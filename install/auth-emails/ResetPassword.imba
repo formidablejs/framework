@@ -3,19 +3,10 @@ import { config } from '@formidablejs/helpers'
 import { ContentComponent } from '../../resources/views/email/vendor/ContentComponent'
 import { LayoutComponent } from '../../resources/views/email/vendor/LayoutComponent'
 import { LineComponent } from '../../resources/views/email/vendor/LineComponent'
-import { Mailable } from '@formidablejs/framework'
 import { ParagraphComponent } from '../../resources/views/email/vendor/ParagraphComponent'
+import Mailable from '@formidablejs/framework/lib/Auth/Mail/ResetPassword'
 
 export default class ResetPassword < Mailable
-
-	prop subject\String
-	prop request\Object
-
-	def constructor request
-		super!
-
-		self.request = request
-		self.subject = "Forgot Password"
 
 	def render
 		<LayoutComponent>
