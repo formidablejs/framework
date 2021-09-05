@@ -1,0 +1,7 @@
+/node_modules
+/public
+.env
+.env.backup
+npm-debug.log
+yarn-error.log
+*.tgz
