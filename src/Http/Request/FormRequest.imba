@@ -2,6 +2,7 @@ const { wildcard, dotNotation: dot } = require '@formidablejs/helpers'
 const Auth = require '../../Auth/Auth'
 const Validator = require '../../Validator/Validator'
 const AuthorizationException = require '../../Auth/Exceptions/AuthorizationException'
+const querystring = require 'querystring'
 
 const response = { raw: null }
 const options = { rules: null }
@@ -70,7 +71,7 @@ module.exports = class FormRequest
 		self.url!.includes('?') ? self.url!.split('?')[0] : self.url!
 
 	def urlWithoutSignature
-		self.signature! ? self.url!.split('signature')[0].slice(0, -1) : self.url!
+		self.signature! ? querystring.unescape(self.url!.split('signature')[0].slice(0, -1)) : self.url!
 
 	def fullUrl
 		this.header('host') + this.url!
@@ -188,7 +189,7 @@ module.exports = class FormRequest
 
 		let value = this.request.query[key]
 
-		value = value ? value.replaceAll(' ', '+') : value
+		value = value ? querystring.unescape(value) : value
 
 		value ?? default
 
