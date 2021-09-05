@@ -1,5 +1,11 @@
 export = Config;
 declare class Config {
+    /** @type {string}*/
+    static get default(): string;
+    /** @type {object}*/
+    static get connections(): any;
+    /** @type {string}*/
+    static get client(): string;
     static make(): {
         client: any;
         connection: {

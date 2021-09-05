@@ -1,2 +1,2 @@
 export = knex;
-declare const knex: any;
+declare let knex: any;

@@ -4,6 +4,27 @@ const knex = require 'knex'
 
 module.exports = class Config
 
+	# Default connection name.
+	#
+	# @type {string}
+
+	static get default
+		config 'database.default', 'mysql'
+
+	# All connections.
+	#
+	# @type {object}
+
+	static get connections
+		config 'database.connections', []
+
+	# Selected client.
+	#
+	# @type {string}
+
+	static get client
+		connections[default]?.driver ?? 'mysql'
+
 	# Configure database connection.
 	#
 	# @returns {void}

@@ -1,5 +1,6 @@
 const Bootstrap = require './Bootstrap'
 const ConfigRepository = require '../Config/Repository'
+const Database = require '../Database/Config'
 const dotenv = require 'dotenv'
 const ExceptionHandler = require './Exceptions/Handler'
 const Kernel = require '../Http/Kernel'
@@ -52,6 +53,16 @@ module.exports = class Application
 		if abstract.name == ConfigRepository.name
 			settings.config = self.make(ConfigRepository)
 			Bootstrap.cache './bootstrap/cache/config.json', self.make(ConfigRepository).all!
+
+			# create a database.json config file.
+
+			const dbConfig = Database.make!.connection
+
+			dbConfig.driver = Database.client
+
+			Bootstrap.cache './bootstrap/cache/database.json', {
+				default: dbConfig
+			}
 
 		self
 
