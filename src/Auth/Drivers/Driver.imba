@@ -170,7 +170,7 @@ module.exports = class Driver
 		self
 
 	def destroy token\String = null, body\Object = new Object
-		await PersonalAccessToken.destroy(token !== null || token !== undefined ? token : self.request.bearerToken!)
+		await PersonalAccessToken.destroy(token !== null && token !== undefined ? token : self.request.bearerToken!)
 
 	def createPersonalAccessToken name\String, id\Number
 		await PersonalAccessToken.create(name, id, self.getProvider.table)

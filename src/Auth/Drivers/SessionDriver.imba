@@ -41,9 +41,11 @@ module.exports = class SessionDriver < Driver
 	def logout body\Object = new Object
 		const token = await self.request.request.session.personal_access_token
 
-		const destroyed = await self.destroy(token != null || token != undefined ? token : new String)
+		const destroyed = await self.destroy(token != null && token != undefined ? token : new String)
 
 		if !destroyed then throw new BadRequestException 'User logout failed.'
+
+		delete self.request.request.session.personal_access_token
 
 		self.request.request.sessionStore.destroy(request.request.session.sessionId, do null)
 
