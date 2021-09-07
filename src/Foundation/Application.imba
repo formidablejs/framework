@@ -60,6 +60,11 @@ module.exports = class Application
 
 			dbConfig.driver = Database.client
 
+			if dbConfig.driver == 'sqlite' && dbConfig.database
+				dbConfig.filename = dbConfig.database
+
+				delete dbConfig.database
+
 			Bootstrap.cache './bootstrap/cache/database.json', {
 				default: dbConfig
 			}
