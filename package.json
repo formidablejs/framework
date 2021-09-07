@@ -1,10 +1,15 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.0.1-rc5",
-  "description": "Formidable framework core",
+  "version": "0.0.1-rc6",
+  "description": "Formidable Framework Core",
+  "author": "Donald Pakkies <donaldpakkies@gmail.com>",
+  "license": "MIT",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "install": "install/Package.js",
+  "bugs": "https://github.com/formidablejs/framework/issues",
+  "homepage": "https://formidablejs.org",
+  "repository": "https://github.com/formidablejs/framework",
   "scripts": {
     "build": "npm run imba:build && npm run ts:build",
     "imba:build": "imbac src --output=lib --platform=node --clean",
@@ -14,8 +19,6 @@
     "test": "jest",
     "test:watch": "jest --watchAll --detectOpenHandles"
   },
-  "author": "Donald Pakkies <donaldpakkies@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "@fastify/csrf": "^4.0.1",
     "@fastify/session": "^6.1.0",
@@ -35,7 +38,7 @@
     "fastify-multipart": "^4.0.7",
     "fastify-static": "^4.2.2",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.95.9",
+    "knex": "^0.95.11",
     "knex-paginate": "^2.3.0",
     "memorystore": "^1.6.6",
     "ms": "^2.0.0",
@@ -50,6 +53,7 @@
     "@types/node": "^16.4.1",
     "imba": "^2.0.0-alpha.155",
     "jest": "^27.0.6",
+    "sqlite3": "^4.2.0",
     "typescript": "^4.4.2"
   }
 }

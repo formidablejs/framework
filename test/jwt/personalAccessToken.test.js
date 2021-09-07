@@ -18,6 +18,8 @@ describe('src/Jwt/PersonalAccessToken', () => {
 
   afterAll(async () => {
     await Database.knex.migrate.rollback();
+
+    await Database.knex.destroy();
   });
 
   it('Should create a Personal Access Token', async () => {
