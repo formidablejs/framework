@@ -7,7 +7,7 @@ def getOrigins origin\String, config
 
 	for o in config.get('cors.allowed_origins')
 		const incomingOrigin = requestOrigin.split('.')
-		const allowedOrigin = o.split('.')
+		const allowedOrigin = o.includes('://') ? o.split('://')[1].split('.') : o.split('.')
 
 		if o === '*'
 			origins.push origin
