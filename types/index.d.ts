@@ -55,9 +55,6 @@ export var Controller: {
 export var ConvertEmptyStringsToNull: {
     new (): import("./Http/Middleware/ConvertEmptyStringsToNull");
 };
-export var CorsServiceResolver: {
-    new (app: import("./Foundation/Application")): import("./Http/Cors/CorsServiceResolver");
-};
 export var CsrfServiceResolver: {
     new (app: import("./Foundation/Application")): import("./Http/Csrf/CsrfServiceResolver");
 };
@@ -74,10 +71,6 @@ export var expiresIn: (time: string) => string;
 export var ForbiddenException: typeof import("./Http/Exceptions/ForbiddenException");
 export var FormRequest: {
     new (request: any, route: any, raw: any, config: any): import("./Http/Request/FormRequest");
-};
-export var HandleCors: {
-    new (): import("./Http/Middleware/HandleCors");
-    configure(cors: any): any;
 };
 export var HasCsrfToken: {
     new (config: any): import("./Http/Middleware/HasCsrfToken");
