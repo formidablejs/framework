@@ -60,7 +60,7 @@ module.exports = class Application
 
 			dbConfig.driver = Database.client
 
-			if dbConfig.driver == 'sqlite' && dbConfig.database
+			if dbConfig.driver == 'sqlite3' && dbConfig.database
 				dbConfig.filename = dbConfig.database
 
 				delete dbConfig.database
