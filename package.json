@@ -17,7 +17,7 @@
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
     "test": "jest",
-    "test:watch": "jest --watchAll --detectOpenHandles"
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "@fastify/csrf": "^4.0.1",
