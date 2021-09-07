@@ -35,9 +35,9 @@ module.exports = class Config
 
 			const selectedConnection = config("database.connections.{connectionName}")
 
-			const client =  config("database.connections.{connectionName}.driver", "mysql")
+			const client = config("database.connections.{connectionName}.driver", "mysql")
 
-			return {
+			const connection = {
 				client: client
 				connection: {
 					host: selectedConnection.host ?? '127.0.0.1'
@@ -48,6 +48,15 @@ module.exports = class Config
 					charset: selectedConnection.charset
 				}
 			}
+
+			if connection.client == 'sqlite3' && connection.connection.database
+				connection.connection.filename = connection.connection.database
+
+				delete connection.connection.database
+
+			return connection
+
+		{}
 
 	static get bookshelf
 		try

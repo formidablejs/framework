@@ -6,16 +6,6 @@ declare class Config {
     static get connections(): any;
     /** @type {string}*/
     static get client(): string;
-    static make(): {
-        client: any;
-        connection: {
-            host: any;
-            port: any;
-            user: any;
-            password: any;
-            database: any;
-            charset: any;
-        };
-    };
+    static make(): {};
     static get bookshelf(): any;
 }
