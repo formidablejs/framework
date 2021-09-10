@@ -21,6 +21,7 @@ declare class Application {
     @param {Function} concrete
     */
     bind(abstract: Function, concrete: Function): import("./Application");
+    cache(): void;
     /**
     @param {Kernel} kernel
     @param {Boolean} testMode

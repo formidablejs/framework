@@ -50,26 +50,26 @@ module.exports = class Application
 			[key.replace(/\t/g, '').split('\r\n')]: concrete
 		}
 
-		if abstract.name == ConfigRepository.name
-			settings.config = self.make(ConfigRepository)
-			Bootstrap.cache './bootstrap/cache/config.json', self.make(ConfigRepository).all!
-
-			# create a database.json config file.
-
-			const dbConfig = Database.make!.connection
-
-			dbConfig.driver = Database.client
-
-			if dbConfig.driver == 'sqlite3' && dbConfig.database
-				dbConfig.filename = dbConfig.database
-
-				delete dbConfig.database
-
-			Bootstrap.cache './bootstrap/cache/database.json', {
-				default: dbConfig
-			}
-
 		self
+
+	def cache
+		settings.config = self.make(ConfigRepository)
+		Bootstrap.cache './bootstrap/cache/config.json', self.make(ConfigRepository).all!
+
+		# create a database.json config file.
+
+		const dbConfig = Database.make!.connection
+
+		dbConfig.driver = Database.client
+
+		if dbConfig.driver == 'sqlite3' && dbConfig.database
+			dbConfig.filename = dbConfig.database
+
+			delete dbConfig.database
+
+		Bootstrap.cache './bootstrap/cache/database.json', {
+			default: dbConfig
+		}
 
 	def initiate kernel\Kernel, testMode\Boolean = false
 		const handler = self.make(ExceptionHandler, [self.config])
