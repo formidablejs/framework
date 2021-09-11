@@ -21,13 +21,17 @@ module.exports = class PersonalAccessToken
 
 		if !isArray(abilities) then throw new TypeError 'abilities must be an array.'
 
+		let returning = null
+
+		try returning = DatabaseConfig.client == 'pg' ? ['id'] : null
+
 		return self.getDatabase!.table('personal_access_tokens')
 			.insert({
 				tokenable_type: table
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
-			}, DatabaseConfig.client == 'pg' ? ['id'] : null)
+			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
