@@ -1,6 +1,7 @@
 const { isFunction, strRandom } = require '@formidablejs/helpers'
 const { Mail } = require '@formidablejs/mailer'
 const Database = require '../../Database/Database'
+const DatabaseConfig = require '../../Database/Config'
 const Hash = require '../../Hashing/Hash'
 const now = require '../../Support/Helpers/now'
 const PersonalAccessToken = require '../Tokens/PersonalAccessToken'
@@ -198,10 +199,12 @@ module.exports = class Driver
 				name: body.name,
 				email: body.email,
 				password: await Hash.make(body.password)
-			})
-			.then do([ userId ])
+			}, DatabaseConfig.client == 'pg' ? ['id'] : null)
+			.then do([ user\Object|Number ])
+				user = (typeof user === 'object' && user.hasOwnProperty('id')) ? user.id : user
+
 				return await Database.table(self.getProvider.table)
-					.where('id', userId)
+					.where('id', user)
 					.first!
 
 	def findUser body\Object

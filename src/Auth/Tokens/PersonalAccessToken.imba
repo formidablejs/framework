@@ -1,6 +1,7 @@
-const Database = require '../../Database/Database'
 const { isArray, isClass, isNumber, isString } = require '@formidablejs/helpers'
 const ConfigRepository = require '../../Config/Repository'
+const Database = require '../../Database/Database'
+const DatabaseConfig = require '../../Database/Config'
 const jwt = require 'jsonwebtoken'
 
 const settings = {
@@ -20,15 +21,21 @@ module.exports = class PersonalAccessToken
 
 		if !isArray(abilities) then throw new TypeError 'abilities must be an array.'
 
+		let returning = null
+
+		try returning = DatabaseConfig.client == 'pg' ? ['id'] : null
+
 		return self.getDatabase!.table('personal_access_tokens')
 			.insert({
 				tokenable_type: table
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
-			})
-			.then do([ tokenId ])
-				await jwt.sign({ id: tokenId }, settings.secret, {
+			}, returning)
+			.then do([ token ])
+				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
+
+				await jwt.sign({ id: token }, settings.secret, {
 					issuer: settings.config.get('app.url')
 				})
 
