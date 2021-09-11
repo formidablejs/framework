@@ -20,9 +20,6 @@ declare class Driver {
     @param {String} token
     */
     getPersonalAccessToken(token?: string): Promise<{
-        /**
-        @param {Object} body
-        */
         token: any;
         tokenable: any;
     }>;
