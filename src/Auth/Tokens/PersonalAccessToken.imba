@@ -1,6 +1,7 @@
-const Database = require '../../Database/Database'
 const { isArray, isClass, isNumber, isString } = require '@formidablejs/helpers'
 const ConfigRepository = require '../../Config/Repository'
+const Database = require '../../Database/Database'
+const DatabaseConfig = require '../../Database/Config'
 const jwt = require 'jsonwebtoken'
 
 const settings = {
@@ -26,9 +27,11 @@ module.exports = class PersonalAccessToken
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
-			})
-			.then do([ tokenId ])
-				await jwt.sign({ id: tokenId }, settings.secret, {
+			}, DatabaseConfig.client == 'pg' ? ['id'] : null)
+			.then do([ token ])
+				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
+
+				await jwt.sign({ id: token }, settings.secret, {
 					issuer: settings.config.get('app.url')
 				})
 
