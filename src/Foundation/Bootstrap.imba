@@ -10,10 +10,5 @@ module.exports = class Bootstrap
 
 		if !fs.existsSync(directory) then fs.mkdirSync(directory, { recursive: true })
 
-		if !fs.existsSync location
-			fs.writeFileSync location, JSON.stringify(config), do(error)
-				if error then console.warn error
-
-		if fs.readFileSync(location, { encoding: 'utf8', flag: 'r' }) !== JSON.stringify(config)
-			fs.writeFileSync location, JSON.stringify(config), do(error)
-				if error then console.warn error
+		fs.writeFileSync location, JSON.stringify(config), do(error)
+			if error then console.warn error
