@@ -1,13 +1,13 @@
-export = ServiceResolver;
+export var __esModule: boolean;
+export default ServiceResolver;
 declare class ServiceResolver {
     /**
     @param {Application} app
     */
-    constructor(app: Application);
-    app: Application;
-    boot(): import("./ServiceResolver");
-    register(): import("./ServiceResolver");
-    [Ψinit]($$?: any): void;
+    constructor(app: any);
+    app: any;
+    boot(): ServiceResolver;
+    register(): ServiceResolver;
+    [Ψ__init__]($$?: any): void;
 }
-import Application = require("../Foundation/Application");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

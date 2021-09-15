@@ -1,7 +1,7 @@
-const ConfigRepostory = require '../../../Config/Repository'
-const HttpException = require '../../../Http/Exceptions/HttpException'
-const StackTrace = require 'stacktrace-js'
-const ValidationException = require '../../../Validator/Exceptions/ValidationException'
+import ConfigRepostory from '../../../Config/Repository'
+import HttpException from '../../../Http/Exceptions/HttpException'
+import StackTrace from 'stacktrace-js'
+import ValidationException from '../../../Validator/Exceptions/ValidationException'
 
 const settings = {
 	config: null
@@ -50,5 +50,7 @@ def setConfig config\ConfigRepostory
 
 	settings.config = config
 
-exports.handleException = handleException
-exports.setConfig = setConfig
+export {
+	handleException
+	setConfig
+}

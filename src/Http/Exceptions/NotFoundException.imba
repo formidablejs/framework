@@ -1,7 +1,7 @@
-const HttpException = require './HttpException'
+import HttpException from './HttpException'
 
 class NotFoundException < HttpException
 
 	prop status = 404
 
-module.exports = NotFoundException
+export default NotFoundException

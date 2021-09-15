@@ -1,6 +1,6 @@
 const Database = require('./setup/Database');
 const Config = require('./setup/Config');
-const PersonalAccessToken = require('../../lib/Auth/Tokens/PersonalAccessToken');
+const { default: PersonalAccessToken } = require('../../lib/Auth/Tokens/PersonalAccessToken');
 
 describe('src/Jwt/PersonalAccessToken', () => {
   const personalAccessToken = PersonalAccessToken;

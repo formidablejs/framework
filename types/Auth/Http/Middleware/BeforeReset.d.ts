@@ -1,4 +1,5 @@
-export = BeforeReset;
+export var __esModule: boolean;
+export default BeforeReset;
 declare class BeforeReset {
     /**
     @param {Function} handler

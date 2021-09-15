@@ -1,3 +1,3 @@
-const ApplicationException = require '../../Foundation/Exceptions/ApplicationException'
+import ApplicationException from '../../Foundation/Exceptions/ApplicationException'
 
-module.exports = class UnauthenticatedException < ApplicationException
+export default class UnauthenticatedException < ApplicationException

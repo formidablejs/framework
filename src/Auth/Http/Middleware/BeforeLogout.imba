@@ -1,10 +1,10 @@
-const DriverManager = require '../../DriverManager'
+import DriverManager from '../../DriverManager'
 
 const logoutAuth = {
 	beforeLogout: null
 }
 
-module.exports = class BeforeLogout
+export default class BeforeLogout
 
 	def constructor config
 		this.config = config

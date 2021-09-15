@@ -1,7 +1,7 @@
-const formbody = require 'fastify-formbody'
-const multipart = require 'fastify-multipart'
+import formbody from 'fastify-formbody'
+import multipart from 'fastify-multipart'
 
-module.exports = def hasContentTypes fastify
+export default def hasContentTypes fastify
 	fastify.register formbody
 	fastify.register multipart
 

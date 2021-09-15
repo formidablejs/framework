@@ -1,6 +1,6 @@
-const Validator = require '../Validator/Validator'
+import Validator from '../Validator/Validator'
 
-module.exports = class Controller
+export default class Controller
 
 	def validate request, rules\Object = null
 		Validator.make(request.input!, rules)

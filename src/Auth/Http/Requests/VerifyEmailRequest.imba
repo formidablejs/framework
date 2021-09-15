@@ -1,6 +1,6 @@
-const FormRequest = require '../../../Http/Request/FormRequest'
+import FormRequest from '../../../Http/Request/FormRequest'
 
-module.exports = class VerifyEmailRequest < FormRequest
+export default class VerifyEmailRequest < FormRequest
 
 	def authorize
 		true

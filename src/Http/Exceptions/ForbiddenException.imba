@@ -1,7 +1,7 @@
-const HttpException = require './HttpException'
+import HttpException from './HttpException'
 
 class ForbiddenException < HttpException
 
 	prop status = 403
 
-module.exports = ForbiddenException
+export default ForbiddenException

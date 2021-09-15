@@ -1,6 +1,6 @@
-const FormRequest = require '../../../Http/Request/FormRequest'
+import FormRequest from '../../../Http/Request/FormRequest'
 
-module.exports = class RegisterRequest < FormRequest
+export default class RegisterRequest < FormRequest
 
 	def authorize
 		true

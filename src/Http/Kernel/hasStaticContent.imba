@@ -1,7 +1,13 @@
-const fastifystatic = require 'fastify-static'
-const path = require 'path'
+import fastifystatic from 'fastify-static'
+import path from 'path'
 
-module.exports = def hasStaticContent fastify
+export default def hasStaticContent fastify
 	fastify.register(fastifystatic, {
 		root: path.join(process.cwd!, 'public')
+	})
+
+	fastify.register(fastifystatic, {
+		root: path.join(process.cwd!, 'bootstrap', 'compiled', 'public', '__assets__')
+		prefix: '/__assets__/'
+		decorateReply: false
 	})

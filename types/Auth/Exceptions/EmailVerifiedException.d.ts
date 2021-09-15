@@ -1,7 +1,11 @@
-export = EmailVerifiedException;
-declare class EmailVerifiedException extends HttpException {
+export var __esModule: boolean;
+export default EmailVerifiedException;
+declare const EmailVerifiedException_base: any;
+declare class EmailVerifiedException extends EmailVerifiedException_base {
+    [x: string]: any;
+    static [Ψ__init__](): typeof EmailVerifiedException;
     constructor(...args: any[]);
-    [Ψinit]($$?: any, ...args: any[]): void;
+    status: any;
+    [Ψ__init__]($$?: any, ...args: any[]): void;
 }
-import HttpException = require("../../Http/Exceptions/HttpException");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

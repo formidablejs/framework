@@ -1,3 +1,7 @@
-declare function _exports(data?: any, statusCode?: number): Response;
-export = _exports;
-import Response = require("../../Http/Response/Response");
+export var __esModule: boolean;
+export default response;
+/**
+@param {any} data
+@param {number} statusCode
+*/
+declare function response(data?: any, statusCode?: number): any;

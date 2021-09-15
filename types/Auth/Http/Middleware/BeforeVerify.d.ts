@@ -1,4 +1,5 @@
-export = BeforeVerify;
+export var __esModule: boolean;
+export default BeforeVerify;
 declare class BeforeVerify {
     /**
     @param {Function} handler

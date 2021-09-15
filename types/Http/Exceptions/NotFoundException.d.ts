@@ -1,7 +1,11 @@
-export = NotFoundException;
-declare class NotFoundException extends HttpException {
+export var __esModule: boolean;
+export default NotFoundException;
+declare const NotFoundException_base: any;
+declare class NotFoundException extends NotFoundException_base {
+    [x: string]: any;
+    static [Ψ__init__](): typeof NotFoundException;
     constructor(...args: any[]);
-    [Ψinit]($$?: any, ...args: any[]): void;
+    status: any;
+    [Ψ__init__]($$?: any, ...args: any[]): void;
 }
-import HttpException = require("./HttpException");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

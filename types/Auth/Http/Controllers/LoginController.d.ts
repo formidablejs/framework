@@ -1,15 +1,16 @@
-export = LoginController;
-declare class LoginController extends Controller {
+export var __esModule: boolean;
+export default LoginController;
+declare const LoginController_base: any;
+declare class LoginController extends LoginController_base {
+    [x: string]: any;
     /**
     @param {Function} handler
     */
     static onLogin(handler: Function): Function;
-    static [Ψinit](): typeof LoginController;
+    static [Ψ__init__](): typeof LoginController;
     /**
     @param {LoginRequest} request
     */
-    login(request: LoginRequest, reply: any): any;
+    login(request: any, reply: any): any;
 }
-import Controller = require("../../../Http/Controller");
-import LoginRequest = require("../Requests/LoginRequest");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

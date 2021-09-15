@@ -1,4 +1,5 @@
-export = BeforeLogout;
+export var __esModule: boolean;
+export default BeforeLogout;
 declare class BeforeLogout {
     /**
     @param {Function} handler

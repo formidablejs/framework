@@ -1,9 +1,12 @@
-export = ValidationServiceResolver;
-declare class ValidationServiceResolver extends ServiceResolver {
+export var __esModule: boolean;
+export default ValidationServiceResolver;
+declare const ValidationServiceResolver_base: any;
+declare class ValidationServiceResolver extends ValidationServiceResolver_base {
+    [x: string]: any;
+    boot(): ValidationServiceResolver;
     registeredRules(): {};
     /**
     @param {Object} rules
     */
-    registerRules(rules: any): import("./ValidationServiceResolver");
+    registerRules(rules: any): ValidationServiceResolver;
 }
-import ServiceResolver = require("../Support/ServiceResolver");

@@ -1,14 +1,15 @@
-const { isFunction, strRandom } = require '@formidablejs/helpers'
-const { Mail } = require '@formidablejs/mailer'
-const Database = require '../../Database/Database'
-const DatabaseConfig = require '../../Database/Config'
-const Hash = require '../../Hashing/Hash'
-const now = require '../../Support/Helpers/now'
-const PersonalAccessToken = require '../Tokens/PersonalAccessToken'
-const URL = require '../../Http/URL/URL'
-const ValidationException = require '../../Validator/Exceptions/ValidationException'
-const EmailNotVerifiedException = require '../Exceptions/EmailNotVerifiedException'
-const EmailVerifiedException = require '../Exceptions/EmailVerifiedException'
+import { Mail } from '@formidablejs/mailer'
+import Database from '../../Database/Database'
+import DatabaseConfig from '../../Database/Config'
+import EmailNotVerifiedException from '../Exceptions/EmailNotVerifiedException'
+import EmailVerifiedException from '../Exceptions/EmailVerifiedException'
+import Hash from '../../Hashing/Hash'
+import isFunction from '../../Support/Helpers/isFunction'
+import now from '../../Support/Helpers/now'
+import PersonalAccessToken from '../Tokens/PersonalAccessToken'
+import strRandom from '../../Support/Helpers/strRandom'
+import URL from '../../Http/URL/URL'
+import ValidationException from '../../Validator/Exceptions/ValidationException'
 
 const events = {
 	onRegistered: null
@@ -20,7 +21,7 @@ const mailers = {
 	resetPasswordMailer: null
 }
 
-module.exports = class Driver
+export default class Driver
 
 	def constructor protocol, request, reply, params, config
 		this.protocol = protocol

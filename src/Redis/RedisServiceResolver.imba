@@ -1,19 +1,20 @@
-const Redis = require './Redis'
-const ServiceResolver = require '../Support/ServiceResolver'
-const session = require '@fastify/session'
-const SessionDriverManager = require '../Http/Session/DriverManager'
+import Redis from './Redis'
+import ServiceResolver from '../Support/ServiceResolver'
+import session from '@fastify/session'
+import SessionDriverManager from '../Http/Session/DriverManager'
+import redisStore from 'connect-redis'
 
-module.exports = class RedisServiceResolver < ServiceResolver
+export default class RedisServiceResolver < ServiceResolver
 
 	def boot
 		# configure redis.
 		Redis.configure(self.app.config)
 
 		if self.app.config.get('session.driver') == 'redis'
-			const redisStore = require('connect-redis')(session)
+			const store = redisStore(session)
 
 			# register redis store driver.
-			SessionDriverManager.register('redis', new redisStore({
+			SessionDriverManager.register('redis', new store({
 				client: Redis.connection('default')
 			}))
 

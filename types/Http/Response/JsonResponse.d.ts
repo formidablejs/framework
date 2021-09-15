@@ -1,9 +1,10 @@
-export = JsonResponse;
+export var __esModule: boolean;
+export default JsonResponse;
 declare class JsonResponse {
     /**
     @param {Object} object
     */
-    static make(object: any): import("./JsonResponse");
+    static make(object: any): JsonResponse;
     /**
     @param {Object} object
     */
@@ -13,8 +14,8 @@ declare class JsonResponse {
     /**
     @param {Number} statusCode
     */
-    code(statusCode?: number): import("./JsonResponse");
+    code(statusCode?: number): JsonResponse;
     toJson(reply: any): any;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

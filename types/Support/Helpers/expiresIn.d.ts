@@ -1,2 +1,6 @@
-declare function _exports(time: string): string;
-export = _exports;
+export var __esModule: boolean;
+export default expiresIn;
+/**
+@param {String} time
+*/
+declare function expiresIn(time: string): string;

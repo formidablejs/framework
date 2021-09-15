@@ -1,6 +1,6 @@
-const LogoutRequest = require '../Requests/LogoutRequest'
-const Controller = require '../../../Http/Controller'
-const decorator$use = require '../../../Support/Decorators/use'
+import LogoutRequest from '../Requests/LogoutRequest'
+import Controller from '../../../Http/Controller'
+import { @use } from '../../../Support/Decorators/use'
 
 const logoutAuth = {
 	onLogout: null
@@ -24,4 +24,4 @@ class LogoutController < Controller
 
 		logoutAuth.onLogout = handler
 
-module.exports = LogoutController
+export default LogoutController

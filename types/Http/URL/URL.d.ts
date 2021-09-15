@@ -1,4 +1,5 @@
-export = URL;
+export var __esModule: boolean;
+export default URL;
 declare class URL {
     /**
     @param {String} name
@@ -42,49 +43,5 @@ declare class URL {
     /**
     @param {String} secret
     */
-    static setSecret(secret: string): {
-        new (): import("./URL");
-        /**
-        @param {String} name
-        @param {Object} params
-        @param {Object} query
-        */
-        route(name: string, params?: any, query?: any): any;
-        uri: any;
-        /**
-        @param {String} name
-        @param {Object} params
-        @param {Object} query
-        */
-        signedRoute(name: string, params?: any, query?: any): Promise<string>;
-        /**
-        @param {String} name
-        @param {String} expiresIn
-        @param {Object} params
-        @param {Object} query
-        */
-        temporarySignedRoute(name: string, expiresIn: string, params?: any, query?: any): Promise<string>;
-        /**
-        @param {String} uri
-        @param {Object} query
-        */
-        path(uri: string, query?: any): string;
-        /**
-        @param {String} uri
-        @param {Object} query
-        */
-        signed(uri: string, query?: any): Promise<string>;
-        /**
-        @param {String} uri
-        @param {String} expiresIn
-        @param {Object} query
-        */
-        temporarySigned(uri: string, expiresIn: string, query?: any): Promise<string>;
-        luri: any;
-        /**
-        @param {Object} params
-        */
-        toQuery(params?: any): string;
-        setSecret(secret: string): any;
-    };
+    static setSecret(secret: string): typeof URL;
 }

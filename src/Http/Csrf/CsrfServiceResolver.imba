@@ -1,7 +1,7 @@
-const Route = require '../Router/Manager'
-const ServiceResolver = require '../../Support/ServiceResolver'
+import Route from '../Router/Manager'
+import ServiceResolver from '../../Support/ServiceResolver'
 
-module.exports = class CsrfServiceResolver < ServiceResolver
+export default class CsrfServiceResolver < ServiceResolver
 
 	def boot
 		Route.get('csrf-cookie', do(request, reply)

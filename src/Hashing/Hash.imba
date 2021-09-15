@@ -1,12 +1,12 @@
-const argon2 = require 'argon2'
-const bcrypt = require 'bcrypt'
-const InvalidHashDriverException = require './Exceptions/InvalidHashDriverException'
+import argon2 from 'argon2'
+import bcrypt from 'bcrypt'
+import InvalidHashDriverException from './Exceptions/InvalidHashDriverException'
 
 const settings = {
 	config: null
 }
 
-module.exports = class Hash
+export default class Hash
 
 	static def make value\String
 		if settings.config.driver == 'argon2'

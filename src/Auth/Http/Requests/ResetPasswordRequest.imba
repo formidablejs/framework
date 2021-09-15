@@ -1,6 +1,6 @@
-const FormRequest = require '../../../Http/Request/FormRequest'
+import FormRequest from '../../../Http/Request/FormRequest'
 
-module.exports = class ResetPasswordRequest < FormRequest
+export default class ResetPasswordRequest < FormRequest
 
 	def authorize
 		true

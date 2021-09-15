@@ -1,7 +1,7 @@
-const session = require '@fastify/session'
-const SessionDriverManager = require '../Session/DriverManager'
+import session from '@fastify/session'
+import SessionDriverManager from '../Session/DriverManager'
 
-module.exports = def hasSession fastify, config
+export default def hasSession fastify, config
 	const sessionConfig = {
 		secret: config.get('app.key')
 		store: null

@@ -1,10 +1,10 @@
-const Path = require './Path'
+import Path from './Path'
 
 const routes = []
 const middleware = []
 const prefix = []
 
-module.exports = class Manager
+export default class Manager
 
 	static def addRoute verb\String, pattern\String, action\Function|[Function, String]
 		if !['delete', 'get', 'options', 'patch', 'post', 'put'].includes verb

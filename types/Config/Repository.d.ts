@@ -1,5 +1,8 @@
-export = Repository;
+export var __esModule: boolean;
+export default Repository;
 declare class Repository {
+    static setEnvironment(): any;
+    static getEnvironment(): any;
     constructor($$?: any);
     temp: any;
     get registered(): Object;
@@ -18,6 +21,6 @@ declare class Repository {
     */
     set(key: string, value: any): any;
     all(): Object;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

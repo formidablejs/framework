@@ -1,4 +1,5 @@
-export = Language;
+export var __esModule: boolean;
+export default Language;
 declare class Language {
     constructor($$?: any);
     lang: any;
@@ -8,15 +9,15 @@ declare class Language {
     /**
     @param {String} locale
     */
-    setLocale(locale: string): import("./Language");
+    setLocale(locale: string): Language;
     /**
     @param {String} locale
     */
-    setFallbackLocale(locale: string): import("./Language");
+    setFallbackLocale(locale: string): Language;
     /**
     @param {String} location
     */
-    register(location: string): import("./Language");
+    register(location: string): Language;
     /**
     @param {String} path
     @param {String} default
@@ -27,6 +28,6 @@ declare class Language {
         fallback_locale: any;
         packs: {};
     };
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

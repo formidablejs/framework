@@ -1,4 +1,5 @@
-export = BeforeForgot;
+export var __esModule: boolean;
+export default BeforeForgot;
 declare class BeforeForgot {
     /**
     @param {Function} handler

@@ -1,4 +1,5 @@
-export = Model;
+export var __esModule: boolean;
+export default Model;
 declare const Model_base: any;
 declare class Model extends Model_base {
     [x: string]: any;

@@ -1,6 +1,6 @@
-const FormValidation = require '../Http/Request/FormValidation'
+import FormValidation from '../Http/Request/FormValidation'
 
-module.exports = class Validator
+export default class Validator
 
 	static def make body\Object, rules\Object, messages\Object = {}
 		const validation = this.get!

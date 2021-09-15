@@ -1,6 +1,6 @@
-const ForbiddenException = require '../../../Http/Exceptions/ForbiddenException'
+import ForbiddenException from '../../../Http/Exceptions/ForbiddenException'
 
-module.exports = class ErrorIfAuthenticated
+export default class ErrorIfAuthenticated
 
 	def handle request, reply, params
 		if self.isAuthenticated(request) then return self.onAuthenticated(request, reply, params)

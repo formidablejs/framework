@@ -1,13 +1,14 @@
-const session = require '@fastify/session'
-const DriverManager = require './DriverManager'
-const ServiceResolver = require '../../Support/ServiceResolver'
+import session from '@fastify/session'
+import DriverManager from './DriverManager'
+import ServiceResolver from '../../Support/ServiceResolver'
+import FileStore from 'session-file-store'
 
-module.exports = class SessionFileStoreServiceResolver < ServiceResolver
+export default class SessionFileStoreServiceResolver < ServiceResolver
 
 	def boot
 		if self.app.config.get('session.driver') === 'file'
-			const FileStore = require('session-file-store')(session)
+			const store = FileStore(session)
 
-			DriverManager.register('file', new FileStore({
+			DriverManager.register('file', new store({
 				path: 'storage/sessions'
 			}))

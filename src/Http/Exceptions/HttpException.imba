@@ -25,4 +25,4 @@ class HttpException < Error
 	def getStatus
 		this.status
 
-module.exports = HttpException
+export default HttpException

@@ -1,4 +1,7 @@
-export = SessionFileStoreServiceResolver;
-declare class SessionFileStoreServiceResolver extends ServiceResolver {
+export var __esModule: boolean;
+export default SessionFileStoreServiceResolver;
+declare const SessionFileStoreServiceResolver_base: any;
+declare class SessionFileStoreServiceResolver extends SessionFileStoreServiceResolver_base {
+    [x: string]: any;
+    boot(): any;
 }
-import ServiceResolver = require("../../Support/ServiceResolver");

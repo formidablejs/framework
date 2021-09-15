@@ -1,14 +1,14 @@
-const { isString } = require '@formidablejs/helpers'
-const jwt = require 'jsonwebtoken'
-const MissingRouteParamException = require './Exceptions/MissingRouteParamException'
-const Path = require '../Router/Path'
-const Route = require '../Router/Manager'
+import isString from '../../Support/Helpers/isString'
+import jwt from 'jsonwebtoken'
+import MissingRouteParamException from './Exceptions/MissingRouteParamException'
+import Path from '../Router/Path'
+import Route from '../Router/Manager'
 
 const settings = {
 	secret: null
 }
 
-module.exports = class URL
+export default class URL
 
 	static def route name\String, params\Object = new Object, query\Object = new Object
 		let selected;

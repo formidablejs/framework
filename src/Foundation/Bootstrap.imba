@@ -1,7 +1,7 @@
-const fs = require 'fs'
-const path = require 'path'
+import fs from 'fs'
+import path from 'path'
 
-module.exports = class Bootstrap
+export default class Bootstrap
 
 	static def cache location\String, config\Object
 		location = path.join process.cwd!, location

@@ -1,8 +1,8 @@
-const UnsupportedSessionDriverException = require './Exceptions/UnsupportedSessionDriverException'
+import UnsupportedSessionDriverException from './Exceptions/UnsupportedSessionDriverException'
 
 const drivers = {}
 
-module.exports = class DriverManager
+export default class DriverManager
 
 	static def register name\String, driver\Object
 		drivers[name] = driver

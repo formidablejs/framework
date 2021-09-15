@@ -1,7 +1,7 @@
-const InvalidSignatureException = require '../Exceptions/InvalidSignatureException'
-const jwt = require 'jsonwebtoken'
+import InvalidSignatureException from '../Exceptions/InvalidSignatureException'
+import jwt from 'jsonwebtoken'
 
-module.exports = class ValidateSignature
+export default class ValidateSignature
 
 	prop config
 

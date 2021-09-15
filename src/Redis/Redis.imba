@@ -1,12 +1,11 @@
-const redis = require 'redis'
-const expiresIn = require '../Support/Helpers/expiresIn'
+import redis from 'redis'
 
 const settings = {
 	instances: {}
 	config: {}
 }
 
-module.exports = class Redis
+export default class Redis
 
 	def constructor database\String = 'default'
 

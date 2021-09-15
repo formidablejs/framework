@@ -1,2 +1,3 @@
-declare function _exports(fastify: any, config: any): any;
-export = _exports;
+export var __esModule: boolean;
+export default hasSession;
+declare function hasSession(fastify: any, config: any): any;

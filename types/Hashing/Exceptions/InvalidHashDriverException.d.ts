@@ -1,4 +1,6 @@
-export = InvalidHashDriverException;
-declare class InvalidHashDriverException extends ApplicationException {
+export var __esModule: boolean;
+export default InvalidHashDriverException;
+declare const InvalidHashDriverException_base: any;
+declare class InvalidHashDriverException extends InvalidHashDriverException_base {
+    [x: string]: any;
 }
-import ApplicationException = require("../../Foundation/Exceptions/ApplicationException");

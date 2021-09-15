@@ -1,4 +1,5 @@
-export = FormValidation;
+export var __esModule: boolean;
+export default FormValidation;
 declare class FormValidation {
     /**
     @param {String} locale

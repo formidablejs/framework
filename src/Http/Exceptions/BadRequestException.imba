@@ -1,7 +1,7 @@
-const HttpException = require './HttpException'
+import HttpException from './HttpException'
 
 class BadRequestException < HttpException
 
 	prop status = 400
 
-module.exports = BadRequestException
+export default BadRequestException

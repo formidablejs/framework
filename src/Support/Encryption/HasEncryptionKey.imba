@@ -1,7 +1,7 @@
-const URL = require '../../Http/URL/URL'
-const MissingAppKeyException = require './Exceptions/MissingAppKeyException'
+import URL from '../../Http/URL/URL'
+import MissingAppKeyException from './Exceptions/MissingAppKeyException'
 
-module.exports = class HasEncryptionKey
+export default class HasEncryptionKey
 
 	def constructor config
 		config = config

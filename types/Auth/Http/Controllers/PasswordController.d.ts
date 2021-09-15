@@ -1,5 +1,8 @@
-export = PasswordController;
-declare class PasswordController extends Controller {
+export var __esModule: boolean;
+export default PasswordController;
+declare const PasswordController_base: any;
+declare class PasswordController extends PasswordController_base {
+    [x: string]: any;
     /**
     @param {Function} handler
     */
@@ -8,17 +11,14 @@ declare class PasswordController extends Controller {
     @param {Function} handler
     */
     static onReset(handler: Function): Function;
-    static [Ψinit](): typeof PasswordController;
+    static [Ψ__init__](): typeof PasswordController;
     /**
     @param {ForgotPasswordRequest} request
     */
-    forgot(request: ForgotPasswordRequest, reply: any): any;
+    forgot(request: any, reply: any): any;
     /**
     @param {ResetPasswordRequest} request
     */
-    reset(request: ResetPasswordRequest, reply: any): any;
+    reset(request: any, reply: any): any;
 }
-import Controller = require("../../../Http/Controller");
-import ForgotPasswordRequest = require("../Requests/ForgotPasswordRequest");
-import ResetPasswordRequest = require("../Requests/ResetPasswordRequest");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

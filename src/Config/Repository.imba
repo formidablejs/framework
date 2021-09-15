@@ -1,6 +1,10 @@
-const { dotNotation: dot } = require '@formidablejs/helpers'
+import dot from '../Support/Helpers/dotNotation'
 
-module.exports = class Repository
+const settings = {
+	environment: null
+}
+
+export default class Repository
 
 	prop temp = {}
 
@@ -29,3 +33,9 @@ module.exports = class Repository
 
 	def all
 		this.registered
+
+	static def setEnvironment
+		settings.environment
+
+	static def getEnvironment
+		settings.environment

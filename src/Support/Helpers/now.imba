@@ -1,6 +1,6 @@
-const Database = require '../../Database/Database'
+import Database from '../../Database/Database'
 
-module.exports = def now
+export default def now
 	# new Date().toISOString().replace('Z','').replace('T', ' ')
 	# 'CURRENT_TIMESTAMP'
 	Database.fn.now!

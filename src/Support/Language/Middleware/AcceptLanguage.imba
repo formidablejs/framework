@@ -1,4 +1,4 @@
-module.exports = class AcceptLanguage
+export default class AcceptLanguage
 
 	get mappings
 		{

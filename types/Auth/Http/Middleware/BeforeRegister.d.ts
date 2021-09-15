@@ -1,4 +1,5 @@
-export = BeforeRegister;
+export var __esModule: boolean;
+export default BeforeRegister;
 declare class BeforeRegister {
     /**
     @param {Function} handler

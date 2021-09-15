@@ -1,8 +1,9 @@
-export = ValidateSignature;
+export var __esModule: boolean;
+export default ValidateSignature;
 declare class ValidateSignature {
     constructor(config: any);
     config: any;
     handle(request: any): Promise<any>;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

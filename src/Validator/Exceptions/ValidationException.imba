@@ -1,4 +1,4 @@
-const HttpException = require '../../Http/Exceptions/HttpException'
+import HttpException from '../../Http/Exceptions/HttpException'
 
 class ValidationException < HttpException
 
@@ -10,4 +10,4 @@ class ValidationException < HttpException
 			errors: messages
 		})
 
-module.exports = ValidationException
+export default ValidationException

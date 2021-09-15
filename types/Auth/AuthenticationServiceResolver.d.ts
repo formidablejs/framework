@@ -1,6 +1,9 @@
-export = AuthenticationServiceResolver;
-declare class AuthenticationServiceResolver extends ServiceResolver {
+export var __esModule: boolean;
+export default AuthenticationServiceResolver;
+declare const AuthenticationServiceResolver_base: any;
+declare class AuthenticationServiceResolver extends AuthenticationServiceResolver_base {
+    [x: string]: any;
     get protocol(): any;
     get provider(): any;
+    boot(): any;
 }
-import ServiceResolver = require("../Support/ServiceResolver");

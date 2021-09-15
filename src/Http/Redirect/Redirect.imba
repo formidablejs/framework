@@ -1,6 +1,6 @@
-const URL = require '../URL/URL'
+import URL from '../URL/URL'
 
-module.exports = class Redirect
+export default class Redirect
 
 	def constructor path\String, statusCode\Number = 302
 		self.path = path

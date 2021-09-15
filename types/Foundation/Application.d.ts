@@ -1,16 +1,32 @@
-export = Application;
+export var __esModule: boolean;
+export default Application;
 declare class Application {
+    /**
+    @param {String} notation
+    @param {any} default
+    */
+    static getConfig(notation: string, default$?: any): any;
+    /**
+    @param {String} key
+    @param {any} default
+    */
+    static getEnv(key: string, default$?: any): any;
+    static env(): any;
     /**
     @param {String} root
     */
     constructor(root: string);
     bindings: any;
-    root: string;
     config: any;
     hooks: any;
-    routes(): any[];
+    root: string;
+    /**
+    @param {Number} default
+    */
+    port(default$?: number): number;
+    routes(): any;
     fastify(): any;
-    addHook(hook: any, handler: any): import("./Application");
+    addHook(hook: any, handler: any): Application;
     /**
     @param {Function} abstract
     @param {array} params
@@ -20,18 +36,17 @@ declare class Application {
     @param {Function} abstract
     @param {Function} concrete
     */
-    bind(abstract: Function, concrete: Function): import("./Application");
-    cache(): void;
+    bind(abstract: Function, concrete: Function): Application;
+    cache(): any;
     /**
     @param {Kernel} kernel
-    @param {Boolean} testMode
+    @param {Boolean} returnMode
     */
-    initiate(kernel: Kernel, testMode?: boolean): Promise<import("./Application")>;
-    prepare(): import("./Application");
+    initiate(kernel: any, returnMode?: boolean): Promise<Application>;
+    prepare(): Application;
     resolve(): any[];
     boot(resolver: any): any;
     register(resolver: any): any;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-import Kernel = require("../Http/Kernel");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

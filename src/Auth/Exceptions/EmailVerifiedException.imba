@@ -1,7 +1,7 @@
-const HttpException = require '../../Http/Exceptions/HttpException'
+import HttpException from '../../Http/Exceptions/HttpException'
 
 class EmailVerifiedException < HttpException
 
 	prop status = 403
 
-module.exports = EmailVerifiedException
+export default EmailVerifiedException

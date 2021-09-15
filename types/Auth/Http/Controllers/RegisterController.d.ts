@@ -1,15 +1,16 @@
-export = RegisterController;
-declare class RegisterController extends Controller {
+export var __esModule: boolean;
+export default RegisterController;
+declare const RegisterController_base: any;
+declare class RegisterController extends RegisterController_base {
+    [x: string]: any;
     /**
     @param {Function} handler
     */
     static onRegister(handler: Function): Function;
-    static [Ψinit](): typeof RegisterController;
+    static [Ψ__init__](): typeof RegisterController;
     /**
     @param {RegisterRequest} request
     */
-    register(request: RegisterRequest, reply: any): any;
+    register(request: any, reply: any): any;
 }
-import Controller = require("../../../Http/Controller");
-import RegisterRequest = require("../Requests/RegisterRequest");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

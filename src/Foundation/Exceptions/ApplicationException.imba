@@ -26,4 +26,4 @@ class ApplicationException < Error
 	def getStatus
 		this.status
 
-module.exports = ApplicationException
+export default ApplicationException

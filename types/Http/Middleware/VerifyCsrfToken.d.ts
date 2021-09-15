@@ -1,4 +1,5 @@
-export = VerifyCsrfToken;
+export var __esModule: boolean;
+export default VerifyCsrfToken;
 declare class VerifyCsrfToken {
     constructor(config: any);
     get addHttpCookie(): boolean;
@@ -7,7 +8,7 @@ declare class VerifyCsrfToken {
     handle(request: any, reply: any): any;
     isReading(request: any): boolean;
     shouldIgnore(request: any): boolean;
-    tokensMatch(request: any): boolean;
+    tokensMatch(request: any): any;
     getTokenFromRequest(request: any): any;
     shouldAddXsrfTokenCookie(): boolean;
     addCookieToResponse(request: any, reply: any): any;

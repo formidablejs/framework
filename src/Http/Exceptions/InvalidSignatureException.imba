@@ -1,3 +1,3 @@
-const ForbiddenException = require './ForbiddenException'
+import ForbiddenException from './ForbiddenException'
 
-module.exports = class InvalidSignatureException < ForbiddenException
+export default class InvalidSignatureException < ForbiddenException

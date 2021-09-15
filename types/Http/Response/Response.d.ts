@@ -1,4 +1,5 @@
-export = Response;
+export var __esModule: boolean;
+export default Response;
 declare class Response {
     /**
     @param {any} data
@@ -10,12 +11,11 @@ declare class Response {
     /**
     @param {Object} object
     */
-    json(object: any): JsonResponse;
+    json(object: any): any;
     /**
     @param {Number} statusCode
     */
     code(statusCode: number): number;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-import JsonResponse = require("./JsonResponse");
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

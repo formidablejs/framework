@@ -1,4 +1,4 @@
-module.exports = class Model
+export default class Model
 	def constructor config
 		config = config
 

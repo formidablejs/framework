@@ -1,2 +1,2 @@
-declare function _exports(target: any, key: any, descriptor: any): any;
-export = _exports;
+export var __esModule: boolean;
+export function αuse(target: any, key: any, descriptor: any): any;

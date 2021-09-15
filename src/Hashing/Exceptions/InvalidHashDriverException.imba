@@ -1,3 +1,3 @@
-const ApplicationException = require '../../Foundation/Exceptions/ApplicationException'
+import ApplicationException from '../../Foundation/Exceptions/ApplicationException'
 
-module.exports = class InvalidHashDriverException < ApplicationException
+export default class InvalidHashDriverException < ApplicationException

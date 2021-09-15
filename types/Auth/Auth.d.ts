@@ -1,4 +1,5 @@
-export = Auth;
+export var __esModule: boolean;
+export default Auth;
 declare class Auth {
     /**
     @param {Object} provider

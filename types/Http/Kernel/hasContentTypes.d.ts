@@ -1,2 +1,3 @@
-declare function _exports(fastify: any): any;
-export = _exports;
+export var __esModule: boolean;
+export default hasContentTypes;
+declare function hasContentTypes(fastify: any): any;

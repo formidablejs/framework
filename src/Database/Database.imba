@@ -1,13 +1,14 @@
-const Config = require './Config'
+import Config from './Config'
+import knexjs from 'knex'
+import { attachPaginate } from 'knex-paginate'
 
 let knex = null
 
 try
-	knex = require('knex')(Config.make!)
+	knex = knexjs(Config.make!)
 
-	const { attachPaginate } = require 'knex-paginate'
 	attachPaginate!
 catch
 	knex = null
 
-module.exports = knex
+export default knex

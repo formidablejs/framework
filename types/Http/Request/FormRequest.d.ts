@@ -1,4 +1,5 @@
-export = FormRequest;
+export var __esModule: boolean;
+export default FormRequest;
 declare class FormRequest {
     constructor(request: any, route: any, raw: any, config: any);
     request: any;
@@ -49,11 +50,11 @@ declare class FormRequest {
     @param {string} header
     @param {string} value
     */
-    setHeader(header: string, value: string): import("./FormRequest");
+    setHeader(header: string, value: string): FormRequest;
     /**
     @param {object} headers
     */
-    setHeaders(headers: object): import("./FormRequest");
+    setHeaders(headers: object): FormRequest;
     /**
     @param {string} header
     */
@@ -67,11 +68,11 @@ declare class FormRequest {
     /**
     @param {string} path
     */
-    pathIs(path: string): boolean;
+    pathIs(path: string): any;
     /**
     @param {string} route
     */
-    routeIs(route: string): boolean;
+    routeIs(route: string): any;
     /**
     @param {String} name
     */
@@ -99,7 +100,7 @@ declare class FormRequest {
     @param {string|null} key
     */
     query(key?: string | null, default$?: any): any;
-    expectsJson(): boolean;
+    expectsJson(): any;
     validate(): any;
     /**
     @param {Array} rules
@@ -109,8 +110,8 @@ declare class FormRequest {
     auth(): {
         user: () => any;
         check: () => boolean;
-        can: () => boolean;
+        can: (perform: string) => boolean;
     };
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

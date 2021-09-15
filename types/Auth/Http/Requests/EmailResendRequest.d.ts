@@ -1,6 +1,11 @@
-export = EmailResendRequest;
-declare class EmailResendRequest extends FormRequest {
+export var __esModule: boolean;
+export default EmailResendRequest;
+declare const EmailResendRequest_base: any;
+declare class EmailResendRequest extends EmailResendRequest_base {
+    [x: string]: any;
     authorize(): boolean;
+    rules(): {
+        email: string;
+    };
     persist(): Promise<any>;
 }
-import FormRequest = require("../../../Http/Request/FormRequest");
