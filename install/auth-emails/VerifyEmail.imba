@@ -1,6 +1,6 @@
 import { ActionComponent } from '../../resources/views/email/vendor/ActionComponent'
-import { config } from '@formidablejs/helpers'
 import { ContentComponent } from '../../resources/views/email/vendor/ContentComponent'
+import { helpers } from '@formidablejs/framework'
 import { LayoutComponent } from '../../resources/views/email/vendor/LayoutComponent'
 import { LineComponent } from '../../resources/views/email/vendor/LineComponent'
 import { ParagraphComponent } from '../../resources/views/email/vendor/ParagraphComponent'
@@ -11,7 +11,7 @@ export default class VerifyEmail < Mailable
 	def render
 		<LayoutComponent>
 			<ContentComponent slot="header">
-				<p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;"> config('app.name')
+				<p style="font-size: 20px; margin-bottom: 20px; font-weight: bold;"> helpers.config('app.name')
 
 			<p style="font-weight: bold; font-size: 18px;"> self.request.t('auth.email.verify.greeting', 'Hello!')
 
@@ -22,7 +22,7 @@ export default class VerifyEmail < Mailable
 			<ParagraphComponent>
 				self.request.t('auth.email.signing', 'Regards,')
 				<br>
-				config('app.name')
+				helpers.config('app.name')
 
 			<LineComponent>
 

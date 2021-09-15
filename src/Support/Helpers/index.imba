@@ -12,15 +12,15 @@ const { default: isFunction }  = require './isFunction'
 const { default: isNumber }  = require './isNumber'
 const { default: isObject }  = require './isObject'
 const { default: isString }  = require './isString'
-const { default: ms }  = require 'ms'
 const { default: now }  = require './now'
-const { default: pluralize }  = require 'pluralize'
 const { default: response }  = require './response'
 const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: toBoolean }  = require './toBoolean'
 const { default: wildcard }  = require './wildcard'
 const { default: without }  = require './without'
+const ms = require 'ms'
+const pluralize = require 'pluralize'
 
 export {
 	asObject
