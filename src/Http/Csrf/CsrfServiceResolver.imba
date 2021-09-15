@@ -1,4 +1,4 @@
-import Route from '../Router/Manager'
+import Route from '../Router/Route'
 import ServiceResolver from '../../Support/ServiceResolver'
 
 export default class CsrfServiceResolver < ServiceResolver

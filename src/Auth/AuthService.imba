@@ -14,7 +14,7 @@ import LoginController from './Http/Controllers/LoginController'
 import LogoutController from './Http/Controllers/LogoutController'
 import PasswordController from './Http/Controllers/PasswordController'
 import RegisterController from './Http/Controllers/RegisterController'
-import Route from '../Http/Router/Manager'
+import Route from '../Http/Router/Route'
 
 export default class AuthService
 

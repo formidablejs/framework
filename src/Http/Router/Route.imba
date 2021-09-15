@@ -4,7 +4,7 @@ const routes = []
 const middleware = []
 const prefix = []
 
-export default class Manager
+export default class Route
 
 	static def addRoute verb\String, pattern\String, action\Function|[Function, String]
 		if !['delete', 'get', 'options', 'patch', 'post', 'put'].includes verb

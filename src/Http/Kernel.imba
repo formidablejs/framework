@@ -8,7 +8,7 @@ import hasCookie from './Kernel/hasCookie'
 import hasSession from './Kernel/hasSession'
 import hasCors from './Kernel/hasCors'
 import resolveResponse from './Kernel/resolveResponse'
-import Route from './Router/Manager'
+import Route from './Router/Route'
 import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
 
 export default class Kernel

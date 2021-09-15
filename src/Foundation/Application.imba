@@ -3,7 +3,7 @@ import ConfigRepository from '../Config/Repository'
 import Database from '../Database/Config'
 import ExceptionHandler from './Exceptions/Handler'
 import Kernel from '../Http/Kernel'
-import Route from '../Http/Router/Manager'
+import Route from '../Http/Router/Route'
 import EnvironmentRepository from '../Environment/Repository'
 
 const settings = {

@@ -72,4 +72,4 @@ export default class AuthService {
     */
     static routes(config?: any): typeof Route;
 }
-import Route from "../Http/Router/Manager";
+import Route from "../Http/Router/Route";

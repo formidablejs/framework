@@ -40,7 +40,7 @@ import Redis from "./Redis/Redis";
 import RedisServiceResolver from "./Redis/RedisServiceResolver";
 import { RequestGenericInterface } from "fastify";
 import response from "./Support/Helpers/response";
-import Route from "./Http/Router/Manager";
+import Route from "./Http/Router/Route";
 import ServiceResolver from "./Support/ServiceResolver";
 import SessionDriverManager from "./Http/Session/DriverManager";
 import SessionFileStoreServiceResolver from "./Http/Session/SessionFileStoreServiceResolver";

@@ -2,7 +2,7 @@ import isString from '../../Support/Helpers/isString'
 import jwt from 'jsonwebtoken'
 import MissingRouteParamException from './Exceptions/MissingRouteParamException'
 import Path from '../Router/Path'
-import Route from '../Router/Manager'
+import Route from '../Router/Route'
 
 const settings = {
 	secret: null
