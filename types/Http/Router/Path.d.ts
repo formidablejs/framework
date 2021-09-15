@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Path;
-declare class Path {
+export default class Path {
     /**
     @param {String[]} prefix
     @param {String} pattern

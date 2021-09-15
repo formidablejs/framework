@@ -1,3 +1,2 @@
-export var __esModule: boolean;
-export default handleNotFound;
-declare function handleNotFound(request: any): any;
+export default function handleNotFound(request: any): NotFoundException;
+import NotFoundException from "../Exceptions/NotFoundException";

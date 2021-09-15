@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default URL;
-declare class URL {
+export default class URL {
     /**
     @param {String} name
     @param {Object} params

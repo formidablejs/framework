@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Redis;
-declare class Redis {
+export default class Redis {
     /**
     @param {String} database
     */

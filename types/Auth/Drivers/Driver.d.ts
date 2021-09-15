@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Driver;
-declare class Driver {
+export default class Driver {
     /**
     @param {Function} handler
     */
@@ -20,7 +18,10 @@ declare class Driver {
     /**
     @param {String} token
     */
-    getPersonalAccessToken(token?: string): Promise<any>;
+    getPersonalAccessToken(token?: string): Promise<{
+        token: any;
+        tokenable: any;
+    }>;
     /**
     @param {Object} body
     */
@@ -99,10 +100,10 @@ declare class Driver {
     /**
     @param {Object} user
     */
-    verificationUrl(user: any): Promise<any>;
+    verificationUrl(user: any): Promise<string>;
     /**
     @param {Object} user
     @param {String} token
     */
-    passwordResetUrl(user: any, token: string): Promise<any>;
+    passwordResetUrl(user: any, token: string): Promise<string>;
 }

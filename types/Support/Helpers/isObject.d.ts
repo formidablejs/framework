@@ -1,3 +1,1 @@
-export var __esModule: boolean;
-export default isObject;
-declare function isObject(object: any): boolean;
+export default function isObject(object: any): boolean;

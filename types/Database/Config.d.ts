@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Config;
-declare class Config {
+export default class Config {
     /** @type {string}*/
     static get default(): string;
     /** @type {object}*/

@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Bootstrap;
-declare class Bootstrap {
+export default class Bootstrap {
     /**
     @param {String} location
     @param {Object} config

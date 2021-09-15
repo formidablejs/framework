@@ -1,8 +1,5 @@
-export var __esModule: boolean;
 export default PasswordController;
-declare const PasswordController_base: any;
-declare class PasswordController extends PasswordController_base {
-    [x: string]: any;
+declare class PasswordController extends Controller {
     /**
     @param {Function} handler
     */
@@ -15,10 +12,13 @@ declare class PasswordController extends PasswordController_base {
     /**
     @param {ForgotPasswordRequest} request
     */
-    forgot(request: any, reply: any): any;
+    forgot(request: ForgotPasswordRequest, reply: any): any;
     /**
     @param {ResetPasswordRequest} request
     */
-    reset(request: any, reply: any): any;
+    reset(request: ResetPasswordRequest, reply: any): any;
 }
+import Controller from "../../../Http/Controller";
+import ForgotPasswordRequest from "../Requests/ForgotPasswordRequest";
+import ResetPasswordRequest from "../Requests/ResetPasswordRequest";
 declare const Ψ__init__: unique symbol;

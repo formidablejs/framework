@@ -1,8 +1,5 @@
-export var __esModule: boolean;
 export default LogoutController;
-declare const LogoutController_base: any;
-declare class LogoutController extends LogoutController_base {
-    [x: string]: any;
+declare class LogoutController extends Controller {
     /**
     @param {Function} handler
     */
@@ -11,6 +8,8 @@ declare class LogoutController extends LogoutController_base {
     /**
     @param {LogoutRequest} request
     */
-    logout(request: any, reply: any): any;
+    logout(request: LogoutRequest, reply: any): any;
 }
+import Controller from "../../../Http/Controller";
+import LogoutRequest from "../Requests/LogoutRequest";
 declare const Ψ__init__: unique symbol;

@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Application;
-declare class Application {
+export default class Application {
     /**
     @param {String} notation
     @param {any} default
@@ -24,7 +22,7 @@ declare class Application {
     @param {Number} default
     */
     port(default$?: number): number;
-    routes(): any;
+    routes(): any[];
     fastify(): any;
     addHook(hook: any, handler: any): Application;
     /**
@@ -42,11 +40,13 @@ declare class Application {
     @param {Kernel} kernel
     @param {Boolean} returnMode
     */
-    initiate(kernel: any, returnMode?: boolean): Promise<Application>;
+    initiate(kernel: Kernel, returnMode?: boolean): Promise<Application>;
     prepare(): Application;
     resolve(): any[];
     boot(resolver: any): any;
     register(resolver: any): any;
     [Ψ__init__]($$?: any): void;
 }
+import Kernel from "../Http/Kernel";
 declare const Ψ__init__: unique symbol;
+export {};

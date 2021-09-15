@@ -1,9 +1,5 @@
-export var __esModule: boolean;
-export default LogoutRequest;
-declare const LogoutRequest_base: any;
-declare class LogoutRequest extends LogoutRequest_base {
-    [x: string]: any;
+export default class LogoutRequest extends FormRequest {
     authorize(): boolean;
-    rules(): {};
     persist(): Promise<any>;
 }
+import FormRequest from "../../../Http/Request/FormRequest";

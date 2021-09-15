@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default BeforeResend;
-declare class BeforeResend {
+export default class BeforeResend {
     /**
     @param {Function} handler
     */

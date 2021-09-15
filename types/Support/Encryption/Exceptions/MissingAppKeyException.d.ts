@@ -1,6 +1,3 @@
-export var __esModule: boolean;
-export default MissingAppKeyException;
-declare const MissingAppKeyException_base: any;
-declare class MissingAppKeyException extends MissingAppKeyException_base {
-    [x: string]: any;
+export default class MissingAppKeyException extends ApplicationException {
 }
+import ApplicationException from "../../../Foundation/Exceptions/ApplicationException";

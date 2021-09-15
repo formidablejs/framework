@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Language;
-declare class Language {
+export default class Language {
     constructor($$?: any);
     lang: any;
     get locale(): any;
@@ -31,3 +29,4 @@ declare class Language {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
+export {};

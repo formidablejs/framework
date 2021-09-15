@@ -1,9 +1,5 @@
-export var __esModule: boolean;
-export default AuthenticationServiceResolver;
-declare const AuthenticationServiceResolver_base: any;
-declare class AuthenticationServiceResolver extends AuthenticationServiceResolver_base {
-    [x: string]: any;
+export default class AuthenticationServiceResolver extends ServiceResolver {
     get protocol(): any;
     get provider(): any;
-    boot(): any;
 }
+import ServiceResolver from "../Support/ServiceResolver";

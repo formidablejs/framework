@@ -1,11 +1,8 @@
-export var __esModule: boolean;
 export default NotFoundException;
-declare const NotFoundException_base: any;
-declare class NotFoundException extends NotFoundException_base {
-    [x: string]: any;
+declare class NotFoundException extends HttpException {
     static [Ψ__init__](): typeof NotFoundException;
     constructor(...args: any[]);
-    status: any;
     [Ψ__init__]($$?: any, ...args: any[]): void;
 }
+import HttpException from "./HttpException";
 declare const Ψ__init__: unique symbol;

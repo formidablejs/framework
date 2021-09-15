@@ -1,6 +1,3 @@
-export var __esModule: boolean;
-export default UndefinedMiddlewareException;
-declare const UndefinedMiddlewareException_base: any;
-declare class UndefinedMiddlewareException extends UndefinedMiddlewareException_base {
-    [x: string]: any;
+export default class UndefinedMiddlewareException extends ApplicationException {
 }
+import ApplicationException from "../../Foundation/Exceptions/ApplicationException";

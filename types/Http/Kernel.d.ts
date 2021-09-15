@@ -1,11 +1,10 @@
-export var __esModule: boolean;
-export default Kernel;
-declare class Kernel {
+/// <reference types="node" />
+export default class Kernel {
     get middleware(): any[];
     get middlewareGroups(): {};
     get routeMiddleware(): {};
     getAllMiddleware(route: any): any[];
-    listen(config: any, errorHandler: any, hooks: any, returnMode: any): Promise<any>;
+    listen(config: any, errorHandler: any, hooks: any, returnMode: any): Promise<void | import("fastify").FastifyInstance<import("http").Server, import("http").IncomingMessage, import("http").ServerResponse, import("fastify").FastifyLoggerInstance>>;
     hasRoutes(router: any, config: any): any[];
     /**
     @param {Object} route

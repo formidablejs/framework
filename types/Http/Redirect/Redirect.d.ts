@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Redirect;
-declare class Redirect {
+export default class Redirect {
     /**
     @param {String} path
     */

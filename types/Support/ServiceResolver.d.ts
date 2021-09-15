@@ -1,13 +1,13 @@
-export var __esModule: boolean;
-export default ServiceResolver;
-declare class ServiceResolver {
+export default class ServiceResolver {
     /**
     @param {Application} app
     */
-    constructor(app: any);
-    app: any;
+    constructor(app: Application);
+    app: Application;
     boot(): ServiceResolver;
     register(): ServiceResolver;
     [Ψ__init__]($$?: any): void;
 }
+import Application from "../Foundation/Application";
 declare const Ψ__init__: unique symbol;
+export {};

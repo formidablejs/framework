@@ -1,9 +1,5 @@
-export var __esModule: boolean;
-export default VerifyEmailRequest;
-declare const VerifyEmailRequest_base: any;
-declare class VerifyEmailRequest extends VerifyEmailRequest_base {
-    [x: string]: any;
+export default class VerifyEmailRequest extends FormRequest {
     authorize(): boolean;
-    rules(): {};
     persist(): Promise<any>;
 }
+import FormRequest from "../../../Http/Request/FormRequest";

@@ -1,7 +1,6 @@
-export var __esModule: boolean;
-export default response;
 /**
 @param {any} data
 @param {number} statusCode
 */
-declare function response(data?: any, statusCode?: number): any;
+export default function response(data?: any, statusCode?: number): Response;
+import Response from "../../Http/Response/Response";

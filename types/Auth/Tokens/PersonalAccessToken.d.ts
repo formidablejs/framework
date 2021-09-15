@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default PersonalAccessToken;
-declare class PersonalAccessToken {
+export default class PersonalAccessToken {
     /**
     @param {String} name
     @param {Number} id

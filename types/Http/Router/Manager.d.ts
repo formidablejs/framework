@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Manager;
-declare class Manager {
+export default class Manager {
     /**
     @param {String} verb
     @param {String} pattern

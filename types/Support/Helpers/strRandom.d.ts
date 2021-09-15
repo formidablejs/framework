@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default strRandom;
 /**
 @param {Number} length
 */
-declare function strRandom(length?: number): any;
+export default function strRandom(length?: number): any;

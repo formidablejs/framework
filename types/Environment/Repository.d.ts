@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Repository;
-declare class Repository {
+export default class Repository {
     /**
     @param {String} root
     */
@@ -14,3 +12,4 @@ declare class Repository {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
+export {};

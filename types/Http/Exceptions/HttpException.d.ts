@@ -1,4 +1,3 @@
-export var __esModule: boolean;
 export default HttpException;
 declare class HttpException extends Error {
     static [Ψ__init__](): typeof HttpException;

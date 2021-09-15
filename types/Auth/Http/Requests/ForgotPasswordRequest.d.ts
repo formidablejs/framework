@@ -1,11 +1,5 @@
-export var __esModule: boolean;
-export default ForgotPasswordRequest;
-declare const ForgotPasswordRequest_base: any;
-declare class ForgotPasswordRequest extends ForgotPasswordRequest_base {
-    [x: string]: any;
+export default class ForgotPasswordRequest extends FormRequest {
     authorize(): boolean;
-    rules(): {
-        email: string;
-    };
     persist(): Promise<any>;
 }
+import FormRequest from "../../../Http/Request/FormRequest";

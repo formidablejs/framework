@@ -1,23 +1,7 @@
-export var __esModule: boolean;
-export default JwtDriver;
-declare const JwtDriver_base: any;
-declare class JwtDriver extends JwtDriver_base {
-    [x: string]: any;
-    verify(): Promise<any>;
-    /**
-    @param {Object} body
-    */
-    authenticate(body: any): Promise<{
+export default class JwtDriver extends Driver {
+    verify(): Promise<{
         token: any;
-        type: string;
-        user: any;
-    }>;
-    /**
-    @param {Object} body
-    */
-    register(body: any): Promise<{
-        token: any;
-        type: string;
-        user: any;
+        tokenable: any;
     }>;
 }
+import Driver from "./Driver";

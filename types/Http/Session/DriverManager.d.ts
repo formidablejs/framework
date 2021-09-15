@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default DriverManager;
-declare class DriverManager {
+export default class DriverManager {
     /**
     @param {String} name
     @param {Object} driver

@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default HasCsrfToken;
-declare class HasCsrfToken {
+export default class HasCsrfToken {
     constructor(config: any);
     config: any;
     handle(request: any, reply: any): any;

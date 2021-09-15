@@ -1,6 +1,3 @@
-export var __esModule: boolean;
-export default TokenMismatchException;
-declare const TokenMismatchException_base: any;
-declare class TokenMismatchException extends TokenMismatchException_base {
-    [x: string]: any;
+export default class TokenMismatchException extends ForbiddenException {
 }
+import ForbiddenException from "../../../Http/Exceptions/ForbiddenException";

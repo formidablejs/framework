@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default BeforeForgot;
-declare class BeforeForgot {
+export default class BeforeForgot {
     /**
     @param {Function} handler
     */

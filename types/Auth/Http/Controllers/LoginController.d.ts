@@ -1,8 +1,5 @@
-export var __esModule: boolean;
 export default LoginController;
-declare const LoginController_base: any;
-declare class LoginController extends LoginController_base {
-    [x: string]: any;
+declare class LoginController extends Controller {
     /**
     @param {Function} handler
     */
@@ -11,6 +8,8 @@ declare class LoginController extends LoginController_base {
     /**
     @param {LoginRequest} request
     */
-    login(request: any, reply: any): any;
+    login(request: LoginRequest, reply: any): any;
 }
+import Controller from "../../../Http/Controller";
+import LoginRequest from "../Requests/LoginRequest";
 declare const Ψ__init__: unique symbol;

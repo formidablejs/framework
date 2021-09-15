@@ -1,11 +1,8 @@
-export var __esModule: boolean;
 export default BadRequestException;
-declare const BadRequestException_base: any;
-declare class BadRequestException extends BadRequestException_base {
-    [x: string]: any;
+declare class BadRequestException extends HttpException {
     static [Ψ__init__](): typeof BadRequestException;
     constructor(...args: any[]);
-    status: any;
     [Ψ__init__]($$?: any, ...args: any[]): void;
 }
+import HttpException from "./HttpException";
 declare const Ψ__init__: unique symbol;

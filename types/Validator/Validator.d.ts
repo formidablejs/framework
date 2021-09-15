@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Validator;
-declare class Validator {
+export default class Validator {
     /**
     @param {Object} body
     @param {Object} rules

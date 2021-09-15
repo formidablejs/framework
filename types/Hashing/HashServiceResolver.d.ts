@@ -1,7 +1,3 @@
-export var __esModule: boolean;
-export default HashServiceResolver;
-declare const HashServiceResolver_base: any;
-declare class HashServiceResolver extends HashServiceResolver_base {
-    [x: string]: any;
-    boot(): any;
+export default class HashServiceResolver extends ServiceResolver {
 }
+import ServiceResolver from "../Support/ServiceResolver";

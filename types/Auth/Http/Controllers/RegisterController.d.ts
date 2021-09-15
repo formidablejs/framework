@@ -1,8 +1,5 @@
-export var __esModule: boolean;
 export default RegisterController;
-declare const RegisterController_base: any;
-declare class RegisterController extends RegisterController_base {
-    [x: string]: any;
+declare class RegisterController extends Controller {
     /**
     @param {Function} handler
     */
@@ -11,6 +8,8 @@ declare class RegisterController extends RegisterController_base {
     /**
     @param {RegisterRequest} request
     */
-    register(request: any, reply: any): any;
+    register(request: RegisterRequest, reply: any): any;
 }
+import Controller from "../../../Http/Controller";
+import RegisterRequest from "../Requests/RegisterRequest";
 declare const Ψ__init__: unique symbol;

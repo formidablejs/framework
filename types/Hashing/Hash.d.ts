@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Hash;
-declare class Hash {
+export default class Hash {
     /**
     @param {String} value
     */

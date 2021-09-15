@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default FormRequest;
-declare class FormRequest {
+export default class FormRequest {
     constructor(request: any, route: any, raw: any, config: any);
     request: any;
     route: any;
@@ -68,11 +66,11 @@ declare class FormRequest {
     /**
     @param {string} path
     */
-    pathIs(path: string): any;
+    pathIs(path: string): boolean;
     /**
     @param {string} route
     */
-    routeIs(route: string): any;
+    routeIs(route: string): boolean;
     /**
     @param {String} name
     */
@@ -100,7 +98,7 @@ declare class FormRequest {
     @param {string|null} key
     */
     query(key?: string | null, default$?: any): any;
-    expectsJson(): any;
+    expectsJson(): boolean;
     validate(): any;
     /**
     @param {Array} rules
@@ -115,3 +113,4 @@ declare class FormRequest {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
+export {};

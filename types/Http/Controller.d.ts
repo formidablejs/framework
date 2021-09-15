@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Controller;
-declare class Controller {
+export default class Controller {
     /**
     @param {Object} rules
     */

@@ -1,7 +1,3 @@
-export var __esModule: boolean;
-export default RedisServiceResolver;
-declare const RedisServiceResolver_base: any;
-declare class RedisServiceResolver extends RedisServiceResolver_base {
-    [x: string]: any;
-    boot(): any;
+export default class RedisServiceResolver extends ServiceResolver {
 }
+import ServiceResolver from "../Support/ServiceResolver";

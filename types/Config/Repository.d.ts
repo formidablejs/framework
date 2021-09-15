@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default Repository;
-declare class Repository {
+export default class Repository {
     static setEnvironment(): any;
     static getEnvironment(): any;
     constructor($$?: any);
@@ -24,3 +22,4 @@ declare class Repository {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
+export {};

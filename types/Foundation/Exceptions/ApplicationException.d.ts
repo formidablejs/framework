@@ -1,4 +1,3 @@
-export var __esModule: boolean;
 export default ApplicationException;
 declare class ApplicationException extends Error {
     static [Ψ__init__](): typeof ApplicationException;

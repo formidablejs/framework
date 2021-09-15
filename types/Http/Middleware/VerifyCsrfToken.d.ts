@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default VerifyCsrfToken;
-declare class VerifyCsrfToken {
+export default class VerifyCsrfToken {
     constructor(config: any);
     get addHttpCookie(): boolean;
     get except(): any[];

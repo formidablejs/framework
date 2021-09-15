@@ -1,12 +1,5 @@
-export var __esModule: boolean;
-export default ResetPasswordRequest;
-declare const ResetPasswordRequest_base: any;
-declare class ResetPasswordRequest extends ResetPasswordRequest_base {
-    [x: string]: any;
+export default class ResetPasswordRequest extends FormRequest {
     authorize(): boolean;
-    rules(): {
-        password: string;
-        password_confirmation: string;
-    };
     persist(): Promise<any>;
 }
+import FormRequest from "../../../Http/Request/FormRequest";

@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default JsonResponse;
-declare class JsonResponse {
+export default class JsonResponse {
     /**
     @param {Object} object
     */
@@ -19,3 +17,4 @@ declare class JsonResponse {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
+export {};

@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default AuthService;
-declare class AuthService {
+export default class AuthService {
     /**
     @param {Function} callback
     */
@@ -64,13 +62,14 @@ declare class AuthService {
     /**
     @param {Mailable} mailer
     */
-    static verificationMailer(mailer: any): typeof AuthService;
+    static verificationMailer(mailer: new ($$?: any) => import("@formidablejs/mailer/types/Mailable")): typeof AuthService;
     /**
     @param {Mailable} mailer
     */
-    static resetPasswordMailer(mailer: any): typeof AuthService;
+    static resetPasswordMailer(mailer: new ($$?: any) => import("@formidablejs/mailer/types/Mailable")): typeof AuthService;
     /**
     @param {Object} config
     */
-    static routes(config?: any): any;
+    static routes(config?: any): typeof Route;
 }
+import Route from "../Http/Router/Manager";

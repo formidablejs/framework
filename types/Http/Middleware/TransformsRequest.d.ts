@@ -1,6 +1,4 @@
-export var __esModule: boolean;
-export default TransformsRequest;
-declare class TransformsRequest {
+export default class TransformsRequest {
     get except(): any[];
     handle(request: any): {};
     clean(request: any): {};
