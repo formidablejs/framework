@@ -1,8 +1,8 @@
-export = Handler;
-declare class Handler {
+export default class Handler {
     constructor(config: any);
     config: any;
     handle(error: any, request: any, reply: any): Promise<any>;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;
+export {};

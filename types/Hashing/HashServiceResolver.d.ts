@@ -1,4 +1,3 @@
-export = HashServiceResolver;
-declare class HashServiceResolver extends ServiceResolver {
+export default class HashServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../Support/ServiceResolver");
+import ServiceResolver from "../Support/ServiceResolver";

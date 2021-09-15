@@ -1,4 +1,3 @@
-export = LanguageServiceResolver;
-declare class LanguageServiceResolver extends ServiceResolver {
+export default class LanguageServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../ServiceResolver");
+import ServiceResolver from "../ServiceResolver";

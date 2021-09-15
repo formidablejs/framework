@@ -1,9 +1,8 @@
-export = ValidationServiceResolver;
-declare class ValidationServiceResolver extends ServiceResolver {
+export default class ValidationServiceResolver extends ServiceResolver {
     registeredRules(): {};
     /**
     @param {Object} rules
     */
-    registerRules(rules: any): import("./ValidationServiceResolver");
+    registerRules(rules: any): ValidationServiceResolver;
 }
-import ServiceResolver = require("../Support/ServiceResolver");
+import ServiceResolver from "../Support/ServiceResolver";

@@ -1,5 +1,4 @@
-export = Hash;
-declare class Hash {
+export default class Hash {
     /**
     @param {String} value
     */

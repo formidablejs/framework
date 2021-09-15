@@ -1,6 +1,6 @@
-const LoginRequest = require '../Requests/LoginRequest'
-const Controller = require '../../../Http/Controller'
-const decorator$use = require '../../../Support/Decorators/use'
+import LoginRequest from '../Requests/LoginRequest'
+import Controller from '../../../Http/Controller'
+import { @use } from '../../../Support/Decorators/use'
 
 const loginAuth = {
 	onLogin: null
@@ -24,4 +24,4 @@ class LoginController < Controller
 
 		loginAuth.onLogin = handler
 
-module.exports = LoginController
+export default LoginController

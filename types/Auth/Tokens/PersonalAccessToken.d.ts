@@ -1,5 +1,4 @@
-export = PersonalAccessToken;
-declare class PersonalAccessToken {
+export default class PersonalAccessToken {
     /**
     @param {String} name
     @param {Number} id
@@ -26,115 +25,13 @@ declare class PersonalAccessToken {
     /**
     @param {Database} database
     */
-    static setDatabase(database: any): {
-        new (): import("./PersonalAccessToken");
-        /**
-        @param {String} name
-        @param {Number} id
-        @param {String} table
-        @param {Array} abilities
-        */
-        create(name: string, id: number, table: string, abilities?: any[]): any;
-        /**
-        @param {String} token
-        */
-        find(token: string): Promise<{
-            token: any;
-            tokenable: any;
-        }>;
-        /**
-        @param {String} token
-        */
-        destroy(token: string): Promise<any>;
-        /**
-        @param {String} token
-        */
-        verify(token: string): Promise<any>;
-        getDatabase(): any;
-        setDatabase(database: any): any;
-        /**
-        @param {Object} config
-        */
-        setConfig(config: any): any;
-        /**
-        @param {String} secret
-        */
-        setSecret(secret: string): any;
-    };
+    static setDatabase(database: any): typeof PersonalAccessToken;
     /**
     @param {Object} config
     */
-    static setConfig(config: any): {
-        new (): import("./PersonalAccessToken");
-        /**
-        @param {String} name
-        @param {Number} id
-        @param {String} table
-        @param {Array} abilities
-        */
-        create(name: string, id: number, table: string, abilities?: any[]): any;
-        /**
-        @param {String} token
-        */
-        find(token: string): Promise<{
-            token: any;
-            tokenable: any;
-        }>;
-        /**
-        @param {String} token
-        */
-        destroy(token: string): Promise<any>;
-        /**
-        @param {String} token
-        */
-        verify(token: string): Promise<any>;
-        getDatabase(): any;
-        /**
-        @param {Database} database
-        */
-        setDatabase(database: any): any;
-        setConfig(config: any): any;
-        /**
-        @param {String} secret
-        */
-        setSecret(secret: string): any;
-    };
+    static setConfig(config: any): typeof PersonalAccessToken;
     /**
     @param {String} secret
     */
-    static setSecret(secret: string): {
-        new (): import("./PersonalAccessToken");
-        /**
-        @param {String} name
-        @param {Number} id
-        @param {String} table
-        @param {Array} abilities
-        */
-        create(name: string, id: number, table: string, abilities?: any[]): any;
-        /**
-        @param {String} token
-        */
-        find(token: string): Promise<{
-            token: any;
-            tokenable: any;
-        }>;
-        /**
-        @param {String} token
-        */
-        destroy(token: string): Promise<any>;
-        /**
-        @param {String} token
-        */
-        verify(token: string): Promise<any>;
-        getDatabase(): any;
-        /**
-        @param {Database} database
-        */
-        setDatabase(database: any): any;
-        /**
-        @param {Object} config
-        */
-        setConfig(config: any): any;
-        setSecret(secret: string): any;
-    };
+    static setSecret(secret: string): typeof PersonalAccessToken;
 }

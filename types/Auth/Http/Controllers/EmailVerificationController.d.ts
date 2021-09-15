@@ -1,4 +1,4 @@
-export = EmailVerificationController;
+export default EmailVerificationController;
 declare class EmailVerificationController extends Controller {
     /**
     @param {Function} handler
@@ -8,7 +8,7 @@ declare class EmailVerificationController extends Controller {
     @param {Function} handler
     */
     static onEmailResend(handler: Function): Function;
-    static [Ψinit](): typeof EmailVerificationController;
+    static [Ψ__init__](): typeof EmailVerificationController;
     /**
     @param {VerifyEmailRequest} request
     */
@@ -18,7 +18,7 @@ declare class EmailVerificationController extends Controller {
     */
     resend(request: EmailResendRequest, reply: any): any;
 }
-import Controller = require("../../../Http/Controller");
-import VerifyEmailRequest = require("../Requests/VerifyEmailRequest");
-import EmailResendRequest = require("../Requests/EmailResendRequest");
-declare const Ψinit: unique symbol;
+import Controller from "../../../Http/Controller";
+import VerifyEmailRequest from "../Requests/VerifyEmailRequest";
+import EmailResendRequest from "../Requests/EmailResendRequest";
+declare const Ψ__init__: unique symbol;

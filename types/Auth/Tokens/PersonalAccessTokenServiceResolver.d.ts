@@ -1,4 +1,3 @@
-export = PersonalAccessTokenServiceResolver;
-declare class PersonalAccessTokenServiceResolver extends ServiceResolver {
+export default class PersonalAccessTokenServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../../Support/ServiceResolver");
+import ServiceResolver from "../../Support/ServiceResolver";

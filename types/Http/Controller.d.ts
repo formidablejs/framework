@@ -1,5 +1,4 @@
-export = Controller;
-declare class Controller {
+export default class Controller {
     /**
     @param {Object} rules
     */

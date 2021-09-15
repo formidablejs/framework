@@ -1,5 +1,4 @@
-export = TransformsRequest;
-declare class TransformsRequest {
+export default class TransformsRequest {
     get except(): any[];
     handle(request: any): {};
     clean(request: any): {};

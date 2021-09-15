@@ -1,5 +1,4 @@
-export = Driver;
-declare class Driver {
+export default class Driver {
     /**
     @param {Function} handler
     */
@@ -26,11 +25,11 @@ declare class Driver {
     /**
     @param {Object} body
     */
-    authenticate(body: any): import("./Driver");
+    authenticate(body: any): Driver;
     /**
     @param {Object} body
     */
-    register(body: any): import("./Driver");
+    register(body: any): Driver;
     /**
     @param {Object} user
     */
@@ -74,7 +73,7 @@ declare class Driver {
     /**
     @param {Object} body
     */
-    logout(body?: any): import("./Driver");
+    logout(body?: any): Driver;
     /**
     @param {String} token
     @param {Object} body

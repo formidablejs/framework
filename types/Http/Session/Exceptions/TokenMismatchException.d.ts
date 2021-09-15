@@ -1,4 +1,3 @@
-export = TokenMismatchException;
-declare class TokenMismatchException extends ForbiddenException {
+export default class TokenMismatchException extends ForbiddenException {
 }
-import ForbiddenException = require("../../../Http/Exceptions/ForbiddenException");
+import ForbiddenException from "../../../Http/Exceptions/ForbiddenException";

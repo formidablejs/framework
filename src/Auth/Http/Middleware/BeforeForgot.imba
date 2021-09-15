@@ -1,10 +1,10 @@
-const DriverManager = require '../../DriverManager'
+import DriverManager from '../../DriverManager'
 
 const password = {
 	beforeForgot: null
 }
 
-module.exports = class BeforeForgot
+export default class BeforeForgot
 
 	def constructor config
 		this.config = config

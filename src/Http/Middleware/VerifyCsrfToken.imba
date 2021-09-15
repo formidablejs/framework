@@ -1,8 +1,8 @@
-const { wildcard } = require '@formidablejs/helpers'
-const csrf = require '@fastify/csrf'
-const TokenMismatchException = require '../Session/Exceptions/TokenMismatchException'
+import csrf from '@fastify/csrf'
+import TokenMismatchException from '../Session/Exceptions/TokenMismatchException'
+import wildcard from '../../Support/Helpers/wildcard'
 
-module.exports = class VerifyCsrfToken
+export default class VerifyCsrfToken
 
 	get addHttpCookie
 		true

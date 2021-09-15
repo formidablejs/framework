@@ -1,6 +1,6 @@
-const RegisterRequest = require '../Requests/RegisterRequest'
-const Controller = require '../../../Http/Controller'
-const decorator$use = require '../../../Support/Decorators/use'
+import RegisterRequest from '../Requests/RegisterRequest'
+import Controller from '../../../Http/Controller'
+import { @use } from '../../../Support/Decorators/use'
 
 const registerAuth = {
 	onRegister: null
@@ -25,4 +25,4 @@ class RegisterController < Controller
 
 		registerAuth.onRegister = handler
 
-module.exports = RegisterController
+export default RegisterController

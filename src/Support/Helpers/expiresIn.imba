@@ -1,4 +1,4 @@
-const ms = require 'ms'
+import ms from 'ms'
 
-module.exports = def expiresIn time\String
+export default def expiresIn time\String
 	"PX {ms(time)}"

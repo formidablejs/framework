@@ -1,8 +1,8 @@
-const { config } = require '@formidablejs/helpers'
-const bookshelf = require 'bookshelf'
-const knex = require 'knex'
+import config from '../Support/Helpers/config'
+import bookshelf from 'bookshelf'
+import knex from 'knex'
 
-module.exports = class Config
+export default class Config
 
 	# Default connection name.
 	#

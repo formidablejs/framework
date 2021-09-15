@@ -1,6 +1,6 @@
-const JsonResponse = require './JsonResponse'
+import JsonResponse from './JsonResponse'
 
-module.exports = class Response
+export default class Response
 
 	prop data = null
 	prop statusCode = 200

@@ -1,3 +1,6 @@
-declare function _exports(data?: any, statusCode?: number): Response;
-export = _exports;
-import Response = require("../../Http/Response/Response");
+/**
+@param {any} data
+@param {number} statusCode
+*/
+export default function response(data?: any, statusCode?: number): Response;
+import Response from "../../Http/Response/Response";

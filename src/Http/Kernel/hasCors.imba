@@ -1,5 +1,5 @@
-const cors = require 'fastify-cors'
-const NotFoundException = require '../../Http/Exceptions/NotFoundException'
+import cors from 'fastify-cors'
+import NotFoundException from '../../Http/Exceptions/NotFoundException'
 
 def getOrigins origin\String, config
 	const origins = []
@@ -43,7 +43,7 @@ def isMatchingPath request, config
 
 	return false
 
-module.exports = def hasCors fastify, config
+export default def hasCors fastify, config
 	fastify.register cors, do(instance)
 		do(request, callback)
 			const options = {

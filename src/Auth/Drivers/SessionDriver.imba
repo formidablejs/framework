@@ -1,9 +1,9 @@
-const Auth = require '../Auth'
-const AuthorizationException = require '../Exceptions/AuthorizationException'
-const Driver = require './Driver'
-const BadRequestException = require '../../Http/Exceptions/BadRequestException'
+import Auth from '../Auth'
+import AuthorizationException from '../Exceptions/AuthorizationException'
+import Driver from './Driver'
+import BadRequestException from '../../Http/Exceptions/BadRequestException'
 
-module.exports = class SessionDriver < Driver
+export default class SessionDriver < Driver
 
 	def verify
 		const token = await self.request.request.session.personal_access_token

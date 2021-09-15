@@ -1,2 +1,4 @@
-declare function _exports(time: string): string;
-export = _exports;
+/**
+@param {String} time
+*/
+export default function expiresIn(time: string): string;

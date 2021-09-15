@@ -1,22 +1,22 @@
-const { Mailable } = require '@formidablejs/mailer'
-const Driver = require './Drivers/Driver'
+import { Mailable } from '@formidablejs/mailer'
+import Driver from './Drivers/Driver'
 
-const BeforeForgot = require './Http/Middleware/BeforeForgot'
-const BeforeLogin = require './Http/Middleware/BeforeLogin'
-const BeforeLogout = require './Http/Middleware/BeforeLogout'
-const BeforeRegister = require './Http/Middleware/BeforeRegister'
-const BeforeResend = require './Http/Middleware/BeforeResend'
-const BeforeReset = require './Http/Middleware/BeforeReset'
-const BeforeVerify = require './Http/Middleware/BeforeVerify'
+import BeforeForgot from './Http/Middleware/BeforeForgot'
+import BeforeLogin from './Http/Middleware/BeforeLogin'
+import BeforeLogout from './Http/Middleware/BeforeLogout'
+import BeforeRegister from './Http/Middleware/BeforeRegister'
+import BeforeResend from './Http/Middleware/BeforeResend'
+import BeforeReset from './Http/Middleware/BeforeReset'
+import BeforeVerify from './Http/Middleware/BeforeVerify'
 
-const EmailVerificationController = require './Http/Controllers/EmailVerificationController'
-const LoginController = require './Http/Controllers/LoginController'
-const LogoutController = require './Http/Controllers/LogoutController'
-const PasswordController = require './Http/Controllers/PasswordController'
-const RegisterController = require './Http/Controllers/RegisterController'
-const Route = require '../Http/Router/Manager'
+import EmailVerificationController from './Http/Controllers/EmailVerificationController'
+import LoginController from './Http/Controllers/LoginController'
+import LogoutController from './Http/Controllers/LogoutController'
+import PasswordController from './Http/Controllers/PasswordController'
+import RegisterController from './Http/Controllers/RegisterController'
+import Route from '../Http/Router/Route'
 
-module.exports = class AuthService
+export default class AuthService
 
 	static def beforeLogin callback\Function
 		BeforeLogin.beforeLogin callback

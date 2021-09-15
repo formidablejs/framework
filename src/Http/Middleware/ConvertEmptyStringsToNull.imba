@@ -1,6 +1,6 @@
-const TransformsRequest = require './TransformsRequest'
+import TransformsRequest from './TransformsRequest'
 
-module.exports = class ConvertEmptyStringsToNull < TransformsRequest
+export default class ConvertEmptyStringsToNull < TransformsRequest
 
 	def transform key, value
 		value !== '' ? value : null

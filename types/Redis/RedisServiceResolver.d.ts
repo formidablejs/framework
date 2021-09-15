@@ -1,4 +1,3 @@
-export = RedisServiceResolver;
-declare class RedisServiceResolver extends ServiceResolver {
+export default class RedisServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../Support/ServiceResolver");
+import ServiceResolver from "../Support/ServiceResolver";

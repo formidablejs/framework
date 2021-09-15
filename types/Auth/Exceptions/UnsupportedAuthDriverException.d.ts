@@ -1,4 +1,3 @@
-export = UnsupportedAuthDriverException;
-declare class UnsupportedAuthDriverException extends ApplicationException {
+export default class UnsupportedAuthDriverException extends ApplicationException {
 }
-import ApplicationException = require("../../Foundation/Exceptions/ApplicationException");
+import ApplicationException from "../../Foundation/Exceptions/ApplicationException";

@@ -1,14 +1,13 @@
-export = Redirect;
-declare class Redirect {
+export default class Redirect {
     /**
     @param {String} path
     */
-    static to(path: string): import("./Redirect");
+    static to(path: string): Redirect;
     /**
     @param {String} name
     @param {Object} params
     */
-    static route(name: string, params?: any): import("./Redirect");
+    static route(name: string, params?: any): Redirect;
     /**
     @param {String} path
     @param {Number} statusCode
@@ -19,5 +18,5 @@ declare class Redirect {
     /**
     @param {Number} statusCode
     */
-    code(statusCode: number): import("./Redirect");
+    code(statusCode: number): Redirect;
 }

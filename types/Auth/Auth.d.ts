@@ -1,4 +1,4 @@
-export = Auth;
+export default Auth;
 declare class Auth {
     /**
     @param {Object} provider

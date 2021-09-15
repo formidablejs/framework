@@ -1,6 +1,6 @@
-const { handleException, setConfig } = require './Handler/handleException'
+import { handleException, setConfig } from './Handler/handleException'
 
-module.exports = class Handler
+export default class Handler
 
 	prop config
 

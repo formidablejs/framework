@@ -1,10 +1,10 @@
-const DriverManager = require '../../DriverManager'
+import DriverManager from '../../DriverManager'
 
 const emailVerification = {
 	beforeVerify: null
 }
 
-module.exports = class BeforeVerify
+export default class BeforeVerify
 
 	def constructor config
 		this.config = config

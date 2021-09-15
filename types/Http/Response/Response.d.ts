@@ -1,5 +1,4 @@
-export = Response;
-declare class Response {
+export default class Response {
     /**
     @param {any} data
     @param {Number} statusCode
@@ -15,7 +14,8 @@ declare class Response {
     @param {Number} statusCode
     */
     code(statusCode: number): number;
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-import JsonResponse = require("./JsonResponse");
-declare const Ψinit: unique symbol;
+import JsonResponse from "./JsonResponse";
+declare const Ψ__init__: unique symbol;
+export {};

@@ -1,6 +1,6 @@
-const TransformsRequest = require './TransformsRequest'
+import TransformsRequest from './TransformsRequest'
 
-module.exports = class TrimStrings < TransformsRequest
+export default class TrimStrings < TransformsRequest
 
 	def transform key, value
 		typeof value == 'string' ? value.trim! : value

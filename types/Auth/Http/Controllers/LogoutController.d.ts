@@ -1,15 +1,15 @@
-export = LogoutController;
+export default LogoutController;
 declare class LogoutController extends Controller {
     /**
     @param {Function} handler
     */
     static onLogout(handler: Function): Function;
-    static [Ψinit](): typeof LogoutController;
+    static [Ψ__init__](): typeof LogoutController;
     /**
     @param {LogoutRequest} request
     */
     logout(request: LogoutRequest, reply: any): any;
 }
-import Controller = require("../../../Http/Controller");
-import LogoutRequest = require("../Requests/LogoutRequest");
-declare const Ψinit: unique symbol;
+import Controller from "../../../Http/Controller";
+import LogoutRequest from "../Requests/LogoutRequest";
+declare const Ψ__init__: unique symbol;

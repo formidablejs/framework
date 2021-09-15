@@ -6,4 +6,4 @@ export function handleException(error: any, request: any, reply: any, returns?: 
 @param {ConfigRepostory} config
 */
 export function setConfig(config: ConfigRepostory): ConfigRepostory;
-import ConfigRepostory = require("../../../Config/Repository");
+import ConfigRepostory from "../../../Config/Repository";

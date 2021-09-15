@@ -1,6 +1,6 @@
-const Application = require '../Foundation/Application'
+import Application from '../Foundation/Application'
 
-module.exports = class ServiceResolver
+export default class ServiceResolver
 
 	prop app\Application
 

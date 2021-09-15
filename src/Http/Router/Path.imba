@@ -1,4 +1,4 @@
-module.exports = class Path
+export default class Path
 
 	static def clean prefix\String[], pattern\String
 		prefix = prefix

@@ -1,6 +1,6 @@
-const csrf = require '@fastify/csrf'
+import csrf from '@fastify/csrf'
 
-module.exports = class HasCsrfToken
+export default class HasCsrfToken
 
 	def constructor config
 		self.config = config

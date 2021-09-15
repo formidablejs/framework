@@ -1,13 +1,13 @@
-const { wildcard, dotNotation: dot } = require '@formidablejs/helpers'
-const Auth = require '../../Auth/Auth'
-const Validator = require '../../Validator/Validator'
-const AuthorizationException = require '../../Auth/Exceptions/AuthorizationException'
-const querystring = require 'querystring'
+import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
+import dot from '../../Support/Helpers/dotNotation'
+import querystring from 'querystring'
+import Validator from '../../Validator/Validator'
+import wildcard from '../../Support/Helpers/wildcard'
 
 const response = { raw: null }
 const options = { rules: null }
 
-module.exports = class FormRequest
+export default class FormRequest
 
 	prop request = {}
 	prop route = {}
@@ -212,5 +212,5 @@ module.exports = class FormRequest
 		{
 			user: do null
 			check: do false
-			can: do false
+			can: do(perform\String) false
 		}

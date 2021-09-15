@@ -1,5 +1,4 @@
-export = Redis;
-declare class Redis {
+export default class Redis {
     /**
     @param {String} database
     */

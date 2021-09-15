@@ -1,4 +1,4 @@
-module.exports = class TransformsRequest
+export default class TransformsRequest
 
 	get except
 		[

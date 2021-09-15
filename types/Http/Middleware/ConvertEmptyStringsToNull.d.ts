@@ -1,4 +1,3 @@
-export = ConvertEmptyStringsToNull;
-declare class ConvertEmptyStringsToNull extends TransformsRequest {
+export default class ConvertEmptyStringsToNull extends TransformsRequest {
 }
-import TransformsRequest = require("./TransformsRequest");
+import TransformsRequest from "./TransformsRequest";

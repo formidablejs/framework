@@ -1,2 +1,1 @@
-declare function _exports(target: any, key: any, descriptor: any): any;
-export = _exports;
+export function αuse(target: any, key: any, descriptor: any): any;

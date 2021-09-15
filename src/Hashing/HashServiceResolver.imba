@@ -1,7 +1,7 @@
-const ServiceResolver = require '../Support/ServiceResolver'
-const Hash = require './Hash'
+import ServiceResolver from '../Support/ServiceResolver'
+import Hash from './Hash'
 
-module.exports = class HashServiceResolver < ServiceResolver
+export default class HashServiceResolver < ServiceResolver
 
 	def boot
 		Hash.configure(self.app.config.get('hashing'))

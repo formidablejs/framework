@@ -1,6 +1,6 @@
-const { dotNotation: dot } = require '@formidablejs/helpers'
-const fs = require 'fs'
-const path = require 'path'
+import dot from '../Helpers/dotNotation'
+import fs from 'fs'
+import path from 'path'
 
 def getDirectories location
 	const all = []
@@ -10,7 +10,7 @@ def getDirectories location
 
 	all
 
-module.exports = class Language
+export default class Language
 
 	prop lang = {
 		locale: null

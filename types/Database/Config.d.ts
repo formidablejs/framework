@@ -1,5 +1,4 @@
-export = Config;
-declare class Config {
+export default class Config {
     /** @type {string}*/
     static get default(): string;
     /** @type {object}*/

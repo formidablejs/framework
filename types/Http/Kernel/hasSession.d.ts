@@ -1,2 +1,1 @@
-declare function _exports(fastify: any, config: any): any;
-export = _exports;
+export default function hasSession(fastify: any, config: any): any;

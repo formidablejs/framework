@@ -1,3 +1,3 @@
-const ForbiddenException = require '../../../Http/Exceptions/ForbiddenException'
+import ForbiddenException from '../../../Http/Exceptions/ForbiddenException'
 
-module.exports = class TokenMismatchException < ForbiddenException
+export default class TokenMismatchException < ForbiddenException

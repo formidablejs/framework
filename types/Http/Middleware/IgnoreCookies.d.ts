@@ -1,4 +1,3 @@
-export = IgnoreCookies;
-declare class IgnoreCookies {
+export default class IgnoreCookies {
     handle(request: any, reply: any): () => any;
 }

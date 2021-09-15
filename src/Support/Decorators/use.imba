@@ -1,9 +1,13 @@
-const { FastifyRequest, FastifyReply } = require 'fastify'
-const Model = require '../../Database/Model'
-const FormRequest = require '../../Http/Request/FormRequest'
-const ValidationException = require '../../Validator/Exceptions/ValidationException'
+import { FastifyRequest, FastifyReply } from 'fastify'
+import Model from '../../Database/Model'
+import FormRequest from '../../Http/Request/FormRequest'
+import ValidationException from '../../Validator/Exceptions/ValidationException'
+import isClass from '../Helpers/isClass'
 
-module.exports = def use target, key, descriptor
+export def @use target, key, descriptor
+	if isClass target
+		return
+
 	const value = descriptor.value
 
 	const definition = this

@@ -1,4 +1,4 @@
-module.exports = class Middleware
+export default class Middleware
 
 	def handle request, reply
 		this

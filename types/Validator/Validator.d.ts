@@ -1,5 +1,4 @@
-export = Validator;
-declare class Validator {
+export default class Validator {
     /**
     @param {Object} body
     @param {Object} rules

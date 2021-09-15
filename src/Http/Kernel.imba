@@ -1,17 +1,17 @@
-const fastify = require 'fastify'
-const FormRequest = require './Request/FormRequest'
-const getResponse = require './Kernel/getResponse'
-const handleNotFound = require './Kernel/handleNotFound'
-const hasContentTypes = require './Kernel/hasContentTypes'
-const hasStaticContent = require './Kernel/hasStaticContent'
-const hasCookie = require './Kernel/hasCookie'
-const hasSession = require './Kernel/hasSession'
-const hasCors = require './Kernel/hasCors'
-const resolveResponse = require './Kernel/resolveResponse'
-const Route = require './Router/Manager'
-const UndefinedMiddlewareException = require './Exceptions/UndefinedMiddlewareException'
+import fastify from 'fastify'
+import FormRequest from './Request/FormRequest'
+import getResponse from './Kernel/getResponse'
+import handleNotFound from './Kernel/handleNotFound'
+import hasContentTypes from './Kernel/hasContentTypes'
+import hasStaticContent from './Kernel/hasStaticContent'
+import hasCookie from './Kernel/hasCookie'
+import hasSession from './Kernel/hasSession'
+import hasCors from './Kernel/hasCors'
+import resolveResponse from './Kernel/resolveResponse'
+import Route from './Router/Route'
+import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
 
-module.exports = class Kernel
+export default class Kernel
 
 	get middleware
 		[
@@ -63,8 +63,10 @@ module.exports = class Kernel
 
 		return list
 
-	def listen config, errorHandler, hooks, testMode
-		const router = fastify!
+	def listen config, errorHandler, hooks, returnMode
+		const router = fastify({
+			ignoreTrailingSlash: true
+		})
 
 		hasStaticContent(router)
 		hasContentTypes(router)
@@ -87,11 +89,13 @@ module.exports = class Kernel
 
 			return errorHandler.handle(error, request, reply)
 
-		if testMode isa Boolean && testMode == true then return router
+		const port = process.env.FORMIDABLE_PORT ?? 3000
 
-		const port = process.env.npm_package_config_port || 3000
+		delete process.env.FORMIDABLE_PORT
 
-		router.listen port, do(error, address)
+		if returnMode isa Boolean && returnMode == true then return router
+
+		router.listen Number(port), do(error, address)
 			if error then throw error
 
 			console.log "\x1b[32mServer started on:\x1b[0m {address}"

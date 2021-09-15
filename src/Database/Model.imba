@@ -1,9 +1,9 @@
-const pluralize = require 'pluralize'
-const Config = require './Config'
+import pluralize from 'pluralize'
+import Config from './Config'
 
 const model = Config.bookshelf ? Config.bookshelf.Model : class fallback
 
-module.exports = class Model < model
+export default class Model < model
 
 	# The table associated with the model.
 	#

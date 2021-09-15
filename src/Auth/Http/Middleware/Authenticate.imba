@@ -1,7 +1,7 @@
-const Auth = require '../../Auth'
-const DriverManager = require '../../DriverManager'
+import Auth from '../../Auth'
+import DriverManager from '../../DriverManager'
 
-module.exports = class Authenticate
+export default class Authenticate
 
 	def constructor config
 		this.config = config

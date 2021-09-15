@@ -1,5 +1,4 @@
-export = FormRequest;
-declare class FormRequest {
+export default class FormRequest {
     constructor(request: any, route: any, raw: any, config: any);
     request: any;
     route: any;
@@ -49,11 +48,11 @@ declare class FormRequest {
     @param {string} header
     @param {string} value
     */
-    setHeader(header: string, value: string): import("./FormRequest");
+    setHeader(header: string, value: string): FormRequest;
     /**
     @param {object} headers
     */
-    setHeaders(headers: object): import("./FormRequest");
+    setHeaders(headers: object): FormRequest;
     /**
     @param {string} header
     */
@@ -109,8 +108,9 @@ declare class FormRequest {
     auth(): {
         user: () => any;
         check: () => boolean;
-        can: () => boolean;
+        can: (perform: string) => boolean;
     };
-    [Ψinit]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;
+export {};

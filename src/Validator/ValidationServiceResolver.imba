@@ -1,7 +1,7 @@
-const ServiceResolver = require '../Support/ServiceResolver'
-const Validator = require './Validator'
+import ServiceResolver from '../Support/ServiceResolver'
+import Validator from './Validator'
 
-module.exports = class ValidationServiceResolver < ServiceResolver
+export default class ValidationServiceResolver < ServiceResolver
 
 	def boot
 		const rules = self.registeredRules!

@@ -1,5 +1,4 @@
-export = BeforeLogin;
-declare class BeforeLogin {
+export default class BeforeLogin {
     /**
     @param {Function} handler
     */

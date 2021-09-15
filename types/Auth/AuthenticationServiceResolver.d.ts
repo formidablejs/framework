@@ -1,6 +1,5 @@
-export = AuthenticationServiceResolver;
-declare class AuthenticationServiceResolver extends ServiceResolver {
+export default class AuthenticationServiceResolver extends ServiceResolver {
     get protocol(): any;
     get provider(): any;
 }
-import ServiceResolver = require("../Support/ServiceResolver");
+import ServiceResolver from "../Support/ServiceResolver";

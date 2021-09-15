@@ -1,4 +1,3 @@
-export = InvalidSignatureException;
-declare class InvalidSignatureException extends ForbiddenException {
+export default class InvalidSignatureException extends ForbiddenException {
 }
-import ForbiddenException = require("./ForbiddenException");
+import ForbiddenException from "./ForbiddenException";

@@ -1,7 +1,8 @@
-export = AuthorizationException;
+export default AuthorizationException;
 declare class AuthorizationException extends HttpException {
+    static [Ψ__init__](): typeof AuthorizationException;
     constructor(...args: any[]);
-    [Ψinit]($$?: any, ...args: any[]): void;
+    [Ψ__init__]($$?: any, ...args: any[]): void;
 }
-import HttpException = require("../../Http/Exceptions/HttpException");
-declare const Ψinit: unique symbol;
+import HttpException from "../../Http/Exceptions/HttpException";
+declare const Ψ__init__: unique symbol;

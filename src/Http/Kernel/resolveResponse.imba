@@ -1,9 +1,9 @@
-const { Mailable } = require '@formidablejs/mailer'
-const JsonResponse = require '../Response/JsonResponse'
-const Redirect = require '../Redirect/Redirect'
-const Response = require '../Response/Response'
+import { Mailable } from '@formidablejs/mailer'
+import JsonResponse from '../Response/JsonResponse'
+import Redirect from '../Redirect/Redirect'
+import Response from '../Response/Response'
 
-module.exports = def resolveResponse response\any, reply
+export default def resolveResponse response\any, reply
 	if response instanceof Redirect then return reply.code(response.statusCode).redirect(response.path)
 
 	if response instanceof JsonResponse then return response.toJson(reply)

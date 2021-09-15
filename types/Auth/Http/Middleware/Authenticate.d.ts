@@ -1,5 +1,4 @@
-export = Authenticate;
-declare class Authenticate {
+export default class Authenticate {
     constructor(config: any);
     config: any;
     /**
@@ -8,4 +7,4 @@ declare class Authenticate {
     handle(request: any, reply: any, params: any[]): Promise<() => Auth>;
     configure(protocol: any): any;
 }
-import Auth = require("../../Auth");
+import Auth from "../../Auth";

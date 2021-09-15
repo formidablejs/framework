@@ -1,3 +1,2 @@
-declare function _exports(request: any): NotFoundException;
-export = _exports;
-import NotFoundException = require("../Exceptions/NotFoundException");
+export default function handleNotFound(request: any): NotFoundException;
+import NotFoundException from "../Exceptions/NotFoundException";

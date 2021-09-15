@@ -1,2 +1,4 @@
-declare function _exports(response: any, reply: any): Promise<any>;
-export = _exports;
+/**
+@param {any} response
+*/
+export default function resolveResponse(response: any, reply: any): Promise<any>;

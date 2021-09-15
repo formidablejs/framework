@@ -1,4 +1,4 @@
-const csrf = require 'fastify-csrf'
+import csrf from 'fastify-csrf'
 
-module.exports = def hasCsrf fastify
+export default def hasCsrf fastify
 	fastify.register(csrf, sessionPlugin: 'fastify-session')

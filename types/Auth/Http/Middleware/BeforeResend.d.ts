@@ -1,5 +1,4 @@
-export = BeforeResend;
-declare class BeforeResend {
+export default class BeforeResend {
     /**
     @param {Function} handler
     */

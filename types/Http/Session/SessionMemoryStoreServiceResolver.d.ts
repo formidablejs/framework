@@ -1,4 +1,3 @@
-export = SessionMemoryStoreServiceResolver;
-declare class SessionMemoryStoreServiceResolver extends ServiceResolver {
+export default class SessionMemoryStoreServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../../Support/ServiceResolver");
+import ServiceResolver from "../../Support/ServiceResolver";

@@ -1,4 +1,3 @@
-export = UndefinedMiddlewareException;
-declare class UndefinedMiddlewareException extends ApplicationException {
+export default class UndefinedMiddlewareException extends ApplicationException {
 }
-import ApplicationException = require("../../Foundation/Exceptions/ApplicationException");
+import ApplicationException from "../../Foundation/Exceptions/ApplicationException";

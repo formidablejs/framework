@@ -1,4 +1,3 @@
-export = CsrfServiceResolver;
-declare class CsrfServiceResolver extends ServiceResolver {
+export default class CsrfServiceResolver extends ServiceResolver {
 }
-import ServiceResolver = require("../../Support/ServiceResolver");
+import ServiceResolver from "../../Support/ServiceResolver";

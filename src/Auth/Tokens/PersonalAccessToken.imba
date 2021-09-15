@@ -1,8 +1,11 @@
-const { isArray, isClass, isNumber, isString } = require '@formidablejs/helpers'
-const ConfigRepository = require '../../Config/Repository'
-const Database = require '../../Database/Database'
-const DatabaseConfig = require '../../Database/Config'
-const jwt = require 'jsonwebtoken'
+import ConfigRepository from '../../Config/Repository'
+import Database from '../../Database/Database'
+import DatabaseConfig from '../../Database/Config'
+import isArray from '../../Support/Helpers/isArray'
+import isClass from '../../Support/Helpers/isClass'
+import isNumber from '../../Support/Helpers/isNumber'
+import isString from '../../Support/Helpers/isString'
+import jwt from 'jsonwebtoken'
 
 const settings = {
 	config: null
@@ -10,7 +13,7 @@ const settings = {
 	secret: null
 }
 
-module.exports = class PersonalAccessToken
+export default class PersonalAccessToken
 
 	static def create name\String, id\Number, table\String, abilities\Array = ['*']
 		if !isString(name) then throw new TypeError 'name must be a string.'

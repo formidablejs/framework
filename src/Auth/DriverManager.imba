@@ -1,13 +1,13 @@
-const UnsupportedAuthDriverException = require './Exceptions/UnsupportedAuthDriverException'
-const JwtDriver = require './Drivers/JwtDriver'
-const SessionDriver = require './Drivers/SessionDriver'
+import UnsupportedAuthDriverException from './Exceptions/UnsupportedAuthDriverException'
+import JwtDriver from './Drivers/JwtDriver'
+import SessionDriver from './Drivers/SessionDriver'
 
 const drivers = {
 	jwt: JwtDriver
 	session: SessionDriver
 }
 
-module.exports = class DriverManager
+export default class DriverManager
 
 	static def register name\String, driver\Object
 		drivers[name] = driver

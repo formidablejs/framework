@@ -1,8 +1,6 @@
-export = HasCsrfToken;
-declare class HasCsrfToken {
+export default class HasCsrfToken {
     constructor(config: any);
     config: any;
-    handle(request: any, reply: any): string;
-    tokens(): csrf;
+    handle(request: any, reply: any): any;
+    tokens(): any;
 }
-import csrf = require("@fastify/csrf");

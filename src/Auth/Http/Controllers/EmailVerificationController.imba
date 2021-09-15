@@ -1,7 +1,7 @@
-const VerifyEmailRequest = require '../Requests/VerifyEmailRequest'
-const EmailResendRequest = require '../Requests/EmailResendRequest'
-const Controller = require '../../../Http/Controller'
-const decorator$use = require '../../../Support/Decorators/use'
+import VerifyEmailRequest from '../Requests/VerifyEmailRequest'
+import EmailResendRequest from '../Requests/EmailResendRequest'
+import Controller from '../../../Http/Controller'
+import { @use } from '../../../Support/Decorators/use'
 
 const emailVerification = {
 	onVerification: null
@@ -42,4 +42,4 @@ class EmailVerificationController < Controller
 
 		emailVerification.onEmailResend = handler
 
-module.exports = EmailVerificationController
+export default EmailVerificationController

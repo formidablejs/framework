@@ -1,7 +1,7 @@
-const fs = require 'fs'
-const path = require 'path'
+import fs from 'fs'
+import path from 'path'
 
-module.exports = class Bootstrap
+export default class Bootstrap
 
 	static def cache location\String, config\Object
 		location = path.join process.cwd!, location
@@ -10,10 +10,5 @@ module.exports = class Bootstrap
 
 		if !fs.existsSync(directory) then fs.mkdirSync(directory, { recursive: true })
 
-		if !fs.existsSync location
-			fs.writeFileSync location, JSON.stringify(config), do(error)
-				if error then console.warn error
-
-		if fs.readFileSync(location, { encoding: 'utf8', flag: 'r' }) !== JSON.stringify(config)
-			fs.writeFileSync location, JSON.stringify(config), do(error)
-				if error then console.warn error
+		fs.writeFileSync location, JSON.stringify(config), do(error)
+			if error then console.warn error

@@ -1,7 +1,7 @@
-const ForgotPasswordRequest = require '../Requests/ForgotPasswordRequest'
-const ResetPasswordRequest = require '../Requests/ResetPasswordRequest'
-const Controller = require '../../../Http/Controller'
-const decorator$use = require '../../../Support/Decorators/use'
+import ForgotPasswordRequest from '../Requests/ForgotPasswordRequest'
+import ResetPasswordRequest from '../Requests/ResetPasswordRequest'
+import Controller from '../../../Http/Controller'
+import { @use } from '../../../Support/Decorators/use'
 
 const password = {
 	onForgot: null
@@ -42,4 +42,4 @@ class PasswordController < Controller
 
 		password.onReset = handler
 
-module.exports = PasswordController
+export default PasswordController

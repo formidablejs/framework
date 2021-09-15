@@ -1,9 +1,10 @@
-const { asObject, without } = require '@formidablejs/helpers'
-const Auth = require '../Auth'
-const AuthorizationException = require '../Exceptions/AuthorizationException'
-const Driver = require './Driver'
+import asObject from '../../Support/Helpers/asObject'
+import Auth from '../Auth'
+import AuthorizationException from '../Exceptions/AuthorizationException'
+import Driver from './Driver'
+import without from '../../Support/Helpers/without'
 
-module.exports = class JwtDriver < Driver
+export default class JwtDriver < Driver
 
 	def verify
 		if !self.request.hasHeader('authorization')

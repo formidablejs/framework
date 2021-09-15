@@ -1,56 +1,107 @@
-const { FastifyReply, FastifyRequest, RequestGenericInterface } = require 'fastify'
-const { Mail, Mailable, MailServiceResolver } = require '@formidablejs/mailer'
+import { FastifyReply, FastifyRequest, RequestGenericInterface } from 'fastify'
+import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
+import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
+import Application from './Foundation/Application'
+import ApplicationException from './Foundation/Exceptions/ApplicationException'
+import Auth from './Auth/Auth'
+import Authenticate from './Auth/Http/Middleware/Authenticate'
+import AuthenticationServiceResolver from './Auth/AuthenticationServiceResolver'
+import AuthService from './Auth/AuthService'
+import ConfigRepository from './Config/Repository'
+import Controller from './Http/Controller'
+import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
+import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
+import Database from './Database/Database'
+import DB from './Database/Database'
+import { @use } from './Support/Decorators/use'
+import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
+import ExceptionHandler from './Foundation/Exceptions/Handler'
+import expiresIn from './Support/Helpers/expiresIn'
+import ForbiddenException from './Http/Exceptions/ForbiddenException'
+import FormRequest from './Http/Request/FormRequest'
+import HasCsrfToken from './Http/Middleware/HasCsrfToken'
+import HasEncryptionKey from './Support/Encryption/HasEncryptionKey'
+import Hash from './Hashing/Hash'
+import HashServiceResolver from './Hashing/HashServiceResolver'
+import * as helpers from './Support/Helpers/index'
+import HttpException from './Http/Exceptions/HttpException'
+import IgnoreCookies from './Http/Middleware/IgnoreCookies'
+import Kernel from './Http/Kernel'
+import Language from './Support/Language/Language'
+import LanguageServiceResolver from './Support/Language/LanguageServiceResolver'
+import Model from './Database/Model'
+import NotFoundException from './Http/Exceptions/NotFoundException'
+import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessTokenServiceResolver'
+import Redirect from './Http/Redirect/Redirect'
+import Redis from './Redis/Redis'
+import RedisServiceResolver from './Redis/RedisServiceResolver'
+import response from './Support/Helpers/response'
+import Route from './Http/Router/Route'
+import ServiceResolver from './Support/ServiceResolver'
+import SessionDriverManager from './Http/Session/DriverManager'
+import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
+import SessionMemoryStoreServiceResolver from './Http/Session/SessionMemoryStoreServiceResolver'
+import TransformsRequest from './Http/Middleware/TransformsRequest'
+import TrimStrings from './Http/Middleware/TrimStrings'
+import URL from './Http/URL/URL'
+import ValidateSignature from './Http/Middleware/ValidateSignature'
+import ValidationServiceResolver from './Validator/ValidationServiceResolver'
+import Validator from './Validator/Validator'
+import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
 
-exports.AcceptLanguage = require './Support/Language/Middleware/AcceptLanguage'
-exports.Application = require './Foundation/Application'
-exports.ApplicationException = require './Foundation/Exceptions/ApplicationException'
-exports.Auth = require './Auth/Auth'
-exports.Authenticate = require './Auth/Http/Middleware/Authenticate'
-exports.AuthenticationServiceResolver = require './Auth/AuthenticationServiceResolver'
-exports.AuthService = require './Auth/AuthService'
-exports.ConfigRepository = require './Config/Repository'
-exports.Controller = require './Http/Controller'
-exports.ConvertEmptyStringsToNull = require './Http/Middleware/ConvertEmptyStringsToNull'
-exports.CsrfServiceResolver = require './Http/Csrf/CsrfServiceResolver'
-exports.Database = require './Database/Database'
-exports.DB = require './Database/Database'
-exports.decorator$use = require './Support/Decorators/use'
-exports.ErrorIfAuthenticated = require './Auth/Http/Middleware/ErrorIfAuthenticated'
-exports.ExceptionHandler = require './Foundation/Exceptions/Handler'
-exports.expiresIn = require './Support/Helpers/expiresIn'
-exports.FastifyReply = FastifyReply
-exports.FastifyRequest = FastifyRequest
-exports.ForbiddenException = require './Http/Exceptions/ForbiddenException'
-exports.FormRequest = require './Http/Request/FormRequest'
-exports.HasCsrfToken = require './Http/Middleware/HasCsrfToken'
-exports.HasEncryptionKey = require './Support/Encryption/HasEncryptionKey'
-exports.Hash = require './Hashing/Hash'
-exports.HashServiceResolver = require './Hashing/HashServiceResolver'
-exports.HttpException = require './Http/Exceptions/HttpException'
-exports.IgnoreCookies = require './Http/Middleware/IgnoreCookies'
-exports.Kernel = require './Http/Kernel'
-exports.Language = require './Support/Language/Language'
-exports.LanguageServiceResolver = require './Support/Language/LanguageServiceResolver'
-exports.Mail = Mail
-exports.Mailable = Mailable
-exports.MailServiceResolver = MailServiceResolver
-exports.Model = require './Database/Model'
-exports.NotFoundException = require './Http/Exceptions/NotFoundException'
-exports.PersonalAccessTokenServiceResolver = require './Auth/Tokens/PersonalAccessTokenServiceResolver'
-exports.Redirect = require './Http/Redirect/Redirect'
-exports.Redis = require './Redis/Redis'
-exports.RedisServiceResolver = require './Redis/RedisServiceResolver'
-exports.RequestGenericInterface = RequestGenericInterface
-exports.response = require './Support/Helpers/response'
-exports.Route = require './Http/Router/Manager'
-exports.ServiceResolver = require './Support/ServiceResolver'
-exports.SessionDriverManager = require './Http/Session/DriverManager'
-exports.SessionFileStoreServiceResolver = require './Http/Session/SessionFileStoreServiceResolver'
-exports.SessionMemoryStoreServiceResolver = require './Http/Session/SessionMemoryStoreServiceResolver'
-exports.TransformsRequest = require './Http/Middleware/TransformsRequest'
-exports.TrimStrings = require './Http/Middleware/TrimStrings'
-exports.URL = require './Http/URL/URL'
-exports.ValidateSignature = require './Http/Middleware/ValidateSignature'
-exports.ValidationServiceResolver = require './Validator/ValidationServiceResolver'
-exports.Validator = require './Validator/Validator'
-exports.VerifyCsrfToken = require './Http/Middleware/VerifyCsrfToken'
+export {
+	AcceptLanguage
+	Application
+	ApplicationException
+	Auth
+	Authenticate
+	AuthenticationServiceResolver
+	AuthService
+	ConfigRepository
+	Controller
+	ConvertEmptyStringsToNull
+	CsrfServiceResolver
+	Database
+	DB
+	@use
+	ErrorIfAuthenticated
+	ExceptionHandler
+	expiresIn
+	FastifyReply
+	FastifyRequest
+	ForbiddenException
+	FormRequest
+	HasCsrfToken
+	HasEncryptionKey
+	Hash
+	HashServiceResolver
+	helpers
+	HttpException
+	IgnoreCookies
+	Kernel
+	Language
+	LanguageServiceResolver
+	Mail
+	Mailable
+	MailServiceResolver
+	Model
+	NotFoundException
+	PersonalAccessTokenServiceResolver
+	Redirect
+	Redis
+	RedisServiceResolver
+	RequestGenericInterface
+	response
+	Route
+	ServiceResolver
+	SessionDriverManager
+	SessionFileStoreServiceResolver
+	SessionMemoryStoreServiceResolver
+	TransformsRequest
+	TrimStrings
+	URL
+	ValidateSignature
+	ValidationServiceResolver
+	Validator
+	VerifyCsrfToken
+}

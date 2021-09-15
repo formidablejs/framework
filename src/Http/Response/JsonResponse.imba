@@ -1,4 +1,4 @@
-module.exports = class JsonResponse
+export default class JsonResponse
 
 	prop data = {}
 	prop statusCode = 200

@@ -1,4 +1,3 @@
-export = MissingAppKeyException;
-declare class MissingAppKeyException extends ApplicationException {
+export default class MissingAppKeyException extends ApplicationException {
 }
-import ApplicationException = require("../../../Foundation/Exceptions/ApplicationException");
+import ApplicationException from "../../../Foundation/Exceptions/ApplicationException";

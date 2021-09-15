@@ -1,7 +1,7 @@
-const PersonalAccessToken = require './PersonalAccessToken'
-const ServiceResolver = require '../../Support/ServiceResolver'
+import PersonalAccessToken from './PersonalAccessToken'
+import ServiceResolver from '../../Support/ServiceResolver'
 
-module.exports = class PersonalAccessTokenServiceResolver < ServiceResolver
+export default class PersonalAccessTokenServiceResolver < ServiceResolver
 
 	def boot
 		PersonalAccessToken

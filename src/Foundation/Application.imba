@@ -1,27 +1,43 @@
-const Bootstrap = require './Bootstrap'
-const ConfigRepository = require '../Config/Repository'
-const Database = require '../Database/Config'
-const dotenv = require 'dotenv'
-const ExceptionHandler = require './Exceptions/Handler'
-const Kernel = require '../Http/Kernel'
-const Route = require '../Http/Router/Manager'
+import Bootstrap from './Bootstrap'
+import ConfigRepository from '../Config/Repository'
+import Database from '../Database/Config'
+import ExceptionHandler from './Exceptions/Handler'
+import Kernel from '../Http/Kernel'
+import Route from '../Http/Router/Route'
+import EnvironmentRepository from '../Environment/Repository'
 
 const settings = {
-	server: null
 	config: null
+	environment: null
+	port: 3000
+	server: null
+	request: null
 }
 
-module.exports = class Application
+export default class Application
 
 	prop bindings = new Object
-	prop root = null
 	prop config
 	prop hooks = new Object
+	prop root = null
 
 	def constructor root\String
-		dotenv.config!
-
 		self.root = root
+
+		settings.environment = new EnvironmentRepository(root)
+		settings.port = process.env.FORMIDABLE_PORT ?? 3000
+
+	static def getConfig notation\String, default\any = null
+		self.config.get(notation, default)
+
+	static def getEnv key\String, default\any = null
+		settings.environment.get(key, default)
+
+	static def env
+		settings.environment.get('app.env')
+
+	def port default\Number = 3000
+		settings.port ?? default
 
 	def routes
 		Route.all!
@@ -54,9 +70,8 @@ module.exports = class Application
 
 	def cache
 		settings.config = self.make(ConfigRepository)
-		Bootstrap.cache './bootstrap/cache/config.json', self.make(ConfigRepository).all!
 
-		# create a database.json config file.
+		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
 
 		const dbConfig = Database.make!.connection
 
@@ -67,18 +82,18 @@ module.exports = class Application
 
 			delete dbConfig.database
 
-		Bootstrap.cache './bootstrap/cache/database.json', {
+		Bootstrap.cache "./bootstrap/cache/database.json", {
 			default: dbConfig
 		}
 
-	def initiate kernel\Kernel, testMode\Boolean = false
+	def initiate kernel\Kernel, returnMode\Boolean = false
 		const handler = self.make(ExceptionHandler, [self.config])
 
 		settings.server = await kernel.listen(
 			self.config,
 			handler,
 			self.hooks,
-			testMode
+			returnMode
 		)
 
 		return self

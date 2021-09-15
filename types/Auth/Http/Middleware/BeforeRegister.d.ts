@@ -1,5 +1,4 @@
-export = BeforeRegister;
-declare class BeforeRegister {
+export default class BeforeRegister {
     /**
     @param {Function} handler
     */

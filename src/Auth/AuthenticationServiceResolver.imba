@@ -1,8 +1,8 @@
-const Auth = require './Auth'
-const ConfigRepository = require '../Config/Repository'
-const ServiceResolver = require '../Support/ServiceResolver'
+import Auth from './Auth'
+import ConfigRepository from '../Config/Repository'
+import ServiceResolver from '../Support/ServiceResolver'
 
-module.exports = class AuthenticationServiceResolver < ServiceResolver
+export default class AuthenticationServiceResolver < ServiceResolver
 
 	get protocol
 		const default = self.app.make(ConfigRepository).get 'auth.defaults.protocol'

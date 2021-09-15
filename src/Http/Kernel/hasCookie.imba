@@ -1,6 +1,6 @@
-const cookie = require 'fastify-cookie'
+import cookie from 'fastify-cookie'
 
-module.exports = def hasCookies fastify, config
+export default def hasCookies fastify, config
 	fastify.register(cookie, {
 		secret: config.get('app.key')
 		parseOptions: {

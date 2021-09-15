@@ -1,4 +1,3 @@
-export = MissingRouteParamException;
-declare class MissingRouteParamException extends ApplicationException {
+export default class MissingRouteParamException extends ApplicationException {
 }
-import ApplicationException = require("../../../Foundation/Exceptions/ApplicationException");
+import ApplicationException from "../../../Foundation/Exceptions/ApplicationException";

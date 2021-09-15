@@ -1,5 +1,4 @@
-export = BeforeReset;
-declare class BeforeReset {
+export default class BeforeReset {
     /**
     @param {Function} handler
     */

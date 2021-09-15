@@ -1,4 +1,3 @@
-export = UnsupportedSessionDriverException;
-declare class UnsupportedSessionDriverException extends ApplicationException {
+export default class UnsupportedSessionDriverException extends ApplicationException {
 }
-import ApplicationException = require("../../../Foundation/Exceptions/ApplicationException");
+import ApplicationException from "../../../Foundation/Exceptions/ApplicationException";

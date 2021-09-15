@@ -1,6 +1,6 @@
-const Hash = require '../Hashing/Hash'
-const ValidationException = require '../Validator/Exceptions/ValidationException'
-const Database = require '../Database/Database'
+import Hash from '../Hashing/Hash'
+import ValidationException from '../Validator/Exceptions/ValidationException'
+import Database from '../Database/Database'
 
 const config = {
 	provider: null
@@ -47,4 +47,4 @@ class Auth
 			]
 		})
 
-module.exports = Auth
+export default Auth

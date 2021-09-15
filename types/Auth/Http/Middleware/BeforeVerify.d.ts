@@ -1,5 +1,4 @@
-export = BeforeVerify;
-declare class BeforeVerify {
+export default class BeforeVerify {
     /**
     @param {Function} handler
     */

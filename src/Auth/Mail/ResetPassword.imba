@@ -1,7 +1,7 @@
-const { Mailable } = require '@formidablejs/mailer'
-const FormRequest = require '../../Http/Request/FormRequest'
+import { Mailable } from '@formidablejs/mailer'
+import FormRequest from '../../Http/Request/FormRequest'
 
-module.exports = class ResetPassword < Mailable
+export default class ResetPassword < Mailable
 
 	prop subject\String
 	prop request\Object

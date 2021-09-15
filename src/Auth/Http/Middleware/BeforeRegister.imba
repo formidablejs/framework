@@ -1,10 +1,10 @@
-const DriverManager = require '../../DriverManager'
+import DriverManager from '../../DriverManager'
 
 const registerAuth = {
 	beforeRegister: null
 }
 
-module.exports = class BeforeRegister
+export default class BeforeRegister
 
 	def constructor config
 		this.config = config

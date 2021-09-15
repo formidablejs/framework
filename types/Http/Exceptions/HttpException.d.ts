@@ -1,5 +1,6 @@
-export = HttpException;
+export default HttpException;
 declare class HttpException extends Error {
+    static [Ψ__init__](): typeof HttpException;
     /**
     @param {String} response
     */
@@ -9,6 +10,6 @@ declare class HttpException extends Error {
     initMessage(): string;
     initName(): string;
     getStatus(): any;
-    [Ψinit]($$?: any, ...args: any[]): void;
+    [Ψ__init__]($$?: any, ...args: any[]): void;
 }
-declare const Ψinit: unique symbol;
+declare const Ψ__init__: unique symbol;

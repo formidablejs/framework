@@ -1,14 +1,15 @@
-const session = require '@fastify/session'
-const DriverManager = require './DriverManager'
-const ServiceResolver = require '../../Support/ServiceResolver'
+import session from '@fastify/session'
+import DriverManager from './DriverManager'
+import ServiceResolver from '../../Support/ServiceResolver'
+import MemoryStore from 'memorystore'
 
-module.exports = class SessionMemoryStoreServiceResolver < ServiceResolver
+export default class SessionMemoryStoreServiceResolver < ServiceResolver
 
 	def boot
 		if self.app.config.get('session.driver') == 'memory'
-			const MemoryStore = require('memorystore')(session)
+			const store = MemoryStore(session)
 
-			DriverManager.register('memory', new MemoryStore({
+			DriverManager.register('memory', new store({
 				checkPeriod: 86400000
 			}))
 

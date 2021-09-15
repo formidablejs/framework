@@ -1,4 +1,3 @@
-export = TrimStrings;
-declare class TrimStrings extends TransformsRequest {
+export default class TrimStrings extends TransformsRequest {
 }
-import TransformsRequest = require("./TransformsRequest");
+import TransformsRequest from "./TransformsRequest";

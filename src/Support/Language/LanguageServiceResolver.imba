@@ -1,10 +1,10 @@
-const ConfigRepository = require '../../Config/Repository'
-const fs = require 'fs'
-const Language = require './Language'
-const path = require 'path'
-const ServiceResolver = require '../ServiceResolver'
+import ConfigRepository from '../../Config/Repository'
+import fs from 'fs'
+import Language from './Language'
+import path from 'path'
+import ServiceResolver from '../ServiceResolver'
 
-module.exports = class LanguageServiceResolver < ServiceResolver
+export default class LanguageServiceResolver < ServiceResolver
 
 	def boot
 		self.app.addHook('onRequest', do(request, reply, done)
