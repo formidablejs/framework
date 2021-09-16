@@ -1,5 +1,6 @@
-import config from '../Support/Helpers/config'
 import bookshelf from 'bookshelf'
+import config from '../Support/Helpers/config'
+import isEmpty from '../Support/Helpers/isEmpty'
 import knex from 'knex'
 
 export default class Config
@@ -39,20 +40,15 @@ export default class Config
 
 			const connection = {
 				client: client
-				connection: {
-					host: selectedConnection.host ?? '127.0.0.1'
-					port: selectedConnection.port ?? '3306'
-					user: selectedConnection.username
-					password: selectedConnection.password
-					database: selectedConnection.database
-					charset: selectedConnection.charset
-				}
+				connection: selectedConnection
+				migrations: config('database.migrations', {
+					tableName: 'migrations'
+					directory: './database/migrations'
+				})
+				seeds: config('database.seeds', {
+					directory: './database/seeds'
+				})
 			}
-
-			if connection.client == 'sqlite3' && connection.connection.database
-				connection.connection.filename = connection.connection.database
-
-				delete connection.connection.database
 
 			return connection
 
