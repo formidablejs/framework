@@ -1,10 +1,14 @@
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
-import Database from '../Database/Config'
-import ExceptionHandler from './Exceptions/Handler'
-import Kernel from '../Http/Kernel'
-import Route from '../Http/Router/Route'
+import Database from '../Database/Database'
+import DatabaseConfig from '../Database/Config'
 import EnvironmentRepository from '../Environment/Repository'
+import ExceptionHandler from './Exceptions/Handler'
+import isEmpty from '../Support/Helpers/isEmpty'
+import Kernel from '../Http/Kernel'
+import Migration from '../Database/Migration'
+import Route from '../Http/Router/Route'
+import Seeder from '../Database/Seeder'
 
 const settings = {
 	config: null
@@ -12,6 +16,8 @@ const settings = {
 	port: 3000
 	server: null
 	request: null
+	migration: null
+	seeder: null
 }
 
 export default class Application
@@ -25,6 +31,8 @@ export default class Application
 		self.root = root
 
 		settings.environment = new EnvironmentRepository(root)
+		settings.migration = new Migration
+		settings.seeder = new Seeder
 		settings.port = process.env.FORMIDABLE_PORT ?? 3000
 
 	static def getConfig notation\String, default\any = null
@@ -53,6 +61,12 @@ export default class Application
 
 		self
 
+	def migration
+		settings.migration
+
+	def seeder
+		settings.seeder
+
 	def make abstract\Function, params\array = []
 		const key = Object.keys({[abstract]: null})[0]
 
@@ -72,19 +86,6 @@ export default class Application
 		settings.config = self.make(ConfigRepository)
 
 		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
-
-		const dbConfig = Database.make!.connection
-
-		dbConfig.driver = Database.client
-
-		if dbConfig.driver == 'sqlite3' && dbConfig.database
-			dbConfig.filename = dbConfig.database
-
-			delete dbConfig.database
-
-		Bootstrap.cache "./bootstrap/cache/database.json", {
-			default: dbConfig
-		}
 
 	def initiate kernel\Kernel, returnMode\Boolean = false
 		const handler = self.make(ExceptionHandler, [self.config])
