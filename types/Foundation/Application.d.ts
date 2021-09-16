@@ -25,6 +25,8 @@ export default class Application {
     routes(): any[];
     fastify(): any;
     addHook(hook: any, handler: any): Application;
+    migration(): any;
+    seeder(): any;
     /**
     @param {Function} abstract
     @param {array} params
