@@ -37,7 +37,7 @@ export default class Application
 		settings.port = process.env.FORMIDABLE_PORT ?? 3000
 
 	static def getConfig notation\String, default\any = null
-		self.config.get(notation, default)
+		settings.config.get(notation, default)
 
 	static def getEnv key\String, default\any = null
 		settings.environment.get(key, default)
@@ -87,8 +87,6 @@ export default class Application
 		self
 
 	def cache distribute\Boolean = false
-		settings.config = self.make(ConfigRepository)
-
 		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
 
 		if distribute && fs.existsSync('./dist')
