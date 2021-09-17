@@ -9,6 +9,7 @@ import Kernel from '../Http/Kernel'
 import Migration from '../Database/Migration'
 import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
+import fs from 'fs'
 
 const settings = {
 	config: null
@@ -80,12 +81,18 @@ export default class Application
 			[key.replace(/\t/g, '').split('\r\n')]: concrete
 		}
 
+		if abstract.name == ConfigRepository.name
+			settings.config = self.make ConfigRepository
+
 		self
 
-	def cache
+	def cache distribute\Boolean = false
 		settings.config = self.make(ConfigRepository)
 
 		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
+
+		if distribute && fs.existsSync('./dist')
+			Bootstrap.cache "./dist/config.json", self.make(ConfigRepository).all!
 
 	def initiate kernel\Kernel, returnMode\Boolean = false
 		const handler = self.make(ExceptionHandler, [self.config])
