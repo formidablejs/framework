@@ -37,7 +37,10 @@ export default class Application {
     @param {Function} concrete
     */
     bind(abstract: Function, concrete: Function): Application;
-    cache(): any;
+    /**
+    @param {Boolean} distribute
+    */
+    cache(distribute?: boolean): any;
     /**
     @param {Kernel} kernel
     @param {Boolean} returnMode
