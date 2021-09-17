@@ -1,9 +1,15 @@
+import Application from '../../Foundation/Application'
 import ConfigNotCachedError from './Error/ConfigNotCachedError'
 import dot from './dotNotation'
 import env from './env'
 import path from 'path'
 
-export default def config notation\string, default\string = null
+def fallback notation\String, default\any = null
+	try Application.getConfig(notation, default)
+	catch e
+		throw new ConfigNotCachedError
+
+export default def config notation\String, default\any = null
 	const location = path.join(env('PREFER_DISTRIBUTED_CACHE', false) ? (process.cwd!, 'dist', 'config.json') : (process.cwd!, 'bootstrap', 'cache', 'config.json'))
 
 	try
@@ -11,4 +17,4 @@ export default def config notation\string, default\string = null
 
 		dot(config, notation) ?? default
 	catch e
-		throw new ConfigNotCachedError
+		fallback notation, default
