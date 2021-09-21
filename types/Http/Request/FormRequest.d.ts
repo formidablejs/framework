@@ -27,6 +27,11 @@ export default class FormRequest {
     @param {String} default
     */
     t(path: string, default$: any): any;
+    /**
+    @param {String} path
+    @param {String} default
+    */
+    __(path: string, default$: any): any;
     signature(): any;
     url(): any;
     urlWithoutQuery(): any;

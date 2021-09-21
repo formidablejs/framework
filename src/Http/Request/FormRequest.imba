@@ -56,6 +56,9 @@ export default class FormRequest
 	def t path\String, default\String
 		self.translate(path, default)
 
+	def __ path\String, default\String
+		self.translate(path, default)
+
 	def signature
 		let urlSignature = self.query('signature', null)
 

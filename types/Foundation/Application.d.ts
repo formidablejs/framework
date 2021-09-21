@@ -17,6 +17,7 @@ export default class Application {
     bindings: any;
     config: any;
     hooks: any;
+    plugins: any;
     root: string;
     /**
     @param {Number} default
@@ -25,6 +26,15 @@ export default class Application {
     routes(): any[];
     fastify(): any;
     addHook(hook: any, handler: any): Application;
+    /**
+    @param {Function} plugin
+    @param {Object} options
+    */
+    register(plugin: Function, options?: any): Application;
+    /**
+    @param {Function} handler
+    */
+    onResponse(handler: Function): Application;
     migration(): any;
     seeder(): any;
     /**
@@ -48,8 +58,8 @@ export default class Application {
     initiate(kernel: Kernel, returnMode?: boolean): Promise<Application>;
     prepare(): Application;
     resolve(): any[];
-    boot(resolver: any): any;
-    register(resolver: any): any;
+    bootResolver(resolver: any): any;
+    registerResolver(resolver: any): any;
     [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
