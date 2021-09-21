@@ -63,7 +63,7 @@ export default class Kernel
 
 		return list
 
-	def listen config, errorHandler, hooks, returnMode
+	def listen config, errorHandler, hooks, plugins, returnMode
 		const router = fastify({
 			ignoreTrailingSlash: true
 		})
@@ -73,6 +73,9 @@ export default class Kernel
 		hasCookie(router, config)
 		hasSession(router, config)
 		hasCors(router, config)
+
+		for plugin in plugins
+			router.register(plugin.plugin, plugin.options)
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
