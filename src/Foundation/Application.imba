@@ -1,15 +1,16 @@
+import { addResolver } from '../Http/Kernel/resolveResponse'
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
 import Database from '../Database/Database'
 import DatabaseConfig from '../Database/Config'
 import EnvironmentRepository from '../Environment/Repository'
 import ExceptionHandler from './Exceptions/Handler'
+import fs from 'fs'
 import isEmpty from '../Support/Helpers/isEmpty'
 import Kernel from '../Http/Kernel'
 import Migration from '../Database/Migration'
 import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
-import fs from 'fs'
 
 const settings = {
 	config: null
@@ -25,7 +26,8 @@ export default class Application
 
 	prop bindings = new Object
 	prop config
-	prop hooks = new Object
+	prop hooks = []
+	prop plugins = []
 	prop root = null
 
 	def constructor root\String
@@ -59,6 +61,19 @@ export default class Application
 			hooks[hook] = new Array
 
 		hooks[hook].push(handler)
+
+		self
+
+	def register plugin\Function, options\Object = {}
+		self.plugins.push({
+			plugin: plugin
+			options: options
+		})
+
+		self
+
+	def onResponse handler\Function
+		addResolver(handler)
 
 		self
 
@@ -99,6 +114,7 @@ export default class Application
 			self.config,
 			handler,
 			self.hooks,
+			self.plugins,
 			returnMode
 		)
 
@@ -119,11 +135,11 @@ export default class Application
 			for resolver in resolvers
 				resolver = resolver.default ?? resolver
 
-				self.boot(resolver)
-				self.register(resolver)
+				self.bootResolver(resolver)
+				self.registerResolver(resolver)
 
-	def boot resolver
+	def bootResolver resolver
 		new resolver(self).boot!
 
-	def register resolver
+	def registerResolver resolver
 		new resolver(self).register!
