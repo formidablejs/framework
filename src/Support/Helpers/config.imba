@@ -10,7 +10,7 @@ def fallback notation\String, default\any = null
 		throw new ConfigNotCachedError
 
 export default def config notation\String, default\any = null
-	const location = path.join(env('PREFER_DISTRIBUTED_CACHE', false) ? (process.cwd!, 'dist', 'config.json') : (process.cwd!, 'bootstrap', 'cache', 'config.json'))
+	const location = env('PREFER_DISTRIBUTED_CACHE', false) ? path.join(process.cwd!, 'dist', 'config.json') : path.join(process.cwd!, 'bootstrap', 'cache', 'config.json')
 
 	try
 		const config = require location

@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.2.0-alpha.4",
+  "version": "0.2.0-alpha.5",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies <donaldpakkies@gmail.com>",
   "license": "MIT",
@@ -56,7 +56,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.4.1",
-    "imba": "^2.0.0-alpha.170",
+    "imba": "^2.0.0-alpha.172",
     "jest": "^27.0.6",
     "sqlite3": "^4.2.0",
     "typescript": "^4.4.2"
