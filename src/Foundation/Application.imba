@@ -104,8 +104,8 @@ export default class Application
 	def cache distribute\Boolean = false
 		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
 
-		if distribute && fs.existsSync('./dist')
-			Bootstrap.cache "./dist/config.json", self.make(ConfigRepository).all!
+		if distribute && fs.existsSync('./.formidable')
+			Bootstrap.cache "./.formidable/config.json", self.make(ConfigRepository).all!
 
 	def initiate kernel\Kernel, returnMode\Boolean = false
 		const handler = self.make(ExceptionHandler, [self.config])
