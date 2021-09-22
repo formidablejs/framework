@@ -7,7 +7,7 @@ export default def hasStaticContent fastify
 	})
 
 	fastify.register(fastifystatic, {
-		root: path.join(process.cwd!, 'dist', 'public', '__assets__')
+		root: path.join(process.cwd!, '.formidable', 'public', '__assets__')
 		prefix: '/__assets__/'
 		decorateReply: false
 	})
