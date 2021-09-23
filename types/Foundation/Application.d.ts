@@ -29,8 +29,9 @@ export default class Application {
     /**
     @param {Function} plugin
     @param {Object} options
+    @param {Function} handler
     */
-    register(plugin: Function, options?: any): Application;
+    register(plugin: Function, options?: any, handler?: Function): Application;
     /**
     @param {Function} handler
     */
