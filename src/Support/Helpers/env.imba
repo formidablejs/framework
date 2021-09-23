@@ -14,7 +14,7 @@ export default def env key\String, default\any = null
 
 			if !isEmpty(results)
 				results.forEach do(variable)
-					output = output.replaceAll(variable, process.env[variable.slice(2, -1)])
+					output = output.replace(new RegExp(variable, 'g'), process.env[variable.slice(2, -1)])
 
 		if output === undefined || output === null
 			return default

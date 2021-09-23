@@ -36,7 +36,7 @@ export default class Repository
 
 			if !isEmpty(results)
 				results.forEach do(variable)
-					output = output.replaceAll(variable, self.variables[variable.slice(2, -1)])
+					output = output.replace(new RegExp(variable, 'g'), self.variables[variable.slice(2, -1)])
 
 		if output === undefined || output === null
 			return default
