@@ -3,13 +3,22 @@ import FormRequest from './Request/FormRequest'
 import getResponse from './Kernel/getResponse'
 import handleNotFound from './Kernel/handleNotFound'
 import hasContentTypes from './Kernel/hasContentTypes'
-import hasStaticContent from './Kernel/hasStaticContent'
 import hasCookie from './Kernel/hasCookie'
-import hasSession from './Kernel/hasSession'
 import hasCors from './Kernel/hasCors'
+import hasSession from './Kernel/hasSession'
+import hasStaticContent from './Kernel/hasStaticContent'
+import InvalidRouteActionException from './Router/Exceptions/InvalidRouteActionException'
+import isArray from '../Support/Helpers/isArray'
+import isClass from '../Support/Helpers/isClass'
+import isEmpty from '../Support/Helpers/isEmpty'
+import isFunction from '../Support/Helpers/isFunction'
 import resolveResponse from './Kernel/resolveResponse'
 import Route from './Router/Route'
 import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
+
+const routes = {
+	invalid: []
+}
 
 export default class Kernel
 
@@ -74,8 +83,12 @@ export default class Kernel
 		hasSession(router, config)
 		hasCors(router, config)
 
+		router.addHook 'onRoute', do(options)
+			routes.invalid = routes.invalid.filter do(route) route !== options.path
+
 		for plugin in plugins
-			router.register(plugin.plugin, plugin.options)
+			router.register(plugin.plugin, plugin.options).after do
+				if !isEmpty(plugin.handler) then plugin.handler(router)
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
@@ -99,20 +112,26 @@ export default class Kernel
 		if returnMode isa Boolean && returnMode == true then return router
 
 		router.listen Number(port), do(error, address)
+			if routes.invalid.length > 0
+				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
+
 			if error then throw error
 
 			console.log "\x1b[32mServer started on:\x1b[0m {address}"
 
 	def hasRoutes router, config
 		for route in Route.all!
-			router[route.method.toLowerCase!] route.path, do(req, reply)
-				const request = await new FormRequest(req, route, reply, config)
+			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action))
+				router[route.method.toLowerCase!] route.path, do(req, reply)
+					const request = await new FormRequest(req, route, reply, config)
 
-				await self.resolveMiddleware(route, request, reply, config)
+					await self.resolveMiddleware(route, request, reply, config)
 
-				const response = await getResponse(route, request, reply)
+					const response = await getResponse(route, request, reply)
 
-				return await resolveResponse(response, reply)
+					return await resolveResponse(response, reply)
+
+			else routes.invalid.push(route.path)
 
 	def resolveMiddleware route\Object, request, reply, config
 		for middleware in self.getAllMiddleware(route)
