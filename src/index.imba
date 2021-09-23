@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest, RequestGenericInterface } from 'fastify'
+import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
 import Application from './Foundation/Application'
@@ -50,6 +50,7 @@ import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
 
 export {
+	@use
 	AcceptLanguage
 	Application
 	ApplicationException
@@ -63,10 +64,10 @@ export {
 	CsrfServiceResolver
 	Database
 	DB
-	@use
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn
+	FastifyInstance
 	FastifyReply
 	FastifyRequest
 	ForbiddenException
