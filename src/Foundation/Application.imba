@@ -64,10 +64,11 @@ export default class Application
 
 		self
 
-	def register plugin\Function, options\Object = {}
+	def register plugin\Function, options\Object = {}, handler\Function = null
 		self.plugins.push({
 			plugin: plugin
 			options: options
+			handler: handler
 		})
 
 		self
