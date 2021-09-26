@@ -1,3 +1,4 @@
+import Encrypter from '../../Foundation/Encrypter'
 import PersonalAccessToken from './PersonalAccessToken'
 import ServiceResolver from '../../Support/ServiceResolver'
 
@@ -6,4 +7,4 @@ export default class PersonalAccessTokenServiceResolver < ServiceResolver
 	def boot
 		PersonalAccessToken
 			.setConfig(self.app.config)
-			.setSecret(self.app.config.get('app.key'))
+			.setSecret(Encrypter.key!)
