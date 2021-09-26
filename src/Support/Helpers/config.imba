@@ -1,10 +1,12 @@
-import Application from '../../Foundation/Application'
 import ConfigNotCachedError from './Error/ConfigNotCachedError'
 import dot from './dotNotation'
 import path from 'path'
 
 def fallback notation\String, default\any = null
-	try Application.getConfig(notation, default)
+	try
+		const app = require('../../Foundation/Application').default
+
+		app.getConfig(notation, default)
 	catch e
 		throw new ConfigNotCachedError
 
