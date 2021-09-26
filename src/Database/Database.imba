@@ -1,14 +1,15 @@
+import { attachPaginate } from 'knex-paginate'
 import Config from './Config'
 import knexjs from 'knex'
-import { attachPaginate } from 'knex-paginate'
+import type { Knex } from 'knex'
 
-let knex = null
+let Database\Knex = null
 
 try
-	knex = knexjs(Config.make!)
+	Database = knexjs(Config.make())
 
 	attachPaginate!
 catch
-	knex = null
+	Database\Knex = null
 
-export default knex
+export default Database
