@@ -1,6 +1,12 @@
+import Application from '../../Foundation/Application'
 import ConfigNotCachedError from './Error/ConfigNotCachedError'
 import dot from './dotNotation'
 import path from 'path'
+
+def fallback notation\String, default\any = null
+	try Application.getConfig(notation, default)
+	catch e
+		throw new ConfigNotCachedError
 
 export default def config notation\String, default\any = null
 	try
@@ -8,4 +14,4 @@ export default def config notation\String, default\any = null
 
 		dot(config, notation) ?? default
 	catch e
-		throw new ConfigNotCachedError
+		fallback(notation, default)
