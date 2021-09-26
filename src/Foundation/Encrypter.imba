@@ -1,3 +1,4 @@
+import DecryptException from './Exceptions/DecryptException'
 import config from '../Support/Helpers/config'
 import crypto from 'crypto'
 import InvalidEncryptionKeyTypeException from './Exceptions/InvalidEncryptionKeyTypeException'
@@ -34,8 +35,11 @@ export default class Encrypter
 		Buffer.concat([cipher.update(JSON.stringify(value)), cipher.final()]).toString('hex')
 
 	static def decrypt hash\String
-		const decipher = crypto.createDecipheriv(algorithm, self.key!, self.iv!);
+		try
+			const decipher = crypto.createDecipheriv(algorithm, self.key!, self.iv!);
 
-		const decrypted = Buffer.concat([decipher.update(Buffer.from(hash, 'hex')), decipher.final()]).toString!
+			const decrypted = Buffer.concat([decipher.update(Buffer.from(hash, 'hex')), decipher.final()]).toString!
 
-		JSON.parse(decrypted)
+			JSON.parse(decrypted)
+		catch
+			throw new DecryptException 'Invalid data.'
