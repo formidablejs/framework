@@ -7,7 +7,6 @@ import isEmpty from '../../Support/Helpers/isEmpty'
 import isNumber from '../../Support/Helpers/isNumber'
 import isString from '../../Support/Helpers/isString'
 import jwt from 'jsonwebtoken'
-import now from '../../Support/Helpers/now'
 
 const settings = {
 	config: null
@@ -36,7 +35,6 @@ export default class PersonalAccessToken
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
-				last_used_at: now!
 			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
@@ -75,7 +73,7 @@ export default class PersonalAccessToken
 	static def using token\Object
 		await self.getDatabase!.table('personal_access_tokens')
 			.where(id: token.id)
-			.update('last_used_at', now!)
+			.update('last_used_at', self.getDatabase!.fn.now!)
 
 	static def destroy token\String
 		const decodedToken = await self.verify(token)
