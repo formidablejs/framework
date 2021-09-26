@@ -1,11 +1,13 @@
 import csrf from '@fastify/csrf'
+import type FormRequest from '../Request/FormRequest'
+import type Repository from '../../Config/Repository'
 
 export default class HasCsrfToken
 
-	def constructor config
+	def constructor config\Repository
 		self.config = config
 
-	def handle request, reply
+	def handle request\FormRequest
 		if ['HEAD', 'GET', 'OPTIONS'].includes(request.method!)
 			const secret = self.tokens!.secretSync!
 			const token = self.tokens!.create(secret)

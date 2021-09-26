@@ -25,7 +25,7 @@ const settings = {
 export default class Application
 
 	prop bindings = new Object
-	prop config
+	prop config\ConfigRepository
 	prop hooks = []
 	prop plugins = []
 	prop root = null

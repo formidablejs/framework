@@ -1,6 +1,8 @@
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import querystring from 'querystring'
+import type { FastifyRequest } from 'fastify'
+import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
 
@@ -9,11 +11,11 @@ const options = { rules: null }
 
 export default class FormRequest
 
-	prop request = {}
+	prop request\FastifyRequest
 	prop route = {}
-	prop config = null
+	prop config\Repository
 
-	def constructor request, route, raw, config
+	def constructor request\FastifyRequest, route, raw, config\Repository
 		this.request = request
 		this.route = route
 		this.config = config

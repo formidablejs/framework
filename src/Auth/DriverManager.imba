@@ -1,6 +1,11 @@
-import UnsupportedAuthDriverException from './Exceptions/UnsupportedAuthDriverException'
+import isEmpty from '../Support/Helpers/isEmpty'
 import JwtDriver from './Drivers/JwtDriver'
 import SessionDriver from './Drivers/SessionDriver'
+import type { FastifyReply } from 'fastify'
+import type Driver from './Drivers/Driver'
+import type FormRequest from '../Http/Request/FormRequest'
+import type Repository from '../Config/Repository'
+import UnsupportedAuthDriverException from './Exceptions/UnsupportedAuthDriverException'
 
 const drivers = {
 	jwt: JwtDriver
@@ -12,12 +17,14 @@ export default class DriverManager
 	static def register name\String, driver\Object
 		drivers[name] = driver
 
-	static def get protocol\String, request, reply, params, config
+	static def get protocol\String, request\FormRequest, reply\FastifyReply, params\any[]|null, config\Repository
 		const provider = config.get("auth.protocols.{protocol}.provider")
 
 		const driver = drivers[provider]
 
-		if driver == null || driver == undefined
+		if isEmpty(driver)
 			throw new UnsupportedAuthDriverException "{provider} is not a support driver."
 
-		new driver(protocol, request, reply, params, config)
+		const authDriver\Driver = new driver(protocol, request, reply, params, config)
+
+		authDriver
