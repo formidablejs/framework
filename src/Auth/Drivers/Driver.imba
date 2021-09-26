@@ -4,10 +4,15 @@ import DatabaseConfig from '../../Database/Config'
 import EmailNotVerifiedException from '../Exceptions/EmailNotVerifiedException'
 import EmailVerifiedException from '../Exceptions/EmailVerifiedException'
 import Hash from '../../Hashing/Hash'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import isFunction from '../../Support/Helpers/isFunction'
 import now from '../../Support/Helpers/now'
 import PersonalAccessToken from '../Tokens/PersonalAccessToken'
 import strRandom from '../../Support/Helpers/strRandom'
+import type { FastifyReply } from 'fastify'
+import type { Mailable } from '@formidablejs/mailer'
+import type FormRequest from '../../Http/Request/FormRequest'
+import type Repository from '../../Config/Repository'
 import URL from '../../Http/URL/URL'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -23,15 +28,28 @@ const mailers = {
 
 export default class Driver
 
-	def constructor protocol, request, reply, params, config
+	def constructor protocol\String, request\FormRequest, reply\FastifyReply, params\any[]|null, config\Repository
 		this.protocol = protocol
 		this.request = request
 		this.reply = reply
 		this.params = params
 		this.config = config
 
+	def attempt name\String, user\Object
+		const token = await self.createPersonalAccessToken(name, user.id)
+
+		self.request.request.session.personal_access_token = token
+
+		await self.getPersonalAccessToken(token)
+
 	def getPersonalAccessToken token\String = null
-		await PersonalAccessToken.find(token !== null && token !== undefined ? token : self.request.bearerToken!)
+		await PersonalAccessToken.find(!isEmpty(token) ? token : self.request.bearerToken!)
+
+	def usingPersonalAccessToken token\Object
+		await PersonalAccessToken.using(token)
+
+	def verify
+		self
 
 	def authenticate body\Object
 		self
@@ -172,7 +190,7 @@ export default class Driver
 		self
 
 	def destroy token\String = null, body\Object = new Object
-		await PersonalAccessToken.destroy(token !== null && token !== undefined ? token : self.request.bearerToken!)
+		await PersonalAccessToken.destroy(!isEmpty(token) ? token : self.request.bearerToken!)
 
 	def createPersonalAccessToken name\String, id\Number
 		await PersonalAccessToken.create(name, id, self.getProvider.table)
@@ -248,13 +266,13 @@ export default class Driver
 
 		events.onAuthenticated = handler
 
-	static def verificationMailer mailer
+	static def verificationMailer mailer\Mailable
 		if mailers.verificationEmail
 			throw new Error 'Verification mailer already set'
 
 		mailers.verificationEmail = mailer
 
-	static def resetPasswordMailer mailer
+	static def resetPasswordMailer mailer\Mailable
 		if mailers.resetPasswordMailer
 			throw new Error 'Reset password mailer already set'
 
