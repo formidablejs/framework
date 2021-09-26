@@ -7,14 +7,35 @@ export default class Driver {
     @param {Function} handler
     */
     static onAuthenticated(handler: Function): Function;
+    /**
+    @param {Mailable} mailer
+    */
     static verificationMailer(mailer: any): any;
+    /**
+    @param {Mailable} mailer
+    */
     static resetPasswordMailer(mailer: any): any;
-    constructor(protocol: any, request: any, reply: any, params: any, config: any);
-    protocol: any;
+    /**
+    @param {String} protocol
+    @param {FormRequest} request
+    @param {FastifyReply} reply
+    @param {any[]|null} params
+    @param {Repository} config
+    */
+    constructor(protocol: string, request: any, reply: any, params: any[] | null, config: any);
+    protocol: string;
     request: any;
     reply: any;
-    params: any;
+    params: any[];
     config: any;
+    /**
+    @param {String} name
+    @param {Object} user
+    */
+    attempt(name: string, user: any): Promise<{
+        token: any;
+        tokenable: any;
+    }>;
     /**
     @param {String} token
     */
@@ -22,6 +43,11 @@ export default class Driver {
         token: any;
         tokenable: any;
     }>;
+    /**
+    @param {Object} token
+    */
+    usingPersonalAccessToken(token: any): Promise<any>;
+    verify(): Driver;
     /**
     @param {Object} body
     */
