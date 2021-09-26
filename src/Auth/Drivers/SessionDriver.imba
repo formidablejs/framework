@@ -41,7 +41,7 @@ export default class SessionDriver < Driver
 					.first!
 
 				if !isEmpty(user)
-					await self.attempt('auth:session', user)
+					return await self.attempt('auth:session', user)
 
 		false
 
