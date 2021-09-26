@@ -1,5 +1,8 @@
 export default class SessionDriver extends Driver {
-    renewSession(): Promise<boolean>;
+    renewSession(): Promise<false | {
+        token: any;
+        tokenable: any;
+    }>;
     /**
     @param {Object} user
     */
