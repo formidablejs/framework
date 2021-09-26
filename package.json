@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.2.1-alpha.2",
+  "version": "0.3.0-alpha.1",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies <donaldpakkies@gmail.com>",
   "license": "MIT",
@@ -28,7 +28,6 @@
   "dependencies": {
     "@fastify/csrf": "^4.0.1",
     "@fastify/session": "^6.1.0",
-    "@formidablejs/mailer": "^0.1.0-alpha.1",
     "argon2": "^0.28.2",
     "bcrypt": "^5.0.1",
     "bookshelf": "^1.2.0",
@@ -53,7 +52,11 @@
     "stacktrace-js": "^2.0.2",
     "validatorjs": "^3.22.1"
   },
+  "peerDependencies": {
+    "@formidablejs/mailer": ">=0.1.0-alpha.1"
+  },
   "devDependencies": {
+    "@formidablejs/mailer": "0.1.0-alpha.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.4.1",
     "imba": "^2.0.0-alpha.172",
