@@ -19,3 +19,6 @@ export default class Encrypter
 		if type.toLowerCase() == 'key' then return key.split(':')[0]
 
 		if type.toLowerCase() == 'iv' then return key.split(':')[1]
+
+	static def key
+		self.appKey 'key'
