@@ -1,7 +1,9 @@
 const { default: asObject }  = require './asObject'
 const { default: config }  = require './config'
+const { default: decrypt } = require './decrypt'
 const { default: dot }  = require './dotNotation'
 const { default: dotNotation }  = require './dotNotation'
+const { default: encrypt } = require './encrypt'
 const { default: env }  = require './env'
 const { default: expiresIn }  = require './expiresIn'
 const { default: isArray }  = require './isArray'
@@ -19,14 +21,17 @@ const { default: strRandom }  = require './strRandom'
 const { default: toBoolean }  = require './toBoolean'
 const { default: wildcard }  = require './wildcard'
 const { default: without }  = require './without'
+
 const ms = require 'ms'
 const pluralize = require 'pluralize'
 
 export {
 	asObject
 	config
+	decrypt
 	dot
 	dotNotation
+	encrypt
 	env
 	expiresIn
 	isArray
