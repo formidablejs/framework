@@ -17,8 +17,8 @@
   ],
   "scripts": {
     "build": "npm run imba:build && npm run imba:build:temp && npm run ts:build",
-    "imba:build": "imbac src --output lib --platform node --format cjs --clean",
-    "imba:build:temp": "imbac src --output .temp --platform node --clean",
+    "imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
+    "imba:build:temp": "imbac src --output=.temp --platform=node --clean",
     "imba:watch": "imbac -w src --output=lib --platform=node --clean",
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
@@ -59,7 +59,7 @@
     "@formidablejs/mailer": "0.1.0-alpha.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.4.1",
-    "imba": "^2.0.0-alpha.172",
+    "imba": "^2.0.0-alpha.173",
     "jest": "^27.0.6",
     "sqlite3": "^4.2.0",
     "typescript": "^4.4.2"
