@@ -3,6 +3,8 @@ import crypto from 'crypto'
 import InvalidEncryptionKeyTypeException from './Exceptions/InvalidEncryptionKeyTypeException'
 import isEmpty from '../Support/Helpers/isEmpty'
 
+const algorithm = config('app.cipher', 'AES-256-CBC')
+
 export default class Encrypter
 
 	static def appKey type\String
