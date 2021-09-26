@@ -1,3 +1,4 @@
+import isString from '../Support/Helpers/isString'
 import config from '../Support/Helpers/config'
 import crypto from 'crypto'
 import DecryptException from './Exceptions/DecryptException'
@@ -12,13 +13,16 @@ const settings = {
 	appKey: null
 }
 
-try
-	if isEmpty(settings.algorithm)
-		settings.algorithm = config('app.cipher', 'AES-256-CBC')
+def configureEncrypter
+	try
+		if isEmpty(settings.algorithm)
+			settings.algorithm = config('app.cipher', 'AES-256-CBC')
 
-	if isEmpty(settings.appKey)
-		settings.appKey = config('app.key', new String)
-catch e
+		if isEmpty(settings.appKey)
+			settings.appKey = config('app.key', new String)
+	catch e
+
+configureEncrypter!
 
 export default class Encrypter
 
@@ -34,10 +38,12 @@ export default class Encrypter
 		Encrypter
 
 	static def appKey type\String
+		configureEncrypter!
+
 		if !isEmpty(type) && ['key', 'iv'].includes(type.toLowerCase()) == false
 			throw new InvalidEncryptionKeyTypeException 'Encryption key type is not valid.'
 
-		let key\String = settings.appKey
+		let key\String = isString(settings.appKey) ? settings.appKey : new String
 
 		if key.startsWith('base64:')
 			key = Buffer.from(key.split('base64:')[1], 'base64').toString('utf-8')
