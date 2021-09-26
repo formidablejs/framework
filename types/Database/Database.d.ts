@@ -1,2 +1,2 @@
-export default knex;
-declare let knex: any;
+export default Database;
+declare let Database: any;
