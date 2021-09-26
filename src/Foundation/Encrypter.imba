@@ -27,3 +27,8 @@ export default class Encrypter
 
 	static def iv
 		self.appKey 'iv'
+
+	static def encrypt value\any
+		const cipher = crypto.createCipheriv(algorithm, self.key!, self.iv!)
+
+		Buffer.concat([cipher.update(JSON.stringify(value)), cipher.final()]).toString('hex')
