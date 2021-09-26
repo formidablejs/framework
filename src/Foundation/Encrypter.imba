@@ -32,3 +32,10 @@ export default class Encrypter
 		const cipher = crypto.createCipheriv(algorithm, self.key!, self.iv!)
 
 		Buffer.concat([cipher.update(JSON.stringify(value)), cipher.final()]).toString('hex')
+
+	static def decrypt hash\String
+		const decipher = crypto.createDecipheriv(algorithm, self.key!, self.iv!);
+
+		const decrypted = Buffer.concat([decipher.update(Buffer.from(hash, 'hex')), decipher.final()]).toString!
+
+		JSON.parse(decrypted)
