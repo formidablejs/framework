@@ -1,5 +1,5 @@
 import Encrypter from '../../Foundation/Encrypter'
-import InvalidAppKeyException from './Exceptions/InvalidAppKeyException'
+import InvalidAppKeyException from '../../Foundation/Exceptions/InvalidAppKeyException'
 import isEmpty from '../Helpers/isEmpty'
 import MissingAppKeyException from './Exceptions/MissingAppKeyException'
 import type FormRequest from '../../Http/Request/FormRequest'
