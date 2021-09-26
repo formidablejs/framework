@@ -12,6 +12,7 @@ import ConvertEmptyStringsToNull from "./Http/Middleware/ConvertEmptyStringsToNu
 import CsrfServiceResolver from "./Http/Csrf/CsrfServiceResolver";
 import Database from "./Database/Database";
 import DB from "./Database/Database";
+import Encrypter from "./Foundation/Encrypter";
 import ErrorIfAuthenticated from "./Auth/Http/Middleware/ErrorIfAuthenticated";
 import ExceptionHandler from "./Foundation/Exceptions/Handler";
 import expiresIn from "./Support/Helpers/expiresIn";
@@ -53,4 +54,4 @@ import ValidateSignature from "./Http/Middleware/ValidateSignature";
 import ValidationServiceResolver from "./Validator/ValidationServiceResolver";
 import Validator from "./Validator/Validator";
 import VerifyCsrfToken from "./Http/Middleware/VerifyCsrfToken";
-export { αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidateSignature, ValidationServiceResolver, Validator, VerifyCsrfToken };
+export { αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, Encrypter, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidateSignature, ValidationServiceResolver, Validator, VerifyCsrfToken };

@@ -1,5 +1,9 @@
 export default class Encrypter {
     /**
+    @param {Object} config
+    */
+    static configure(config: any): typeof Encrypter;
+    /**
     @param {String} type
     */
     static appKey(type: string): any;
