@@ -1,26 +1,30 @@
 import Auth from '../../Auth'
 import DriverManager from '../../DriverManager'
+import isEmpty from '../../../Support/Helpers/isEmpty'
+import type { FastifyReply } from 'fastify'
+import type FormRequest from '../../../Http/Request/FormRequest'
+import type Repository from '../../../Config/Repository'
 
 export default class Authenticate
 
-	def constructor config
+	def constructor config\Repository
 		this.config = config
 
-	def handle request, reply, params\any[]
-		const [ protocol ] = (params[0] !== undefined && params[0] !== null) ? params : [ 'api' ]
+	def handle request\FormRequest, reply\FastifyReply, params\any[]|null
+		const [ protocol ] = !isEmpty(params[0]) ? params : [ 'api' ]
 
 		self.configure protocol
 
 		const handler = DriverManager.get(protocol, request, reply, params, self.config)
 
-		const personalAccessToken = await handler.verify!
+		const personalAccessToken\{token: {}, tokenable: {}} = await handler.verify!
 
 		request.auth = do new Auth(personalAccessToken.tokenable, personalAccessToken.token.abilities)
 
-	def configure protocol
+	def configure protocol\String
 		const fetchedProtocol = self.config.get "auth.protocols.{protocol}.provider"
 
-		if fetchedProtocol == undefined || fetchedProtocol == null
+		if isEmpty(fetchedProtocol)
 			throw new Error "{protocol} is not a valid authentication protocol"
 
 		const provider = self.config.get "auth.providers.{fetchedProtocol}"

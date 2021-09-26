@@ -3,6 +3,7 @@ import Database from '../../Database/Database'
 import DatabaseConfig from '../../Database/Config'
 import isArray from '../../Support/Helpers/isArray'
 import isClass from '../../Support/Helpers/isClass'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import isNumber from '../../Support/Helpers/isNumber'
 import isString from '../../Support/Helpers/isString'
 import jwt from 'jsonwebtoken'
@@ -58,16 +59,21 @@ export default class PersonalAccessToken
 			.where(id: decodedToken.id)
 			.first!
 
-		if token === undefined then return response
+		if isEmpty(token) then return response
 
 		const tokenable = await self.getDatabase!.table(token.tokenable_type)
 			.where(id: token.tokenable_id)
 			.first!
 
 		return {
-			token: token !== undefined ? token : null,
-			tokenable: tokenable !== undefined ? tokenable : null
+			token: !isEmpty(token) ? token : null,
+			tokenable: !isEmpty(tokenable) ? tokenable : null
 		}
+
+	static def using token\Object
+		await self.getDatabase!.table('personal_access_tokens')
+			.where(id: token.id)
+			.update('last_used_at', self.getDatabase!.fn.now!)
 
 	static def destroy token\String
 		const decodedToken = await self.verify(token)

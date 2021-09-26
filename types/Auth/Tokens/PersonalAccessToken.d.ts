@@ -14,6 +14,10 @@ export default class PersonalAccessToken {
         tokenable: any;
     }>;
     /**
+    @param {Object} token
+    */
+    static using(token: any): Promise<any>;
+    /**
     @param {String} token
     */
     static destroy(token: string): Promise<any>;

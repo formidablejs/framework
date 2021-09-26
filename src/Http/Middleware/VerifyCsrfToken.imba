@@ -1,5 +1,11 @@
 import csrf from '@fastify/csrf'
+import decrypt from '../../Support/Helpers/decrypt'
+import encrypt from '../../Support/Helpers/encrypt'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import TokenMismatchException from '../Session/Exceptions/TokenMismatchException'
+import type { FastifyReply } from 'fastify'
+import type FormRequest from '../Request/FormRequest'
+import type Repository from '../../Config/Repository'
 import wildcard from '../../Support/Helpers/wildcard'
 
 export default class VerifyCsrfToken
@@ -12,10 +18,10 @@ export default class VerifyCsrfToken
 
 		]
 
-	def constructor config
+	def constructor config\Repository
 		self.config = config
 
-	def handle request, reply
+	def handle request\FormRequest, reply\FastifyReply
 		shouldIgnore(request)
 		if self.isReading(request) || self.shouldIgnore(request) || self.tokensMatch(request)
 			if !self.isReading(request) then self.forgetTokens(request)
@@ -28,23 +34,21 @@ export default class VerifyCsrfToken
 
 		throw new TokenMismatchException 'CSRF token mismatch.'
 
-	def isReading request
+	def isReading request\FormRequest
 		['HEAD', 'GET', 'OPTIONS'].includes(request.method!)
 
-	def shouldIgnore request
+	def shouldIgnore request\FormRequest
 		for value in self.except
 			if wildcard(value, request.url!) then return true
 
 		false
 
-	def tokensMatch request
-		const token = self.getTokenFromRequest(request)
+	def tokensMatch request\FormRequest
+		let token = self.getTokenFromRequest(request)
 
-		const results = (new csrf!).verify(request.request.session.secret, token)
+		(new csrf!).verify(request.request.session.secret, decrypt(token))
 
-		return results
-
-	def getTokenFromRequest request
+	def getTokenFromRequest request\FormRequest
 		const token = request.input('_token') ? request.input('_token') : request.header('x-csrf-token')
 
 		token ? token : new String
@@ -52,14 +56,14 @@ export default class VerifyCsrfToken
 	def shouldAddXsrfTokenCookie
 		self.addHttpCookie
 
-	def addCookieToResponse request, reply
+	def addCookieToResponse request\FormRequest, reply\FastifyReply
 		const session = self.config.get('session')
 
-		const token = request.request.session.token
+		const token\String = request.request.session.token
 
-		if token === null || token === undefined then return false;
+		if isEmpty(token) then return false;
 
-		reply.setCookie('XSRF-TOKEN', request.request.session.token, {
+		reply.setCookie('XSRF-TOKEN', encrypt(token), {
 			domain: session.domain
 			httpOnly: session.http_only
 			maxAge: session.lifetime
@@ -68,7 +72,7 @@ export default class VerifyCsrfToken
 			secure: session.secure
 		})
 
-	def forgetTokens request
+	def forgetTokens request\FormRequest
 		request.request.session.secret = null
 		request.request.session.token = null
 

@@ -1,5 +1,7 @@
+import { @use } from './Support/Decorators/use'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
+import * as helpers from './Support/Helpers/index'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
 import Application from './Foundation/Application'
 import ApplicationException from './Foundation/Exceptions/ApplicationException'
@@ -13,7 +15,7 @@ import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNu
 import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
 import Database from './Database/Database'
 import DB from './Database/Database'
-import { @use } from './Support/Decorators/use'
+import Encrypter from './Foundation/Encrypter'
 import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
 import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
@@ -23,7 +25,6 @@ import HasCsrfToken from './Http/Middleware/HasCsrfToken'
 import HasEncryptionKey from './Support/Encryption/HasEncryptionKey'
 import Hash from './Hashing/Hash'
 import HashServiceResolver from './Hashing/HashServiceResolver'
-import * as helpers from './Support/Helpers/index'
 import HttpException from './Http/Exceptions/HttpException'
 import IgnoreCookies from './Http/Middleware/IgnoreCookies'
 import Kernel from './Http/Kernel'
@@ -64,6 +65,7 @@ export {
 	CsrfServiceResolver
 	Database
 	DB
+	Encrypter
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn

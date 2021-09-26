@@ -36,9 +36,8 @@ export default class Repository
 
 			if !isEmpty(results)
 				results.forEach do(variable)
-					output = output.replace(new RegExp(variable, 'g'), self.variables[variable.slice(2, -1)])
+					output = output.replace(variable, self.variables[variable.slice(2, -1)])
 
-		if output === undefined || output === null
-			return default
+		if isEmpty(output) then return default
 
 		['true', 'false'].includes(output.toLowerCase!) ? output = JSON.parse(output) : output

@@ -1,9 +1,12 @@
+import config from '../../Support/Helpers/config'
+import Encrypter from '../../Foundation/Encrypter'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import session from '@fastify/session'
 import SessionDriverManager from '../Session/DriverManager'
 
 export default def hasSession fastify, config
 	const sessionConfig = {
-		secret: config.get('app.key')
+		secret: Encrypter.key!
 		store: null
 		cookieName: config.get('session.cookie')
 		cookie: {
@@ -21,7 +24,7 @@ export default def hasSession fastify, config
 
 	const store = SessionDriverManager.get(driver)
 
-	if store !== null || store !== undefined
+	if !isEmpty(store)
 		sessionConfig.store = store
 
 	fastify.register(session, sessionConfig)

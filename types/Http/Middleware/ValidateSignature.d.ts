@@ -1,6 +1,9 @@
 export default class ValidateSignature {
     constructor(config: any);
     config: any;
+    /**
+    @param {FormRequest} request
+    */
     handle(request: any): Promise<any>;
     [Ψ__init__]($$?: any): void;
 }
