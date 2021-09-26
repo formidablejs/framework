@@ -1,12 +1,30 @@
+import isObject from '../Support/Helpers/isObject'
 import DecryptException from './Exceptions/DecryptException'
 import config from '../Support/Helpers/config'
 import crypto from 'crypto'
 import InvalidEncryptionKeyTypeException from './Exceptions/InvalidEncryptionKeyTypeException'
 import isEmpty from '../Support/Helpers/isEmpty'
 
-const algorithm = config('app.cipher', 'AES-256-CBC')
+const settings = {
+	algorithm: null
+	appKey: null
+}
+
+try settings.algorithm = config('app.cipher', 'AES-256-CBC')
+try settings.appKey = config('app.key', new String)
 
 export default class Encrypter
+
+	static def configure config\Object
+		if !isObject(config) then throw TypeError 'Expected an object.'
+
+		if !isEmpty(config.algorithm)
+			settings.algorithm = config.algorithm
+
+		if !isEmpty(config.appKey)
+			settings.appKey = config.appKey
+
+		Encrypter
 
 	static def appKey type\String
 		if !isEmpty(type) && ['key', 'iv'].includes(type.toLowerCase()) == false
