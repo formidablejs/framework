@@ -3,7 +3,7 @@ import config from '../Support/Helpers/config'
 import isEmpty from '../Support/Helpers/isEmpty'
 import knex from 'knex'
 
-export default class Config
+class Config
 
 	# Default connection name.
 	#
@@ -57,3 +57,7 @@ export default class Config
 	static get bookshelf
 		try
 			bookshelf(knex(self.make!))
+
+export { Config }
+
+export default Config
