@@ -22,3 +22,6 @@ export default class Encrypter
 
 	static def key
 		self.appKey 'key'
+
+	static def iv
+		self.appKey 'iv'
