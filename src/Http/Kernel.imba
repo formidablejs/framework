@@ -121,7 +121,7 @@ export default class Kernel
 
 	def hasRoutes router, config
 		for route in Route.all!
-			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action))
+			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action)) || route.action.constructor.name === 'AsyncFunction'
 				router[route.method.toLowerCase!] route.path, do(req, reply)
 					const request = await new FormRequest(req, route, reply, config)
 
@@ -130,8 +130,8 @@ export default class Kernel
 					const response = await getResponse(route, request, reply)
 
 					return await resolveResponse(response, reply)
-
-			else routes.invalid.push(route.path)
+			else
+				routes.invalid.push(route.path)
 
 	def resolveMiddleware route\Object, request, reply, config
 		for middleware in self.getAllMiddleware(route)
