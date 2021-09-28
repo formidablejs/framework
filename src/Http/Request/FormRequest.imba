@@ -6,15 +6,13 @@ import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
 
-const response = { raw: null }
-const options = { rules: null }
-
 export default class FormRequest
 
 	prop request\FastifyRequest
 	prop reply\FastifyReply
 	prop route = {}
 	prop config\Repository
+	prop _rules = null
 
 	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
 		self.request = request
@@ -205,13 +203,13 @@ export default class FormRequest
 		Validator.make(this.input!, this.getRules!, this.messages!)
 
 	def setRules rules\Array
-		if options.rules !== null
+		if self._rules !== null
 			throw new Error('FormRequest rules have already been set.')
 
-		options.rules = rules
+		self._rules = rules
 
 	def getRules
-		options.rules === null ? this.rules! : options.rules
+		self._rules === null ? this.rules! : self._rules
 
 	def auth
 		{
