@@ -16,7 +16,7 @@ export default class FormRequest
 	prop route = {}
 	prop config\Repository
 
-	def constructor request\FastifyRequest, route, reply, config\Repository
+	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
 		self.request = request
 		self.reply = reply
 		self.route = route
