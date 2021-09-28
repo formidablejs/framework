@@ -1,12 +1,16 @@
 export default class FormRequest {
     /**
     @param {FastifyRequest} request
+    @param {Object} route
+    @param {FastifyReply} reply
     @param {Repository} config
     */
-    constructor(request: any, route: any, raw: any, config: any);
+    constructor(request: any, route: any, reply: any, config: any);
     request: any;
+    reply: any;
     route: any;
     config: any;
+    _rules: any;
     passesAuthorization(): any;
     failedAuthorization(): void;
     rules(): {};
