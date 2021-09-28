@@ -1,7 +1,7 @@
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import querystring from 'querystring'
-import type { FastifyRequest } from 'fastify'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
@@ -12,15 +12,15 @@ const options = { rules: null }
 export default class FormRequest
 
 	prop request\FastifyRequest
+	prop reply\FastifyReply
 	prop route = {}
 	prop config\Repository
 
-	def constructor request\FastifyRequest, route, raw, config\Repository
-		this.request = request
-		this.route = route
-		this.config = config
-
-		response.raw = raw
+	def constructor request\FastifyRequest, route, reply, config\Repository
+		self.request = request
+		self.reply = reply
+		self.route = route
+		self.config = config
 
 	def passesAuthorization
 		if typeof this.authorize === 'function' then return this.authorize!
@@ -100,7 +100,7 @@ export default class FormRequest
 		this.headers![header] ? true : false
 
 	def setHeader header\string, value\string
-		response.raw.header(header, value)
+		self.reply.header(header, value)
 
 		this
 
