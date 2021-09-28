@@ -87,8 +87,8 @@ export default class Kernel
 			routes.invalid = routes.invalid.filter do(route) route !== options.path
 
 		for plugin in plugins
-			router.register(plugin.plugin, plugin.options).after do
-				if !isEmpty(plugin.handler) then plugin.handler(router)
+			router.register(plugin.plugin, plugin.options).after do(error)
+				if !isEmpty(plugin.handler) then plugin.handler(error, router)
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
