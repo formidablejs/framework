@@ -1,26 +1,24 @@
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import querystring from 'querystring'
-import type { FastifyRequest } from 'fastify'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
 
-const response = { raw: null }
-const options = { rules: null }
-
 export default class FormRequest
 
 	prop request\FastifyRequest
+	prop reply\FastifyReply
 	prop route = {}
 	prop config\Repository
+	prop _rules = null
 
-	def constructor request\FastifyRequest, route, raw, config\Repository
-		this.request = request
-		this.route = route
-		this.config = config
-
-		response.raw = raw
+	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
+		self.request = request
+		self.reply = reply
+		self.route = route
+		self.config = config
 
 	def passesAuthorization
 		if typeof this.authorize === 'function' then return this.authorize!
@@ -91,7 +89,7 @@ export default class FormRequest
 		this.fullUrl! === path.replace /^\s*\/*\s*|\s*\/*\s*$/gm, ''
 
 	def isMethod method\string
-		this.method! == method
+		this.method!.toLowerCase! == method.toLowerCase!
 
 	def headers
 		this.request.headers
@@ -100,7 +98,7 @@ export default class FormRequest
 		this.headers![header] ? true : false
 
 	def setHeader header\string, value\string
-		response.raw.header(header, value)
+		self.reply.header(header, value)
 
 		this
 
@@ -205,13 +203,13 @@ export default class FormRequest
 		Validator.make(this.input!, this.getRules!, this.messages!)
 
 	def setRules rules\Array
-		if options.rules !== null
+		if self._rules !== null
 			throw new Error('FormRequest rules have already been set.')
 
-		options.rules = rules
+		self._rules = rules
 
 	def getRules
-		options.rules === null ? this.rules! : options.rules
+		self._rules === null ? this.rules! : self._rules
 
 	def auth
 		{

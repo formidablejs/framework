@@ -1,14 +1,17 @@
 import ConfigRepostory from '../../../Config/Repository'
 import HttpException from '../../../Http/Exceptions/HttpException'
 import StackTrace from 'stacktrace-js'
+import type { FastifyReply } from 'fastify'
+import type FormRequest from '../../../Http/Request/FormRequest'
+import type Repository from '../../../Config/Repository'
 import ValidationException from '../../../Validator/Exceptions/ValidationException'
 
 const settings = {
-	config: null
+	config\ConfigRepostory: null
 }
 
-def handleException error, request, reply, returns\Boolean = false
-	const statusCode = typeof error.getStatus === 'function' ? error.getStatus! : 500
+def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false
+	const statusCode\Number = typeof error.getStatus === 'function' ? error.getStatus! : 500
 
 	const response = {
 		message: 'An error has occured.'
@@ -23,9 +26,9 @@ def handleException error, request, reply, returns\Boolean = false
 
 		const stack = await StackTrace.fromError(error)
 
-		response.file    = stack[0].fileName
-		response.line    = stack[0].lineNumber
-		response.stack   = stack
+		response.file  = stack[0].fileName
+		response.line  = stack[0].lineNumber
+		response.stack = stack
 
 		console.error error
 

@@ -87,8 +87,8 @@ export default class Kernel
 			routes.invalid = routes.invalid.filter do(route) route !== options.path
 
 		for plugin in plugins
-			router.register(plugin.plugin, plugin.options).after do
-				if !isEmpty(plugin.handler) then plugin.handler(router)
+			router.register(plugin.plugin, plugin.options).after do(error)
+				if !isEmpty(plugin.handler) then plugin.handler(error, router)
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
@@ -96,10 +96,14 @@ export default class Kernel
 
 		await this.hasRoutes(router, config)
 
-		router.setNotFoundHandler do(request)
+		router.setNotFoundHandler do(req, reply)
+			const request = new FormRequest(req, {}, reply, config)
+
 			throw handleNotFound(request)
 
-		router.setErrorHandler do(error, request, reply)
+		router.setErrorHandler do(error, req, reply)
+			const request = new FormRequest(req, {}, reply, config)
+
 			if error.constructor.name == 'NotFoundError' && error.message == 'Not Found'
 				error = handleNotFound(request)
 
