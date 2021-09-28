@@ -1,5 +1,6 @@
 import { @use } from './Support/Decorators/use'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
+import { handleException } from './Foundation/Exceptions/Handler/handleException'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
 import * as helpers from './Support/Helpers/index'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
@@ -74,6 +75,7 @@ export {
 	FastifyRequest
 	ForbiddenException
 	FormRequest
+	handleException
 	HasCsrfToken
 	HasEncryptionKey
 	Hash
