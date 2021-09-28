@@ -89,7 +89,7 @@ export default class FormRequest
 		this.fullUrl! === path.replace /^\s*\/*\s*|\s*\/*\s*$/gm, ''
 
 	def isMethod method\string
-		this.method! == method
+		this.method!.toLowerCase! == method.toLowerCase!
 
 	def headers
 		this.request.headers
