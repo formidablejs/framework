@@ -96,10 +96,14 @@ export default class Kernel
 
 		await this.hasRoutes(router, config)
 
-		router.setNotFoundHandler do(request)
+		router.setNotFoundHandler do(req, reply)
+			const request = new FormRequest(req, {}, reply, config)
+
 			throw handleNotFound(request)
 
-		router.setErrorHandler do(error, request, reply)
+		router.setErrorHandler do(error, req, reply)
+			const request = new FormRequest(req, {}, reply, config)
+
 			if error.constructor.name == 'NotFoundError' && error.message == 'Not Found'
 				error = handleNotFound(request)
 
