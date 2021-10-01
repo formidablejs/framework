@@ -1,6 +1,6 @@
 import { @use } from './Support/Decorators/use'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
-import { handleException } from './Foundation/Exceptions/Handler/handleException'
+import { handleException, handleMaintenanceMode } from './Foundation/Exceptions/Handler/handleException'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
 import * as helpers from './Support/Helpers/index'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
@@ -31,6 +31,8 @@ import IgnoreCookies from './Http/Middleware/IgnoreCookies'
 import Kernel from './Http/Kernel'
 import Language from './Support/Language/Language'
 import LanguageServiceResolver from './Support/Language/LanguageServiceResolver'
+import MaintenanceModeException from './Foundation/Exceptions/MaintenanceModeException'
+import MaintenanceServiceResolver from './Foundation/MaintenanceServiceResolver'
 import Model from './Database/Model'
 import NotFoundException from './Http/Exceptions/NotFoundException'
 import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessTokenServiceResolver'
@@ -76,6 +78,7 @@ export {
 	ForbiddenException
 	FormRequest
 	handleException
+	handleMaintenanceMode
 	HasCsrfToken
 	HasEncryptionKey
 	Hash
@@ -89,6 +92,8 @@ export {
 	Mail
 	Mailable
 	MailServiceResolver
+	MaintenanceModeException
+	MaintenanceServiceResolver
 	Model
 	NotFoundException
 	PersonalAccessTokenServiceResolver
