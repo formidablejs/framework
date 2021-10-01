@@ -1,11 +1,15 @@
+import isEmpty from '../../Support/Helpers/isEmpty'
+
 class HttpException < Error
 	prop response
 	prop status = 400
 
-	def constructor response\String
+	def constructor response\String, statusCode\Number|null = null
 		super!
 
 		this.response = response
+
+		if !isEmpty(statusCode) then self.status = statusCode
 
 		this.initMessage!
 		this.initName!
