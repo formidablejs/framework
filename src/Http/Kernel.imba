@@ -1,3 +1,5 @@
+import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
+import MaintenanceModeException from '../Foundation/Exceptions/MaintenanceModeException'
 import fastify from 'fastify'
 import FormRequest from './Request/FormRequest'
 import getResponse from './Kernel/getResponse'
@@ -92,7 +94,8 @@ export default class Kernel
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
-				router.addHook(hook, hookHandler)
+				if hook !== 'onMaintenance'
+					router.addHook(hook, hookHandler)
 
 		await this.hasRoutes(router, config)
 
@@ -103,6 +106,9 @@ export default class Kernel
 
 		router.setErrorHandler do(error, req, reply)
 			const request = new FormRequest(req, {}, reply, config)
+
+			if error instanceof MaintenanceModeException
+				return handleMaintenanceMode(error, request, reply, hooks)
 
 			if error.constructor.name == 'NotFoundError' && error.message == 'Not Found'
 				error = handleNotFound(request)

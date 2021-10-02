@@ -1,14 +1,27 @@
 import ConfigRepostory from '../../../Config/Repository'
 import HttpException from '../../../Http/Exceptions/HttpException'
+import MaintenanceModeException from '../MaintenanceModeException'
 import StackTrace from 'stacktrace-js'
+import ValidationException from '../../../Validator/Exceptions/ValidationException'
 import type { FastifyReply } from 'fastify'
 import type FormRequest from '../../../Http/Request/FormRequest'
 import type Repository from '../../../Config/Repository'
-import ValidationException from '../../../Validator/Exceptions/ValidationException'
 
 const settings = {
 	config\ConfigRepostory: null
 }
+
+def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, reply\FastifyReply, hooks
+	for own hook, registeredHooks of hooks
+		for hookHandler in registeredHooks
+			if hook == 'onMaintenance'
+				hookHandler(error, request, reply)
+
+	const message\String = error.response
+	const statusCode\Number = error.getStatus!
+
+	reply.code(statusCode).send { message }
+
 
 def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false
 	const statusCode\Number = typeof error.getStatus === 'function' ? error.getStatus! : 500
@@ -55,5 +68,6 @@ def setConfig config\ConfigRepostory
 
 export {
 	handleException
+	handleMaintenanceMode
 	setConfig
 }
