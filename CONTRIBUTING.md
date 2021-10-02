@@ -9,8 +9,10 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 1. Ensure your PR is up to date with the latest changes of the `develop` branch.
 
-2. Ensure you have read and understood the [commit guidelines](.github/COMMIT_CONVENTION.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+   > Note: you must always branch off the `develop` branch and your PR must be created against the `develop` branch.
 
-3. Ensure the [Documentation](https://github.com/formidablejs/formidablejs.org) has been updated to reflect the latest changes you have made and the PR description includes a link (PR link) to the relevant section of the documentation.
+2. Ensure you have read and understood the [Commit Guidelines](.github/COMMIT_CONVENTION.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+3. Ensure the [documentation](https://github.com/formidablejs/formidablejs.org) has been updated to reflect the latest changes you have made and the PR description includes a link to the PR of the documentation changes.
 
 4. You may merge the Pull Request once you have the sign-off of one of the core mainteners, or if you do not have permission to do that, you may request the second reviewer merge it for you.
