@@ -26,6 +26,7 @@ export default class PersonalAccessToken {
     */
     static verify(token: string): Promise<any>;
     static getDatabase(): any;
+    static getEncryper(): any;
     /**
     @param {Database} database
     */
@@ -38,4 +39,9 @@ export default class PersonalAccessToken {
     @param {String} secret
     */
     static setSecret(secret: string): typeof PersonalAccessToken;
+    /**
+    @param {Encrypter} encryper
+    */
+    static setEncrypter(encryper: Encrypter): typeof PersonalAccessToken;
 }
+import Encrypter from "../../Foundation/Encrypter";
