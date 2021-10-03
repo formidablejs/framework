@@ -7,4 +7,4 @@ export default class PersonalAccessTokenServiceResolver < ServiceResolver
 	def boot
 		PersonalAccessToken
 			.setConfig(self.app.config)
-			.setSecret(Encrypter.key!)
+			.setEncrypter(Encrypter)
