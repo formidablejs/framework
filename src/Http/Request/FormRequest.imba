@@ -95,7 +95,7 @@ export default class FormRequest
 		this.request.headers
 
 	def hasHeader header\string
-		this.headers![header] ? true : false
+		this.headers![header.toLowerCase!] ? true : false
 
 	def setHeader header\string, value\string
 		self.reply.header(header, value)

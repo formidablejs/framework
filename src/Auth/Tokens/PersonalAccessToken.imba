@@ -1,3 +1,4 @@
+import Encrypter from '../../Foundation/Encrypter'
 import ConfigRepository from '../../Config/Repository'
 import Database from '../../Database/Database'
 import DatabaseConfig from '../../Database/Config'
@@ -12,6 +13,7 @@ const settings = {
 	config: null
 	database: null
 	secret: null
+	encryption\Encrypter: null
 }
 
 export default class PersonalAccessToken
@@ -39,7 +41,7 @@ export default class PersonalAccessToken
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
-				await jwt.sign({ id: token }, settings.secret, {
+				await jwt.sign({ id: self.getEncryper!.encrypt(token) }, self.getEncryper!.key!, {
 					issuer: settings.config.get('app.url')
 				})
 
@@ -56,7 +58,7 @@ export default class PersonalAccessToken
 		if !decodedToken then return response
 
 		token = await self.getDatabase!.table('personal_access_tokens')
-			.where(id: decodedToken.id)
+			.where(id: self.getEncryper!.decrypt(decodedToken.id))
 			.first!
 
 		if isEmpty(token) then return response
@@ -79,18 +81,21 @@ export default class PersonalAccessToken
 		const decodedToken = await self.verify(token)
 
 		await self.getDatabase!.table('personal_access_tokens')
-			.where(id: decodedToken.id)
+			.where(id: self.getEncryper!.decrypt(decodedToken.id))
 			.del!
 
 	static def verify token\String
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
-		try return await jwt.verify(token, settings.secret)
+		try return await jwt.verify(token, self.getEncryper!.key!)
 
 		false
 
 	static def getDatabase
 		settings.database ? settings.database : Database
+
+	static def getEncryper
+		settings.encryption ? settings.encryption : Encrypter
 
 	static def setDatabase database\Database
 		if !isClass(database) then throw new TypeError 'database must be a valid class.'
@@ -111,5 +116,12 @@ export default class PersonalAccessToken
 		if !isString(secret) then throw new TypeError 'secret must be a string.'
 
 		settings.secret = secret
+
+		self
+
+	static def setEncrypter encryper\Encrypter
+		if !isClass(encryper) then throw new TypeError 'encryper must be a valid class.'
+
+		settings.encryper = encryper
 
 		self

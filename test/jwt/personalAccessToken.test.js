@@ -1,5 +1,6 @@
 const Database = require('./setup/Database');
 const Config = require('./setup/Config');
+const Encrypter = require('../encrypter/setup/Encrypter');
 const { default: PersonalAccessToken } = require('../../lib/Auth/Tokens/PersonalAccessToken');
 
 describe('src/Jwt/PersonalAccessToken', () => {
@@ -13,7 +14,7 @@ describe('src/Jwt/PersonalAccessToken', () => {
     personalAccessToken
       .setDatabase(Database)
       .setConfig(new Config)
-      .setSecret('random-secret');
+      .setEncrypter(Encrypter);
   });
 
   afterAll(async () => {
