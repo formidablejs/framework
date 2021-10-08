@@ -139,7 +139,7 @@ export default class Kernel
 
 					const response = await getResponse(route, request, reply)
 
-					return await resolveResponse(response, reply)
+					return await resolveResponse(response, request, reply)
 			else
 				routes.invalid.push(route.path)
 

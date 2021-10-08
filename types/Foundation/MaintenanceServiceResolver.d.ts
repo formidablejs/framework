@@ -17,6 +17,10 @@ export default class MaintenanceServiceResolver extends ServiceResolver {
     @param {FormRequest} request
     */
     setBypassMaintenanceModeCookie(secret: any, request: FormRequest): any;
+    /**
+    @param {FormRequest} request
+    */
+    isFile(request: FormRequest): boolean;
 }
 import ServiceResolver from "../Support/ServiceResolver";
 import FormRequest from "../Http/Request/FormRequest";

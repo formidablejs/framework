@@ -1,12 +1,11 @@
 exports.Package = class Package {
   publish() {
     return {
-      vendor: {
+      'auth-emails': {
         paths: {
-          'app/Mail': './install/auth-emails',
+          'app/Mail': './formidable/auth-emails',
         }
-      },
-      config: { }
+      }
     }
   }
 }
