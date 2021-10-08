@@ -1,9 +1,9 @@
-import { ActionComponent } from '../../resources/views/email/vendor/ActionComponent'
-import { ContentComponent } from '../../resources/views/email/vendor/ContentComponent'
+import { ActionComponent } from '../../resources/views/mail/vendor/ActionComponent'
+import { ContentComponent } from '../../resources/views/mail/vendor/ContentComponent'
 import { helpers } from '@formidablejs/framework'
-import { LayoutComponent } from '../../resources/views/email/vendor/LayoutComponent'
-import { LineComponent } from '../../resources/views/email/vendor/LineComponent'
-import { ParagraphComponent } from '../../resources/views/email/vendor/ParagraphComponent'
+import { LayoutComponent } from '../../resources/views/mail/vendor/LayoutComponent'
+import { LineComponent } from '../../resources/views/mail/vendor/LineComponent'
+import { ParagraphComponent } from '../../resources/views/mail/vendor/ParagraphComponent'
 import Mailable from '@formidablejs/framework/lib/Auth/Mail/ResetPassword'
 
 export default class ResetPassword < Mailable
