@@ -8,12 +8,4 @@ exports.Package = class Package {
       }
     }
   }
-
-  settings() {
-    return {
-      'auth-emails': {
-        'allow-force': true
-      }
-    }
-  }
 }
