@@ -59,8 +59,8 @@
     "@formidablejs/mailer": "0.1.0-alpha.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.4.1",
-    "imba": "^2.0.0-alpha.173",
-    "jest": "^27.0.6",
+    "imba": "^2.0.0-alpha.175",
+    "jest": "^27.2.5",
     "sqlite3": "^4.2.0",
     "typescript": "^4.4.2"
   }
