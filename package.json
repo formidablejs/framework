@@ -6,12 +6,12 @@
   "license": "MIT",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
-  "install": "install/Package.js",
+  "publisher": "formidable/Package.js",
   "bugs": "https://github.com/formidablejs/framework/issues",
   "homepage": "https://formidablejs.org",
   "repository": "https://github.com/formidablejs/framework",
   "files": [
-    "install",
+    "formidable",
     "lib",
     "types"
   ],
