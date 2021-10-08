@@ -49,8 +49,7 @@ export default class MaintenanceServiceResolver < ServiceResolver
 			const request = new FormRequest req, {}, reply, self.app.config
 
 			if !isEmpty(down.redirect)
-				if request.isUrl(down.redirect)
-					return done!
+				if self.isFile(request) || request.isUrl(down.redirect) then return done!
 
 				return reply.redirect down.redirect
 
@@ -107,3 +106,13 @@ export default class MaintenanceServiceResolver < ServiceResolver
 			secure: session.secure
 			signed: session.encrypt
 		}
+
+	def isFile request\FormRequest
+		const publicPath = path.join(process.cwd!, 'public', request.urlWithoutQuery!)
+		const formidablePath = path.join(process.cwd!, '.formidable', 'public', request.urlWithoutQuery!)
+
+		if fs.existsSync(publicPath) && fs.statSync(publicPath).isFile! then return true
+
+		if fs.existsSync(formidablePath) && fs.statSync(formidablePath).isFile! then return true
+
+		false
