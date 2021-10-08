@@ -1,3 +1,4 @@
+export function addExceptionResolver(resolver: any): number;
 /**
 @param {Error|ApplicationException|HttpException} error
 @param {FormRequest} request
