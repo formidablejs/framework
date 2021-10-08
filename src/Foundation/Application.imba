@@ -1,3 +1,4 @@
+import { addExceptionResolver } from './Exceptions/Handler/handleException'
 import { addResolver } from '../Http/Kernel/resolveResponse'
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
@@ -75,6 +76,7 @@ export default class Application
 
 	def onResponse handler\Function
 		addResolver(handler)
+		addExceptionResolver(handler)
 
 		self
 

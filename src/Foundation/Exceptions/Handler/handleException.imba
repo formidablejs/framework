@@ -1,3 +1,4 @@
+import isEmpty from '../../../Support/Helpers/isEmpty'
 import ConfigRepostory from '../../../Config/Repository'
 import HttpException from '../../../Http/Exceptions/HttpException'
 import MaintenanceModeException from '../MaintenanceModeException'
@@ -9,7 +10,11 @@ import type Repository from '../../../Config/Repository'
 
 const settings = {
 	config\ConfigRepostory: null
+	resolvers: []
 }
+
+def addExceptionResolver resolver
+	settings.resolvers.push resolver
 
 def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, reply\FastifyReply, hooks
 	for own hook, registeredHooks of hooks
@@ -22,8 +27,12 @@ def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, r
 
 	reply.code(statusCode).send { message }
 
-
 def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false
+	for resolver of settings.resolvers
+		const results = resolver(error, request, reply)
+
+		if !isEmpty(results) then return results
+
 	const statusCode\Number = typeof error.getStatus === 'function' ? error.getStatus! : 500
 
 	const response = {
@@ -67,6 +76,7 @@ def setConfig config\ConfigRepostory
 	settings.config = config
 
 export {
+	addExceptionResolver
 	handleException
 	handleMaintenanceMode
 	setConfig

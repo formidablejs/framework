@@ -13,9 +13,9 @@ def addResolver resolver
 
 exports.addResolver = addResolver
 
-export default def resolveResponse response\any, reply
+export default def resolveResponse response\any, request, reply
 	for resolver of settings.resolvers
-		const results = resolver(response, reply)
+		const results = resolver(response, request, reply)
 
 		if !isEmpty(results) then return results
 
