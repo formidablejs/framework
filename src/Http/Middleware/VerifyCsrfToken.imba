@@ -22,7 +22,6 @@ export default class VerifyCsrfToken
 		self.config = config
 
 	def handle request\FormRequest, reply\FastifyReply
-		shouldIgnore(request)
 		if self.isReading(request) || self.shouldIgnore(request) || self.tokensMatch(request)
 			if !self.isReading(request) then self.forgetTokens(request)
 
