@@ -49,6 +49,7 @@ import TransformsRequest from './Http/Middleware/TransformsRequest'
 import TrimStrings from './Http/Middleware/TrimStrings'
 import URL from './Http/URL/URL'
 import ValidateSignature from './Http/Middleware/ValidateSignature'
+import ValidationException from './Validator/Exceptions/ValidationException'
 import ValidationServiceResolver from './Validator/ValidationServiceResolver'
 import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
@@ -110,6 +111,7 @@ export {
 	TransformsRequest
 	TrimStrings
 	URL
+	ValidationException
 	ValidateSignature
 	ValidationServiceResolver
 	Validator
