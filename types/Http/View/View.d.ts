@@ -2,6 +2,10 @@ export default class View {
     /**
     @param {Object} data
     */
+    static withViewData(data?: any): View;
+    /**
+    @param {Object} data
+    */
     constructor(data?: any);
     /**
     @param {String} property
