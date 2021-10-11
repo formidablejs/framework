@@ -5,13 +5,13 @@ import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
 
 export default class View
 
-	prop #data\Object = {}
+	prop #_data\Object = {}
 
 	def constructor data\Object = {}
-		self.#data\Object = data
+		self.#_data\Object = data
 
 	def get property\String, default\any = null
-		const value = dot(self.#data, property)
+		const value = dot(self.#_data, property)
 
 		if (value == null || value == undefined) && (default == null || default == undefined)
 			throw new UndefinedDataPropException 'Data prop is undefined.'
@@ -19,7 +19,7 @@ export default class View
 		value ?? default
 
 	def has property\String
-		dot(self.#data, property) != null && dot(self.#data, property) != undefined
+		dot(self.#_data, property) != null && dot(self.#_data, property) != undefined
 
 	def beforeRender
 		null
