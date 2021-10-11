@@ -3,6 +3,7 @@ import isEmpty from '../../Support/Helpers/isEmpty'
 import JsonResponse from '../Response/JsonResponse'
 import Redirect from '../Redirect/Redirect'
 import Response from '../Response/Response'
+import ViewResponse from '../Response/ViewResponse'
 
 const settings = {
 	resolvers: []
@@ -19,11 +20,16 @@ export default def resolveResponse response\any, request, reply
 
 		if !isEmpty(results) then return results
 
-	if response instanceof Redirect then return reply.code(response.statusCode).redirect(response.path)
+	if response instanceof Redirect
+		return reply.code(response.statusCode).redirect(response.path)
 
-	if response instanceof JsonResponse then return response.toJson(reply)
+	if response instanceof JsonResponse
+		return response.toJson(reply)
 
-	if (response instanceof Mailable)
+	if response instanceof ViewResponse
+		return await response.toView(reply)
+
+	if response instanceof Mailable
 		reply.header('content-type', 'text/html')
 
 		return response.render! ? String(await response.render!) : ''
