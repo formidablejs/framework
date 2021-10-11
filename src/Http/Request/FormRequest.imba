@@ -1,5 +1,6 @@
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
+import appVersion from '../../Support/Helpers/version'
 import querystring from 'querystring'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type Repository from '../../Config/Repository'
@@ -19,6 +20,9 @@ export default class FormRequest
 		self.reply = reply
 		self.route = route
 		self.config = config
+
+	get version
+		appVersion!
 
 	def passesAuthorization
 		if typeof this.authorize === 'function' then return this.authorize!
