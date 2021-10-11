@@ -20,6 +20,7 @@ const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: toBoolean }  = require './toBoolean'
 const { default: version } = require './version'
+const { default: view } = require './view'
 const { default: wildcard }  = require './wildcard'
 const { default: without }  = require './without'
 
@@ -51,6 +52,7 @@ export {
 	strRandom
 	toBoolean
 	version
+	view
 	wildcard
 	without
 }
