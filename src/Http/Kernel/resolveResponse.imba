@@ -3,7 +3,6 @@ import isEmpty from '../../Support/Helpers/isEmpty'
 import JsonResponse from '../Response/JsonResponse'
 import Redirect from '../Redirect/Redirect'
 import Response from '../Response/Response'
-import View from '../View/View'
 import ViewResponse from '../Response/ViewResponse'
 
 const settings = {
@@ -29,11 +28,6 @@ export default def resolveResponse response\any, request, reply
 
 	if response instanceof ViewResponse
 		return await response.toView(reply)
-
-	if response instanceof View
-		reply.header('content-type', 'text/html')
-
-		return await response.make!
 
 	if response instanceof Mailable
 		reply.header('content-type', 'text/html')
