@@ -1,6 +1,7 @@
 import dot from '../../Support/Helpers/dotNotation'
 import isObject from '../../Support/Helpers/isObject'
 import isString from '../../Support/Helpers/isString'
+import querystring from 'querystring'
 import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
 
 export default class View
@@ -12,7 +13,7 @@ export default class View
 
 		self.#_data\Object = data
 
-	def get property\String, default\any = null
+	def get property\String, default\any = null, escape\boolean = true
 		if !isString(property) then throw TypeError "Expected string."
 
 		const value = dot(self.#_data, property)
@@ -20,7 +21,12 @@ export default class View
 		if (value == null || value == undefined) && (default == null || default == undefined)
 			throw new UndefinedDataPropException 'Data prop is undefined.'
 
-		value ?? default
+		if value then return escape ? querystring.escape(value) : value
+
+		default
+
+	def raw property\String, default\any = null
+		self.get(property, default, false)
 
 	def has property\String
 		if !isString(property) then throw TypeError "Expected string."
