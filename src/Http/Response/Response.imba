@@ -1,4 +1,6 @@
+import type View from '../View/View'
 import JsonResponse from './JsonResponse'
+import ViewResponse from './ViewResponse'
 
 export default class Response
 
@@ -11,6 +13,9 @@ export default class Response
 
 	def json object\Object
 		JsonResponse.make object
+
+	def view view\View, data\Object|null = null
+		ViewResponse.make(view, data)
 
 	def code statusCode\Number
 		self.statusCode = statusCode
