@@ -1,6 +1,7 @@
-import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
-import isString from '../../Support/Helpers/isString'
+import dot from '../../Support/Helpers/dotNotation'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isString from '../../Support/Helpers/isString'
+import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
 
 export default class View
 
@@ -9,21 +10,16 @@ export default class View
 	def constructor data\Object = {}
 		self.#data\Object = data
 
-	def #setup
-		for own key\String, value\any of self.#data
-			if !isEmpty(value)
-				this[key] = value
-
 	def get property\String, default\any = null
-		const value = self[property]
+		const value = dot(self.#data, property)
 
-		if (value == null || value == undefined) && isEmpty(default)
+		if (value == null || value == undefined) && (default == null || default == undefined)
 			throw new UndefinedDataPropException 'Data prop is undefined.'
 
 		value ?? default
 
 	def has property\String
-		self[property] != null && self[property] != undefined
+		dot(self.#data, property) != null && dot(self.#data, property) != undefined
 
 	def beforeRender
 		null
