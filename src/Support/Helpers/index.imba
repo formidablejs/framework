@@ -19,6 +19,7 @@ const { default: response }  = require './response'
 const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: toBoolean }  = require './toBoolean'
+const { default: version } = require './version'
 const { default: wildcard }  = require './wildcard'
 const { default: without }  = require './without'
 
@@ -49,6 +50,7 @@ export {
 	slug
 	strRandom
 	toBoolean
+	version
 	wildcard
 	without
 }
