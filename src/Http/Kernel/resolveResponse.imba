@@ -33,7 +33,7 @@ export default def resolveResponse response\any, request, reply
 	if response instanceof View
 		reply.header('content-type', 'text/html')
 
-		return await response.render!
+		return await response.make!
 
 	if response instanceof Mailable
 		reply.header('content-type', 'text/html')
