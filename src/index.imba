@@ -54,6 +54,7 @@ import ValidationServiceResolver from './Validator/ValidationServiceResolver'
 import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
 import View from './Http/View/View'
+import view from './Support/Helpers/view'
 import ViewResponse from './Http/Response/ViewResponse'
 
 export {
@@ -119,5 +120,6 @@ export {
 	Validator
 	VerifyCsrfToken
 	View
+	view
 	ViewResponse
 }
