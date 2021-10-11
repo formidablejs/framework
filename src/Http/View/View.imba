@@ -12,11 +12,6 @@ export default class View
 
 		self.#_data\Object = data
 
-	static def withViewData data\Object = {}
-		if !isObject(data) then throw TypeError "Expected object."
-
-		new View(data)
-
 	def get property\String, default\any = null
 		if !isString(property) then throw TypeError "Expected string."
 
