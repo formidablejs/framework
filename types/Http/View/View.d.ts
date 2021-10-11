@@ -18,10 +18,8 @@ export default class View {
     render(): any;
     make(): Promise<string>;
     [Ψ__init__]($$?: any): void;
-    [Ψsetup](): any[];
-    [Ψdata]: any;
+    [Ψ_data]: any;
 }
 declare const Ψ__init__: unique symbol;
-declare const Ψsetup: unique symbol;
-declare const Ψdata: unique symbol;
+declare const Ψ_data: unique symbol;
 export {};
