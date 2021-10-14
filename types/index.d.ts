@@ -44,6 +44,7 @@ import PersonalAccessTokenServiceResolver from "./Auth/Tokens/PersonalAccessToke
 import Redirect from "./Http/Redirect/Redirect";
 import Redis from "./Redis/Redis";
 import RedisServiceResolver from "./Redis/RedisServiceResolver";
+import Request from "./Http/Request/Request";
 import { RequestGenericInterface } from "fastify";
 import response from "./Support/Helpers/response";
 import Route from "./Http/Router/Route";
@@ -54,9 +55,12 @@ import SessionMemoryStoreServiceResolver from "./Http/Session/SessionMemoryStore
 import TransformsRequest from "./Http/Middleware/TransformsRequest";
 import TrimStrings from "./Http/Middleware/TrimStrings";
 import URL from "./Http/URL/URL";
-import ValidationException from "./Validator/Exceptions/ValidationException";
 import ValidateSignature from "./Http/Middleware/ValidateSignature";
+import ValidationException from "./Validator/Exceptions/ValidationException";
 import ValidationServiceResolver from "./Validator/ValidationServiceResolver";
 import Validator from "./Validator/Validator";
 import VerifyCsrfToken from "./Http/Middleware/VerifyCsrfToken";
-export { αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, Encrypter, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, handleException, handleMaintenanceMode, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, MaintenanceModeException, MaintenanceServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidationException, ValidateSignature, ValidationServiceResolver, Validator, VerifyCsrfToken };
+import View from "./Http/View/View";
+import view from "./Support/Helpers/view";
+import ViewResponse from "./Http/Response/ViewResponse";
+export { αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, Encrypter, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, handleException, handleMaintenanceMode, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, MaintenanceModeException, MaintenanceServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, Request, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidateSignature, ValidationException, ValidationServiceResolver, Validator, VerifyCsrfToken, View, view, ViewResponse };

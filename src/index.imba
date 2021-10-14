@@ -39,6 +39,7 @@ import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessToke
 import Redirect from './Http/Redirect/Redirect'
 import Redis from './Redis/Redis'
 import RedisServiceResolver from './Redis/RedisServiceResolver'
+import Request from './Http/Request/Request'
 import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
 import ServiceResolver from './Support/ServiceResolver'
@@ -53,6 +54,9 @@ import ValidationException from './Validator/Exceptions/ValidationException'
 import ValidationServiceResolver from './Validator/ValidationServiceResolver'
 import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
+import View from './Http/View/View'
+import view from './Support/Helpers/view'
+import ViewResponse from './Http/Response/ViewResponse'
 
 export {
 	@use
@@ -101,6 +105,7 @@ export {
 	Redirect
 	Redis
 	RedisServiceResolver
+	Request
 	RequestGenericInterface
 	response
 	Route
@@ -111,9 +116,12 @@ export {
 	TransformsRequest
 	TrimStrings
 	URL
-	ValidationException
 	ValidateSignature
+	ValidationException
 	ValidationServiceResolver
 	Validator
 	VerifyCsrfToken
+	View
+	view
+	ViewResponse
 }

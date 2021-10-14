@@ -1,3 +1,4 @@
+import isArray from '../../../Support/Helpers/isArray'
 import isEmpty from '../../../Support/Helpers/isEmpty'
 import ConfigRepostory from '../../../Config/Repository'
 import HttpException from '../../../Http/Exceptions/HttpException'
@@ -27,7 +28,7 @@ def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, r
 
 	reply.code(statusCode).send { message }
 
-def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false
+def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false, shouldReport\Boolean = true
 	for resolver of settings.resolvers
 		const results = resolver(error, request, reply)
 
@@ -52,7 +53,8 @@ def handleException error\Error|ApplicationException|HttpException, request\Form
 		response.line  = stack[0].lineNumber
 		response.stack = stack
 
-		console.error error
+		if shouldReport
+			console.error error
 
 	elif error instanceof HttpException
 		response.message = (error.message !== undefined || error.message !== null) ? error.message : response.message

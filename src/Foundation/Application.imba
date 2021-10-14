@@ -1,5 +1,6 @@
 import { addExceptionResolver } from './Exceptions/Handler/handleException'
 import { addResolver } from '../Http/Kernel/resolveResponse'
+import appVersion from '../Support/Helpers/version'
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
 import Database from '../Database/Database'
@@ -47,6 +48,12 @@ export default class Application
 
 	static def env
 		settings.environment.get('app.env')
+
+	static get version
+		appVersion!
+
+	get version
+		appVersion!
 
 	def port default\Number = 3000
 		settings.port ?? default

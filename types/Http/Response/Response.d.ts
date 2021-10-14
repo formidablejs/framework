@@ -11,11 +11,17 @@ export default class Response {
     */
     json(object: any): JsonResponse;
     /**
+    @param {View} view
+    @param {Object|null} data
+    */
+    view(view: any, data?: any | null): ViewResponse;
+    /**
     @param {Number} statusCode
     */
     code(statusCode: number): number;
     [Ψ__init__]($$?: any): void;
 }
 import JsonResponse from "./JsonResponse";
+import ViewResponse from "./ViewResponse";
 declare const Ψ__init__: unique symbol;
 export {};
