@@ -10,6 +10,7 @@ export default class Application {
     */
     static getEnv(key: string, default$?: any): any;
     static env(): any;
+    static get version(): any;
     /**
     @param {String} root
     */
@@ -19,6 +20,7 @@ export default class Application {
     hooks: any;
     plugins: any;
     root: string;
+    get version(): any;
     /**
     @param {Number} default
     */

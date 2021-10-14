@@ -11,6 +11,7 @@ export default class FormRequest {
     route: any;
     config: any;
     _rules: any;
+    get version(): any;
     passesAuthorization(): any;
     failedAuthorization(): void;
     rules(): {};

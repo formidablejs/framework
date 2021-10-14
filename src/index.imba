@@ -53,6 +53,9 @@ import ValidationException from './Validator/Exceptions/ValidationException'
 import ValidationServiceResolver from './Validator/ValidationServiceResolver'
 import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
+import View from './Http/View/View'
+import view from './Support/Helpers/view'
+import ViewResponse from './Http/Response/ViewResponse'
 
 export {
 	@use
@@ -116,4 +119,7 @@ export {
 	ValidationServiceResolver
 	Validator
 	VerifyCsrfToken
+	View
+	view
+	ViewResponse
 }
