@@ -39,6 +39,7 @@ import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessToke
 import Redirect from './Http/Redirect/Redirect'
 import Redis from './Redis/Redis'
 import RedisServiceResolver from './Redis/RedisServiceResolver'
+import Request from './Http/Request/Request'
 import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
 import ServiceResolver from './Support/ServiceResolver'
@@ -104,6 +105,7 @@ export {
 	Redirect
 	Redis
 	RedisServiceResolver
+	Request
 	RequestGenericInterface
 	response
 	Route
@@ -114,8 +116,8 @@ export {
 	TransformsRequest
 	TrimStrings
 	URL
-	ValidationException
 	ValidateSignature
+	ValidationException
 	ValidationServiceResolver
 	Validator
 	VerifyCsrfToken
