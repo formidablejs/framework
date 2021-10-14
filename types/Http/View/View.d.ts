@@ -2,16 +2,18 @@ export default class View {
     /**
     @param {Object} data
     */
-    static withViewData(data?: any): View;
-    /**
-    @param {Object} data
-    */
     constructor(data?: any);
     /**
     @param {String} property
     @param {any} default
+    @param {boolean} escape
     */
-    get(property: string, default$?: any): any;
+    get(property: string, default$?: any, escape?: boolean): any;
+    /**
+    @param {String} property
+    @param {any} default
+    */
+    raw(property: string, default$?: any): any;
     /**
     @param {String} property
     */
