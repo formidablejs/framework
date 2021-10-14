@@ -127,7 +127,7 @@ export default class Kernel
 
 			if error then throw error
 
-			console.log "\x1b[32mServer started on:\x1b[0m {address}"
+		imba.serve router.server
 
 	def hasRoutes router, config
 		for route in Route.all!
