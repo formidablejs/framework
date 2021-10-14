@@ -9,6 +9,11 @@ export default class Handler
 
 	prop config\Repository
 
+	get dontReport
+		[
+
+		]
+
 	def constructor config\Repository
 		self.config = config
 
