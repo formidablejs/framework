@@ -20,6 +20,7 @@ export default class Application {
     hooks: any;
     plugins: any;
     root: string;
+    handler: any;
     get version(): any;
     /**
     @param {Number} default

@@ -22,6 +22,7 @@ const settings = {
 	request: null
 	migration: null
 	seeder: null
+	handler: null
 }
 
 export default class Application
@@ -31,6 +32,7 @@ export default class Application
 	prop hooks = []
 	prop plugins = []
 	prop root = null
+	prop handler\ExceptionHandler = null
 
 	def constructor root\String
 		self.root = root
@@ -118,11 +120,9 @@ export default class Application
 			Bootstrap.cache "./.formidable/config.json", self.make(ConfigRepository).all!
 
 	def initiate kernel\Kernel, returnMode\Boolean = false
-		const handler = self.make(ExceptionHandler, [self.config])
-
 		settings.server = await kernel.listen(
 			self.config,
-			handler,
+			self.handler,
 			self.hooks,
 			self.plugins,
 			returnMode
@@ -132,6 +132,7 @@ export default class Application
 
 	def prepare
 		self.config = self.make(ConfigRepository)
+		self.handler = self.make ExceptionHandler, [self.config]
 
 		self.resolve!
 
