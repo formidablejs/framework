@@ -4,8 +4,9 @@ export function addExceptionResolver(resolver: any): number;
 @param {FormRequest} request
 @param {FastifyReply} reply
 @param {Boolean} returns
+@param {Boolean} shouldReport
 */
-export function handleException(error: Error | any | HttpException, request: any, reply: any, returns?: boolean): Promise<any>;
+export function handleException(error: Error | any | HttpException, request: any, reply: any, returns?: boolean, shouldReport?: boolean): Promise<any>;
 /**
 @param {MaintenanceModeException} error
 @param {FormRequest} request
