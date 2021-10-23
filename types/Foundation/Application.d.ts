@@ -21,6 +21,7 @@ export default class Application {
     plugins: any;
     root: string;
     handler: any;
+    context: any;
     get version(): any;
     /**
     @param {Number} default
