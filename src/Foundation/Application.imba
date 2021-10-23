@@ -1,5 +1,6 @@
 import { addExceptionResolver } from './Exceptions/Handler/handleException'
 import { addResolver } from '../Http/Kernel/resolveResponse'
+import { Context } from './Context'
 import appVersion from '../Support/Helpers/version'
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
@@ -15,7 +16,7 @@ import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
 
 const settings = {
-	config: null
+	config\ConfigRepository: null
 	environment: null
 	port: 3000
 	server: null
@@ -33,6 +34,7 @@ export default class Application
 	prop plugins = []
 	prop root = null
 	prop handler\ExceptionHandler = null
+	prop context\Context = Context
 
 	def constructor root\String
 		self.root = root
@@ -40,7 +42,7 @@ export default class Application
 		settings.environment = new EnvironmentRepository(root)
 		settings.migration = new Migration
 		settings.seeder = new Seeder
-		settings.port = process.env.FORMIDABLE_PORT ?? 3000
+		settings.port = Number(process.env.FORMIDABLE_PORT) ?? 3000
 
 	static def getConfig notation\String, default\any = null
 		settings.config.get(notation, default)
