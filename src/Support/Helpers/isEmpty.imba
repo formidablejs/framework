@@ -1,3 +1,4 @@
+import isObject from './isObject'
 import isArray from './isArray'
 import isBoolean from './isBoolean'
 import isString from './isString'
@@ -16,6 +17,9 @@ export default def isEmpty value\any
 		return true
 
 	if isArray(value) && value.length === 0
+		return true
+
+	if isObject(value) && Object.keys(value).length === 0
 		return true
 
 	return false
