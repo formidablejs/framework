@@ -14,6 +14,7 @@ const { default: isFunction }  = require './isFunction'
 const { default: isNumber }  = require './isNumber'
 const { default: isObject }  = require './isObject'
 const { default: isString }  = require './isString'
+const { default: mix } = require './mix'
 const { default: now }  = require './now'
 const { default: response }  = require './response'
 const { default: slug }  = require './slug'
@@ -44,6 +45,7 @@ export {
 	isNumber
 	isObject
 	isString
+	mix
 	ms
 	now
 	pluralize
