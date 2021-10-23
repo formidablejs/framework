@@ -68,6 +68,6 @@ export default class Application {
     [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
-import Repository from '../Config/Repository'
+import Repository from "../Config/Repository";
 declare const Ψ__init__: unique symbol;
 export {};
