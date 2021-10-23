@@ -22,6 +22,10 @@ describe('Test the isEmpty helper method.', () => {
     expect(isEmpty([])).toBe(true);
   });
 
+  test('Should return true if object keys length is 0', () => {
+    expect(isEmpty({})).toBe(true);
+  });
+
   test('Should return false', () => {
     expect(isEmpty('Hello World')).toBe(false);
     expect(isEmpty([ 'Luna' ])).toBe(false);
