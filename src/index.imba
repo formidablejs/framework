@@ -1,4 +1,6 @@
+import { @context } from './Support/Decorators/context'
 import { @use } from './Support/Decorators/use'
+import { Context } from './Foundation/Context'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { handleException, handleMaintenanceMode } from './Foundation/Exceptions/Handler/handleException'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
@@ -59,6 +61,7 @@ import view from './Support/Helpers/view'
 import ViewResponse from './Http/Response/ViewResponse'
 
 export {
+	@context
 	@use
 	AcceptLanguage
 	Application
@@ -68,6 +71,7 @@ export {
 	AuthenticationServiceResolver
 	AuthService
 	ConfigRepository
+	Context
 	Controller
 	ConvertEmptyStringsToNull
 	CsrfServiceResolver

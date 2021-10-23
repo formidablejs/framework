@@ -73,7 +73,7 @@ export default class SessionDriver < Driver
 		self.reply.setCookie('remember', token, {
 			domain: session.domain
 			httpOnly: session.http_only
-			maxAge: ms('5 years')
+			maxAge: self.config.get('auth.remember', ms('6 months'))
 			path: session.path
 			sameSite: session.same_site
 			secure: session.secure

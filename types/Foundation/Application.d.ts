@@ -16,11 +16,12 @@ export default class Application {
     */
     constructor(root: string);
     bindings: any;
-    config: any;
+    config: Repository;
     hooks: any;
     plugins: any;
     root: string;
     handler: any;
+    context: any;
     get version(): any;
     /**
     @param {Number} default
@@ -67,5 +68,6 @@ export default class Application {
     [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
+import Repository from "../Config/Repository";
 declare const Ψ__init__: unique symbol;
 export {};

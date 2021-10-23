@@ -1,3 +1,4 @@
+import { escape as htmlEscape } from 'html-escaper'
 import dot from '../../Support/Helpers/dotNotation'
 import isObject from '../../Support/Helpers/isObject'
 import isString from '../../Support/Helpers/isString'
@@ -21,7 +22,7 @@ export default class View
 		if (value == null || value == undefined) && (default == null || default == undefined)
 			throw new UndefinedDataPropException 'Data prop is undefined.'
 
-		if value then return escape ? querystring.escape(value) : value
+		if value then return escape ? htmlEscape(value) : value
 
 		default
 

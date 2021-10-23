@@ -1,3 +1,4 @@
+import { αcontext } from "./Support/Decorators/context";
 import { αuse } from "./Support/Decorators/use";
 import AcceptLanguage from "./Support/Language/Middleware/AcceptLanguage";
 import Application from "./Foundation/Application";
@@ -7,6 +8,7 @@ import Authenticate from "./Auth/Http/Middleware/Authenticate";
 import AuthenticationServiceResolver from "./Auth/AuthenticationServiceResolver";
 import AuthService from "./Auth/AuthService";
 import ConfigRepository from "./Config/Repository";
+import { Context } from "./Foundation/Context";
 import Controller from "./Http/Controller";
 import ConvertEmptyStringsToNull from "./Http/Middleware/ConvertEmptyStringsToNull";
 import CsrfServiceResolver from "./Http/Csrf/CsrfServiceResolver";
@@ -63,4 +65,4 @@ import VerifyCsrfToken from "./Http/Middleware/VerifyCsrfToken";
 import View from "./Http/View/View";
 import view from "./Support/Helpers/view";
 import ViewResponse from "./Http/Response/ViewResponse";
-export { αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, Encrypter, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, handleException, handleMaintenanceMode, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, MaintenanceModeException, MaintenanceServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, Request, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidateSignature, ValidationException, ValidationServiceResolver, Validator, VerifyCsrfToken, View, view, ViewResponse };
+export { αcontext, αuse, AcceptLanguage, Application, ApplicationException, Auth, Authenticate, AuthenticationServiceResolver, AuthService, ConfigRepository, Context, Controller, ConvertEmptyStringsToNull, CsrfServiceResolver, Database, DB, Encrypter, ErrorIfAuthenticated, ExceptionHandler, expiresIn, FastifyInstance, FastifyReply, FastifyRequest, ForbiddenException, FormRequest, handleException, handleMaintenanceMode, HasCsrfToken, HasEncryptionKey, Hash, HashServiceResolver, helpers, HttpException, IgnoreCookies, Kernel, Language, LanguageServiceResolver, Mail, Mailable, MailServiceResolver, MaintenanceModeException, MaintenanceServiceResolver, Model, NotFoundException, PersonalAccessTokenServiceResolver, Redirect, Redis, RedisServiceResolver, Request, RequestGenericInterface, response, Route, ServiceResolver, SessionDriverManager, SessionFileStoreServiceResolver, SessionMemoryStoreServiceResolver, TransformsRequest, TrimStrings, URL, ValidateSignature, ValidationException, ValidationServiceResolver, Validator, VerifyCsrfToken, View, view, ViewResponse };
