@@ -10,7 +10,7 @@ export class RouterServiceResolver < ServiceResolver
 
 			require '../../routes/web'
 
-		Route.group { middleware: ['jwt'] }, do
+		Route.group { middleware: ['jwt'], prefix: 'api' }, do
 			require '../../routes/api'
 
 		self
