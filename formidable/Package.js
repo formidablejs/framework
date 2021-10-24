@@ -11,6 +11,7 @@ exports.Package = class Package {
           'public': './formidable/web/public',
           'app/Resolvers': './formidable/web/resolvers',
           'routes': './formidable/web/routes',
+          'test': './formidable/web/test',
           'resources/views': './formidable/web/views',
         }
       }
