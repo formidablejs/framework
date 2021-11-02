@@ -16,7 +16,7 @@ export default class Application {
     */
     constructor(root: string);
     bindings: any;
-    config: Repository;
+    config: any;
     hooks: any;
     plugins: any;
     root: string;
@@ -68,6 +68,5 @@ export default class Application {
     [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
-import Repository from "../Config/Repository";
 declare const Ψ__init__: unique symbol;
 export {};
