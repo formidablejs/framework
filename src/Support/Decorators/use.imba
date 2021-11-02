@@ -1,8 +1,9 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
-import Model from '../../Database/Model'
 import FormRequest from '../../Http/Request/FormRequest'
-import ValidationException from '../../Validator/Exceptions/ValidationException'
 import isClass from '../Helpers/isClass'
+import Model from '../../Database/Model'
+import Request from '../../Http/Request/Request'
+import ValidationException from '../../Validator/Exceptions/ValidationException'
 
 export def @use target, key, descriptor
 	if isClass target
@@ -36,6 +37,9 @@ export def @use target, key, descriptor
 
 				response = new object({ [column]: value }).fetch!
 
+			elif object == Request
+				response = request
+
 			elif object == FormRequest
 				response = request
 
@@ -45,7 +49,7 @@ export def @use target, key, descriptor
 			elif object == FastifyRequest
 				response = request.request
 
-			elif (FormRequest.isPrototypeOf(object))
+			elif FormRequest.isPrototypeOf(object) || Request.isPrototypeOf(object)
 				response = new object(
 					request.request,
 					request.route,
