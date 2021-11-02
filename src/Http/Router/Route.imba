@@ -1,4 +1,5 @@
 import Path from './Path'
+import isString from '../../Support/Helpers/isString'
 
 const routes = []
 const middleware = []
@@ -10,56 +11,62 @@ export default class Route
 		if !['delete', 'get', 'options', 'patch', 'post', 'put'].includes verb
 			throw new Error "{verb} is not a valid HTTP verb."
 
-		if typeof pattern !== 'string' && pattern.trim! !== ''
-			throw new Error "{pattern} is not a valid route pattern."
+		if typeof pattern !== 'string' || (isString(pattern) && pattern.trim! == '')
+			throw new Error 'Invalid route path.'
 
 		routes.push {
 			method: verb
 			path: Path.clean prefix, pattern.trim!
 			middleware: middleware.flat!
-			action
+			action: action
 			name: null
 		}
 
 		this
 
-
+	/**
+	 * Add a delete route.
+	 */
 	static def delete path\String, action\Function|[Function, String]
 		self.addRoute 'delete', path, action
 
-		this
-
+	/**
+	 * Add a get route.
+	 */
 	static def get path\String, action\Function|[Function, String]
 		self.addRoute 'get', path, action
 
-		this
-
+	/**
+	 * Add a options route.
+	 */
 	static def options path\String, action\Function|[Function, String]
 		self.addRoute 'options', path, action
 
-		this
-
+	/**
+	 * Add a patch route.
+	 */
 	static def patch path\String, action\Function|[Function, String]
 		self.addRoute 'patch', path, action
 
-		this
-
+	/**
+	 * Add a post route.
+	 */
 	static def post path\String, action\Function|[Function, String]
 		self.addRoute 'post', path, action
 
-		this
-
+	/**
+	 * Add a put route.
+	 */
 	static def put path\String, action\Function|[Function, String]
 		self.addRoute 'put', path, action
 
-		this
-
+	/**
+	 * Set route name.
+	 */
 	static def name name\String
-		if routes.length === 0
-			return this
+		if routes.length === 0 then return this
 
-		const names = routes.map do(route)
-			route.name
+		const names = routes.map do(route) route.name
 
 		if names.includes name
 			throw new Error "\"{name}\" is already in use by another route."
@@ -68,18 +75,22 @@ export default class Route
 
 		this
 
+	/**
+	 * Add middleware to route.
+	 */
 	static def middleware name\String|String[]
-		if routes.length === 0
-			return this
+		if routes.length === 0 then return this
 
-		if !Array.isArray name
-			name = [name]
+		if !Array.isArray name then name = [name]
 
 		name.forEach do(middleware)
 			routes.slice(-1).pop!.middleware.push middleware
 
 		this
 
+	/**
+	 * Add grouped routes.
+	 */
 	static def group options = new Object, callable\Function
 		if !options || options && typeof options !== 'object'
 			throw new Error 'Invalid route group.'
