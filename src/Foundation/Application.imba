@@ -122,6 +122,10 @@ export default class Application
 			Bootstrap.cache "./.formidable/config.json", self.make(ConfigRepository).all!
 
 	def initiate kernel\Kernel, returnMode\Boolean = false
+		Database.context = 'Database'
+
+		self.context.inject Database
+
 		settings.server = await kernel.listen(
 			self.config,
 			self.handler,
