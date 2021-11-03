@@ -1,3 +1,7 @@
+import { ContextAPI } from './Context';
+import ConfigRepository from "../Config/Repository";
+import Kernel from "../Http/Kernel";
+
 export default class Application {
     /**
     @param {String} notation
@@ -16,12 +20,12 @@ export default class Application {
     */
     constructor(root: string);
     bindings: any;
-    config: Repository;
-    hooks: any;
-    plugins: any;
+    config: ConfigRepository;
+    hooks: [];
+    plugins: [];
     root: string;
     handler: any;
-    context: any;
+    context: ContextAPI;
     get version(): any;
     /**
     @param {Number} default
@@ -67,7 +71,5 @@ export default class Application {
     registerResolver(resolver: any): any;
     [Ψ__init__]($$?: any): void;
 }
-import Kernel from "../Http/Kernel";
-import Repository from "../Config/Repository";
 declare const Ψ__init__: unique symbol;
 export {};
