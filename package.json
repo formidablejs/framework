@@ -60,7 +60,7 @@
     "@types/node": "^16.11.6",
     "imba": "^2.0.0-alpha.183",
     "jest": "^27.3.1",
-    "sqlite3": "^4.2.0",
+    "sqlite3": "git+https://github.com/mapbox/node-sqlite3.git",
     "typescript": "^4.4.4"
   }
 }

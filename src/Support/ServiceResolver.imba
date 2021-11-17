@@ -8,7 +8,7 @@ export default class ServiceResolver
 		self.app = app
 
 	def boot
-		self
+		null
 
 	def register
-		self
+		null
