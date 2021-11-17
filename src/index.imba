@@ -15,6 +15,8 @@ import AuthService from './Auth/AuthService'
 import ConfigRepository from './Config/Repository'
 import Controller from './Http/Controller'
 import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
+import CookieServiceResolver from './Http/Cookie/CookieServiceResolver'
+import CorsServiceResolver from './Http/Cors/CorsServiceResolver'
 import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
 import Database from './Database/Database'
 import DB from './Database/Database'
@@ -48,6 +50,8 @@ import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
 import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
 import SessionMemoryStoreServiceResolver from './Http/Session/SessionMemoryStoreServiceResolver'
+import SessionServiceResolver from './Http/Session/SessionServiceResolver'
+import StaticContentServiceResolver from './Http/Static/StaticContentServiceResolver'
 import TransformsRequest from './Http/Middleware/TransformsRequest'
 import TrimStrings from './Http/Middleware/TrimStrings'
 import URL from './Http/URL/URL'
@@ -74,6 +78,8 @@ export {
 	Context
 	Controller
 	ConvertEmptyStringsToNull
+	CookieServiceResolver
+	CorsServiceResolver
 	CsrfServiceResolver
 	Database
 	DB
@@ -117,6 +123,8 @@ export {
 	SessionDriverManager
 	SessionFileStoreServiceResolver
 	SessionMemoryStoreServiceResolver
+	SessionServiceResolver
+	StaticContentServiceResolver
 	TransformsRequest
 	TrimStrings
 	URL
@@ -125,7 +133,7 @@ export {
 	ValidationServiceResolver
 	Validator
 	VerifyCsrfToken
-	View
 	view
+	View
 	ViewResponse
 }
