@@ -5,10 +5,6 @@ import FormRequest from './Request/FormRequest'
 import getResponse from './Kernel/getResponse'
 import handleNotFound from './Kernel/handleNotFound'
 import hasContentTypes from './Kernel/hasContentTypes'
-import hasCookie from './Kernel/hasCookie'
-import hasCors from './Kernel/hasCors'
-import hasSession from './Kernel/hasSession'
-import hasStaticContent from './Kernel/hasStaticContent'
 import InvalidRouteActionException from './Router/Exceptions/InvalidRouteActionException'
 import isArray from '../Support/Helpers/isArray'
 import isClass from '../Support/Helpers/isClass'
@@ -79,11 +75,7 @@ export default class Kernel
 			ignoreTrailingSlash: true
 		})
 
-		hasStaticContent(router)
 		hasContentTypes(router)
-		hasCookie(router, config)
-		hasSession(router, config)
-		hasCors(router, config)
 
 		router.addHook 'onRoute', do(options)
 			routes.invalid = routes.invalid.filter do(route) route !== options.path
@@ -94,8 +86,7 @@ export default class Kernel
 
 		for own hook, registeredHooks of hooks
 			for hookHandler in registeredHooks
-				if hook !== 'onMaintenance'
-					router.addHook(hook, hookHandler)
+				if hook !== 'onMaintenance' then router.addHook(hook, hookHandler)
 
 		await this.hasRoutes(router, config)
 
