@@ -1,0 +1,33 @@
+import { join } from 'path'
+import fastifystatic from 'fastify-static'
+import ServiceResolver from '../../Support/ServiceResolver'
+
+export default class StaticContentServiceResolver < ServiceResolver
+
+	/**
+	 * Public directory.
+	 */
+	get public
+		{ root: join(process.cwd!, 'public') }
+
+	/**
+	 * Formidable assets directory.
+	 */
+	get assets
+		{
+			root: join(process.cwd!, '.formidable', 'public', '__assets__')
+			prefix: '/__assets__/'
+			decorateReply: false
+		}
+
+	/**
+	 * Register public and formidable assets directories as static content paths.
+	 *
+	 * @returns {void}
+	 */
+	def boot
+		/** register public directory. */
+		self.app.register fastifystatic, self.public
+
+		/** register formidable assets directory. */
+		self.app.register fastifystatic, self.assets
