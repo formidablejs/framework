@@ -4,8 +4,8 @@ export default class ServiceResolver {
     */
     constructor(app: Application);
     app: Application;
-    boot(): ServiceResolver;
-    register(): ServiceResolver;
+    boot(): any;
+    register(): any;
     [Ψ__init__]($$?: any): void;
 }
 import Application from "../Foundation/Application";
