@@ -21,4 +21,5 @@ echo
 
 cd $E2E                           && \
 npm i --legacy-peer-deps          && \
+npm i sqlite3 --save              && \
 npm i $PACKAGE --legacy-peer-deps
