@@ -2,39 +2,39 @@ export default class VerifyCsrfToken {
     /**
     @param {Repository} config
     */
-    constructor(config: any);
+    constructor(config: Repository);
     get addHttpCookie(): boolean;
     get except(): any[];
-    config: any;
+    config: Repository;
     /**
     @param {FormRequest} request
     @param {FastifyReply} reply
     */
-    handle(request: any, reply: any): any;
+    handle(request: FormRequest, reply: FastifyReply): FormRequest;
     /**
     @param {FormRequest} request
     */
-    isReading(request: any): boolean;
+    isReading(request: FormRequest): boolean;
     /**
     @param {FormRequest} request
     */
-    shouldIgnore(request: any): boolean;
+    shouldIgnore(request: FormRequest): boolean;
     /**
     @param {FormRequest} request
     */
-    tokensMatch(request: any): any;
+    tokensMatch(request: FormRequest): any;
     /**
     @param {FormRequest} request
     */
-    getTokenFromRequest(request: any): any;
+    getTokenFromRequest(request: FormRequest): any;
     shouldAddXsrfTokenCookie(): boolean;
     /**
     @param {FormRequest} request
     @param {FastifyReply} reply
     */
-    addCookieToResponse(request: any, reply: any): any;
+    addCookieToResponse(request: FormRequest, reply: FastifyReply): any;
     /**
     @param {FormRequest} request
     */
-    forgetTokens(request: any): any;
+    forgetTokens(request: FormRequest): FormRequest;
 }

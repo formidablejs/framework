@@ -10,11 +10,11 @@ export default class Driver {
     /**
     @param {Mailable} mailer
     */
-    static verificationMailer(mailer: any): any;
+    static verificationMailer(mailer: Mailable): Mailable;
     /**
     @param {Mailable} mailer
     */
-    static resetPasswordMailer(mailer: any): any;
+    static resetPasswordMailer(mailer: Mailable): Mailable;
     /**
     @param {String} protocol
     @param {FormRequest} request
@@ -22,12 +22,12 @@ export default class Driver {
     @param {any[]|null} params
     @param {Repository} config
     */
-    constructor(protocol: string, request: any, reply: any, params: any[] | null, config: any);
+    constructor(protocol: string, request: FormRequest, reply: FastifyReply, params: any[] | null, config: Repository);
     protocol: string;
-    request: any;
-    reply: any;
+    request: FormRequest;
+    reply: FastifyReply;
     params: any[];
-    config: any;
+    config: Repository;
     /**
     @param {String} name
     @param {Object} user

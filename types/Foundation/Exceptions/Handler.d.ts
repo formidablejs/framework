@@ -2,15 +2,15 @@ export default class Handler {
     /**
     @param {Repository} config
     */
-    constructor(config: any);
-    config: any;
+    constructor(config: Repository);
+    config: Repository;
     get dontReport(): (typeof HttpException)[];
     /**
     @param {Error|ApplicationException|HttpException} error
     @param {FormRequest} request
     @param {FastifyReply} reply
     */
-    handle(error: Error | any | HttpException, request: any, reply: any): Promise<any>;
+    handle(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply): Promise<any>;
     /**
     @param {Error} error
     */
