@@ -9,8 +9,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install craftsman
-      run: npm i -g @formidablejs/craftsman
     - name: Prepare e2e tests
       run: npm run pre-test
     - name: Run e2e tests
