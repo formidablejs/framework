@@ -6,13 +6,13 @@ export function addExceptionResolver(resolver: any): number;
 @param {Boolean} returns
 @param {Boolean} shouldReport
 */
-export function handleException(error: Error | any | HttpException, request: any, reply: any, returns?: boolean, shouldReport?: boolean): Promise<any>;
+export function handleException(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply, returns?: boolean, shouldReport?: boolean): Promise<any>;
 /**
 @param {MaintenanceModeException} error
 @param {FormRequest} request
 @param {FastifyReply} reply
 */
-export function handleMaintenanceMode(error: MaintenanceModeException, request: any, reply: any, hooks: any): any;
+export function handleMaintenanceMode(error: MaintenanceModeException, request: FormRequest, reply: FastifyReply, hooks: any): any;
 /**
 @param {ConfigRepostory} config
 */

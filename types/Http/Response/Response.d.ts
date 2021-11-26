@@ -14,7 +14,7 @@ export default class Response {
     @param {View} view
     @param {Object|null} data
     */
-    view(view: any, data?: any | null): ViewResponse;
+    view(view: View, data?: any | null): ViewResponse;
     /**
     @param {Number} statusCode
     */

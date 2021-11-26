@@ -2,11 +2,11 @@ export default class HasEncryptionKey {
     /**
     @param {Repository} config
     */
-    constructor(config: any);
-    config: any;
+    constructor(config: Repository);
+    config: Repository;
     /**
     @param {FormRequest} request
     */
-    handle(request: any): any;
+    handle(request: FormRequest): FormRequest;
     key(): any;
 }

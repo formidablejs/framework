@@ -4,5 +4,5 @@ export default class IgnoreCookies {
     @param {FastifyReply} reply
     @param {any[]|null} params
     */
-    handle(request: any, reply: any, params: any[] | null): () => any;
+    handle(request: FormRequest, reply: FastifyReply, params: any[] | null): () => any;
 }

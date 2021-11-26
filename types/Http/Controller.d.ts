@@ -37,7 +37,7 @@ export default class Controller {
     @param {Function|View} view
     @param {Object} data
     */
-    view(view: Function | any, data?: any): ViewResponse;
+    view(view: Function | View, data?: any): ViewResponse;
     /**
          * Validate request.
          */
@@ -48,6 +48,6 @@ export default class Controller {
     @param {FormRequest|Request} request
     @param {Object} rules
     */
-    validate(request: any | Request, rules?: any): any;
+    validate(request: FormRequest | Request, rules?: any): any;
 }
 import ViewResponse from "./Response/ViewResponse";

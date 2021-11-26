@@ -4,13 +4,13 @@ export default class ViewResponse {
     @param {Object|null} data
     @param {Number} statusCode
     */
-    static make(view: any, data?: any | null, statusCode?: number): ViewResponse;
+    static make(view: View, data?: any | null, statusCode?: number): ViewResponse;
     /**
     @param {View} view
     @param {Object|null} data
     @param {Number} statusCode
     */
-    constructor(view: any, data?: any | null, statusCode?: number);
+    constructor(view: View, data?: any | null, statusCode?: number);
     view: any;
     statusCode: number;
     /**
@@ -20,7 +20,7 @@ export default class ViewResponse {
     /**
     @param {FastifyReply} reply
     */
-    toView(reply: any): Promise<boolean>;
+    toView(reply: FastifyReply): Promise<boolean>;
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
