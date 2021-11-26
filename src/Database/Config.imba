@@ -50,7 +50,9 @@ class Config
 				})
 			}
 
-			return connection
+			const useNullAsDefault = isEmpty(config('database.useNullAsDefault')) ? { } : { useNullAsDefault: config('database.useNullAsDefault') }
+
+			return Object.assign(connection, useNullAsDefault)
 
 		{}
 
