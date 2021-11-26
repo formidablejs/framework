@@ -11,5 +11,5 @@ export default class DriverManager {
     @param {any[]|null} params
     @param {Repository} config
     */
-    static get(protocol: string, request: any, reply: any, params: any[] | null, config: any): any;
+    static get(protocol: string, request: FormRequest, reply: FastifyReply, params: any[] | null, config: Repository): any;
 }

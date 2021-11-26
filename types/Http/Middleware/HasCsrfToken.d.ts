@@ -2,11 +2,11 @@ export default class HasCsrfToken {
     /**
     @param {Repository} config
     */
-    constructor(config: any);
-    config: any;
+    constructor(config: Repository);
+    config: Repository;
     /**
     @param {FormRequest} request
     */
-    handle(request: any): any;
+    handle(request: FormRequest): any;
     tokens(): any;
 }

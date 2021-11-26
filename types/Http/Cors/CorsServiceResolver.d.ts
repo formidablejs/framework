@@ -30,6 +30,6 @@ export default class CorsServiceResolver extends ServiceResolver {
          
     @param {FastifyRequest} request
     */
-    isMatchingPath(request: any): boolean;
+    isMatchingPath(request: FastifyRequest): boolean;
 }
 import ServiceResolver from "../../Support/ServiceResolver";
