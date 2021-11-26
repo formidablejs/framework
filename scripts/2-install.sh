@@ -19,5 +19,6 @@ echo
 echo "Install dependencies..."
 echo
 
-cd $E2E && \
+cd $E2E                           && \
+npm i --legacy-peer-deps          && \
 npm i $PACKAGE --legacy-peer-deps
