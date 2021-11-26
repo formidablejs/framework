@@ -22,6 +22,7 @@ cd $E2E                                                                         
 cp .env.example .env                                                                           && \
 sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env                                                && \
 sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env                                     && \
+sed -i 's/"jest --roots test"/"jest --roots=test --forceExit"/g' package.json                  && \
 echo "DATABASE_URL=database/db.sqlite" >> .env                                                 && \
 touch database/db.sqlite                                                                       && \
 ./node_modules/.bin/craftsman key                                                              && \
