@@ -18,15 +18,15 @@ echo
 echo "Prepare application..."
 echo
 
-cd $E2E                                                                                        && \
-cp .env.example .env                                                                           && \
-sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env                                                && \
-sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env                                                 && \
-echo "DATABASE_URL=database/db.sqlite" >> .env                                                 && \
-touch database/db.sqlite                                                                       && \
-./node_modules/.bin/craftsman key                                                              && \
-./node_modules/.bin/craftsman publish --package=@formidablejs/framework --tag="auth-emails"    && \
-./node_modules/.bin/craftsman publish --package=@formidablejs/mailer --tag="components,config" && \
-./node_modules/.bin/craftsman cache                                                            && \
-./node_modules/.bin/craftsman build                                                            && \
-./node_modules/.bin/craftsman migrate latest
+cd $E2E                                                                    && \
+cp .env.example .env                                                       && \
+sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env                            && \
+sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env                 && \
+echo "DATABASE_URL=database/db.sqlite" >> .env                             && \
+touch database/db.sqlite                                                   && \
+craftsman key                                                              && \
+craftsman publish --package=@formidablejs/framework --tag="auth-emails"    && \
+craftsman publish --package=@formidablejs/mailer --tag="components,config" && \
+craftsman cache                                                            && \
+craftsman build                                                            && \
+craftsman migrate latest
