@@ -1,6 +1,8 @@
 /node_modules
 /public
 /.temp
+/output
+/test/e2e
 .env
 .env.backup
 npm-debug.log
