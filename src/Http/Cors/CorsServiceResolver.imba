@@ -20,7 +20,7 @@ export default class CorsServiceResolver < ServiceResolver
 			const incomingOrigin = requestOrigin.split('.')
 			const allowedOrigin = o.includes('://') ? o.split('://')[1].split('.') : o.split('.')
 
-			if o === '*' then origins.push origin
+			if o === '*' then origins.push(origin.includes('://') ? origin.split('://')[1] : origin)
 
 			if o !== '*'
 				if allowedOrigin.length === incomingOrigin.length
@@ -34,7 +34,9 @@ export default class CorsServiceResolver < ServiceResolver
 
 						index++
 
-					origins.push build.join('.')
+					const completeOrigin = build.join('.')
+
+					origins.push(completeOrigin.includes('://') ? completeOrigin.split('://')[1] : completeOrigin)
 
 		origins
 
@@ -73,7 +75,7 @@ export default class CorsServiceResolver < ServiceResolver
 
 						const requestOrigin = origin.split('://')[1]
 
-						if getOrigins(origin, self.app.config).includes(requestOrigin) && isMatchingPath(request, self.app.config)
+						if self.getOrigins(origin).includes(requestOrigin) && self.isMatchingPath(request)
 							cb null, true
 							return
 
