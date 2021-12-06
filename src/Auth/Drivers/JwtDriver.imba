@@ -1,3 +1,4 @@
+import Database from '../../Database/Database'
 import asObject from '../../Support/Helpers/asObject'
 import Auth from '../Auth'
 import AuthorizationException from '../Exceptions/AuthorizationException'
@@ -48,3 +49,13 @@ export default class JwtDriver < Driver
 			type: 'Bearer'
 			user: without(user, hidden)
 		}
+
+	def logout body\Object = new Object
+		const personalAccessToken = await self.getPersonalAccessToken!
+
+		await Database.table('personal_access_tokens')
+			.where('id', personalAccessToken.token.id)
+			.where('tokenable_id', personalAccessToken.tokenable.id)
+			.del!
+
+		return { status: 'success' }
