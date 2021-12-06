@@ -1,2 +1,4 @@
+import type { Knex } from "knex";
+
 export default Database;
-declare let Database: any;
+declare let Database: Knex;
