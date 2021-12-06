@@ -1,12 +1,24 @@
-export default class Redis {
+export default class Redis extends RedisFactory {
     /**
-    @param {String} database
+    @param {String} key
+    @param {String} value
+    @param {any} options
     */
-    static connection(database?: string): any;
-    static configure(config: any): any;
-    static closeAll(): any[];
+    static set(key: string, value: string, options?: any): any;
     /**
-    @param {String} database
+    @param {String} key
     */
-    constructor(database?: string);
+    static get(key: string): any;
+    /**
+    @param {String} key
+    */
+    static del(key: string): any;
+    /**
+    @param {String} command
+    @param {String} key
+    @param {String|null} value
+    @param {any} nx
+    */
+    static command(command: string, key: string, value?: string | null, nx?: any): any;
 }
+import RedisFactory from "./RedisFactory";
