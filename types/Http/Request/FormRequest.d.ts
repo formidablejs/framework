@@ -6,6 +6,7 @@ export default class FormRequest {
     @param {Repository} config
     */
     constructor(request: FastifyRequest, route: any, reply: FastifyReply, config: Repository);
+    req: FastifyRequest;
     request: FastifyRequest;
     reply: FastifyReply;
     route: any;
@@ -381,11 +382,56 @@ export default class FormRequest {
     */
     query(key?: string | null, default$?: any): any;
     /**
+         * Get files.
+         *
+         * @returns {File[]}
+         */
+    /**
+    *
+         * Get files.
+         *
+         * @returns {File[]}
+         
+    */
+    files(): File[];
+    /**
+         * Get file.
+         *
+         * @returns {File|null}
+         */
+    /**
+    *
+         * Get file.
+         *
+         * @returns {File|null}
+         
+    @param {String} name
+    */
+    file(name: string): File | null;
+    /**
+         * Check if request has file.
+         *
+         * @returns {Boolean}
+         */
+    /**
+    *
+         * Check if request has file.
+         *
+         * @returns {Boolean}
+         
+    @param {String} name
+    */
+    hasFile(name: string): boolean;
+    /**
          * Check if request expects a json response.
+         *
+         * @returns {Boolean}
          */
     /**
     *
          * Check if request expects a json response.
+         *
+         * @returns {Boolean}
          
     */
     expectsJson(): boolean;
@@ -400,14 +446,32 @@ export default class FormRequest {
     validate(): any;
     /**
          * Set request rules.
+         *
+         * @param {Object} rules
+         * @returns {FormRequest}
          */
     /**
     *
          * Set request rules.
+         *
+         * @param {Object} rules
+         * @returns {FormRequest}
          
-    @param {Array} rules
+    @param {Object} rules
     */
-    setRules(rules: any[]): any[];
+    setRules(rules: any): FormRequest;
+    /**
+         * Get request rules.
+         *
+         * @returns {Object}
+         */
+    /**
+    *
+         * Get request rules.
+         *
+         * @returns {Object}
+         
+    */
     getRules(): any;
     /**
          * Get currently authenticated user.
@@ -424,5 +488,6 @@ export default class FormRequest {
     };
     [Ψ__init__]($$?: any): void;
 }
+import File from "./File";
 declare const Ψ__init__: unique symbol;
 export {};
