@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -35,11 +35,11 @@
     "bookshelf": "^1.2.0",
     "connect-redis": "^6.0.0",
     "dotenv": "^10.0.0",
-    "fastify": "^3.24.0",
+    "fastify": "^3.24.1",
     "fastify-cookie": "^5.4.0",
     "fastify-cors": "^6.0.2",
     "fastify-formbody": "^5.2.0",
-    "fastify-multipart": "^5.1.0",
+    "fastify-multipart": "^5.2.0",
     "fastify-static": "^4.5.0",
     "html-escaper": "^3.0.3",
     "jsonwebtoken": "^8.5.1",
@@ -59,9 +59,9 @@
   "devDependencies": {
     "@formidablejs/mailer": "0.2.0-alpha.1",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.10",
+    "@types/node": "^16.11.11",
     "imba": "^2.0.0-alpha.190",
-    "jest": "^27.3.1",
+    "jest": "^27.4.3",
     "sqlite3": "git+https://github.com/mapbox/node-sqlite3.git",
     "typescript": "^4.5.2"
   }
