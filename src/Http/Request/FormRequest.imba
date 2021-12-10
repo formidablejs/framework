@@ -1,3 +1,4 @@
+import isEmpty from '../../Support/Helpers/isEmpty'
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import appVersion from '../../Support/Helpers/version'
@@ -6,9 +7,11 @@ import type { FastifyReply, FastifyRequest } from 'fastify'
 import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
+import File from './File'
 
 export default class FormRequest
 
+	prop req\FastifyRequest
 	prop request\FastifyRequest
 	prop reply\FastifyReply
 	prop route = {}
@@ -16,6 +19,7 @@ export default class FormRequest
 	prop _rules = null
 
 	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
+		self.req = request
 		self.request = request
 		self.reply = reply
 		self.route = route
@@ -315,26 +319,62 @@ export default class FormRequest
 		value ?? default
 
 	/**
+	 * Get files.
+	 *
+	 * @returns {File[]}
+	 */
+	def files
+		request.rawFiles ?? {}
+
+	/**
+	 * Get file.
+	 *
+	 * @returns {File|null}
+	 */
+	def file name\String
+		self.files![name] ?? null
+
+	/**
+	 * Check if request has file.
+	 *
+	 * @returns {Boolean}
+	 */
+	def hasFile name\String
+		!isEmpty(self.file(name))
+
+	/**
 	 * Check if request expects a json response.
+	 *
+	 * @returns {Boolean}
 	 */
 	def expectsJson
-		wildcard(this.header('accept', ''), '*json')
+		wildcard(self.header('accept', ''), '*json')
 
 	/**
 	 * Validate a request using specified rules.
 	 */
 	def validate
-		Validator.make(this.input!, this.getRules!, this.messages!)
+		Validator.make(Object.assign(self.input! ?? {}, self.files! ?? {}), self.getRules!, self.messages!)
 
 	/**
 	 * Set request rules.
+	 *
+	 * @param {Object} rules
+	 * @returns {FormRequest}
 	 */
-	def setRules rules\Array
+	def setRules rules\Object
 		if self._rules !== null
 			throw new Error('FormRequest rules have already been set.')
 
 		self._rules = rules
 
+		self
+
+	/**
+	 * Get request rules.
+	 *
+	 * @returns {Object}
+	 */
 	def getRules
 		self._rules === null ? this.rules! : self._rules
 
