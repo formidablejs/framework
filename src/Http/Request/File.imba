@@ -25,6 +25,14 @@ export default class File
 		self._object.filename
 
 	/**
+	 * File name.
+	 *
+	 * @type {String}
+	 */
+	get filename
+		self.name
+
+	/**
 	 * File encoding.
 	 *
 	 * @type {String}
@@ -49,6 +57,14 @@ export default class File
 		self._object.mimetype
 
 	/**
+	 * File mime type.
+	 *
+	 * @type {String}
+	 */
+	get type
+		self._object.mimetype
+
+	/**
 	 * Temp file path.
 	 *
 	 * @type {String}
@@ -67,6 +83,14 @@ export default class File
 		i < 0 ? '' : self._object.filepath.substr(i)
 
 	/**
+	 * File extension.
+	 *
+	 * @type {String}
+	 */
+	get ext
+		self.extension
+
+	/**
 	 * File size in MB.
 	 *
 	 * @type {Number}
@@ -75,14 +99,14 @@ export default class File
 		(self._object.file.bytesRead ?? 0) / 1048576
 
 	/**
-	 * Store file.
+	 * Move file.
 	 *
 	 * @param {String} destination
 	 * @param {Boolean} overwrite
 	 * @throws {DestinationExistsException}
 	 * @returns {void}
 	 */
-	def storeAs destination\String, overwrite\Boolean = false
+	def move destination\String, overwrite\Boolean = false
 		if !overwrite && existsSync(destination) && statSync(destination).isFile!
 			throw new DestinationExistsException 'Destination already exist.'
 
