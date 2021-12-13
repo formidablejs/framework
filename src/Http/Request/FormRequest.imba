@@ -1,13 +1,13 @@
-import isEmpty from '../../Support/Helpers/isEmpty'
+import appVersion from '../../Support/Helpers/version'
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
-import appVersion from '../../Support/Helpers/version'
+import FileCollection from './FileCollection'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import querystring from 'querystring'
-import type { FastifyReply, FastifyRequest } from 'fastify'
-import type Repository from '../../Config/Repository'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
-import File from './File'
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import type Repository from '../../Config/Repository'
 
 export default class FormRequest
 
@@ -321,18 +321,18 @@ export default class FormRequest
 	/**
 	 * Get files.
 	 *
-	 * @returns {File[]}
+	 * @returns {FileCollection[]|[]}
 	 */
 	def files
-		request.rawFiles ?? {}
+		!isEmpty(request.rawFiles) ? Object.values(request.rawFiles) : []
 
 	/**
 	 * Get file.
 	 *
-	 * @returns {File|null}
+	 * @returns {FileCollection|null}
 	 */
 	def file name\String
-		self.files![name] ?? null
+		!(isEmpty(request.rawFiles) && isEmpty(request.rawFiles[name])) ? request.rawFiles[name] : null
 
 	/**
 	 * Check if request has file.
