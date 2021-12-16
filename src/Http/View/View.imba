@@ -14,6 +14,13 @@ export default class View
 
 		self.#_data\Object = data
 
+	def setData data\Object
+		if !isObject(data) then throw TypeError "Expected object."
+
+		self.#_data\Object = Object.assign(self.#_data, data)
+
+		self
+
 	def get property\String, default\any = null, escape\boolean = true
 		if !isString(property) then throw TypeError "Expected string."
 
