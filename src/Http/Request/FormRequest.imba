@@ -4,6 +4,7 @@ import AuthorizationException from '../../Auth/Exceptions/AuthorizationException
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
@@ -88,6 +89,27 @@ export default class FormRequest
 	 */
 	def __ path\String, default\String
 		self.translate(path, default)
+
+	/**
+	 * Flash data.
+	 */
+	def flash key\String, value\any
+		if !isString(key) then throw TypeError 'Expected key to be a string.'
+
+		self.req.session._flashed = Object.assign(self.req.session._flashed ?? {}, {
+			[key]: value
+		})
+
+		self
+
+	/**
+	 * Flash many.
+	 */
+	def flashMany object\Object
+		for own key\String, value of object
+			self.flash key, value
+
+		self
 
 	/**
 	 * Get url signature.
