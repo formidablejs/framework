@@ -8,7 +8,7 @@ export default class VerifyEmail < Mailable
 	prop user\Object
 
 	def constructor request\FormRequest, user\Object
-		super!
+		super()
 
 		self.request = request
 		self.subject = request.t('auth.email.verify.subject', 'Verify Email Address')
