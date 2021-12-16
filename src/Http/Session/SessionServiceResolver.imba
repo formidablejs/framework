@@ -45,7 +45,7 @@ export default class SessionServiceResolver < ServiceResolver
 		self.app.register session, config
 
 		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
-			if response instanceof ValidationException && !request.expectsJson!
+			if response instanceof ValidationException && request.expectsHtml!
 				request.flash('_errors', response.message.errors)
 				request.flash('_old', request.body!)
 
