@@ -27,18 +27,24 @@ export default class MultipartServiceResolver < ServiceResolver
 		self.app.addHook 'preHandler', do(request\FastifyReply)
 			if !request.isMultipart!
 				request.rawFiles = {}
+				request._rawFiles = {}
 
 				return
 
 			const files\{}[] = await request.saveRequestFiles!
 
 			if isEmpty(request.rawFiles) then request.rawFiles = {}
+			if isEmpty(request._rawFiles) then request._rawFiles = {}
 
 			for file in files
+				const fileObject = new File(without(file, ['fields']))
+
 				if !isEmpty(request.rawFiles[file.fieldname])
-					request.rawFiles[file.fieldname] = request.rawFiles[file.fieldname].push(new File(without(file, ['fields'])))
+					request.rawFiles[file.fieldname] = request.rawFiles[file.fieldname].push(fileObject)
 				else
-					request.rawFiles[file.fieldname] = (new FileCollection).push(new File(without(file, ['fields'])))
+					request.rawFiles[file.fieldname] = (new FileCollection).push(fileObject)
+
+				request._rawFiles[file.fieldname] = fileObject
 
 				for field in Object.keys(file.fields)
 					if isEmpty(file.fields[field].file) && !isEmpty(file.fields[field].value)
