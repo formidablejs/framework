@@ -190,9 +190,7 @@ export default class FormRequest
 	def bearerToken
 		const token = self.header('authorization', new String)
 
-		if token.startsWith('Bearer ') then return token.split(' ')[1]
-
-		new String
+		token.startsWith('Bearer ') ? token.split(' ')[1] : new String
 
 	/**
 	 * Get request host.
@@ -353,8 +351,12 @@ export default class FormRequest
 	/**
 	 * Validate a request using specified rules.
 	 */
-	def validate
-		Validator.make(Object.assign(self.input! ?? {}, self.files! ?? {}), self.getRules!, self.messages!)
+	def validate rules\Object|null = null
+		const requestRules\Object = isEmpty(rules) ? self.getRules! : rules
+		const files\Object = !isEmpty(request._rawFiles) ? request._rawFiles : {}
+		const body\Object = Object.assign(self.input! ?? {}, files ?? {})
+
+		Validator.make(body, requestRules, self.messages!)
 
 	/**
 	 * Set request rules.
