@@ -1,4 +1,5 @@
 import appVersion from '../../Support/Helpers/version'
+import asObject from '../../Support/Helpers/asObject'
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
@@ -270,7 +271,7 @@ export default class FormRequest
 	def input key\string|null = null, default = null
 		if !key && !default then return self.body!
 
-		dot(self.body!, key) ?? default
+		dot(asObject(self.body!), key) ?? default
 
 	/**
 	 * Check body/query has key.
