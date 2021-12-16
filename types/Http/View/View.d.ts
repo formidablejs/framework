@@ -4,6 +4,10 @@ export default class View {
     */
     constructor(data?: any);
     /**
+    @param {Object} data
+    */
+    setData(data: any): View;
+    /**
     @param {String} property
     @param {any} default
     @param {boolean} escape
