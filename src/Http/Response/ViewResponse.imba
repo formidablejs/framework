@@ -1,4 +1,5 @@
 import { encrypt } from '../../Support/Helpers'
+import { isEmpty } from '../../Support/Helpers'
 import type FormRequest from '../Request/FormRequest'
 import type { FastifyReply } from 'fastify'
 import type View from '../View/View'
@@ -21,7 +22,7 @@ export default class ViewResponse
 	def toView request\FormRequest, reply\FastifyReply
 		self.view.setData {
 			locale: request.locale!
-			_token: encrypt(request.req.session.token)
+			_token: !(isEmpty(request.req.session) && isEmpty(request.req.session.token)) ? encrypt(request.req.session.token) : null
 		}
 
 		const output = await self.view.make!
