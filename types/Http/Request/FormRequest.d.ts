@@ -89,6 +89,27 @@ export default class FormRequest {
     */
     __(path: string, default$: any): any;
     /**
+         * Flash data.
+         */
+    /**
+    *
+         * Flash data.
+         
+    @param {String} key
+    @param {any} value
+    */
+    flash(key: string, value: any): FormRequest;
+    /**
+         * Flash many.
+         */
+    /**
+    *
+         * Flash many.
+         
+    @param {Object} object
+    */
+    flashMany(object: any): FormRequest;
+    /**
          * Get url signature.
          */
     /**
@@ -384,30 +405,30 @@ export default class FormRequest {
     /**
          * Get files.
          *
-         * @returns {File[]}
+         * @returns {FileCollection[]|[]}
          */
     /**
     *
          * Get files.
          *
-         * @returns {File[]}
+         * @returns {FileCollection[]|[]}
          
     */
-    files(): File[];
+    files(): FileCollection[] | [];
     /**
          * Get file.
          *
-         * @returns {File|null}
+         * @returns {FileCollection|null}
          */
     /**
     *
          * Get file.
          *
-         * @returns {File|null}
+         * @returns {FileCollection|null}
          
     @param {String} name
     */
-    file(name: string): File | null;
+    file(name: string): FileCollection | null;
     /**
          * Check if request has file.
          *
@@ -442,8 +463,9 @@ export default class FormRequest {
     *
          * Validate a request using specified rules.
          
+    @param {Object|null} rules
     */
-    validate(): any;
+    validate(rules?: any | null): any;
     /**
          * Set request rules.
          *
@@ -488,6 +510,9 @@ export default class FormRequest {
     };
     [Ψ__init__]($$?: any): void;
 }
-import File from "./File";
+import FileCollection from "./FileCollection";
+import type { FastifyReply } from 'fastify';
+import type { FastifyRequest } from 'fastify';
+import Repository from '../../Config/Repository'
 declare const Ψ__init__: unique symbol;
 export {};
