@@ -7,7 +7,7 @@ export default class ResetPassword < Mailable
 	prop request\Object
 
 	def constructor request\FormRequest
-		super!
+		super()
 
 		self.request = request
 		self.subject = "Forgot Password"
