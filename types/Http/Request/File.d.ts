@@ -30,6 +30,19 @@ export default class File {
     */
     get name(): string;
     /**
+         * File name.
+         *
+         * @type {String}
+         */
+    /**
+    *
+         * File name.
+         *
+         * @type {String}
+         
+    */
+    get filename(): string;
+    /**
          * File encoding.
          *
          * @type {String}
@@ -69,6 +82,19 @@ export default class File {
     */
     get mimetype(): string;
     /**
+         * File mime type.
+         *
+         * @type {String}
+         */
+    /**
+    *
+         * File mime type.
+         *
+         * @type {String}
+         
+    */
+    get type(): string;
+    /**
          * Temp file path.
          *
          * @type {String}
@@ -95,6 +121,19 @@ export default class File {
     */
     get extension(): string;
     /**
+         * File extension.
+         *
+         * @type {String}
+         */
+    /**
+    *
+         * File extension.
+         *
+         * @type {String}
+         
+    */
+    get ext(): string;
+    /**
          * File size in MB.
          *
          * @type {Number}
@@ -108,7 +147,7 @@ export default class File {
     */
     get size(): number;
     /**
-         * Store file.
+         * Move file.
          *
          * @param {String} destination
          * @param {Boolean} overwrite
@@ -117,7 +156,7 @@ export default class File {
          */
     /**
     *
-         * Store file.
+         * Move file.
          *
          * @param {String} destination
          * @param {Boolean} overwrite
@@ -127,7 +166,7 @@ export default class File {
     @param {String} destination
     @param {Boolean} overwrite
     */
-    storeAs(destination: string, overwrite?: boolean): void;
+    move(destination: string, overwrite?: boolean): void;
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
