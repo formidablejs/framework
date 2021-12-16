@@ -1,5 +1,4 @@
 import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
-import MaintenanceModeException from '../Foundation/Exceptions/MaintenanceModeException'
 import fastify from 'fastify'
 import FormRequest from './Request/FormRequest'
 import getResponse from './Kernel/getResponse'
@@ -10,9 +9,11 @@ import isArray from '../Support/Helpers/isArray'
 import isClass from '../Support/Helpers/isClass'
 import isEmpty from '../Support/Helpers/isEmpty'
 import isFunction from '../Support/Helpers/isFunction'
+import MaintenanceModeException from '../Foundation/Exceptions/MaintenanceModeException'
 import resolveResponse from './Kernel/resolveResponse'
 import Route from './Router/Route'
 import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 
 const routes = {
 	invalid: []
@@ -123,7 +124,7 @@ export default class Kernel
 	def hasRoutes router, config
 		for route in Route.all!
 			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action)) || route.action.constructor.name === 'AsyncFunction'
-				router[route.method.toLowerCase!] route.path, do(req, reply)
+				router[route.method.toLowerCase!] route.path, do(req\FastifyRequest, reply\FastifyReply)
 					const request = await new FormRequest(req, route, reply, config)
 
 					await self.resolveMiddleware(route, request, reply, config)
