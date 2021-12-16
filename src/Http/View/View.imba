@@ -1,5 +1,6 @@
 import { escape as htmlEscape } from 'html-escaper'
 import dot from '../../Support/Helpers/dotNotation'
+import isEmpty from '../../Support/Helpers/isEmpty'
 import isObject from '../../Support/Helpers/isObject'
 import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
@@ -21,6 +22,21 @@ export default class View
 
 		self
 
+	def old key\String, default\any
+		const results = dot(self.#_data, "_old.{key}") ?? (isEmpty(default) ? '' : default )
+
+	def session key\String, default\any
+		dot(self.#_data, "_flashed.{key}") ?? (isEmpty(default) ? '' : default )
+
+	def hasSession key\String
+		!isEmpty(dot(self.#_data, "_flashed.{key}"))
+
+	def hasError key\String
+		!isEmpty(dot(self.#_data, "_flashed._errors.{key}"))
+
+	def error key\String
+		dot(self.#_data, "_flashed._errors.{key}")
+
 	def get property\String, default\any = null, escape\boolean = true
 		if !isString(property) then throw TypeError "Expected string."
 
@@ -29,7 +45,8 @@ export default class View
 		if (value == null || value == undefined) && (default == null || default == undefined)
 			throw new UndefinedDataPropException 'Data prop is undefined.'
 
-		if value then return escape ? htmlEscape(value) : value
+		if value
+			return (escape && isString(value)) ? htmlEscape(value) : value
 
 		default
 
