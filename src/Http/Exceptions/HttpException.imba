@@ -5,7 +5,7 @@ class HttpException < Error
 	prop status = 400
 
 	def constructor response\String, statusCode\Number|null = null
-		super!
+		super()
 
 		this.response = response
 

@@ -18,9 +18,10 @@ export default class ViewResponse {
     */
     code(statusCode: number): number;
     /**
+    @param {FormRequest} request
     @param {FastifyReply} reply
     */
-    toView(reply: FastifyReply): Promise<boolean>;
+    toView(request: FormRequest, reply: FastifyReply): Promise<boolean>;
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;

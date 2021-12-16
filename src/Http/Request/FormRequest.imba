@@ -1,8 +1,10 @@
 import appVersion from '../../Support/Helpers/version'
+import asObject from '../../Support/Helpers/asObject'
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
 import Validator from '../../Validator/Validator'
 import wildcard from '../../Support/Helpers/wildcard'
@@ -87,6 +89,27 @@ export default class FormRequest
 	 */
 	def __ path\String, default\String
 		self.translate(path, default)
+
+	/**
+	 * Flash data.
+	 */
+	def flash key\String, value\any
+		if !isString(key) then throw TypeError 'Expected key to be a string.'
+
+		self.req.session._flashed = Object.assign(self.req.session._flashed ?? {}, {
+			[key]: value
+		})
+
+		self
+
+	/**
+	 * Flash many.
+	 */
+	def flashMany object\Object
+		for own key\String, value of object
+			self.flash key, value
+
+		self
 
 	/**
 	 * Get url signature.
@@ -270,7 +293,7 @@ export default class FormRequest
 	def input key\string|null = null, default = null
 		if !key && !default then return self.body!
 
-		dot(self.body!, key) ?? default
+		dot(asObject(self.body!), key) ?? default
 
 	/**
 	 * Check body/query has key.
@@ -347,6 +370,14 @@ export default class FormRequest
 	 */
 	def expectsJson
 		wildcard(self.header('accept', ''), '*json')
+
+	/**
+	 * Check if request expects an html response.
+	 *
+	 * @returns {Boolean}
+	 */
+	def expectsHtml
+		wildcard(self.header('accept', ''), '*html')
 
 	/**
 	 * Validate a request using specified rules.

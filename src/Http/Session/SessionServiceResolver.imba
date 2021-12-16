@@ -1,8 +1,12 @@
 import Encrypter from '../../Foundation/Encrypter'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import Redirect from '../Redirect/Redirect'
 import ServiceResolver from '../../Support/ServiceResolver'
 import session from '@fastify/session'
 import SessionDriverManager from '../Session/DriverManager'
+import ValidationException from '../../Validator/Exceptions/ValidationException'
+import type { FastifyReply } from 'fastify'
+import type FormRequest from '../Request/FormRequest'
 
 export default class SessionServiceResolver < ServiceResolver
 
@@ -39,3 +43,10 @@ export default class SessionServiceResolver < ServiceResolver
 		if !isEmpty(store) then config.store = store
 
 		self.app.register session, config
+
+		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
+			if response instanceof ValidationException && request.expectsHtml!
+				request.flash('_errors', response.message.errors)
+				request.flash('_old', request.body!)
+
+				return reply.redirect(request.header('referer')).sent = true

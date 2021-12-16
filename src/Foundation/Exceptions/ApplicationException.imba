@@ -3,7 +3,7 @@ class ApplicationException < Error
 	prop status
 
 	def constructor response\any, status\Number = 500
-		super!
+		super()
 
 		this.response = response
 		this.status = status
