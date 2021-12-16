@@ -1,3 +1,5 @@
+import { encrypt } from '../../Support/Helpers'
+import type FormRequest from '../Request/FormRequest'
 import type { FastifyReply } from 'fastify'
 import type View from '../View/View'
 
@@ -16,7 +18,12 @@ export default class ViewResponse
 	def code statusCode\Number
 		self.statusCode = statusCode
 
-	def toView reply\FastifyReply
+	def toView request\FormRequest, reply\FastifyReply
+		self.view.setData {
+			locale: request.locale!
+			_token: encrypt(request.req.session.token)
+		}
+
 		const output = await self.view.make!
 
 		reply.code(self.statusCode)

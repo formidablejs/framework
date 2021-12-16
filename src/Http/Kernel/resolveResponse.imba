@@ -27,7 +27,7 @@ export default def resolveResponse response\any, request, reply
 		return response.toJson(reply)
 
 	if response instanceof ViewResponse
-		return await response.toView(reply)
+		return await response.toView(request, reply)
 
 	if response instanceof Mailable
 		reply.header('content-type', 'text/html')
