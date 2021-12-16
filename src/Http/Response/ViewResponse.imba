@@ -22,7 +22,7 @@ export default class ViewResponse
 	def toView request\FormRequest, reply\FastifyReply
 		self.view.setData {
 			locale: request.locale!
-			_token: !(isEmpty(request.req.session) && isEmpty(request.req.session.token)) ? encrypt(request.req.session.token) : null
+			csrf_token: !(isEmpty(request.req.session) && isEmpty(request.req.session.token)) ? encrypt(request.req.session.token) : null
 		}
 
 		const output = await self.view.make!
