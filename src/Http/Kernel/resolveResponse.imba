@@ -1,3 +1,4 @@
+import type FormRequest from '../Request/FormRequest'
 import { Mailable } from '@formidablejs/mailer'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import JsonResponse from '../Response/JsonResponse'
@@ -14,13 +15,17 @@ def addResolver resolver
 
 exports.addResolver = addResolver
 
-export default def resolveResponse response\any, request, reply
+export default def resolveResponse response\any, request\FormRequest, reply
 	for resolver of settings.resolvers
 		const results = resolver(response, request, reply)
 
 		if !isEmpty(results) then return results
 
 	if response instanceof Redirect
+		if isEmpty(response.path) then response.path = request.header('referer')
+
+		if response.hasFlash! then request.flashMany(response.flashed!)
+
 		return reply.code(response.statusCode).redirect(response.path)
 
 	if response instanceof JsonResponse
