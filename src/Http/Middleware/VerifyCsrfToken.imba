@@ -45,7 +45,12 @@ export default class VerifyCsrfToken
 	def tokensMatch request\FormRequest
 		let token = self.getTokenFromRequest(request)
 
-		(new csrf!).verify(request.request.session.secret, isEmpty(token) ? token : decrypt(token))
+		if !isEmpty(token)
+			try token = decrypt(token)
+			catch
+				token = new String
+
+		(new csrf!).verify(request.request.session.secret, token)
 
 	def getTokenFromRequest request\FormRequest
 		let token = request.input('_token') ? request.input('_token') : request.header('x-csrf-token')
