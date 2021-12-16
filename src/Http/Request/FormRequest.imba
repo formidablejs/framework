@@ -372,6 +372,14 @@ export default class FormRequest
 		wildcard(self.header('accept', ''), '*json')
 
 	/**
+	 * Check if request expects an html response.
+	 *
+	 * @returns {Boolean}
+	 */
+	def expectsHtml
+		wildcard(self.header('accept', ''), '*html')
+
+	/**
 	 * Validate a request using specified rules.
 	 */
 	def validate rules\Object|null = null
