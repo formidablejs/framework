@@ -457,6 +457,19 @@ export default class FormRequest {
     */
     expectsJson(): boolean;
     /**
+         * Check if request expects an html response.
+         *
+         * @returns {Boolean}
+         */
+    /**
+    *
+         * Check if request expects an html response.
+         *
+         * @returns {Boolean}
+         
+    */
+    expectsHtml(): boolean;
+    /**
          * Validate a request using specified rules.
          */
     /**
