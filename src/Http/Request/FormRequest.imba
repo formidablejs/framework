@@ -369,7 +369,7 @@ export default class FormRequest
 	 * @returns {Boolean}
 	 */
 	def expectsJson
-		wildcard(self.header('accept', ''), '*json')
+		new String(self.header('accept', '')).includes('json')
 
 	/**
 	 * Check if request expects an html response.
@@ -377,7 +377,7 @@ export default class FormRequest
 	 * @returns {Boolean}
 	 */
 	def expectsHtml
-		wildcard(self.header('accept', ''), '*html')
+		new String(self.header('accept', '')).includes('html')
 
 	/**
 	 * Validate a request using specified rules.
