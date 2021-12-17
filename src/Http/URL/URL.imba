@@ -1,8 +1,10 @@
+import isEmpty from '../../Support/Helpers/isEmpty'
 import isString from '../../Support/Helpers/isString'
 import jwt from 'jsonwebtoken'
 import MissingRouteParamException from './Exceptions/MissingRouteParamException'
 import Path from '../Router/Path'
 import Route from '../Router/Route'
+import UnregisteredRouteException from './Exceptions/UnregisteredRouteException'
 
 const settings = {
 	secret: null
@@ -15,6 +17,9 @@ export default class URL
 
 		for route, key in Route.all!
 			if route.name === name then selected = route
+
+		if isEmpty selected
+			throw new UnregisteredRouteException 'Route is not registered'
 
 		if selected.path.trim! == '/'
 			let uri = selected.path
