@@ -58,6 +58,11 @@ export default class AuthService
 
 		self
 
+	static def onLogout callback\Function
+		LogoutController.onLogout callback
+
+		self
+
 	static def onRegister callback\Function
 		RegisterController.onRegister callback
 
@@ -75,6 +80,16 @@ export default class AuthService
 
 	static def onAuthenticated callback\Function
 		Driver.onAuthenticated callback
+
+		self
+
+	static def onSessionDestroyed callback\Function
+		Driver.onSessionDestroyed callback
+
+		self
+
+	static def onSuccessfulAttempt callback\Function
+		Driver.onSuccessfulAttempt callback
 
 		self
 
