@@ -105,7 +105,7 @@ export default class Kernel
 			if error.constructor.name == 'NotFoundError' && error.message == 'Not Found'
 				error = handleNotFound(request)
 
-			return errorHandler.handle(error, request, reply)
+			return errorHandler.beforeHandle(error, request, reply)
 
 		const port = process.env.FORMIDABLE_PORT ?? 3000
 
