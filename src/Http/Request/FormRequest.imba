@@ -32,7 +32,7 @@ export default class FormRequest
 		self.route = route
 		self.config = config
 		self.#session = new Session(request)
-		self.#cookies = new Cookies(request)
+		self.#cookies = new Cookies(request, reply)
 
 	get version
 		appVersion!
