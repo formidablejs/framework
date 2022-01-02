@@ -22,7 +22,7 @@ export default class Repository
 	def get key\String, default\any
 		let tempValue = dot(temp, key)
 
-		if tempValue !== undefined && tempValue !== null then tempValue
+		if tempValue !== undefined && tempValue !== null then return tempValue
 
 		const output = dot(this.registered, key)
 

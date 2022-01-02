@@ -8,6 +8,12 @@ export default class ValidationServiceResolver < ServiceResolver
 
 		this.registerRules rules
 
+	def register
+		Validator.get!.register 'nullable', self.nullable, ''
+
+	def nullable
+		true
+
 	def registeredRules
 		{  }
 

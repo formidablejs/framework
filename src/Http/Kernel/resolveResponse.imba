@@ -6,46 +6,32 @@ import Redirect from '../Redirect/Redirect'
 import Response from '../Response/Response'
 import ViewResponse from '../Response/ViewResponse'
 
-const settings = {
-	resolvers: []
-}
+const settings = { resolvers: [] }
 
 def addResolver resolver
 	settings.resolvers.push resolver
 
 exports.addResolver = addResolver
 
-export default def resolveResponse response\any, request\FormRequest, reply
-	for resolver of settings.resolvers
-		const results = resolver(response, request, reply)
+export default def resolveResponse response\any, request\FormRequest, reply, skipResolvers = false
+	if skipResolvers !== true
+		for resolver of settings.resolvers
+			const results = resolver(response, request, reply)
 
-		if !isEmpty(results) then return results
+			if !isEmpty(results) then return results
 
 	if response instanceof Redirect
-		if isEmpty(response.path) then response.path = request.header('referer')
-
-		if response.hasFlash! then request.flashMany(response.flashed!)
-
-		return reply.code(response.statusCode).redirect(response.path)
-
-	if response instanceof JsonResponse
-		return response.toJson(reply)
-
-	if response instanceof ViewResponse
+		return await response.handle(request, reply)
+	elif response instanceof JsonResponse
+		return await response.toJson(reply)
+	elif response instanceof ViewResponse
 		return await response.toView(request, reply)
-
-	if response instanceof Mailable
+	elif response instanceof Mailable
 		reply.header('content-type', 'text/html')
-
 		return await response.render!
-
-	if response instanceof Response
-		reply.code(response.statusCode)
-
-		if response.data then return response.data;
-
-		return ''
-
-	if response === undefined then return null
-
-	response
+	elif response instanceof Response
+		return await response.handle(reply)
+	elif response === undefined
+		return null
+	else
+		response

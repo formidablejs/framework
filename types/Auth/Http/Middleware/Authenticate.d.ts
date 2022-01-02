@@ -10,6 +10,7 @@ export default class Authenticate {
     @param {any[]|null} params
     */
     handle(request: FormRequest, reply: FastifyReply, params: any[] | null): Promise<() => Auth>;
+    get defaultProtocol(): any;
     /**
     @param {String} protocol
     */

@@ -40,6 +40,7 @@ import MaintenanceServiceResolver from './Foundation/MaintenanceServiceResolver'
 import Model from './Database/Model'
 import MultipartServiceResolver from './Http/Request/MultipartServiceResolver'
 import NotFoundException from './Http/Exceptions/NotFoundException'
+import PersonalAccessToken from './Auth/Tokens/PersonalAccessToken'
 import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessTokenServiceResolver'
 import Redirect from './Http/Redirect/Redirect'
 import Redis from './Redis/Redis'
@@ -113,6 +114,7 @@ export {
 	Model
 	MultipartServiceResolver
 	NotFoundException
+	PersonalAccessToken
 	PersonalAccessTokenServiceResolver
 	Redirect
 	Redis

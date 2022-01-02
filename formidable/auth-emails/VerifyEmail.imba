@@ -4,9 +4,9 @@ import { helpers } from '@formidablejs/framework'
 import { LayoutComponent } from '../../resources/views/mail/vendor/LayoutComponent'
 import { LineComponent } from '../../resources/views/mail/vendor/LineComponent'
 import { ParagraphComponent } from '../../resources/views/mail/vendor/ParagraphComponent'
-import Mailable from '@formidablejs/framework/lib/Auth/Mail/VerifyEmail'
+import { VerifyEmail as Mailable } from '@formidablejs/framework/lib/Auth/Mail'
 
-export default class VerifyEmail < Mailable
+export class VerifyEmail < Mailable
 
 	def render
 		<LayoutComponent>

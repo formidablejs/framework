@@ -34,6 +34,10 @@ export default class AuthService {
     /**
     @param {Function} callback
     */
+    static onLogout(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
     static onRegister(callback: Function): typeof AuthService;
     /**
     @param {Function} callback
@@ -47,6 +51,14 @@ export default class AuthService {
     @param {Function} callback
     */
     static onAuthenticated(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
+    static onSessionDestroyed(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
+    static onSuccessfulAttempt(callback: Function): typeof AuthService;
     /**
     @param {Function} callback
     */

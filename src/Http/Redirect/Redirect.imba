@@ -37,3 +37,11 @@ export default class Redirect
 		self.statusCode = statusCode
 
 		self
+
+	def handle request, reply
+		if isEmpty(self.path) then self.path = request.header('referer')
+
+		if self.hasFlash! then request.flashMany(self.flashed!)
+
+		reply.code(self.statusCode)
+			.redirect(self.path)

@@ -9,4 +9,5 @@ export default class BeforeResend {
     @param {any[]} params
     */
     handle(request: any, reply: any, params: any[]): any;
+    get defaultProtocol(): any;
 }

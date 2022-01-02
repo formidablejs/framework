@@ -27,13 +27,15 @@ export default class JwtDriver < Driver
 		const token = await self.createPersonalAccessToken('auth:jwt', user.id)
 		const hidden = !isEmpty(self.getProvider.hidden) ? self.getProvider.hidden : []
 
-		self.afterAuthenticated user
-
-		return {
+		const payload = {
 			token: token
 			type: 'Bearer'
 			user: without(user, hidden)
 		}
+
+		const results = await self.afterAuthenticated user
+
+		isEmpty(results) ? payload : results
 
 	def register body\Object
 		const user = asObject(await self.insertUser(body))
@@ -42,13 +44,16 @@ export default class JwtDriver < Driver
 		const hidden = !isEmpty(self.getProvider.hidden) ? self.getProvider.hidden : []
 
 		self.sendVerificationEmail user
-		self.afterRegistered user
 
-		return {
+		const payload = {
 			token: token
 			type: 'Bearer'
 			user: without(user, hidden)
 		}
+
+		const results = self.afterRegistered payload
+
+		isEmpty(results) ? payload : results
 
 	def logout body\Object = new Object
 		const personalAccessToken = await self.getPersonalAccessToken!
@@ -58,4 +63,6 @@ export default class JwtDriver < Driver
 			.where('tokenable_id', personalAccessToken.tokenable.id)
 			.del!
 
-		return { status: 'success' }
+		const results = await self.afterSessionDestroyed!
+
+		isEmpty ? { status: 'success' } : results

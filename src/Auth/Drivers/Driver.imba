@@ -9,16 +9,18 @@ import isFunction from '../../Support/Helpers/isFunction'
 import now from '../../Support/Helpers/now'
 import PersonalAccessToken from '../Tokens/PersonalAccessToken'
 import strRandom from '../../Support/Helpers/strRandom'
-import type { FastifyReply } from 'fastify'
-import type { Mailable } from '@formidablejs/mailer'
-import type FormRequest from '../../Http/Request/FormRequest'
-import type Repository from '../../Config/Repository'
 import URL from '../../Http/URL/URL'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
+import type { FastifyReply } from 'fastify'
+import type { Mailable } from '@formidablejs/mailer'
+import type Repository from '../../Config/Repository'
+import type Request from '../../Http/Request/Request'
 
 const events = {
 	onRegistered: null
 	onAuthenticated: null
+	onSessionDestroyed: null
+	onSuccessfulAttempt: null
 }
 
 const mailers = {
@@ -28,7 +30,7 @@ const mailers = {
 
 export default class Driver
 
-	def constructor protocol\String, request\FormRequest, reply\FastifyReply, params\any[]|null, config\Repository
+	def constructor protocol\String, request\Request, reply\FastifyReply, params\any[]|null, config\Repository
 		this.protocol = protocol
 		this.request = request
 		this.reply = reply
@@ -59,11 +61,18 @@ export default class Driver
 
 	def afterRegistered user\Object
 		if isFunction(events.onRegistered)
-			events.onRegistered(self.request, user)
+			events.onRegistered(self.request, self.reply, user, self.protocol, self.params)
 
 	def afterAuthenticated user\Object
 		if isFunction(events.onAuthenticated)
-			events.onAuthenticated(self.request, user)
+			events.onAuthenticated(self.request, self.reply, user, self.protocol, self.params)
+
+	def afterSessionDestroyed
+		if isFunction(events.onSessionDestroyed)
+			events.onSessionDestroyed(self.request, self.reply, self.protocol, self.params)
+
+	def onSuccessfulAuthAttemptEvent
+		events.onSuccessfulAttempt
 
 	def getVerificationMailer
 		mailers.verificationEmail
@@ -109,7 +118,6 @@ export default class Driver
 
 		# we will always return success even if the email was not sent
 		# to prevent attackers from knowing if the email was sent or not.
-
 		return { status: 'success' }
 
 	def requestForgotPasswordUrl body\Object = new Object
@@ -265,6 +273,22 @@ export default class Driver
 			return
 
 		events.onAuthenticated = handler
+
+	static def onSessionDestroyed handler\Function
+		if events.onSessionDestroyed !== null
+			throw new Error 'onSessionDestroyed handler is already set.'
+
+			return
+
+		events.onSessionDestroyed = handler
+
+	static def onSuccessfulAttempt handler\Function
+		if events.onSuccessfulAttempt !== null
+			throw new Error 'onSuccessfulAttempt handler is already set.'
+
+			return
+
+		events.onSuccessfulAttempt = handler
 
 	static def verificationMailer mailer\Mailable
 		if mailers.verificationEmail
