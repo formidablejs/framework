@@ -1,3 +1,6 @@
+import isEmpty from '../Support/Helpers/isEmpty'
+import type Request from '../Http/Request/Request'
+import type Driver from './Drivers/Driver'
 import Hash from '../Hashing/Hash'
 import ValidationException from '../Validator/Exceptions/ValidationException'
 import Database from '../Database/Database'
@@ -8,8 +11,9 @@ const config = {
 }
 
 class Auth
+	prop _driver\Driver
 
-	def constructor user\Object = null, abilities\String = null
+	def constructor user\Object = null, abilities\String = null, driverManager\Driver
 		self.abilities = do abilities isa String ? JSON.parse(abilities) : null
 
 		let userObject = {}
@@ -18,6 +22,10 @@ class Auth
 			userObject[key] = value
 
 		self.user = do userObject
+		self._driver = driverManager
+
+	def driver
+		self._driver
 
 	def can perform\String
 		self.abilities!.includes('*') || self.abilities!.includes(perform)
