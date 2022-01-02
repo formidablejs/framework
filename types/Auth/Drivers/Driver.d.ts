@@ -8,6 +8,14 @@ export default class Driver {
     */
     static onAuthenticated(handler: Function): Function;
     /**
+    @param {Function} handler
+    */
+    static onSessionDestroyed(handler: Function): Function;
+    /**
+    @param {Function} handler
+    */
+    static onSuccessfulAttempt(handler: Function): Function;
+    /**
     @param {Mailable} mailer
     */
     static verificationMailer(mailer: Mailable): Mailable;
@@ -17,14 +25,14 @@ export default class Driver {
     static resetPasswordMailer(mailer: Mailable): Mailable;
     /**
     @param {String} protocol
-    @param {FormRequest} request
+    @param {Request} request
     @param {FastifyReply} reply
     @param {any[]|null} params
     @param {Repository} config
     */
-    constructor(protocol: string, request: FormRequest, reply: FastifyReply, params: any[] | null, config: Repository);
+    constructor(protocol: string, request: Request, reply: FastifyReply, params: any[] | null, config: Repository);
     protocol: string;
-    request: FormRequest;
+    request: Request;
     reply: FastifyReply;
     params: any[];
     config: Repository;
@@ -64,6 +72,8 @@ export default class Driver {
     @param {Object} user
     */
     afterAuthenticated(user: any): any;
+    afterSessionDestroyed(): any;
+    onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
     /**
     @param {Object} user

@@ -31,6 +31,7 @@ export default class Redirect {
     @param {Number} statusCode
     */
     code(statusCode: number): Redirect;
+    handle(request: any, reply: any): any;
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
