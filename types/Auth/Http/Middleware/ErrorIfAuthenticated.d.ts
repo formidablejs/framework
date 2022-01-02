@@ -1,20 +1,25 @@
 export default class ErrorIfAuthenticated {
     /**
-    @param {FormRequest} request
+    @param {FormRequest|Request} request
     @param {FastifyReply} reply
     @param {any[]|null} params
     */
-    handle(request: FormRequest, reply: FastifyReply, params: any[] | null): Promise<void | FormRequest>;
+    handle(request: FormRequest | Request, reply: FastifyReply, params: any[] | null): Promise<void | FormRequest>;
     /**
-    @param {FormRequest} request
+    @param {FormRequest|Request} request
     */
-    isAuthenticated(request: FormRequest): boolean;
+    getPersonalAccessToken(request: FormRequest | Request): any;
     /**
-    @param {FormRequest} request
+    @param {FormRequest|Request} request
+    */
+    isAuthenticated(request: FormRequest | Request): boolean;
+    /**
+    @param {FormRequest|Request} request
     @param {FastifyReply} reply
     @param {any[]|null} params
     */
-    onAuthenticated(request: FormRequest, reply: FastifyReply, params: any[] | null): void;
+    onAuthenticated(request: FormRequest | Request, reply: FastifyReply, params: any[] | null): void;
 }
 import FormRequest from "../../../Http/Request/FormRequest";
+import Request from "../../../Http/Request/Request";
 import { FastifyReply } from "fastify";

@@ -10,7 +10,14 @@ export default class Handler {
     @param {FormRequest} request
     @param {FastifyReply} reply
     */
-    handle(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply): Promise<any>;
+    beforeHandle(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply): Promise<any>;
+    /**
+    @param {Error|ApplicationException|HttpException} error
+    @param {FormRequest} request
+    @param {FastifyReply} reply
+    @param {Boolean} shouldReport
+    */
+    handle(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply, shouldReport: boolean): any;
     /**
     @param {Error} error
     */

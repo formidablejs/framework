@@ -9,4 +9,5 @@ export default class BeforeReset {
     @param {any[]} params
     */
     handle(request: any, reply: any, params: any[]): any;
+    get defaultProtocol(): any;
 }

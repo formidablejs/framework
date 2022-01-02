@@ -14,9 +14,12 @@ export default class BeforeForgot
 
 		if handler then handler(request,reply,params, self.config)
 
-		const [ protocol ] = params[0] != undefined ? params : [ 'api']
+		const [ protocol ] = params[0] != undefined ? params : [ self.defaultProtocol ]
 
 		request.authDriver = DriverManager.get(protocol, request, reply, params, self.config)
+
+	get defaultProtocol
+		self.config.get('auth.defaults.protocol', 'api')
 
 	static def beforeForgot handler\Function
 		if password.beforeForgot !== null

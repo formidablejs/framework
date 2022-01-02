@@ -1,9 +1,12 @@
+import Cookies from './Cookies'
+import Session from './Session'
 import appVersion from '../../Support/Helpers/version'
 import asObject from '../../Support/Helpers/asObject'
 import AuthorizationException from '../../Auth/Exceptions/AuthorizationException'
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isArray from '../../Support/Helpers/isArray'
 import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
 import Validator from '../../Validator/Validator'
@@ -18,6 +21,8 @@ export default class FormRequest
 	prop reply\FastifyReply
 	prop route = {}
 	prop config\Repository
+	prop #session\Session
+	prop #cookies\Cookies
 	prop _rules = null
 
 	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
@@ -26,12 +31,14 @@ export default class FormRequest
 		self.reply = reply
 		self.route = route
 		self.config = config
+		self.#session = new Session(request)
+		self.#cookies = new Cookies(request, reply)
 
 	get version
 		appVersion!
 
 	def passesAuthorization
-		if typeof this.authorize === 'function' then return this.authorize!
+		if typeof self.authorize === 'function' then return self.authorize!
 
 		false
 
@@ -47,6 +54,12 @@ export default class FormRequest
 		{
 			#
 		}
+
+	def session
+		self.#session
+
+	def cookies
+		self.#cookies
 
 	/**
 	 * Get request locale.
@@ -216,6 +229,12 @@ export default class FormRequest
 		token.startsWith('Bearer ') ? token.split(' ')[1] : new String
 
 	/**
+	 * Get request referer.
+	 */
+	def referer
+		self.header('referer', new String)
+
+	/**
 	 * Get request host.
 	 */
 	def getHost
@@ -282,10 +301,19 @@ export default class FormRequest
 		self.request.body !== null ? self.request.body : {}
 
 	/**
-	 * Get all query and body input.
+	 * Get body input or specified query keys.
 	 */
-	def all
-		Object.assign(this.query!, self.body!)
+	def all keys\String[] = null
+		if isArray(keys) && !isEmpty(keys)
+			const all = Object.assign(self.query!, self.body!)
+			const res = {}
+
+			for key in keys
+				res[key] = all[key]
+
+			return res
+
+		self.body!
 
 	/**
 	 * Get specified input from body.
@@ -311,7 +339,7 @@ export default class FormRequest
 	 * Get specified keys from request.
 	 */
 	def only keys\string[]
-		if (!Array.isArray(keys))
+		if (!isArray(keys))
 			return []
 
 		let response = {}
@@ -327,11 +355,27 @@ export default class FormRequest
 		response
 
 	/**
+	 * Get filled input.
+	 */
+	def filled keys\String[]
+		if isArray(keys) then keys = Object.keys(self.body!)
+
+		let filled = {}
+
+		for key in keys
+			if !isEmpty(self.get(key))
+				filled = Object.assign(filled, {
+					[key]: self.get(key)
+				})
+
+		filled
+
+	/**
 	 * Get specified query.
 	 */
 	def query key\string|null = null, default = null
 		if (!key && !default)
-			return this.request.query
+			return this.request.query ?? {}
 
 		let value = this.request.query[key]
 
@@ -417,6 +461,10 @@ export default class FormRequest
 	def auth
 		{
 			user: do null
+			driver: do null
 			check: do false
 			can: do(perform\String) false
 		}
+
+	def user
+		self.auth!.user!

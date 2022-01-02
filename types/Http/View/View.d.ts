@@ -3,6 +3,7 @@ export default class View {
     @param {Object} data
     */
     constructor(data?: any);
+    get data(): any;
     /**
     @param {Object} data
     */

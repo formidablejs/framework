@@ -11,7 +11,7 @@ export default class Authenticate
 		this.config = config
 
 	def handle request\FormRequest, reply\FastifyReply, params\any[]|null
-		const [ protocol ] = !isEmpty(params[0]) ? params : [ 'api' ]
+		const [ protocol ] = !isEmpty(params[0]) ? params : [ self.defaultProtocol ]
 
 		self.configure protocol
 
@@ -19,7 +19,14 @@ export default class Authenticate
 
 		const personalAccessToken\{token: {}, tokenable: {}} = await handler.verify!
 
-		request.auth = do new Auth(personalAccessToken.tokenable, personalAccessToken.token.abilities)
+		request.auth = do new Auth(
+			personalAccessToken.tokenable,
+			personalAccessToken.token.abilities,
+			handler
+		)
+
+	get defaultProtocol
+		self.config.get('auth.defaults.protocol', 'api')
 
 	def configure protocol\String
 		const fetchedProtocol = self.config.get "auth.protocols.{protocol}.provider"

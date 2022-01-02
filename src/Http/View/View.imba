@@ -15,6 +15,9 @@ export default class View
 
 		self.#_data\Object = data
 
+	get data
+		self.#_data
+
 	def setData data\Object
 		if !isObject(data) then throw TypeError "Expected object."
 

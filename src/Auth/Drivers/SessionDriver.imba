@@ -45,39 +45,35 @@ export default class SessionDriver < Driver
 
 		false
 
-
 	def authenticate body\Object
 		const user = await Auth.attempt(body)
 
 		await self.attempt('auth:session', user)
 
-		await self.afterAuthenticated user
-
 		if !isEmpty(body.remember_me) && body.remember_me === true
-			return await self.addRememberMeToken user
+			const token = strRandom(80)
 
-		return { status: 'success' }
+			await Database.table(self.getProvider.table)
+				.where('id', user.id)
+				.update({
+					remember_token: encrypt(token)
+					updated_at: now!
+				})
 
-	def addRememberMeToken user\Object
-		const token = strRandom(64)
+			const session = self.config.get('session')
 
-		await Database.table(self.getProvider.table)
-			.where('id', user.id)
-			.update({
-				remember_token: encrypt(token)
-				updated_at: now!
+			self.reply.setCookie('remember', token, {
+				domain: session.domain
+				httpOnly: session.http_only
+				maxAge: self.config.get('auth.remember', 60 * 60 * 24 * 180)
+				path: session.path
+				sameSite: session.same_site
+				secure: session.secure
 			})
 
-		const session = self.config.get('session')
+		const results = await self.afterAuthenticated user
 
-		self.reply.setCookie('remember', token, {
-			domain: session.domain
-			httpOnly: session.http_only
-			maxAge: self.config.get('auth.remember', ms('6 months'))
-			path: session.path
-			sameSite: session.same_site
-			secure: session.secure
-		}).send({ status: 'success' })
+		isEmpty(results) ? { status: 'success' } : results
 
 	def register body\Object
 		const user = await self.insertUser(body)
@@ -86,12 +82,30 @@ export default class SessionDriver < Driver
 
 		self.sendVerificationEmail user
 
-		await self.afterRegistered user
-
 		if !isEmpty(body.remember_me) && body.remember_me === true
-			return await self.addRememberMeToken user
+			const token = strRandom(80)
 
-		return { status: 'success' }
+			await Database.table(self.getProvider.table)
+				.where('id', user.id)
+				.update({
+					remember_token: encrypt(token)
+					updated_at: now!
+				})
+
+			const session = self.config.get('session')
+
+			self.reply.setCookie('remember', token, {
+				domain: session.domain
+				httpOnly: session.http_only
+				maxAge: self.config.get('auth.remember', 60 * 60 * 24 * 180)
+				path: session.path
+				sameSite: session.same_site
+				secure: session.secure
+			})
+
+		const results = await self.afterRegistered user
+
+		isEmpty(results) ? { status: 'success' } : results
 
 	def logout body\Object = new Object
 		const userId = self.request.auth!.user!.id
@@ -113,6 +127,6 @@ export default class SessionDriver < Driver
 
 		self.request.request.sessionStore.destroy(request.request.session.sessionId, do null)
 
-		return {
-			status: 'success'
-		}
+		const results = await self.afterSessionDestroyed!
+
+		isEmpty ? { status: 'success' } : results

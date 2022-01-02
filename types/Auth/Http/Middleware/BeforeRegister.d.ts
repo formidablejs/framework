@@ -9,4 +9,5 @@ export default class BeforeRegister {
     @param {any[]} params
     */
     handle(request: any, reply: any, params: any[]): any;
+    get defaultProtocol(): any;
 }

@@ -1,6 +1,7 @@
 const { default: asObject }  = require './asObject'
 const { default: config }  = require './config'
 const { default: decrypt } = require './decrypt'
+const { default: die }  = require './die'
 const { default: dot }  = require './dotNotation'
 const { default: dotNotation }  = require './dotNotation'
 const { default: encrypt } = require './encrypt'
@@ -32,6 +33,7 @@ export {
 	asObject
 	config
 	decrypt
+	die
 	dot
 	dotNotation
 	encrypt
