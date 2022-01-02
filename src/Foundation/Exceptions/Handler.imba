@@ -1,3 +1,5 @@
+import resolveResponse from '../../Http/Kernel/resolveResponse'
+import ExitHandlerException from './ExitHandlerException'
 import isArray from '../../Support/Helpers/isArray'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import HttpException from '../../Http/Exceptions/HttpException'
@@ -21,8 +23,27 @@ export default class Handler
 
 		setConfig(this.config)
 
-	def handle error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply
-		handleException(error, request, reply, false, self.shouldReport(error))
+	def beforeHandle error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply
+		const resutls = self.handle(error, request, reply, self.shouldReport(error))
+
+		if !isEmpty(resutls)
+			resolveResponse(resutls, request, reply, true)
+		elif error instanceof ExitHandlerException
+			let handler
+
+			if error.response.constructor.name == 'AsyncFunction'
+				handler = await error.response!
+			elif typeof error.response == 'function'
+				handler = error.response!
+			else
+				handler = error.response
+
+			resolveResponse(handler, request, reply, true)
+		else
+			handleException(error, request, reply, false, self.shouldReport(error))
+
+	def handle error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, shouldReport\Boolean
+		null
 
 	def shouldReport error\Error
 		if !isEmpty(self.dontReport) && isArray(self.dontReport)
