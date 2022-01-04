@@ -1,4 +1,4 @@
 import { InfiniteHigherOrderTapProxy } from '../InfiniteHigherOrderTapProxy'
 
-export def multitap object
+export default def multitap object
 	new InfiniteHigherOrderTapProxy object
