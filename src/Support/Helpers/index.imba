@@ -16,10 +16,12 @@ const { default: isNumber }  = require './isNumber'
 const { default: isObject }  = require './isObject'
 const { default: isString }  = require './isString'
 const { default: mix } = require './mix'
+const { default: multitap } = require './multitap'
 const { default: now }  = require './now'
 const { default: response }  = require './response'
 const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
+const { default: tap } = require './tap'
 const { default: toBoolean }  = require './toBoolean'
 const { default: version } = require './version'
 const { default: view } = require './view'
@@ -49,11 +51,13 @@ export {
 	isString
 	mix
 	ms
+	multitap
 	now
 	pluralize
 	response
 	slug
 	strRandom
+	tap
 	toBoolean
 	version
 	view
