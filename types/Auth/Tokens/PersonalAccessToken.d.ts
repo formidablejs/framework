@@ -9,10 +9,14 @@ export default class PersonalAccessToken {
     /**
     @param {String} token
     */
-    static find(token: string): Promise<{
+    static find(token: string, protocol?: any): Promise<{
         token: any;
         tokenable: any;
     }>;
+    /**
+    @param {Function} handler
+    */
+    static onFetchAuthenticated(handler: Function): Function;
     /**
     @param {Object} token
     */
