@@ -1,5 +1,7 @@
 import Path from './Path'
 import isString from '../../Support/Helpers/isString'
+import ViewResponse from '../Response/ViewResponse'
+import type View from '../View/View'
 
 const routes = []
 const middleware = []
@@ -23,6 +25,23 @@ export default class Route
 		}
 
 		this
+
+	/**
+	 * Check if route exists.
+	 */
+	static def has name\String
+		if routes.length === 0 then return false
+
+		const names = routes.map do(route) route.name
+
+		names.includes(name)
+
+	/**
+	 * Add a get route that renders a view.
+	 */
+	static def view path\String, view\View, data\Object = {}, statusCode\Number|null = null
+		self.get path, do
+			ViewResponse.make(view, data, statusCode ?? 200)
 
 	/**
 	 * Add a delete route.
