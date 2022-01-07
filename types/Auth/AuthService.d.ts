@@ -54,6 +54,10 @@ export default class AuthService {
     /**
     @param {Function} callback
     */
+    static onFetchAuthenticated(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
     static onSessionDestroyed(callback: Function): typeof AuthService;
     /**
     @param {Function} callback

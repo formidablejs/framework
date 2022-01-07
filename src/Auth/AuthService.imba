@@ -1,3 +1,4 @@
+import PersonalAccessToken from './Tokens/PersonalAccessToken'
 import { Mailable } from '@formidablejs/mailer'
 import Driver from './Drivers/Driver'
 
@@ -80,6 +81,11 @@ export default class AuthService
 
 	static def onAuthenticated callback\Function
 		Driver.onAuthenticated callback
+
+		self
+
+	static def onFetchAuthenticated callback\Function
+		PersonalAccessToken.onFetchAuthenticated callback
 
 		self
 
