@@ -6,6 +6,29 @@ export default class Route {
     */
     static addRoute(verb: string, pattern: string, action: Function | [Function, string]): typeof Route;
     /**
+         * Check if route exists.
+         */
+    /**
+    *
+         * Check if route exists.
+         
+    @param {String} name
+    */
+    static has(name: string): boolean;
+    /**
+         * Add a get route that renders a view.
+         */
+    /**
+    *
+         * Add a get route that renders a view.
+         
+    @param {String} path
+    @param {View} view
+    @param {Object} data
+    @param {Number|null} statusCode
+    */
+    static view(path: string, view: View, data?: any, statusCode?: number | null): typeof Route;
+    /**
          * Add a delete route.
          */
     /**

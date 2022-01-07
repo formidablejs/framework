@@ -22,9 +22,7 @@ describe('src/Http/Router/Route', () => {
   it('Should set route name to route', () => {
     Route.get('/', () => {}).name('home');
 
-    const homeRoute = Route.all()[Route.all().length - 1];
-
-    expect(homeRoute.name).toBe('home');
+    expect(Route.has('home')).toBeTruthy();
   });
 
   it('Should add middleware to route', () => {
