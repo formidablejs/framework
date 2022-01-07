@@ -1,3 +1,4 @@
+import isFunction from '../../Support/Helpers/isFunction'
 import Encrypter from '../../Foundation/Encrypter'
 import ConfigRepository from '../../Config/Repository'
 import Database from '../../Database/Database'
@@ -14,6 +15,7 @@ const settings = {
 	database: null
 	secret: null
 	encryption\Encrypter: null
+	event: null
 }
 
 export default class PersonalAccessToken
@@ -45,7 +47,7 @@ export default class PersonalAccessToken
 					issuer: settings.config.get('app.url')
 				})
 
-	static def find token\String
+	static def find token\String, protocol = null
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
 		const response = {
@@ -63,14 +65,30 @@ export default class PersonalAccessToken
 
 		if isEmpty(token) then return response
 
-		const tokenable = await self.getDatabase!.table(token.tokenable_type)
-			.where(id: token.tokenable_id)
-			.first!
+		let tokenable
+
+		if !isEmpty(settings.event)
+			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol)
+
+			if !isEmpty(results) then tokenable = results
+
+		if isEmpty(tokenable)
+			tokenable = await self.getDatabase!.table(token.tokenable_type)
+				.where(id: token.tokenable_id)
+				.first!
 
 		return {
 			token: !isEmpty(token) ? token : null,
 			tokenable: !isEmpty(tokenable) ? tokenable : null
 		}
+
+	static def onFetchAuthenticated handler\Function
+		if settings.event !== null
+			throw new Error 'onFetchAuthenticated handler is already set.'
+
+			return
+
+		settings.event = handler
 
 	static def using token\Object
 		await self.getDatabase!.table('personal_access_tokens')

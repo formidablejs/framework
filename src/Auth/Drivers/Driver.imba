@@ -45,7 +45,7 @@ export default class Driver
 		await self.getPersonalAccessToken(token)
 
 	def getPersonalAccessToken token\String = null
-		await PersonalAccessToken.find(!isEmpty(token) ? token : self.request.bearerToken!)
+		await PersonalAccessToken.find(!isEmpty(token) ? token : self.request.bearerToken!, self.protocol)
 
 	def usingPersonalAccessToken token\Object
 		await PersonalAccessToken.using(token)
