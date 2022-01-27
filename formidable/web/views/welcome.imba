@@ -19,7 +19,7 @@ export class Welcome < View
 			<body[m:0 ff:Nunito]>
 				<div[pos:relative d:flex ji:center min-height:100vh bg:gray1 ai:center pt@sm:0]>
 					<div[max-width:72rem mx:auto px@sm:6 px@lg:8]>
-						<div[ta:center pt:1- pt@sm:0 mb:10]>
+						<div[ta:center pt:-1 pt@sm:0 mb:10]>
 							<img[w:35] src="/formidable.png">
 
 						<div[mb:10]>
