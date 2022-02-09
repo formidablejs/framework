@@ -53,6 +53,7 @@ import SessionDriverManager from './Http/Session/DriverManager'
 import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
 import SessionMemoryStoreServiceResolver from './Http/Session/SessionMemoryStoreServiceResolver'
 import SessionServiceResolver from './Http/Session/SessionServiceResolver'
+import SPAServiceResolver from './Http/SPA/SPAServiceResolver'
 import StaticContentServiceResolver from './Http/Static/StaticContentServiceResolver'
 import TransformsRequest from './Http/Middleware/TransformsRequest'
 import TrimStrings from './Http/Middleware/TrimStrings'
@@ -128,6 +129,7 @@ export {
 	SessionFileStoreServiceResolver
 	SessionMemoryStoreServiceResolver
 	SessionServiceResolver
+	SPAServiceResolver
 	StaticContentServiceResolver
 	TransformsRequest
 	TrimStrings
