@@ -36,14 +36,14 @@ export default class Kernel
 
 		}
 
-	def getAllMiddleware route
+	def getAllMiddleware route, _middleware = null
 		# get default middleware list.
 		let list = [ ...self.middleware ]
 
 		let params = []
 
 		# get route grouped middleware list.
-		Object.values(route.middleware || []).forEach do(middleware)
+		Object.values((_middleware ? _middleware : route.middleware) || []).forEach do(middleware)
 			if typeof middleware === 'string'
 				if typeof middleware.split(':')[1] === 'string' then params = middleware.split(':')[1].split(',')
 
@@ -135,8 +135,8 @@ export default class Kernel
 			else
 				routes.invalid.push(route.path)
 
-	def resolveMiddleware route\Object, request, reply, config
-		for middleware in self.getAllMiddleware(route)
+	def resolveMiddleware route\Object, request, reply, config, _middleware = null
+		for middleware in self.getAllMiddleware(route, _middleware)
 			if middleware == undefined || typeof middleware == 'string'
 				throw new UndefinedMiddlewareException "Middleware {middleware} is undefined."
 
