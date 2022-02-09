@@ -17,6 +17,7 @@ export class App < View
 				<style src="../imba/main.imba">
 
 			<body>
-				<Props html:locale=locale>
-
 				<script type="module" src="../imba/main.imba">
+
+				try
+					<Props html:locale=locale>
