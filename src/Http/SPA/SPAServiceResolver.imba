@@ -26,4 +26,6 @@ export default class SPAServiceResolver < ServiceResolver
 
 				self.request = request
 
+				reply.status(200)
+
 				return view(self.view, self.props).toView(request, reply)
