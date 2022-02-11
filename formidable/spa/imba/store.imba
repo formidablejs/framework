@@ -1,5 +1,5 @@
-import hasAttr from '@formidablejs/framework/lib/Http/SPA/hasAttr'
-import readProps from '@formidablejs/framework/lib/Http/SPA/readProps'
+import hasAttr from '@formidablejs/framework/lib/Http/Spa/hasAttr'
+import readProps from '@formidablejs/framework/lib/Http/Spa/readProps'
 
 let props = { }
 
