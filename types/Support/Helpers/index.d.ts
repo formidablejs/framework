@@ -1,1 +1,1 @@
-export { asObject, config, decrypt, die, dot, dotNotation, encrypt, env, expiresIn, withEnv, isArray, isBoolean, isClass, isEmpty, isFunction, isNumber, isObject, isString, mix, ms, multitap, now, pluralize, response, slug, strRandom, tap, toBoolean, version, view, wildcard, without };
+export { asObject, config, decrypt, die, dot, dotNotation, encrypt, env, expiresIn, isArray, isBoolean, isClass, isEmpty, isFunction, isNumber, isObject, isString, mix, ms, multitap, now, pluralize, response, slug, strRandom, tap, toBoolean, version, view, wildcard, withEnv, without };
