@@ -1,4 +1,4 @@
-export default def imbaEnv prefix = 'IMBA_'
+export default def withEnv prefix = 'IMBA_'
 	const envList = {}
 
 	for env, value in process.env
