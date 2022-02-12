@@ -8,7 +8,10 @@ export default class StaticContentServiceResolver < ServiceResolver
 	 * Public directory.
 	 */
 	get public
-		{ root: join(process.cwd!, 'public') }
+		{
+			root: join(process.cwd!, 'public')
+			wildcard: false
+		}
 
 	/**
 	 * Formidable assets directory.
@@ -16,6 +19,7 @@ export default class StaticContentServiceResolver < ServiceResolver
 	get assets
 		{
 			root: join(process.cwd!, '.formidable', 'public', '__assets__')
+			wildcard: false
 			prefix: '/__assets__/'
 			decorateReply: false
 		}
