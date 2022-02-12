@@ -1,4 +1,4 @@
-export default def withEnv
+export default def imbaEnv stringify\Boolean = true
 	const prefix = 'IMBA_APP_'
 	const envList = {}
 
@@ -6,4 +6,4 @@ export default def withEnv
 		if env.startsWith(prefix)
 			envList[env.slice(prefix.length)] = value
 
-	envList
+	stringify ? JSON.stringify(envList) : envList

@@ -7,6 +7,7 @@ const { default: dotNotation }  = require './dotNotation'
 const { default: encrypt } = require './encrypt'
 const { default: env }  = require './env'
 const { default: expiresIn }  = require './expiresIn'
+const { default: imbaEnv } = require './imbaEnv'
 const { default: isArray }  = require './isArray'
 const { default: isBoolean }  = require './isBoolean'
 const { default: isClass }  = require './isClass'
@@ -26,7 +27,6 @@ const { default: toBoolean }  = require './toBoolean'
 const { default: version } = require './version'
 const { default: view } = require './view'
 const { default: wildcard }  = require './wildcard'
-const { default: withEnv } = require './withEnv'
 const { default: without }  = require './without'
 
 const ms = require 'ms'
@@ -42,6 +42,7 @@ export {
 	encrypt
 	env
 	expiresIn
+	imbaEnv
 	isArray
 	isBoolean
 	isClass
@@ -63,6 +64,5 @@ export {
 	version
 	view
 	wildcard
-	withEnv
 	without
 }
