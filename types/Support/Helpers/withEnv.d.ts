@@ -1,1 +1,1 @@
-export default function withEnv(prefix?: string): {};
+export default function withEnv(): {};

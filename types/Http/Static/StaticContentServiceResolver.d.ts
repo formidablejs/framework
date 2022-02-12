@@ -9,6 +9,7 @@ export default class StaticContentServiceResolver extends ServiceResolver {
     */
     get public(): {
         root: string;
+        wildcard: boolean;
     };
     /**
          * Formidable assets directory.
@@ -20,6 +21,7 @@ export default class StaticContentServiceResolver extends ServiceResolver {
     */
     get assets(): {
         root: string;
+        wildcard: boolean;
         prefix: string;
         decorateReply: boolean;
     };
