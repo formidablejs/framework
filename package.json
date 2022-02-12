@@ -39,7 +39,7 @@
     "fastify-cookie": "^5.5.0",
     "fastify-cors": "^6.0.2",
     "fastify-formbody": "^5.2.0",
-    "fastify-multipart": "^5.3.0",
+    "fastify-multipart": "^5.3.1",
     "fastify-static": "^4.5.0",
     "html-escaper": "^3.0.3",
     "jsonwebtoken": "^8.5.1",
