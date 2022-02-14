@@ -1,7 +1,3 @@
-import { ContextAPI } from './Context';
-import ConfigRepository from "../Config/Repository";
-import Kernel from "../Http/Kernel";
-
 export default class Application {
     /**
     @param {String} notation
@@ -31,6 +27,7 @@ export default class Application {
     @param {Number} default
     */
     port(default$?: number): number;
+    host(default$?: string): string;
     routes(): any[];
     fastify(): any;
     addHook(hook: any, handler: any): Application;
@@ -71,5 +68,6 @@ export default class Application {
     registerResolver(resolver: any): any;
     [Ψ__init__]($$?: any): void;
 }
+import Kernel from "../Http/Kernel";
 declare const Ψ__init__: unique symbol;
 export {};
