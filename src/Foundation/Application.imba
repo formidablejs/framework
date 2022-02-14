@@ -19,6 +19,7 @@ const settings = {
 	config\ConfigRepository: null
 	environment: null
 	port: 3000
+	host: '0.0.0.0'
 	server: null
 	request: null
 	migration: null
@@ -42,7 +43,8 @@ export default class Application
 		settings.environment = new EnvironmentRepository(root)
 		settings.migration = new Migration
 		settings.seeder = new Seeder
-		settings.port = Number(process.env.FORMIDABLE_PORT) ?? 3000
+		settings.port = Number(process.env.FORMIDABLE_PORT) || 3000
+		settings.host = process.env.HOST || '0.0.0.0'
 
 	static def getConfig notation\String, default\any = null
 		settings.config.get(notation, default)
@@ -60,7 +62,10 @@ export default class Application
 		appVersion!
 
 	def port default\Number = 3000
-		settings.port ?? default
+		settings.port || default
+	
+	def host default = '0.0.0.0'
+		settings.host || default
 
 	def routes
 		Route.all!
