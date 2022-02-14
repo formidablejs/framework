@@ -107,13 +107,14 @@ export default class Kernel
 
 			return errorHandler.beforeHandle(error, request, reply)
 
-		const port = process.env.FORMIDABLE_PORT ?? 3000
+		const port = process.env.FORMIDABLE_PORT || 3000
+		const host = process.env.HOST || '0.0.0.0'
 
 		delete process.env.FORMIDABLE_PORT
 
 		if returnMode isa Boolean && returnMode == true then return router
 
-		router.listen Number(port), do(error, address)
+		router.listen Number(port), host, do(error, address)
 			if routes.invalid.length > 0
 				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
 
