@@ -8,9 +8,12 @@ export class MigrateRollbackCommand < MigrationCommand
 
 	get props
 		{
-			all: Prop.boolean!.default(true).description 'Rollback all migrations'
+			all: Prop.boolean!.default(false).description 'Rollback all migrations'
 			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
 		}
+	
+	get description
+		'Rollback the last or all database migrations'
 	
 	def handle
 		run 'rollback'

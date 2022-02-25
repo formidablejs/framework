@@ -11,5 +11,8 @@ export class MigrateLatestCommand < MigrationCommand
 			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
 		}
 	
+	get description
+		'Run latest migrations'
+	
 	def handle
 		run 'latest'

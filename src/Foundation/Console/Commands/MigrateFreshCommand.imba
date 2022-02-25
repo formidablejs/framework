@@ -11,5 +11,8 @@ export class MigrateFreshCommand < MigrationCommand
 			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
 		}
 	
+	get description
+		'Drop all tables and re-run all migrations'
+	
 	def handle
 		run 'fresh'
