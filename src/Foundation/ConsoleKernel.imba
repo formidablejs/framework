@@ -1,3 +1,8 @@
+import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
+import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
+import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
+import { MigrateDownCommand } from './Console/Commands/MigrateDownCommand'
+import { MigrateUpCommand } from './Console/Commands/MigrateUpCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
 import { GenerateKeyCommand } from './Console/Commands/GenerateKeyCommand'
 import { MakeConfigCommand } from './Console/Commands/MakeConfigCommand'
@@ -34,6 +39,13 @@ export default class ConsoleKernel
 			# maintenance commands
 			DownCommand
 			UpCommand
+
+			# migration commands
+			MigrateDownCommand
+			MigrateFreshCommand
+			MigrateLatestCommand
+			MigrateRollbackCommand
+			MigrateUpCommand
 		]
 
 	get registered
@@ -41,9 +53,11 @@ export default class ConsoleKernel
 			
 		]
 	
-	def registerCommands app\Application
+	def registerCommands app\Application, ctx
 		for command in self.default
+			command.ctx = ctx
 			app.register(command)
 		
 		for command in self.registered
+			command.ctx = ctx
 			app.register(command)
