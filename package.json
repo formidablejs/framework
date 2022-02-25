@@ -44,6 +44,7 @@
     "fastify-static": "^4.5.0",
     "fs-extra": "^10.0.1",
     "html-escaper": "^3.0.3",
+    "inquirer": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.15",
     "knex-paginate": "^3.0.0",
