@@ -4,7 +4,7 @@ import { Prop } from '@formidablejs/console'
 export class DownCommand < MaintenanceCommand
 
 	get signature
-		'down {--message} {?--retry} {?--refresh} {?--secret} {?--status} {?--redirect}'
+		'down {?--message} {?--retry} {?--refresh} {?--secret} {?--status} {?--redirect}'
 
 	get props
 		{
