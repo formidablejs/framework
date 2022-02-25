@@ -1,3 +1,4 @@
+import { RouteListCommand } from './Console/Commands/RouteListCommand'
 import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
 import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
 import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
@@ -46,6 +47,9 @@ export default class ConsoleKernel
 			MigrateLatestCommand
 			MigrateRollbackCommand
 			MigrateUpCommand
+
+			# route commands
+			RouteListCommand
 		]
 
 	get registered
