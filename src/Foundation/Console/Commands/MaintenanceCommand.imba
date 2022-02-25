@@ -44,7 +44,7 @@ export class MaintenanceCommand < Command
 		self.error 'Failed to put application in maintenance mode.'
 
 	def up
-		if existsSync(file)
+		if !existsSync(file)
 			return self.write "<fg:green>Application is already up.</fg:green>"
 		
 		unlinkSync(file)
