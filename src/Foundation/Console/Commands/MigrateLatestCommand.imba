@@ -4,12 +4,7 @@ import { MigrationCommand } from './MigrationCommand'
 export class MigrateLatestCommand < MigrationCommand
 
 	get signature
-		'migrate:latest {?--no-interaction}'
-
-	get props
-		{
-			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
-		}
+		'migrate:latest'
 	
 	get description
 		'Run latest migrations'

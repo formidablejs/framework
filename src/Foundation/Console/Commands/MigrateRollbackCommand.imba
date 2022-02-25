@@ -4,12 +4,11 @@ import { MigrationCommand } from './MigrationCommand'
 export class MigrateRollbackCommand < MigrationCommand
 
 	get signature
-		'migrate:rollback {?--all} {?--no-interaction}'
+		'migrate:rollback {?--all}'
 
 	get props
 		{
 			all: Prop.boolean!.default(false).description 'Rollback all migrations'
-			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
 		}
 	
 	get description

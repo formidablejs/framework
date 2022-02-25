@@ -4,12 +4,11 @@ import { MigrationCommand } from './MigrationCommand'
 export class MigrateDownCommand < MigrationCommand
 
 	get signature
-		'migrate:down {?migration} {?--no-interaction}'
+		'migrate:down {?migration}'
 
 	get props
 		{
-			migration: Prop.string!.description 'Migration file to run'
-			'no-interaction': Prop.boolean!.default(false).description 'Do not ask any interactive question'
+			migration: Prop.string!.nullable!.description 'Migration file to run'
 		}
 	
 	get description
