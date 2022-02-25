@@ -148,7 +148,7 @@ export default class Application
 		return self
 	
 	def craftsman kernel\ConsoleKernel
-		kernel.registerCommands(settings.console)
+		kernel.registerCommands(settings.console, this)
 
 		{
 			run: do
