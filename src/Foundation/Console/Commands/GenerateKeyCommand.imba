@@ -3,7 +3,7 @@ import { Prop } from '@formidablejs/console'
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { randomBytes } from 'crypto'
-import { updateLine } from '../../Support/Helpers/updateLine'
+import { updateLine } from '../../../Support/Helpers/updateLine'
 
 export class GenerateKeyCommand < Command
 
