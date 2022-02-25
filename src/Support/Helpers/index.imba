@@ -24,6 +24,7 @@ const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: tap } = require './tap'
 const { default: toBoolean }  = require './toBoolean'
+const { default: updateLine } = require './updateLine'
 const { default: version } = require './version'
 const { default: view } = require './view'
 const { default: wildcard }  = require './wildcard'
@@ -61,6 +62,7 @@ export {
 	strRandom
 	tap
 	toBoolean
+	updateLine
 	version
 	view
 	wildcard
