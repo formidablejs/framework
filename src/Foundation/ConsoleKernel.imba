@@ -1,3 +1,4 @@
+import { DbSeedCommand } from './Console/Commands/DbSeedCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
 import { EnvironmentCommand } from './Console/Commands/EnvironmentCommand'
 import { GenerateKeyCommand } from './Console/Commands/GenerateKeyCommand'
@@ -24,6 +25,9 @@ export default class ConsoleKernel
 
 	get default
 		[
+			# db commands
+			DbSeedCommand
+
 			# env command
 			EnvironmentCommand
 

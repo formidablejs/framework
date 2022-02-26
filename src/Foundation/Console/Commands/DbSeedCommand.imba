@@ -1,0 +1,24 @@
+import { isArray } from '../../../Support/Helpers'
+import { Command } from '../Command'
+
+export class DbSeedCommand < Command
+
+	get signature
+		'db:seed'
+
+	get description
+		'Seed the database with records'
+	
+	def handle
+		usingEnv!
+
+		const results = await app.seeder!.run!
+		
+		if results === false then return self.error 'Seeding failed'
+		
+		if isArray(results)
+			results[0].forEach do(seeder) self.info "Seeded: {seeder}"
+
+			return
+		
+		console.error results
