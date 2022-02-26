@@ -10,4 +10,4 @@ export class GenerateKeyCommand extends Command {
     */
     updateEnv(key: string): boolean;
 }
-import { Command } from "@formidablejs/console";
+import { Command } from "../Command";

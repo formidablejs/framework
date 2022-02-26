@@ -3,4 +3,4 @@ export class MaintenanceCommand extends Command {
     down(): void;
     up(): void;
 }
-import { Command } from "@formidablejs/console";
+import { Command } from "../Command";

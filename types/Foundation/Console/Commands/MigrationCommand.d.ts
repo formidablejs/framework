@@ -1,8 +1,11 @@
 export class MigrationCommand extends Command {
-    get app(): any;
     /**
     @param {String} environment
     */
     shouldRun(environment: string): Promise<any>;
+    /**
+    @param {String} action
+    */
+    call(action: string): Promise<void>;
 }
-import { Command } from "@formidablejs/console";
+import { Command } from "../Command";
