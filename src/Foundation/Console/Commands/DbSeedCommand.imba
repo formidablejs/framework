@@ -10,7 +10,9 @@ export class DbSeedCommand < Command
 		'Seed the database with records'
 	
 	def handle
-		usingEnv!
+		await self.shouldRun!
+
+		self.usingEnv!
 
 		const results = await app.seeder!.run!
 		

@@ -5,27 +5,8 @@ import type Application from '../../Application'
 
 export class MigrationCommand < Command
 
-	def shouldRun environment\String
-		if !environment then return false
-		
-		self.info `**************************************
-*     Application In Production!     *
-**************************************`
-		
-		const confirmed = await self.confirm('Do you really wish to run this command')
-
-		if !confirmed
-			self.info "Command Canceled!"
-		
-		confirmed
-
 	def call action\String
-		const environment = env('development')
-
-		if environment.toLowerCase!.trim! === 'production' && (self.globalOptions ? self.globalOptions.noInteraction : false) !== true 
-			const runCommand = await shouldRun(environment)
-
-			if !runCommand then return
+		await shouldRun!
 
 		self.usingEnv!
 
