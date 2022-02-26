@@ -10,4 +10,4 @@ export class MigrateFreshCommand < MigrationCommand
 		'Drop all tables and re-run all migrations'
 	
 	def handle
-		run 'fresh'
+		call 'fresh'

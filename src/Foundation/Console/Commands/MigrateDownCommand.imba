@@ -15,4 +15,4 @@ export class MigrateDownCommand < MigrationCommand
 		'Reverse migration(s)'
 
 	def handle
-		run 'down'
+		call 'down'

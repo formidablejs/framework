@@ -10,4 +10,4 @@ export class MigrateLatestCommand < MigrationCommand
 		'Run latest migrations'
 	
 	def handle
-		run 'latest'
+		call 'latest'

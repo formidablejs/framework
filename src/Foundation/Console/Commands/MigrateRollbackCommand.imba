@@ -15,4 +15,4 @@ export class MigrateRollbackCommand < MigrationCommand
 		'Rollback the last or all database migrations'
 	
 	def handle
-		run 'rollback'
+		call 'rollback'

@@ -7,6 +7,9 @@ export class RouteListCommand < Command
 	get signature
 		'route:list'
 	
+	get description
+		'List all registered routes'
+	
 	# @returns {Application}
 	get app
 		self.constructor.ctx

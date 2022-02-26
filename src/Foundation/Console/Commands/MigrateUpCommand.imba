@@ -15,4 +15,4 @@ export class MigrateUpCommand < MigrationCommand
 		'Run migration(s)'
 	
 	def handle
-		run 'up'
+		call 'up'
