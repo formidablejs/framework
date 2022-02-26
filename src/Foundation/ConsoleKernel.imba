@@ -1,10 +1,5 @@
-import { RouteListCommand } from './Console/Commands/RouteListCommand'
-import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
-import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
-import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
-import { MigrateDownCommand } from './Console/Commands/MigrateDownCommand'
-import { MigrateUpCommand } from './Console/Commands/MigrateUpCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
+import { EnvironmentCommand } from './Console/Commands/EnvironmentCommand'
 import { GenerateKeyCommand } from './Console/Commands/GenerateKeyCommand'
 import { MakeConfigCommand } from './Console/Commands/MakeConfigCommand'
 import { MakeControllerCommand } from './Console/Commands/MakeControllerCommand'
@@ -16,6 +11,12 @@ import { MakeModelCommand } from './Console/Commands/MakeModelCommand'
 import { MakeRequestCommand } from './Console/Commands/MakeRequestCommand'
 import { MakeResolverCommand } from './Console/Commands/MakeResolverCommand'
 import { MakeSeederCommand } from './Console/Commands/MakeSeederCommand'
+import { MigrateDownCommand } from './Console/Commands/MigrateDownCommand'
+import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
+import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
+import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
+import { MigrateUpCommand } from './Console/Commands/MigrateUpCommand'
+import { RouteListCommand } from './Console/Commands/RouteListCommand'
 import { UpCommand } from './Console/Commands/UpCommand'
 import type { Application } from '@formidablejs/console'
 
@@ -23,6 +24,9 @@ export default class ConsoleKernel
 
 	get default
 		[
+			# env command
+			EnvironmentCommand
+
 			# key command
 			GenerateKeyCommand
 
