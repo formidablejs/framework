@@ -24,14 +24,14 @@ export class MigrationCommand < Command
 		res.run
 
 	def call action\String
-		const environment = app.config.get('app.env', 'development')
+		const environment = env('development')
 
 		if environment.toLowerCase!.trim! === 'production' && (self.globalOptions ? self.globalOptions.noInteraction : false) !== true 
 			const runCommand = await shouldRun(environment)
 
 			if !runCommand then return
 
-		self.info "Using environment: {environment}"
+		self.usingEnv!
 
 		let results
 
