@@ -1,20 +1,16 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { join } from 'path'
 import inquirer from 'inquirer'
 import type Application from '../../Application'
 
 export class MigrationCommand < Command
-	
-	# @returns {Application}
-	get app
-		self.constructor.ctx
 
 	def shouldRun environment\String
 		if !environment then return false
 		
-		self.write `<fg:green>**************************************
+		self.info `**************************************
 *     Application In Production!     *
-**************************************</fg:green>`
+**************************************`
 		
 		const res = await inquirer.prompt([{
 			name: 'run'
@@ -23,11 +19,11 @@ export class MigrationCommand < Command
 		}])
 
 		if !res.run
-			self.write "<fg:green>Command Canceled!</fg:green>"
+			self.info "Command Canceled!"
 		
 		res.run
 
-	def run action\String
+	def call action\String
 		const environment = app.config.get('app.env', 'development')
 
 		if environment.toLowerCase!.trim! === 'production' && (self.globalOptions ? self.globalOptions.noInteraction : false) !== true 
@@ -35,7 +31,7 @@ export class MigrationCommand < Command
 
 			if !runCommand then return
 
-		self.write "<fg:green>Using environment: {environment}</fg:green>"
+		self.info "Using environment: {environment}"
 
 		let results
 
@@ -52,7 +48,7 @@ export class MigrationCommand < Command
 			return self.error 'Migration failed'
 		
 		if results[1].length > 0
-			results[1].forEach do(migration) self.write "<fg:green>{action === 'rollback' ? 'Rollback' : 'Migrate'}: {migration}</fg:green>"
+			results[1].forEach do(migration) self.info "{action === 'rollback' ? 'Rollback' : 'Migrate'}: {migration}"
 
 			return
 		

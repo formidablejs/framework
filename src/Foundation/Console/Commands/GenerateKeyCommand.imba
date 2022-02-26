@@ -1,4 +1,4 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { Prop } from '@formidablejs/console'
 import { existsSync } from 'fs'
 import { join } from 'path'
@@ -32,11 +32,11 @@ export class GenerateKeyCommand < Command
 		const key = self.key 32
 
 		if self.option('show', false)
-			return self.write "<fg:green>Application key [{key}] generated successfully.</fg:green>"
+			return self.info "Application key [{key}] generated successfully."
 
 		self.updateEnv key
 
-		this.write "<fg:green>Application key set successfully.</fg:green>"
+		this.info "Application key set successfully."
 
 	def key length\Number = 32
 		const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'

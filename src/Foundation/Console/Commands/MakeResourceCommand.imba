@@ -1,4 +1,4 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { dirname } from 'path'
 import { existsSync } from 'fs'
 import { join } from 'path'
@@ -33,6 +33,6 @@ export class MakeResourceCommand < Command
 		writeFileSync(normalize(filePath), information.output)
 
 		if existsSync(filePath)
-			return self.write "<fg:green>{self.resource} created successfully.</fg:green>"
+			return self.info "{self.resource} created successfully."
 
 		self.error "{self.resource} not created."

@@ -1,4 +1,4 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
 import { unlinkSync } from 'fs'
@@ -12,7 +12,7 @@ export class MaintenanceCommand < Command
 
 	def down
 		if existsSync(file)
-			return self.write "<fg:green>Application is already down</fg:green>"
+			return self.info "Application is already down."
 		
 		const content = { }
 
@@ -39,17 +39,17 @@ export class MaintenanceCommand < Command
 		})
 
 		if existsSync(file)
-			return self.write "<fg:green>Application is now in maintenance mode.</fg:green>"
+			return self.info "Application is now in maintenance mode."
 
 		self.error 'Failed to put application in maintenance mode.'
 
 	def up
 		if !existsSync(file)
-			return self.write "<fg:green>Application is already up.</fg:green>"
+			return self.info "Application is already up."
 		
 		unlinkSync(file)
 
 		if existsSync(file)
 			return self.error "Failed to bring application out of maintenance."
 		
-		self.write "<fg:green>Application is now live.</fg:green>"
+		self.info "Application is now live."
