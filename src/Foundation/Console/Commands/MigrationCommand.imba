@@ -12,16 +12,12 @@ export class MigrationCommand < Command
 *     Application In Production!     *
 **************************************`
 		
-		const res = await inquirer.prompt([{
-			name: 'run'
-			message: 'Do you really wish to run this command'
-			type: 'confirm'
-		}])
+		const confirmed = await self.confirm('Do you really wish to run this command')
 
-		if !res.run
+		if !confirmed
 			self.info "Command Canceled!"
 		
-		res.run
+		confirmed
 
 	def call action\String
 		const environment = env('development')
