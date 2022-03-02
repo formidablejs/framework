@@ -4,8 +4,11 @@ import { join } from 'path'
 
 export class CacheCommand < Command
 
-	get path
+	get config
 		join process.cwd!, 'bootstrap', 'cache', 'config.json'
+
+	get address
+		join process.cwd!, 'storage', 'framework', 'address.json'
 
 	def cache
 		self.clear!
@@ -15,6 +18,9 @@ export class CacheCommand < Command
 		self.info 'Configuration cached successfully!'
 
 	def clear
-		if existsSync(self.path) then unlinkSync(self.path)
+		if existsSync(self.config) then unlinkSync(self.config)
 
-		self.info 'Configuration cached cleared!'
+		if existsSync(self.address) then unlinkSync(self.address)
+
+		self.info 'Configuration address cleared!'
+		self.info 'Configuration cache cleared!'
