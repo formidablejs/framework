@@ -108,9 +108,10 @@ export default class Kernel
 			return errorHandler.beforeHandle(error, request, reply)
 
 		const port = process.env.FORMIDABLE_PORT || 3000
-		const host = process.env.HOST || '0.0.0.0'
+		const host = process.env.FORMIDABLE_HOST || '0.0.0.0'
 
 		delete process.env.FORMIDABLE_PORT
+		delete process.env.FORMIDABLE_HOST
 
 		if returnMode isa Boolean && returnMode == true then return router
 
