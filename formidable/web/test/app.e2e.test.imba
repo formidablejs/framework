@@ -1,4 +1,3 @@
-const { config } = require '@formidablejs/framework/lib/Support/Helpers'
 const { current } = require '../storage/framework/address.json'
 const { SuperTest, Response } = require 'supertest'
 const request = require 'supertest'
