@@ -1,3 +1,6 @@
+import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
+import { ConfigCacheCommand } from './Console/Commands/ConfigCacheCommand'
+import { ConfigClearCommand } from './Console/Commands/ConfigClearCommand'
 import { DbSeedCommand } from './Console/Commands/DbSeedCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
 import { EnvironmentCommand } from './Console/Commands/EnvironmentCommand'
@@ -18,6 +21,8 @@ import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
 import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
 import { MigrateUpCommand } from './Console/Commands/MigrateUpCommand'
 import { RouteListCommand } from './Console/Commands/RouteListCommand'
+import { ServeCommand } from './Console/Commands/ServeCommand'
+import { ShellCommand } from './Console/Commands/ShellCommand'
 import { UpCommand } from './Console/Commands/UpCommand'
 import type { Application } from '@formidablejs/console'
 
@@ -33,6 +38,19 @@ export default class ConsoleKernel
 
 			# key command
 			GenerateKeyCommand
+
+			# shell command
+			ShellCommand
+
+			# config commands
+			ConfigCacheCommand
+			ConfigClearCommand
+
+			# serve command
+			ServeCommand
+
+			# package commands
+			PackagePublishCommand
 
 			# make commands
 			MakeConfigCommand
