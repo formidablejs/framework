@@ -12,6 +12,7 @@
   "repository": "https://github.com/formidablejs/framework",
   "files": [
     "formidable",
+    "bin",
     "lib",
     "types"
   ],
