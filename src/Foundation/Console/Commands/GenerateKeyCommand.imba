@@ -9,6 +9,9 @@ export class GenerateKeyCommand < Command
 
 	get signature
 		'key:generate {?--env} {?--show}'
+	
+	get description
+		'Application key set successfully'
 
 	get props
 		{
