@@ -1,12 +1,12 @@
-import { Prop } from '@formidablejs/console'
 import { Command } from '../Command'
-import { spawnSync } from 'child_process'
 import { join } from 'path'
+import { Prop } from '@formidablejs/console'
+import { spawnSync } from 'child_process'
 
 export class ServeCommand < Command
 
 	get signature
-		'serve {?--port} {?--host} {?--dev}'
+		'serve {?--port} {?--host} {?--dev} {?--addr}'
 
 	get description
 		'Serve the application on the Imba server'
@@ -16,6 +16,7 @@ export class ServeCommand < Command
 			port: Prop.number!.alias('p').default(3000).description 'The port to serve the application on'
 			host: Prop.string!.alias('h').default('localhost').description 'The host address to serve the application on'
 			dev: Prop.boolean!.alias('d').description 'Serve in dev mode (build, serve and watch)'
+			addr: Prop.boolean!.description 'Store address in a config file'
 		}
 		
 	get runtime
@@ -35,6 +36,8 @@ export class ServeCommand < Command
 		const args = [ ]
 
 		if self.option('dev', false) then args.push '--watch'
+
+		if self.option('addr') then process.env.FORMIDABLE_ADDRESS_SET = '1'
 
 		spawnSync self.runtime, [...args, 'server.imba'], {
 			stdio: 'inherit'
