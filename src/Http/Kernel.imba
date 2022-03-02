@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs-extra'
+import { join } from 'path'
 import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
 import fastify from 'fastify'
 import FormRequest from './Request/FormRequest'
@@ -121,7 +123,22 @@ export default class Kernel
 
 			if error then throw error
 
+			if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress address
+
 		imba.serve router.server
+
+	def storeAddress address\String
+		const location = join(process.cwd!, 'storage', 'framework', 'address.json')
+
+		const object = {
+			current: address
+		}
+
+		writeFileSync location, JSON.stringify(object, null, 2), {
+			encoding: 'utf8'
+		}
+
+		delete process.env.FORMIDABLE_ADDRESS_SET
 
 	def hasRoutes router, config
 		for route in Route.all!
