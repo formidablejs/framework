@@ -8,6 +8,7 @@ export default class MaintenanceServiceResolver extends ServiceResolver {
         retry: number;
         refresh: number;
     };
+    boot(): MaintenanceServiceResolver;
     /**
     @param {String} secret
     @param {FormRequest} request

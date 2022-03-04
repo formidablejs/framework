@@ -182,8 +182,8 @@ export default class FileCollection {
          
     */
     get(): File[];
-    [Ψ__init__]($$?: any): void;
+    [$1]($$?: any): void;
 }
 import File from "./File";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};

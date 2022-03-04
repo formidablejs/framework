@@ -1,4 +1,9 @@
 export class PackagePublishCommand extends Command {
+    get props(): {
+        package: import("@formidablejs/console/types/Props/Prop").default;
+        tag: import("@formidablejs/console/types/Props/Prop").default;
+        force: import("@formidablejs/console/types/Props/Prop").default;
+    };
     get package(): string;
     get definition(): any;
     get publisherPath(): any;

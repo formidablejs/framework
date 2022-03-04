@@ -8,7 +8,8 @@ declare class PasswordController extends Controller {
     @param {Function} handler
     */
     static onReset(handler: Function): Function;
-    static [Ψ__init__](): typeof PasswordController;
+    static [$1](): typeof PasswordController;
+    constructor(...args: any[]);
     /**
     @param {ForgotPasswordRequest} request
     */
@@ -21,4 +22,4 @@ declare class PasswordController extends Controller {
 import Controller from "../../../Http/Controller";
 import ForgotPasswordRequest from "../Requests/ForgotPasswordRequest";
 import ResetPasswordRequest from "../Requests/ResetPasswordRequest";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;

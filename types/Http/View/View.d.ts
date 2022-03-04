@@ -50,9 +50,9 @@ export default class View {
     handle(): any;
     render(): any;
     make(): Promise<string>;
-    [Ψ__init__]($$?: any): void;
-    [Ψ_data]: any;
+    [$2]($$?: any): void;
+    [$1]: any;
 }
-declare const Ψ__init__: unique symbol;
-declare const Ψ_data: unique symbol;
+declare const $2: unique symbol;
+declare const $1: unique symbol;
 export {};

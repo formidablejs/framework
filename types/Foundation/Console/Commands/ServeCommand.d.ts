@@ -1,7 +1,15 @@
+/// <reference types="node" />
 export class ServeCommand extends Command {
+    get props(): {
+        port: any;
+        host: any;
+        dev: import("@formidablejs/console/types/Props/Prop").default;
+        addr: import("@formidablejs/console/types/Props/Prop").default;
+    };
     get runtime(): string;
     get fallbackPort(): string;
     get fallbackHost(): string;
+    handle(): import("child_process").SpawnSyncReturns<Buffer>;
     setEnvVars(): mixed;
 }
 import { Command } from "../Command";

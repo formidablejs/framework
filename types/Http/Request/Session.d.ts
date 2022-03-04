@@ -26,10 +26,10 @@ export default class Session {
     @param {String|String[]} key
     */
     forget(key: string | string[]): any[];
-    [Ψ__init__]($$?: any): void;
-    [Ψref]: any;
+    [$2]($$?: any): void;
+    [$1]: any;
 }
-declare const Ψ__init__: unique symbol;
-declare const Ψref: unique symbol;
+declare const $2: unique symbol;
+declare const $1: unique symbol;
 import type { FastifyRequest } from 'fastify';
 export {};

@@ -4,7 +4,8 @@ declare class LogoutController extends Controller {
     @param {Function} handler
     */
     static onLogout(handler: Function): Function;
-    static [Ψ__init__](): typeof LogoutController;
+    static [$1](): typeof LogoutController;
+    constructor(...args: any[]);
     /**
     @param {LogoutRequest} request
     */
@@ -12,4 +13,4 @@ declare class LogoutController extends Controller {
 }
 import Controller from "../../../Http/Controller";
 import LogoutRequest from "../Requests/LogoutRequest";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;

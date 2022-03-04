@@ -1,5 +1,5 @@
 export default class ConfigNotCachedError extends Error {
-    static [Ψ__init__](): typeof ConfigNotCachedError;
+    static [$3](): typeof ConfigNotCachedError;
 }
-declare const Ψ__init__: unique symbol;
+declare const $3: unique symbol;
 export {};

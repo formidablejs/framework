@@ -1,6 +1,6 @@
 export default ApplicationException;
 declare class ApplicationException extends Error {
-    static [Ψ__init__](): typeof ApplicationException;
+    static [$1](): typeof ApplicationException;
     /**
     @param {any} response
     @param {Number} status
@@ -11,6 +11,6 @@ declare class ApplicationException extends Error {
     initMessage(): any;
     initName(): string;
     getStatus(): number;
-    [Ψ__init__]($$?: any, ...args: any[]): void;
+    [$1]($$?: any, ...args: any[]): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;

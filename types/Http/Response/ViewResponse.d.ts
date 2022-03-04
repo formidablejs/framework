@@ -22,7 +22,7 @@ export default class ViewResponse {
     @param {FastifyReply} reply
     */
     toView(request: FormRequest, reply: FastifyReply): Promise<boolean>;
-    [Ψ__init__]($$?: any): void;
+    [$1]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};
