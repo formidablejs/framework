@@ -19,5 +19,18 @@ export default class CookieServiceResolver extends ServiceResolver {
             signed: any;
         };
     };
+    /**
+         * Boot cookie service resolver.
+         *
+         * @returns {void}
+         */
+    /**
+    *
+         * Boot cookie service resolver.
+         *
+         * @returns {void}
+         
+    */
+    boot(): void;
 }
 import ServiceResolver from "../../Support/ServiceResolver";

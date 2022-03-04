@@ -1,11 +1,17 @@
 export default class RegisterRequest extends FormRequest {
-    static [Ψ__init__](): typeof RegisterRequest;
+    static [$1](): typeof RegisterRequest;
     constructor(...args: any[]);
     authDriver: any;
     authorize(): boolean;
+    rules(): {
+        name: string;
+        email: string;
+        password: string;
+        password_confirmation: string;
+    };
     persist(): Promise<any>;
-    [Ψ__init__]($$?: any, ...args: any[]): void;
+    [$1]($$?: any, ...args: any[]): void;
 }
 import FormRequest from "../../../Http/Request/FormRequest";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};

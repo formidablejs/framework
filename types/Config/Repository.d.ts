@@ -19,7 +19,7 @@ export default class Repository {
     */
     set(key: string, value: any): any;
     all(): Object;
-    [Ψ__init__]($$?: any): void;
+    [$1]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};

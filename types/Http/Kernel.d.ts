@@ -4,6 +4,10 @@ export default class Kernel {
     get routeMiddleware(): {};
     getAllMiddleware(route: any, _middleware?: any): any[];
     listen(config: any, errorHandler: any, hooks: any, plugins: any, returnMode: any): Promise<any>;
+    /**
+    @param {String} address
+    */
+    storeAddress(address: string): string;
     hasRoutes(router: any, config: any): any[];
     /**
     @param {Object} route

@@ -21,5 +21,18 @@ export default class SessionServiceResolver extends ServiceResolver {
             signed: any;
         };
     };
+    /**
+         * Boot session service resolver.
+         *
+         * @returns {void}
+         */
+    /**
+    *
+         * Boot session service resolver.
+         *
+         * @returns {void}
+         
+    */
+    boot(): void;
 }
 import ServiceResolver from "../../Support/ServiceResolver";
