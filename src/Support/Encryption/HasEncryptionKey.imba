@@ -12,7 +12,7 @@ export default class HasEncryptionKey
 		config = config
 
 	def handle request\FormRequest
-		if !self.config.get
+		if !self.config.get('app.key')
 			throw new MissingAppKeyException 'No application encryption key has been specified.'
 
 		if isEmpty(Encrypter.iv!)
