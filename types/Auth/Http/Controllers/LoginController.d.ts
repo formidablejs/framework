@@ -4,7 +4,8 @@ declare class LoginController extends Controller {
     @param {Function} handler
     */
     static onLogin(handler: Function): Function;
-    static [Ψ__init__](): typeof LoginController;
+    static [$1](): typeof LoginController;
+    constructor(...args: any[]);
     /**
     @param {LoginRequest} request
     */
@@ -12,4 +13,4 @@ declare class LoginController extends Controller {
 }
 import Controller from "../../../Http/Controller";
 import LoginRequest from "../Requests/LoginRequest";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;

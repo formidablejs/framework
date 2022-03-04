@@ -6,8 +6,8 @@ export default class ServiceResolver {
     app: Application;
     boot(): any;
     register(): any;
-    [Ψ__init__]($$?: any): void;
+    [$1]($$?: any): void;
 }
 import Application from "../Foundation/Application";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};

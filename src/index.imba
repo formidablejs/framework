@@ -1,9 +1,11 @@
 import { @context } from './Support/Decorators/context'
 import { @use } from './Support/Decorators/use'
+import { Command } from './Foundation/Console/Command'
 import { Context } from './Foundation/Context'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { handleException, handleMaintenanceMode } from './Foundation/Exceptions/Handler/handleException'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
+import { Prop } from '@formidablejs/console'
 import * as helpers from './Support/Helpers/index'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
 import Application from './Foundation/Application'
@@ -13,6 +15,7 @@ import Authenticate from './Auth/Http/Middleware/Authenticate'
 import AuthenticationServiceResolver from './Auth/AuthenticationServiceResolver'
 import AuthService from './Auth/AuthService'
 import ConfigRepository from './Config/Repository'
+import ConsoleKernel from './Foundation/ConsoleKernel'
 import Controller from './Http/Controller'
 import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
 import CookieServiceResolver from './Http/Cookie/CookieServiceResolver'
@@ -76,7 +79,9 @@ export {
 	Authenticate
 	AuthenticationServiceResolver
 	AuthService
+	Command
 	ConfigRepository
+	ConsoleKernel
 	Context
 	Controller
 	ConvertEmptyStringsToNull
@@ -116,6 +121,7 @@ export {
 	NotFoundException
 	PersonalAccessToken
 	PersonalAccessTokenServiceResolver
+	Prop
 	Redirect
 	Redis
 	RedisServiceResolver

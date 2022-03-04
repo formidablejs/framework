@@ -1,5 +1,6 @@
 import { addExceptionResolver } from './Exceptions/Handler/handleException'
 import { addResolver } from '../Http/Kernel/resolveResponse'
+import { Application as ApplicationConsole } from '@formidablejs/console'
 import { Context } from './Context'
 import appVersion from '../Support/Helpers/version'
 import Bootstrap from './Bootstrap'
@@ -14,9 +15,12 @@ import Kernel from '../Http/Kernel'
 import Migration from '../Database/Migration'
 import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
+import version from '../Support/Helpers/version'
+import type ConsoleKernel from './ConsoleKernel'
 
 const settings = {
 	config\ConfigRepository: null
+	console\ApplicationConsole: null
 	environment: null
 	port: 3000
 	host: '0.0.0.0'
@@ -40,6 +44,7 @@ export default class Application
 	def constructor root\String
 		self.root = root
 
+		settings.console = new ApplicationConsole('Formidable Framework', version!)
 		settings.environment = new EnvironmentRepository(root)
 		settings.migration = new Migration
 		settings.seeder = new Seeder
@@ -78,6 +83,11 @@ export default class Application
 			hooks[hook] = new Array
 
 		hooks[hook].push(handler)
+
+		self
+	
+	def registerCommand command
+		settings.console.register(command)
 
 		self
 
@@ -136,6 +146,14 @@ export default class Application
 		)
 
 		return self
+	
+	def craftsman kernel\ConsoleKernel
+		kernel.registerCommands(settings.console, this)
+
+		{
+			run: do
+				settings.console.run!
+		}
 
 	def prepare
 		self.config = self.make(ConfigRepository)

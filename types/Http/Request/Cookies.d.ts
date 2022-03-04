@@ -1,8 +1,9 @@
 export default class Cookies {
     /**
     @param {FastifyRequest} request
+    @param {FastifyReply} reply
     */
-    constructor(request: FastifyRequest);
+    constructor(request: FastifyRequest, reply: FastifyReply);
     /**
     @param {String} key
     */
@@ -19,17 +20,18 @@ export default class Cookies {
     pull(key: string, default$: any): any;
     /**
     @param {String} key
-    @param {any} value
+    @param {String} value
     */
-    set(key: string, value: any): any;
+    set(key: string, value: string): any;
     /**
     @param {String|String[]} key
     */
     forget(key: string | string[]): any[];
-    [Ψ__init__]($$?: any): void;
-    [Ψref]: any;
+    [$3]($$?: any): void;
+    [$1]: any;
+    [$2]: any;
 }
-declare const Ψ__init__: unique symbol;
-declare const Ψref: unique symbol;
-import type { FastifyRequest } from 'fastify';
+declare const $3: unique symbol;
+declare const $1: unique symbol;
+declare const $2: unique symbol;
 export {};

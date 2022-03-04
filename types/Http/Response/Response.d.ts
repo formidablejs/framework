@@ -19,9 +19,9 @@ export default class Response {
     @param {Number} statusCode
     */
     code(statusCode: number): number;
-    [Ψ__init__]($$?: any): void;
+    [$1]($$?: any): void;
 }
 import JsonResponse from "./JsonResponse";
 import ViewResponse from "./ViewResponse";
-declare const Ψ__init__: unique symbol;
+declare const $1: unique symbol;
 export {};

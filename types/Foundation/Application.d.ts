@@ -17,8 +17,8 @@ export default class Application {
     constructor(root: string);
     bindings: any;
     config: ConfigRepository;
-    hooks: [];
-    plugins: [];
+    hooks: Array;
+    plugins: Array;
     root: string;
     handler: any;
     context: ContextAPI;
@@ -31,6 +31,7 @@ export default class Application {
     routes(): any[];
     fastify(): any;
     addHook(hook: any, handler: any): Application;
+    registerCommand(command: any): Application;
     /**
     @param {Function} plugin
     @param {Object} options
@@ -62,6 +63,12 @@ export default class Application {
     @param {Boolean} returnMode
     */
     initiate(kernel: Kernel, returnMode?: boolean): Promise<Application>;
+    /**
+    @param {ConsoleKernel} kernel
+    */
+    craftsman(kernel: ConsoleKernel): {
+        run: () => any;
+    };
     prepare(): Application;
     resolve(): any[];
     bootResolver(resolver: any): any;
@@ -69,5 +76,8 @@ export default class Application {
     [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
+import type ConsoleKernel from './ConsoleKernel'
+import type ConfigRepository from '../Config/Repository'
+import type { ContextAPI } from './Context'
 declare const Ψ__init__: unique symbol;
 export {};

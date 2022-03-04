@@ -31,5 +31,18 @@ export default class CorsServiceResolver extends ServiceResolver {
     @param {FastifyRequest} request
     */
     isMatchingPath(request: FastifyRequest): boolean;
+    /**
+         * Boot cors service resolver.
+         *
+         * @returns {void}
+         */
+    /**
+    *
+         * Boot cors service resolver.
+         *
+         * @returns {void}
+         
+    */
+    boot(): void;
 }
 import ServiceResolver from "../../Support/ServiceResolver";

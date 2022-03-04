@@ -25,5 +25,18 @@ export default class StaticContentServiceResolver extends ServiceResolver {
         prefix: string;
         decorateReply: boolean;
     };
+    /**
+         * Register public and formidable assets directories as static content paths.
+         *
+         * @returns {void}
+         */
+    /**
+    *
+         * Register public and formidable assets directories as static content paths.
+         *
+         * @returns {void}
+         
+    */
+    boot(): void;
 }
 import ServiceResolver from "../../Support/ServiceResolver";

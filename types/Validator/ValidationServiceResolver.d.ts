@@ -1,4 +1,5 @@
 export default class ValidationServiceResolver extends ServiceResolver {
+    boot(): ValidationServiceResolver;
     nullable(): boolean;
     registeredRules(): {};
     /**
