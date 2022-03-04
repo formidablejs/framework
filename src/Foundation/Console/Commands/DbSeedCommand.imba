@@ -19,7 +19,7 @@ export class DbSeedCommand < Command
 		if results === false then return self.error 'Seeding failed'
 		
 		if isArray(results)
-			results[0].forEach do(seeder) self.info "Seeded: {seeder}"
+			results[0].forEach do(seeder) self.write "<fg:green>Seeded:</fg:green> {seeder}"
 
 			exit!
 		

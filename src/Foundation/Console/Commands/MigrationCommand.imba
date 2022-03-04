@@ -25,7 +25,7 @@ export class MigrationCommand < Command
 			return self.error 'Migration failed'
 		
 		if results[1].length > 0
-			results[1].forEach do(migration) self.info "{action === 'rollback' ? 'Rollback' : 'Migrate'}: {migration}"
+			results[1].forEach do(migration) self.write "<fg:green>{action === 'rollback' ? 'Rollback' : 'Migrate'}:</fg:green> {migration}"
 
 			exit!
 		
