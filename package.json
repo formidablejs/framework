@@ -64,10 +64,10 @@
   },
   "devDependencies": {
     "@formidablejs/mailer": "0.2.0-alpha.1",
-    "@formidablejs/stubs": "^0.2.5",
+    "@formidablejs/stubs": "^0.2.6",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
-    "imba": "^2.0.0-alpha.201",
+    "imba": "^2.0.0-alpha.202",
     "imba-shell": "^0.3.1",
     "jest": "^27.5.1",
     "sqlite3": "git+https://github.com/mapbox/node-sqlite3.git",
