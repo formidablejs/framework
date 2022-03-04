@@ -22,7 +22,7 @@ export class GenerateKeyCommand < Command
 	get envFile
 		let env = self.option('env')
 
-		env = env === undefined && env === null ? '.env' : ".env.{env}"
+		env = env === undefined || env === null ? '.env' : ".env.{env}"
 
 		env
 
