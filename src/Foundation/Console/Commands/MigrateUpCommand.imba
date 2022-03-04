@@ -4,11 +4,11 @@ import { MigrationCommand } from './MigrationCommand'
 export class MigrateUpCommand < MigrationCommand
 
 	get signature
-		'migrate:up {?migration}'
+		'migrate:up {?--migration}'
 
 	get props
 		{
-			migration: Prop.string!.nullable!.description 'Migration file to run'
+			migration: Prop.string!.alias('m').nullable!.description 'Migration file to run'
 		}
 	
 	get description
