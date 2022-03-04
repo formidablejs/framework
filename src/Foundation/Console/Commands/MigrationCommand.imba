@@ -27,8 +27,6 @@ export class MigrationCommand < Command
 		if results[1].length > 0
 			results[1].forEach do(migration) self.info "{action === 'rollback' ? 'Rollback' : 'Migrate'}: {migration}"
 
-			return
+			exit!
 		
 		self.write "<fg:red>No migration to run</fg:red>"
-
-		exit!

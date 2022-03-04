@@ -21,6 +21,6 @@ export class DbSeedCommand < Command
 		if isArray(results)
 			results[0].forEach do(seeder) self.info "Seeded: {seeder}"
 
-			return
+			exit!
 		
 		console.error results
