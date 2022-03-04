@@ -24,7 +24,7 @@
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
     "test": "jest --roots=test",
-    "test:e2e": "cd test/e2e && npm run test",
+    "test:e2e": "cd test/e2e && npm run test && cd ../../ && ./scripts/6-kill-server.sh",
     "test:watch": "jest --watchAll --roots=test",
     "pre-test": "./scripts/0-package.sh && ./scripts/1-fetch.sh && ./scripts/2-install.sh && ./scripts/3-copy-test-files.sh && ./scripts/4-prepare.sh"
   },
