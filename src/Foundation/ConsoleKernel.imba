@@ -5,6 +5,7 @@ import { DbSeedCommand } from './Console/Commands/DbSeedCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
 import { EnvironmentCommand } from './Console/Commands/EnvironmentCommand'
 import { GenerateKeyCommand } from './Console/Commands/GenerateKeyCommand'
+import { MakeCommandCommand } from './Console/Commands/MakeCommandCommand'
 import { MakeConfigCommand } from './Console/Commands/MakeConfigCommand'
 import { MakeControllerCommand } from './Console/Commands/MakeControllerCommand'
 import { MakeExceptionCommand } from './Console/Commands/MakeExceptionCommand'
@@ -53,6 +54,7 @@ export default class ConsoleKernel
 			PackagePublishCommand
 
 			# make commands
+			MakeCommandCommand
 			MakeConfigCommand
 			MakeControllerCommand
 			MakeExceptionCommand
