@@ -17,7 +17,7 @@ export class PackagePublishCommand < Command
 	get props
 		{
 			package: Prop.string!.description 'Package name'
-			tag: Prop.string!.multiple!.description 'Assets you want to publish'
+			tag: Prop.string!.description 'Assets you want to publish'
 			force: Prop.boolean!.default(false).description 'Overwrite any existing files'
 		}
 	
@@ -53,9 +53,7 @@ export class PackagePublishCommand < Command
 		publisher.publish!
 	
 	def handle
-		let tags\String[]|String = self.option('tag')
-
-		if isString(tags) then tags = [ tags ]
+		let tags\String[] = self.option('tag').split(',')
 
 		tags.forEach do(optTag) self.persist optTag
 	
