@@ -15,14 +15,14 @@ export class GenerateKeyCommand < Command
 
 	get props
 		{
-			env: Prop.string!.alias('e').description('Set the application key')
+			env: Prop.string!.alias('e').description('Environment file')
 			show: Prop.boolean!.description('Display the key instead of modifying files')
 		}
 	
 	get envFile
 		let env = self.option('env')
 
-		env = env === undefined ? '.env' : ".env.{env}"
+		env = env === undefined || env === null ? '.env' : ".env.{env}"
 
 		env
 
