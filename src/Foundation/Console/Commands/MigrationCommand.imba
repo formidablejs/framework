@@ -13,7 +13,7 @@ export class MigrationCommand < Command
 		let results
 
 		if action === 'up' || action === 'down'
-			results = await app.migration!.migrate self.option('migration', action === 'up' ? true : false)
+			results = await app.migration!.migrate(self.option('migration'), action === 'up' ? true : false)
 		elif action === 'latest'
 			results = await app.migration!.latest!
 		elif action === 'rollback'
