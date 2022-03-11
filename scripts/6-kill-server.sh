@@ -2,4 +2,4 @@
 
 echo "Killing server..."
 
-kill -9 $(lsof -t -i:3081)
+pm2 stop all

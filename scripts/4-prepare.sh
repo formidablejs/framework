@@ -30,5 +30,5 @@ node craftsman package:publish --package=@formidablejs/framework --tag="auth-ema
 node craftsman package:publish --package=@formidablejs/mailer --tag="components,config" && \
 node craftsman config:cache                                                             && \
 node craftsman migrate:latest                                                           && \
-node craftsman serve --port=3081 --addr > /dev/null                                     && \
+pm2 start "npm run start -- --addr"                                                     && \
 sleep 5
