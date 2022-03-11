@@ -18,16 +18,17 @@ echo
 echo "Prepare application..."
 echo
 
-cd $E2E                                                                                        && \
-cp .env.example .env                                                                           && \
-sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env                                                && \
-sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env                                     && \
-sed -i 's/"jest --roots test"/"jest --roots=test --forceExit"/g' package.json                  && \
-echo "DATABASE_URL=database/db.sqlite" >> .env                                                 && \
-touch database/db.sqlite                                                                       && \
-./node_modules/.bin/craftsman key                                                              && \
-./node_modules/.bin/craftsman publish --package=@formidablejs/framework --tag="auth-emails"    && \
-./node_modules/.bin/craftsman publish --package=@formidablejs/mailer --tag="components,config" && \
-./node_modules/.bin/craftsman cache                                                            && \
-./node_modules/.bin/craftsman build                                                            && \
-./node_modules/.bin/craftsman migrate latest
+cd $E2E                                                                                 && \
+cp .env.example .env                                                                    && \
+sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env                                         && \
+sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env                              && \
+sed -i 's/"jest --roots test"/"jest --roots=test --forceExit"/g' package.json           && \
+echo "DATABASE_URL=database/db.sqlite" >> .env                                          && \
+touch database/db.sqlite                                                                && \
+node craftsman key:generate                                                             && \
+node craftsman package:publish --package=@formidablejs/framework --tag="auth-emails"    && \
+node craftsman package:publish --package=@formidablejs/mailer --tag="components,config" && \
+node craftsman config:cache                                                             && \
+node craftsman migrate:latest                                                           && \
+pm2 start "npm run start -- --addr"                                                     && \
+sleep 5

@@ -72,4 +72,4 @@ export class PackagePublishCommand < Command
 			else
 				copySync file, entry, { overwrite: true }
 
-				self.write existsSync(entry) ? "<fg:green>Published {entry}.</fg:green>" : "<fg:red>{entry} not published.</fg:red>"
+				self.write existsSync(entry) ? "<fg:green>Published</fg:green> {entry}" : "<fg:red>{entry} not published.</fg:red>"
