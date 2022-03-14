@@ -20,7 +20,7 @@ export class ServeCommand < Command
 		}
 		
 	get runtime
-		join process.cwd!, 'node_modules', '.bin', 'imbar'
+		join process.cwd!, 'node_modules', '.bin', 'imbar' + (process.platform === 'win32' ? '.cmd' : '')
 
 	get fallbackPort
 		process.env.PORT !== undefined && process.env.PORT !== null ? process.env.PORT : undefined
@@ -39,10 +39,20 @@ export class ServeCommand < Command
 
 		if self.option('addr') then process.env.FORMIDABLE_ADDRESS_SET = '1'
 
-		spawnSync self.runtime, [...args, 'server.imba'], {
+		const conf = {
 			stdio: 'inherit'
 			cwd: process.cwd!
 		}
+
+		let sh = 'sh'
+		let shFlag = '-c'
+
+		if process.platform === 'win32'
+			sh = process.env.comspec || 'cmd'
+			shFlag = '/d /s /c'
+			conf.windowsVerbatimArguments = true
+
+		spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
 
 	def setEnvVars
 		process.env.FORMIDABLE_PORT = self.option('port', self.fallbackPort)
