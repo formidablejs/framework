@@ -6,7 +6,7 @@ export default class Bootstrap
 	static def cache location\String, config\Object
 		location = path.join process.cwd!, location
 
-		const directory = location.substring(0, location.lastIndexOf '/')
+		const directory = path.join process.cwd!, location.substring(0, location.lastIndexOf '/')
 
 		if !fs.existsSync(directory) then fs.mkdirSync(directory, { recursive: true })
 
