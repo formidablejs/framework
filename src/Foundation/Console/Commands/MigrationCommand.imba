@@ -30,3 +30,5 @@ export class MigrationCommand < Command
 			exit!
 		
 		self.write "<fg:red>No migration to run</fg:red>"
+
+		exit!
