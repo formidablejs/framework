@@ -44,15 +44,14 @@ export class ServeCommand < Command
 			cwd: process.cwd!
 		}
 
-		let sh = 'sh'
-		let shFlag = '-c'
-
 		if process.platform === 'win32'
-			sh = process.env.comspec || 'cmd'
-			shFlag = '/d /s /c'
+			const sh = process.env.comspec || 'cmd'
+			const shFlag = '/d /s /c'
 			conf.windowsVerbatimArguments = true
 
-		spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
+			return spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
+		
+		spawnSync self.runtime, [...args, 'server.imba'], conf
 
 	def setEnvVars
 		process.env.FORMIDABLE_PORT = self.option('port', self.fallbackPort)
