@@ -50,7 +50,7 @@ export default class SessionServiceResolver < ServiceResolver
 		self.app.register session, config
 
 		self.app.addHook 'onRequest', do(request, reply, done)
-			try self.attemptAuth(request, reply)
+			try self.attemptAuth(request, reply, done)
 
 		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
 			if response instanceof ValidationException && request.expectsHtml!
