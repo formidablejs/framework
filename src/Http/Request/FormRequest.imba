@@ -463,7 +463,7 @@ export default class FormRequest
 	def auth
 		const onRequestAuth = self.request.auth
 
-		if isFunction(onRequestAuth) && isFunction(onRequestAuth!.user) && user! !== null
+		if isFunction(onRequestAuth) && isFunction(onRequestAuth!.user) && onRequestAuth!.user! !== null
 			return onRequestAuth!
 
 		return {
