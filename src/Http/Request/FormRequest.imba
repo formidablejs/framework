@@ -1,3 +1,4 @@
+import Auth from '../../Auth/Auth'
 import Cookies from './Cookies'
 import Session from './Session'
 import appVersion from '../../Support/Helpers/version'
@@ -459,7 +460,11 @@ export default class FormRequest
 	 * Get currently authenticated user.
 	 */
 	def auth
-		{
+		const onRequestAuth = self.request.auth
+
+		if onRequestAuth instanceof Auth then return onRequestAuth
+
+		return {
 			user: do null
 			driver: do null
 			check: do false
