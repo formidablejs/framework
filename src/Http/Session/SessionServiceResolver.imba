@@ -49,7 +49,7 @@ export default class SessionServiceResolver < ServiceResolver
 
 		self.app.register session, config
 
-		self.app.addHook 'onRequest', do(request, reply)
+		self.app.addHook 'onRequest', do(request, reply, done)
 			try self.attemptAuth(request, reply)
 
 		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
@@ -59,7 +59,7 @@ export default class SessionServiceResolver < ServiceResolver
 
 				return reply.redirect(request.header('referer')).sent = true
 
-	def attemptAuth request\FastifyRequest, reply\FastifyReply
+	def attemptAuth request\FastifyRequest, reply\FastifyReply, done\Function
 		const token\String = await request.session.personal_access_token
 
 		if !(typeof token === 'string' && !isEmpty(token))
@@ -98,6 +98,8 @@ export default class SessionServiceResolver < ServiceResolver
 				personalAccessToken.token.abilities,
 				handler
 			)
+
+			done!
 
 			return
 
