@@ -34,5 +34,14 @@ export default class SessionServiceResolver extends ServiceResolver {
          
     */
     boot(): void;
+    /**
+    @param {FastifyRequest} request
+    @param {FastifyReply} reply
+    */
+    attemptAuth(request: FastifyRequest, reply: FastifyReply): Promise<void>;
+    /**
+    @param {FastifyRequest} request
+    */
+    remove(request: FastifyRequest): void;
 }
 import ServiceResolver from "../../Support/ServiceResolver";
