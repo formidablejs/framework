@@ -13,8 +13,7 @@ export default class Authenticate
 
 	def handle request\FormRequest, reply\FastifyReply, params\any[]|null
 		# ignore middleware if user is already authenticated.
-
-		if request.auth! instanceof Auth then return
+		if request.auth!.user! !== null then return
 
 		const [ protocol ] = !isEmpty(params[0]) ? params : [ self.defaultProtocol ]
 

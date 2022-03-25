@@ -7,6 +7,7 @@ import AuthorizationException from '../../Auth/Exceptions/AuthorizationException
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isFunction from '../../Support/Helpers/isFunction'
 import isArray from '../../Support/Helpers/isArray'
 import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
@@ -462,7 +463,8 @@ export default class FormRequest
 	def auth
 		const onRequestAuth = self.request.auth
 
-		if onRequestAuth instanceof Auth then return onRequestAuth
+		if isFunction(onRequestAuth) && isFunction(onRequestAuth!.user) && user! !== null
+			return onRequestAuth!
 
 		return {
 			user: do null
