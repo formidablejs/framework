@@ -204,6 +204,8 @@ export default class Driver
 	def createPersonalAccessToken name\String, id\Number
 		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], {
 			protocol: self.protocol
+			ip_address: self.request.ip! || null
+			user_agent: self.request.header('User-Agent', null)
 		})
 
 	get getProvider
