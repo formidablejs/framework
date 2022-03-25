@@ -20,7 +20,7 @@ const settings = {
 
 export default class PersonalAccessToken
 
-	static def create name\String, id\Number, table\String, abilities\Array = ['*']
+	static def create name\String, id\Number, table\String, abilities\Array = ['*'], data\object = {}
 		if !isString(name) then throw new TypeError 'name must be a string.'
 
 		if !isNumber(id) then throw new TypeError 'id must be an int.'
@@ -43,7 +43,12 @@ export default class PersonalAccessToken
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
-				await jwt.sign({ id: self.getEncryper!.encrypt(token) }, self.getEncryper!.key!, {
+				if typeof data === 'object' && !isEmpty(data)
+					data = Object.assign(data, { id: self.getEncryper!.encrypt(token) })
+				else
+					data = { id: self.getEncryper!.encrypt(token) }
+
+				await jwt.sign(data, self.getEncryper!.key!, {
 					issuer: settings.config.get('app.url')
 				})
 
