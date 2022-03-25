@@ -1,6 +1,7 @@
 import Auth from '../../Auth'
 import DriverManager from '../../DriverManager'
 import isEmpty from '../../../Support/Helpers/isEmpty'
+import Protocol from '../../Protocol'
 import type { FastifyReply } from 'fastify'
 import type FormRequest from '../../../Http/Request/FormRequest'
 import type Repository from '../../../Config/Repository'
@@ -11,6 +12,10 @@ export default class Authenticate
 		this.config = config
 
 	def handle request\FormRequest, reply\FastifyReply, params\any[]|null
+		# ignore middleware if user is already authenticated.
+
+		if request.auth! instanceof Auth then return
+
 		const [ protocol ] = !isEmpty(params[0]) ? params : [ self.defaultProtocol ]
 
 		self.configure protocol
@@ -29,11 +34,4 @@ export default class Authenticate
 		self.config.get('auth.defaults.protocol', 'api')
 
 	def configure protocol\String
-		const fetchedProtocol = self.config.get "auth.protocols.{protocol}.provider"
-
-		if isEmpty(fetchedProtocol)
-			throw new Error "{protocol} is not a valid authentication protocol"
-
-		const provider = self.config.get "auth.providers.{fetchedProtocol}"
-
-		Auth.setProvider provider
+		Protocol.make(self.config).configure(protocol)
