@@ -37,8 +37,9 @@ export default class SessionServiceResolver extends ServiceResolver {
     /**
     @param {FastifyRequest} request
     @param {FastifyReply} reply
+    @param {Function} done
     */
-    attemptAuth(request: FastifyRequest, reply: FastifyReply): Promise<void>;
+    attemptAuth(request: FastifyRequest, reply: FastifyReply, done: Function): Promise<void>;
     /**
     @param {FastifyRequest} request
     */
