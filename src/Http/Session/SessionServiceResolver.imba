@@ -49,8 +49,8 @@ export default class SessionServiceResolver < ServiceResolver
 
 		self.app.register session, config
 
-		self.app.addHook 'onRequest', do(request, reply, done)
-			try self.attemptAuth(request, reply, done)
+		self.app.addHook 'onRequest', do(request, reply)
+			try await self.attemptAuth(request, reply)
 
 		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
 			if response instanceof ValidationException && request.expectsHtml!
@@ -59,7 +59,7 @@ export default class SessionServiceResolver < ServiceResolver
 
 				return reply.redirect(request.header('referer')).sent = true
 
-	def attemptAuth request\FastifyRequest, reply\FastifyReply, done\Function
+	def attemptAuth request\FastifyRequest, reply\FastifyReply
 		const token\String = await request.session.personal_access_token
 
 		if !(typeof token === 'string' && !isEmpty(token))
@@ -98,8 +98,6 @@ export default class SessionServiceResolver < ServiceResolver
 				personalAccessToken.token.abilities,
 				handler
 			)
-
-			done!
 
 			return
 
