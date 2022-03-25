@@ -31,4 +31,5 @@ export default class Session {
 }
 declare const $2: unique symbol;
 declare const $1: unique symbol;
+import type { FastifyRequest } from 'fastify';
 export {};

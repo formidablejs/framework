@@ -16,12 +16,12 @@ export default class Application {
     */
     constructor(root: string);
     bindings: any;
-    config: any;
-    hooks: any;
-    plugins: any;
+    config: ConfigRepository;
+    hooks: Array;
+    plugins: Array;
     root: string;
     handler: any;
-    context: any;
+    context: ContextAPI;
     get version(): any;
     /**
     @param {Number} default
@@ -73,8 +73,11 @@ export default class Application {
     resolve(): any[];
     bootResolver(resolver: any): any;
     registerResolver(resolver: any): any;
-    [$1]($$?: any): void;
+    [Ψ__init__]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
-declare const $1: unique symbol;
+import type ConsoleKernel from './ConsoleKernel'
+import type ConfigRepository from '../Config/Repository'
+import type { ContextAPI } from './Context'
+declare const Ψ__init__: unique symbol;
 export {};
