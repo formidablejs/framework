@@ -39,6 +39,7 @@ export default class PersonalAccessToken
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
+				payload: Encrypter.encrypt(data)
 			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
