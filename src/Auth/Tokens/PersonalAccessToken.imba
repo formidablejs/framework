@@ -64,6 +64,8 @@ export default class PersonalAccessToken
 
 		if !decodedToken then return response
 
+		const sessionToken = token
+
 		token = await self.getDatabase!.table('personal_access_tokens')
 			.where(id: self.getEncryper!.decrypt(decodedToken.id))
 			.first!
@@ -73,7 +75,7 @@ export default class PersonalAccessToken
 		let tokenable
 
 		if !isEmpty(settings.event)
-			const results = await settings.event(token.tokenable_type, token.tokenable_id, decodedToken, protocol)
+			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol, { token: decodedToken, session: sessionToken })
 
 			if !isEmpty(results) then tokenable = results
 
