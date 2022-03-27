@@ -205,7 +205,7 @@ export default class Driver
 		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], {
 			protocol: self.protocol
 			ip_address: self.request.ip! || null
-			user_agent: self.request.header('User-Agent', null)
+			user_agent: self.request.header('user-agent', null)
 		})
 
 	get getProvider
