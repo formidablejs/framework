@@ -73,7 +73,7 @@ export default class PersonalAccessToken
 		let tokenable
 
 		if !isEmpty(settings.event)
-			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol)
+			const results = await settings.event(token.tokenable_type, token.tokenable_id, decodedToken, protocol)
 
 			if !isEmpty(results) then tokenable = results
 
