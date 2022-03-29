@@ -20,7 +20,7 @@ const settings = {
 
 export default class PersonalAccessToken
 
-	static def create name\String, id\Number, table\String, abilities\Array = ['*']
+	static def create name\String, id\Number, table\String, abilities\Array = ['*'], data\object = {}
 		if !isString(name) then throw new TypeError 'name must be a string.'
 
 		if !isNumber(id) then throw new TypeError 'id must be an int.'
@@ -39,11 +39,17 @@ export default class PersonalAccessToken
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
+				payload: Encrypter.encrypt(data)
 			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
-				await jwt.sign({ id: self.getEncryper!.encrypt(token) }, self.getEncryper!.key!, {
+				if typeof data === 'object' && !isEmpty(data)
+					data = Object.assign(data, { id: self.getEncryper!.encrypt(token) })
+				else
+					data = { id: self.getEncryper!.encrypt(token) }
+
+				await jwt.sign(data, self.getEncryper!.key!, {
 					issuer: settings.config.get('app.url')
 				})
 
@@ -59,6 +65,8 @@ export default class PersonalAccessToken
 
 		if !decodedToken then return response
 
+		const sessionToken = token
+
 		token = await self.getDatabase!.table('personal_access_tokens')
 			.where(id: self.getEncryper!.decrypt(decodedToken.id))
 			.first!
@@ -68,7 +76,7 @@ export default class PersonalAccessToken
 		let tokenable
 
 		if !isEmpty(settings.event)
-			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol)
+			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol, { token: decodedToken, session: sessionToken })
 
 			if !isEmpty(results) then tokenable = results
 

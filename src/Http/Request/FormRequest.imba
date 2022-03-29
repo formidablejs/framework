@@ -1,3 +1,4 @@
+import Auth from '../../Auth/Auth'
 import Cookies from './Cookies'
 import Session from './Session'
 import appVersion from '../../Support/Helpers/version'
@@ -6,6 +7,7 @@ import AuthorizationException from '../../Auth/Exceptions/AuthorizationException
 import dot from '../../Support/Helpers/dotNotation'
 import FileCollection from './FileCollection'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isFunction from '../../Support/Helpers/isFunction'
 import isArray from '../../Support/Helpers/isArray'
 import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
@@ -459,7 +461,12 @@ export default class FormRequest
 	 * Get currently authenticated user.
 	 */
 	def auth
-		{
+		const onRequestAuth = self.request.auth
+
+		if isFunction(onRequestAuth) && isFunction(onRequestAuth!.user) && onRequestAuth!.user! !== null
+			return onRequestAuth!
+
+		return {
 			user: do null
 			driver: do null
 			check: do false

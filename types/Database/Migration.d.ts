@@ -9,6 +9,7 @@ export default class Migration {
     */
     migrate(name?: string | null, up?: boolean): any;
     latest(): any;
+    fresh(): Promise<any>;
     /**
     @param {Boolean} all
     */

@@ -66,6 +66,10 @@ export default class AuthService {
     /**
     @param {Function} callback
     */
+    static onCreateUser(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
     static onRegistered(callback: Function): typeof AuthService;
     /**
     @param {Function} callback

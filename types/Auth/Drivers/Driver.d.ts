@@ -2,6 +2,10 @@ export default class Driver {
     /**
     @param {Function} handler
     */
+    static onCreateUser(handler: Function): Function;
+    /**
+    @param {Function} handler
+    */
     static onRegistered(handler: Function): Function;
     /**
     @param {Function} handler
@@ -42,28 +46,32 @@ export default class Driver {
     */
     attempt(name: string, user: any): Promise<{
         token: any;
-        tokenable: any;
+        tokenable: any; /**
+        @param {Object} user
+        */
     }>;
     /**
     @param {String} token
     */
     getPersonalAccessToken(token?: string): Promise<{
         token: any;
-        tokenable: any;
+        tokenable: any; /**
+        @param {Object} user
+        */
     }>;
     /**
     @param {Object} token
     */
     usingPersonalAccessToken(token: any): Promise<any>;
-    verify(): Driver;
+    verify(): any;
     /**
     @param {Object} body
     */
-    authenticate(body: any): Driver;
+    authenticate(body: any): any;
     /**
     @param {Object} body
     */
-    register(body: any): Driver;
+    register(body: any): any;
     /**
     @param {Object} user
     */

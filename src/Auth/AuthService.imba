@@ -99,6 +99,11 @@ export default class AuthService
 
 		self
 
+	static def onCreateUser callback\Function
+		Driver.onCreateUser callback
+
+		self
+
 	static def onRegistered callback\Function
 		Driver.onRegistered callback
 
