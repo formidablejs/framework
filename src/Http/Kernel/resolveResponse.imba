@@ -1,5 +1,4 @@
 import type FormRequest from '../Request/FormRequest'
-import { Mailable } from '@formidablejs/mailer'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import JsonResponse from '../Response/JsonResponse'
 import Redirect from '../Redirect/Redirect'
@@ -26,9 +25,6 @@ export default def resolveResponse response\any, request\FormRequest, reply, ski
 		return await response.toJson(reply)
 	elif response instanceof ViewResponse
 		return await response.toView(request, reply)
-	elif response instanceof Mailable
-		reply.header('content-type', 'text/html')
-		return await response.render!
 	elif response instanceof Response
 		return await response.handle(reply)
 	elif response === undefined
