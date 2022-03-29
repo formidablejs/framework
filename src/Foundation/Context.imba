@@ -1,8 +1,14 @@
-import isString from '../Support/Helpers/isString'
-import isEmpty from '../Support/Helpers/isEmpty'
+import { Mail } from '@formidablejs/mailer'
+import Database from '../Database/Database'
 import isClass from '../Support/Helpers/isClass'
+import isEmpty from '../Support/Helpers/isEmpty'
+import isString from '../Support/Helpers/isString'
 
-const registered = {}
+const registered = {
+	Database: Database
+	DB: Database
+	Mail: Mail
+}
 
 class ContextAPI
 
