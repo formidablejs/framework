@@ -1,4 +1,5 @@
 const { default: asObject }  = require './asObject'
+const { default: bind }  = require './bind'
 const { default: config }  = require './config'
 const { default: decrypt } = require './decrypt'
 const { default: die }  = require './die'
@@ -35,6 +36,7 @@ const pluralize = require 'pluralize'
 
 export {
 	asObject
+	bind
 	config
 	decrypt
 	die
