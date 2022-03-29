@@ -1,7 +1,8 @@
-import isEmpty from '../Helpers/isEmpty'
 import { FastifyRequest, FastifyReply } from 'fastify'
+import Bind from '../../Database/Bind'
 import FormRequest from '../../Http/Request/FormRequest'
 import isClass from '../Helpers/isClass'
+import isEmpty from '../Helpers/isEmpty'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -32,7 +33,10 @@ export def @use target, key, descriptor
 		await definition.forEach do(object, key)
 			let response = null
 
-			if object == Request
+			if object instanceof Bind
+				response = object.handle(request, key)
+
+			elif object == Request
 				response = request
 				parsed.request = true
 
