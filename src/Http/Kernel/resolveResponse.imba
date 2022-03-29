@@ -2,7 +2,6 @@ import type FormRequest from '../Request/FormRequest'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import JsonResponse from '../Response/JsonResponse'
 import Redirect from '../Redirect/Redirect'
-import Response from '../Response/Response'
 import ViewResponse from '../Response/ViewResponse'
 
 const settings = { resolvers: [] }
@@ -25,8 +24,6 @@ export default def resolveResponse response\any, request\FormRequest, reply, ski
 		return await response.toJson(reply)
 	elif response instanceof ViewResponse
 		return await response.toView(request, reply)
-	elif response instanceof Response
-		return await response.handle(reply)
 	elif response === undefined
 		return null
 	else
