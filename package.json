@@ -47,7 +47,7 @@
     "html-escaper": "^3.0.3",
     "inquirer": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.95.15",
+    "knex": "^1.0.4",
     "knex-paginate": "^3.0.0",
     "memorystore": "^1.6.6",
     "ms": "^2.1.3",
