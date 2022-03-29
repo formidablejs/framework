@@ -34,7 +34,6 @@
     "@formidablejs/console": "^0.0.4",
     "argon2": "^0.28.3",
     "bcrypt": "^5.0.1",
-    "bookshelf": "^1.2.0",
     "connect-redis": "^6.0.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.27.1",
