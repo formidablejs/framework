@@ -2,7 +2,6 @@ import isEmpty from '../Helpers/isEmpty'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import FormRequest from '../../Http/Request/FormRequest'
 import isClass from '../Helpers/isClass'
-import Model from '../../Database/Model'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -33,18 +32,7 @@ export def @use target, key, descriptor
 		await definition.forEach do(object, key)
 			let response = null
 
-			if Model.isPrototypeOf(object)
-				const param  = Object.keys(request.request.params)[key]
-
-				if !isEmpty(param)
-					const value  = Object.values(request.request.params)[key]
-					const column = param.split(':')[1] ?? (object.routeKeyName ?? 'id')
-
-					response = new object({ [column]: value }).fetch!
-				else
-					response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
-
-			elif object == Request
+			if object == Request
 				response = request
 				parsed.request = true
 
