@@ -182,8 +182,10 @@ export default class FileCollection {
          
     */
     get(): File[];
+    [$2]($$?: {}): void;
     [$1]($$?: any): void;
 }
 import File from "./File";
+declare const $2: unique symbol;
 declare const $1: unique symbol;
 export {};

@@ -26,10 +26,11 @@ export default class Session {
     @param {String|String[]} key
     */
     forget(key: string | string[]): any[];
+    [$3]($$?: {}): void;
     [$2]($$?: any): void;
     [$1]: any;
 }
+declare const $3: unique symbol;
 declare const $2: unique symbol;
 declare const $1: unique symbol;
-import type { FastifyRequest } from 'fastify';
 export {};

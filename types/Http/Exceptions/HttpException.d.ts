@@ -11,6 +11,8 @@ declare class HttpException extends Error {
     initMessage(): string;
     initName(): string;
     getStatus(): number;
+    [$2]($$?: {}): void;
     [$1]($$?: any, ...args: any[]): void;
 }
+declare const $2: unique symbol;
 declare const $1: unique symbol;

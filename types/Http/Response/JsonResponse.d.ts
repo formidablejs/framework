@@ -14,7 +14,9 @@ export default class JsonResponse {
     */
     code(statusCode?: number): JsonResponse;
     toJson(reply: any): any;
+    [$2]($$?: {}): void;
     [$1]($$?: any): void;
 }
+declare const $2: unique symbol;
 declare const $1: unique symbol;
 export {};
