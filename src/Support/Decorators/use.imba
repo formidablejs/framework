@@ -113,6 +113,3 @@ export def @use target, key, descriptor
 		return value.apply(this, args)
 
 	return descriptor
-
-export def use
-	@use
