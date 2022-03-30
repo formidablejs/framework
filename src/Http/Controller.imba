@@ -1,3 +1,4 @@
+import { use } from '../Support/Decorators/use'
 import bind from '../Support/Helpers/bind'
 import HttpException from './Exceptions/HttpException'
 import NotFoundException from './Exceptions/NotFoundException'
@@ -6,6 +7,8 @@ import ViewResponse from './Response/ViewResponse'
 import type FormRequest from './Request/FormRequest'
 import type Request from './Request/FormRequest'
 import type View from './View/View'
+
+global.@use = use!
 
 export default class Controller
 

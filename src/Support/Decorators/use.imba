@@ -1,10 +1,10 @@
-import bind from '../Helpers/bind'
-import isString from '../Helpers/isString'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import Bind from '../../Database/Bind'
+import bind from '../Helpers/bind'
 import FormRequest from '../../Http/Request/FormRequest'
 import isClass from '../Helpers/isClass'
 import isEmpty from '../Helpers/isEmpty'
+import isString from '../Helpers/isString'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -113,3 +113,6 @@ export def @use target, key, descriptor
 		return value.apply(this, args)
 
 	return descriptor
+
+export def use
+	@use
