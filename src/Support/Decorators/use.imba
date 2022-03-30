@@ -44,14 +44,14 @@ export def @use target, key, descriptor
 			elif object === Number
 				const param = Object.values(request.params!)[key] || undefined
 
-				if !isNaN(param) then throw new TypeError "Argument {key} must be of the type Number."
+				if isNaN(param) then throw new TypeError "Argument {key} must be of the type Number."
 
 				response = param
 
 			elif object === String
 				const param = Object.values(request.params!)[key] || undefined
 
-				if isNaN(param) && !isString(param) then throw new TypeError "Argument {key} must be of the type String."
+				if !isNaN(param) then throw new TypeError "Argument {key} must be of the type String."
 
 				response = param
 
