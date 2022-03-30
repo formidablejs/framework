@@ -38,20 +38,25 @@ export def @use target, key, descriptor
 			if isString(object) && object.substring(0, 'table:'.length) === 'table:'
 				response = bind(object.split(':')[1]).handle(request, key)
 
+			elif isString(object) && object.substring(0, 'param:'.length) === 'param:'
+				const param = object.split(':')[1]
+
+				response = request.param(param) || undefined
+				
 			elif isString(object) && object === 'param'
 				response = Object.values(request.params!)[key] || undefined
 
 			elif object === Number
 				const param = Object.values(request.params!)[key] || undefined
 
-				if isNaN(param) then throw new TypeError "Argument {key} must be of the type Number."
+				if isNaN(param) then throw new TypeError "Argument {key++} must be of the type Number."
 
 				response = param
 
 			elif object === String
 				const param = Object.values(request.params!)[key] || undefined
 
-				if !isNaN(param) then throw new TypeError "Argument {key} must be of the type String."
+				if !isNaN(param) then throw new TypeError "Argument {key++} must be of the type String."
 
 				response = param
 
@@ -79,7 +84,7 @@ export def @use target, key, descriptor
 					request.request,
 					request.route,
 					reply.raw,
-					request.configRepository
+					request.config
 				)
 
 				if !isEmpty(request.auth)
