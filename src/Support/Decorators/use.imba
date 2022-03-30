@@ -41,6 +41,20 @@ export def @use target, key, descriptor
 			elif isString(object) && object === 'param'
 				response = Object.values(request.params!)[key] || undefined
 
+			elif object === Number
+				const param = Object.values(request.params!)[key] || undefined
+
+				if !isNaN(param) then throw new TypeError "Argument {key} must be of the type Number."
+
+				response = param
+
+			elif object === String
+				const param = Object.values(request.params!)[key] || undefined
+
+				if isNaN(param) && !isString(param) then throw new TypeError "Argument {key} must be of the type String."
+
+				response = param
+
 			elif object instanceof Bind
 				response = object.handle(request, key)
 
