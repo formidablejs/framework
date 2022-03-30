@@ -1,3 +1,5 @@
+import bind from '../Helpers/bind'
+import isString from '../Helpers/isString'
 import { FastifyRequest, FastifyReply } from 'fastify'
 import Bind from '../../Database/Bind'
 import FormRequest from '../../Http/Request/FormRequest'
@@ -33,7 +35,13 @@ export def @use target, key, descriptor
 		await definition.forEach do(object, key)
 			let response = null
 
-			if object instanceof Bind
+			if isString(object) && object.substring(0, 'table:'.length) === 'table:'
+				response = bind(object.split(':')[1]).handle(request, key)
+
+			elif isString(object) && object === 'param'
+				response = Object.values(request.params!)[key] || undefined
+
+			elif object instanceof Bind
 				response = object.handle(request, key)
 
 			elif object == Request
