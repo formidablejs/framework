@@ -38,6 +38,11 @@ export def @use target, key, descriptor
 			if isString(object) && object.substring(0, 'table:'.length) === 'table:'
 				response = bind(object.split(':')[1]).handle(request, key)
 
+			elif isString(object) && object.substring(0, 'query:'.length) === 'query:'
+				const query = object.split(':')[1]
+
+				response = request.query(query, undefined) || undefined
+
 			elif isString(object) && object.substring(0, 'param:'.length) === 'param:'
 				const param = object.split(':')[1]
 
