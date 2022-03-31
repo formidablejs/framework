@@ -1,5 +1,5 @@
+import { DB } from '@formidablejs/framework'
 import { FormRequest } from '@formidablejs/framework'
-import { Post } from '../../Models/Post'
 
 export class StorePostRequest < FormRequest
 
@@ -12,6 +12,6 @@ export class StorePostRequest < FormRequest
 		}
 
 	def persist
-		new Post({
+		DB.table('posts').insert({
 			body: this.input('body')
-		}).save!
+		})

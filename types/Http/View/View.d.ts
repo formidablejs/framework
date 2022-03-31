@@ -50,9 +50,11 @@ export default class View {
     handle(): any;
     render(): any;
     make(): Promise<string>;
+    [$3]($$?: {}): void;
     [$2]($$?: any): void;
     [$1]: any;
 }
+declare const $3: unique symbol;
 declare const $2: unique symbol;
 declare const $1: unique symbol;
 export {};

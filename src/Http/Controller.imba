@@ -1,3 +1,4 @@
+import bind from '../Support/Helpers/bind'
 import HttpException from './Exceptions/HttpException'
 import NotFoundException from './Exceptions/NotFoundException'
 import Validator from '../Validator/Validator'
@@ -35,3 +36,9 @@ export default class Controller
 	 */
 	def validate request\FormRequest|Request, rules\Object = null
 		Validator.make(request.input!, rules)
+
+	/**
+	 * Bind route param.
+	 */
+	def bind table\String, first\Boolean = true
+		bind(table, first)

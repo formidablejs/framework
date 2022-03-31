@@ -1,7 +1,5 @@
-import bookshelf from 'bookshelf'
 import config from '../Support/Helpers/config'
 import isEmpty from '../Support/Helpers/isEmpty'
-import knex from 'knex'
 
 class Config
 
@@ -55,10 +53,6 @@ class Config
 			return Object.assign(connection, useNullAsDefault)
 
 		{}
-
-	static get bookshelf
-		try
-			bookshelf(knex(self.make!))
 
 export { Config }
 

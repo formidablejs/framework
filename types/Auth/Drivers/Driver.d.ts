@@ -46,18 +46,14 @@ export default class Driver {
     */
     attempt(name: string, user: any): Promise<{
         token: any;
-        tokenable: any; /**
-        @param {Object} user
-        */
+        tokenable: any;
     }>;
     /**
     @param {String} token
     */
     getPersonalAccessToken(token?: string): Promise<{
         token: any;
-        tokenable: any; /**
-        @param {Object} user
-        */
+        tokenable: any;
     }>;
     /**
     @param {Object} token

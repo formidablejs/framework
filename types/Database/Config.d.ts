@@ -7,5 +7,4 @@ export class Config {
     /** @type {string}*/
     static get client(): string;
     static make(): {};
-    static get bookshelf(): any;
 }

@@ -49,5 +49,16 @@ export default class Controller {
     @param {Object} rules
     */
     validate(request: FormRequest | Request, rules?: any): any;
+    /**
+         * Bind route param.
+         */
+    /**
+    *
+         * Bind route param.
+         
+    @param {String} table
+    @param {Boolean} first
+    */
+    bind(table: string, first?: boolean): import("../Database/Bind").default;
 }
 import ViewResponse from "./Response/ViewResponse";

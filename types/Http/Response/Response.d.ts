@@ -19,9 +19,11 @@ export default class Response {
     @param {Number} statusCode
     */
     code(statusCode: number): number;
+    [$2]($$?: {}): void;
     [$1]($$?: any): void;
 }
 import JsonResponse from "./JsonResponse";
 import ViewResponse from "./ViewResponse";
+declare const $2: unique symbol;
 declare const $1: unique symbol;
 export {};

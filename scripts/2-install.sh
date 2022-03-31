@@ -22,5 +22,5 @@ echo
 cd $E2E                           && \
 npm i --legacy-peer-deps          && \
 npm i -g pm2                      && \
-npm i sqlite3 --save              && \
+npm i @vscode/sqlite3 --save      && \
 npm i $PACKAGE --legacy-peer-deps
