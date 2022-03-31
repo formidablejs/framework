@@ -22,6 +22,7 @@ export default class Application {
     root: string;
     handler: any;
     context: ContextAPI;
+    serverConfig: any;
     get version(): any;
     /**
     @param {Number} default
@@ -29,6 +30,10 @@ export default class Application {
     port(default$?: number): number;
     host(default$?: string): string;
     routes(): any[];
+    /**
+    @param {Object} config
+    */
+    server(config: any): Application;
     fastify(): any;
     addHook(hook: any, handler: any): Application;
     registerCommand(command: any): Application;
@@ -73,11 +78,13 @@ export default class Application {
     resolve(): any[];
     bootResolver(resolver: any): any;
     registerResolver(resolver: any): any;
-    [Ψ__init__]($$?: any): void;
+    [$2]($$?: {}): void;
+    [$1]($$?: any): void;
 }
 import Kernel from "../Http/Kernel";
 import type ConsoleKernel from './ConsoleKernel'
 import type ConfigRepository from '../Config/Repository'
 import type { ContextAPI } from './Context'
-declare const Ψ__init__: unique symbol;
+declare const $2: unique symbol;
+declare const $1: unique symbol;
 export {};
