@@ -1,17 +1,17 @@
 import { @use } from '@formidablejs/framework'
 import { Request } from '@formidablejs/framework'
 import { Controller } from './Controller'
-import { Post } from '../../Models/Post'
+import { DB } from '@formidablejs/framework'
 import { StorePostRequest } from '../Request/StorePostRequest'
 
 export class PostController < Controller
 
 	def index
-		Post.fetchAll!
+		await DB.table('posts')
 
 	@use(Request)
 	def show request\Request
-		const post = await Post.find(request.param('id'))
+		const post = await DB.table('posts').where('id', request.param('id')).first!
 
 		if !post then self.notFound 'Post not found.'
 
