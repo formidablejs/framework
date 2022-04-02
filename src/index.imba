@@ -15,6 +15,7 @@ import Authenticate from './Auth/Http/Middleware/Authenticate'
 import AuthenticationServiceResolver from './Auth/AuthenticationServiceResolver'
 import AuthService from './Auth/AuthService'
 import ConfigRepository from './Config/Repository'
+import Console from './Foundation/Console'
 import ConsoleKernel from './Foundation/ConsoleKernel'
 import Controller from './Http/Controller'
 import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
@@ -80,6 +81,7 @@ export {
 	AuthService
 	Command
 	ConfigRepository
+	Console
 	ConsoleKernel
 	Context
 	Controller
