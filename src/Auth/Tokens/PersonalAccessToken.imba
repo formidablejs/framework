@@ -46,11 +46,11 @@ export default class PersonalAccessToken
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
 				if typeof data === 'object' && !isEmpty(data)
-					data = Object.assign(data, { id: self.getEncryper!.encrypt(token) })
+					data = Object.assign(data, { id: self.getEncrypter!.encrypt(token) })
 				else
-					data = { id: self.getEncryper!.encrypt(token) }
+					data = { id: self.getEncrypter!.encrypt(token) }
 
-				await jwt.sign(data, self.getEncryper!.key!, {
+				await jwt.sign(data, self.getEncrypter!.key!, {
 					issuer: settings.config.get('app.url')
 				})
 
@@ -69,7 +69,7 @@ export default class PersonalAccessToken
 		const sessionToken = token
 
 		token = await self.getDatabase!.table('personal_access_tokens')
-			.where(id: self.getEncryper!.decrypt(decodedToken.id))
+			.where(id: self.getEncrypter!.decrypt(decodedToken.id))
 			.first!
 
 		if isEmpty(token) then return response
@@ -108,20 +108,20 @@ export default class PersonalAccessToken
 		const decodedToken = await self.verify(token)
 
 		await self.getDatabase!.table('personal_access_tokens')
-			.where(id: self.getEncryper!.decrypt(decodedToken.id))
+			.where(id: self.getEncrypter!.decrypt(decodedToken.id))
 			.del!
 
 	static def verify token\String
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
-		try return await jwt.verify(token, self.getEncryper!.key!)
+		try return await jwt.verify(token, self.getEncrypter!.key!)
 
 		false
 
 	static def getDatabase
 		settings.database ? settings.database : Database
 
-	static def getEncryper
+	static def getEncrypter
 		settings.encryption ? settings.encryption : Encrypter
 
 	static def setDatabase database\Database
