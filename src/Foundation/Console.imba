@@ -12,7 +12,7 @@ export default class Console
 
 	def constructor runtime\String, console\String
 		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imbar')
-		self.console = console || join(process.cwd!, 'bootstrap', 'console.imba')
+		self.console = console || join('bootstrap', 'console.imba')
 	
 	static def make runtime, console
 		new Console(runtime, console)
