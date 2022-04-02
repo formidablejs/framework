@@ -73,10 +73,8 @@ export default class Kernel
 
 		return list
 
-	def listen config, errorHandler, hooks, plugins, returnMode
-		const router = fastify({
-			ignoreTrailingSlash: true
-		})
+	def listen config, errorHandler, hooks, plugins, serverConfig, returnMode
+		const router = fastify(serverConfig)
 
 		hasContentTypes(router)
 

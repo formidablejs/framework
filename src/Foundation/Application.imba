@@ -40,6 +40,9 @@ export default class Application
 	prop root = null
 	prop handler\ExceptionHandler = null
 	prop context\Context = Context
+	prop serverConfig\Object = {
+		ignoreTrailingSlash: true
+	}
 
 	def constructor root\String
 		self.root = root
@@ -74,6 +77,11 @@ export default class Application
 
 	def routes
 		Route.all!
+
+	def server config\Object
+		self.serverConfig = config
+
+		self
 
 	def fastify
 		settings.server
@@ -142,6 +150,7 @@ export default class Application
 			self.handler,
 			self.hooks,
 			self.plugins,
+			self.serverConfig,
 			returnMode
 		)
 
