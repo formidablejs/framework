@@ -38,8 +38,8 @@ export default class Driver
 		this.params = params
 		this.config = config
 
-	def attempt name\String, user\Object
-		const token = await self.createPersonalAccessToken(name, user.id)
+	def attempt name\String, user\Object, ttl\Number|null = null
+		const token = await self.createPersonalAccessToken(name, user.id, ttl)
 
 		self.request.request.session.personal_access_token = token
 
@@ -201,8 +201,8 @@ export default class Driver
 	def destroy token\String = null, body\Object = new Object
 		await PersonalAccessToken.destroy(!isEmpty(token) ? token : self.request.bearerToken!)
 
-	def createPersonalAccessToken name\String, id\Number
-		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], {
+	def createPersonalAccessToken name\String, id\Number, ttl\Number|null = null
+		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], ttl, {
 			protocol: self.protocol
 			ip_address: self.request.ip! || null
 			user_agent: self.request.header('user-agent', null)

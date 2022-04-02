@@ -20,7 +20,7 @@ const settings = {
 
 export default class PersonalAccessToken
 
-	static def create name\String, id\Number, table\String, abilities\Array = ['*'], data\object = {}
+	static def create name\String, id\Number, table\String, abilities\Array = ['*'], ttl\Number|null = null, data\object = {}
 		if !isString(name) then throw new TypeError 'name must be a string.'
 
 		if !isNumber(id) then throw new TypeError 'id must be an int.'
@@ -40,6 +40,7 @@ export default class PersonalAccessToken
 				name: name
 				abilities: JSON.stringify(abilities)
 				payload: Encrypter.encrypt(data)
+				ttl: ttl
 			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
