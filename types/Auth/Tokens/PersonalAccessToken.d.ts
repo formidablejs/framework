@@ -32,7 +32,7 @@ export default class PersonalAccessToken {
     */
     static verify(token: string): Promise<any>;
     static getDatabase(): any;
-    static getEncryper(): any;
+    static getEncrypter(): any;
     /**
     @param {Database} database
     */
