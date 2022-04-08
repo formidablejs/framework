@@ -82,14 +82,15 @@ export default class AuthService {
     /**
     @param {Mailable} mailer
     */
-    static verificationMailer(mailer: new ($$?: any) => import("@formidablejs/mailer/types/Mailable")): typeof AuthService;
+    static verificationMailer(mailer: Mailable): typeof AuthService;
     /**
     @param {Mailable} mailer
     */
-    static resetPasswordMailer(mailer: new ($$?: any) => import("@formidablejs/mailer/types/Mailable")): typeof AuthService;
+    static resetPasswordMailer(mailer: Mailable): typeof AuthService;
     /**
     @param {Object} config
     */
     static routes(config?: any): typeof Route;
 }
+import { Mailable } from "@formidablejs/mailer";
 import Route from "../Http/Router/Route";
