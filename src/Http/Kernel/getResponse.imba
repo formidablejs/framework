@@ -1,12 +1,13 @@
 import isClass from '../../Support/Helpers/isClass'
 
 export default def getResponse route\Object, request, reply
-	if route.action instanceof Function then return await route.action request, reply
+	if route.action instanceof Function && !isClass(route.action)
+		return await route.action request, reply
 
 	let controller
 	let action
 
-	if isClass(route.action)
+	if !Array.isArray(route.action)
 		controller = new route.action
 		action = '__invoke'
 	else
