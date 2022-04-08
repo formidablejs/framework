@@ -1,3 +1,4 @@
+import { SessionPruneExpiredCommand } from './Console/Commands/SessionPruneExpiredCommand'
 import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
 import { ConfigCacheCommand } from './Console/Commands/ConfigCacheCommand'
 import { ConfigClearCommand } from './Console/Commands/ConfigClearCommand'
@@ -49,6 +50,9 @@ export default class ConsoleKernel
 
 			# serve command
 			ServeCommand
+
+			# session command
+			SessionPruneExpiredCommand
 
 			# package commands
 			PackagePublishCommand

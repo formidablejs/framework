@@ -4,9 +4,10 @@ export default class PersonalAccessToken {
     @param {Number} id
     @param {String} table
     @param {Array} abilities
+    @param {Number|null} ttl
     @param {object} data
     */
-    static create(name: string, id: number, table: string, abilities?: any[], data?: object): any;
+    static create(name: string, id: number, table: string, abilities?: any[], ttl?: number | null, data?: object): any;
     /**
     @param {String} token
     */
@@ -31,7 +32,7 @@ export default class PersonalAccessToken {
     */
     static verify(token: string): Promise<any>;
     static getDatabase(): any;
-    static getEncryper(): any;
+    static getEncrypter(): any;
     /**
     @param {Database} database
     */

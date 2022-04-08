@@ -41,14 +41,20 @@ export default class SessionDriver < Driver
 					.first!
 
 				if !isEmpty(user)
-					return await self.attempt('auth:session', user)
+					const date = new Date!
+					const ttl = new Date(date.valueOf! + self.config.get('session.lifetime', ms('2 hours')))
+
+					return await self.attempt('auth:session', user, ttl.valueOf!)
 
 		false
 
 	def authenticate body\Object
 		const user = await Auth.attempt(body)
 
-		await self.attempt('auth:session', user)
+		const date = new Date!
+		const ttl = new Date(date.valueOf! + self.config.get('session.lifetime', ms('2 hours')))
+
+		await self.attempt('auth:session', user, ttl.valueOf!)
 
 		if !isEmpty(body.remember_me) && body.remember_me === true
 			const token = strRandom(80)
@@ -78,7 +84,10 @@ export default class SessionDriver < Driver
 	def register body\Object
 		const user = await self.insertUser(body)
 
-		await self.attempt('auth:session', user)
+		const date = new Date!
+		const ttl = new Date(date.valueOf! + self.config.get('session.lifetime', ms('2 hours')))
+
+		await self.attempt('auth:session', user, ttl.valueOf!)
 
 		self.sendVerificationEmail user
 
