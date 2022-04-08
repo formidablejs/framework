@@ -2,12 +2,9 @@ export class ContextAPI {
     get registered(): {
         Database: any;
         DB: any;
-        Mail: {
-            new (emails: string | string[]): import("@formidablejs/mailer/types/Mail");
-            to(emails: string | string[]): import("@formidablejs/mailer/types/Mail");
-            configure(config: any): any;
-        };
+        Mail: typeof Mail;
     };
     inject(target: any): ContextAPI;
 }
 export let Context: ContextAPI;
+import { Mail } from "@formidablejs/mailer";
