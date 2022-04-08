@@ -7,7 +7,7 @@ export default def getResponse route\Object, request, reply
 	let action
 
 	if isClass(route.action)
-		controller = route.action
+		controller = new route.action
 		action = '__invoke'
 	else
 		controller = new route.action[0]
