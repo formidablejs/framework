@@ -13,7 +13,7 @@ export class ServeCommand < Command
 
 	get props
 		{
-			port: Prop.string!.alias('p').default(3000).description 'The port to serve the application on'
+			port: Prop.number!.alias('p').default(3000).description 'The port to serve the application on'
 			host: Prop.string!.alias('h').default('localhost').description 'The host address to serve the application on'
 			dev: Prop.boolean!.alias('d').description 'Serve in dev mode (build, serve and watch)'
 			addr: Prop.boolean!.description 'Store address in a config file'
