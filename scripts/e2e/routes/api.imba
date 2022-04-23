@@ -11,3 +11,11 @@ Route.group { prefix: 'posts' }, do
 	Route.get '/', [PostController, 'index']
 	Route.get '/:id', [PostController, 'show']
 	Route.put '/', [PostController, 'store']
+
+Route.group { prefix: 'routes' }, do
+	Route.get 'invoke', class invokable
+		def __invoke
+			'hello'
+
+	Route.get 'function', do
+		'hello'

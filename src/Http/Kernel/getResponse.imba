@@ -1,8 +1,18 @@
-export default def getResponse route\Object, request, reply
-	if route.action instanceof Function then return await route.action request, reply
+import isClass from '../../Support/Helpers/isClass'
 
-	const controller = new route.action[0]
-	const action = route.action[1]
+export default def getResponse route\Object, request, reply
+	if route.action instanceof Function && !isClass(route.action)
+		return await route.action request, reply
+
+	let controller
+	let action
+
+	if !Array.isArray(route.action)
+		controller = new route.action
+		action = '__invoke'
+	else
+		controller = new route.action[0]
+		action = route.action[1]
 
 	controller.#request = request
 

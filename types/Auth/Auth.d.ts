@@ -24,6 +24,8 @@ declare class Auth {
     */
     can(perform: string): any;
     check(): boolean;
+    [$2]($$?: {}): void;
     [$1]($$?: any): void;
 }
+declare const $2: unique symbol;
 declare const $1: unique symbol;

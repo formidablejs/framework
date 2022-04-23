@@ -21,6 +21,7 @@ const events = {
 	onAuthenticated: null
 	onSessionDestroyed: null
 	onSuccessfulAttempt: null
+	onCreateUser: null
 }
 
 const mailers = {
@@ -37,8 +38,8 @@ export default class Driver
 		this.params = params
 		this.config = config
 
-	def attempt name\String, user\Object
-		const token = await self.createPersonalAccessToken(name, user.id)
+	def attempt name\String, user\Object, ttl\Number|null = null
+		const token = await self.createPersonalAccessToken(name, user.id, ttl)
 
 		self.request.request.session.personal_access_token = token
 
@@ -51,13 +52,13 @@ export default class Driver
 		await PersonalAccessToken.using(token)
 
 	def verify
-		self
+		null
 
 	def authenticate body\Object
-		self
+		null
 
 	def register body\Object
-		self
+		null
 
 	def afterRegistered user\Object
 		if isFunction(events.onRegistered)
@@ -200,8 +201,12 @@ export default class Driver
 	def destroy token\String = null, body\Object = new Object
 		await PersonalAccessToken.destroy(!isEmpty(token) ? token : self.request.bearerToken!)
 
-	def createPersonalAccessToken name\String, id\Number
-		await PersonalAccessToken.create(name, id, self.getProvider.table)
+	def createPersonalAccessToken name\String, id\Number, ttl\Number|null = null
+		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], ttl, {
+			protocol: self.protocol
+			ip_address: self.request.ip! || null
+			user_agent: self.request.header('user-agent', null)
+		})
 
 	get getProvider
 		const protocol = self.config.get("auth.protocols.{self.protocol}")
@@ -221,6 +226,13 @@ export default class Driver
 		await this.createUser(body)
 
 	def createUser body\Object
+		if events.onCreateUser !== null
+			return events.onCreateUser(
+				self.request,
+				body,
+				self.getProvider.table
+			)
+
 		Database.table(self.getProvider.table)
 			.insert({
 				name: body.name,
@@ -257,6 +269,14 @@ export default class Driver
 		})
 
 		clientUrl + signature
+
+	static def onCreateUser handler\Function
+		if events.onCreateUser !== null
+			throw new Error 'onCreateUser handler is already set.'
+
+			return
+		
+		events.onCreateUser = handler
 
 	static def onRegistered handler\Function
 		if events.onRegistered !== null

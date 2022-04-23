@@ -19,7 +19,7 @@ export class MigrationCommand < Command
 		elif action === 'rollback'
 			results = await app.migration!.rollback self.option('all', false)
 		elif action === 'fresh'
-			results = await app.migration!.fresh(true)
+			results = await app.migration!.fresh!
 
 		if results === false
 			return self.error 'Migration failed'

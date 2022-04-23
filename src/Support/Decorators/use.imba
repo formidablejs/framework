@@ -1,8 +1,10 @@
-import isEmpty from '../Helpers/isEmpty'
 import { FastifyRequest, FastifyReply } from 'fastify'
+import Bind from '../../Database/Bind'
+import bind from '../Helpers/bind'
 import FormRequest from '../../Http/Request/FormRequest'
 import isClass from '../Helpers/isClass'
-import Model from '../../Database/Model'
+import isEmpty from '../Helpers/isEmpty'
+import isString from '../Helpers/isString'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -33,16 +35,38 @@ export def @use target, key, descriptor
 		await definition.forEach do(object, key)
 			let response = null
 
-			if Model.isPrototypeOf(object)
-				const param  = Object.keys(request.request.params)[key]
+			if isString(object) && object.substring(0, 'table:'.length) === 'table:'
+				response = bind(object.split(':')[1]).handle(request, key)
 
-				if !isEmpty(param)
-					const value  = Object.values(request.request.params)[key]
-					const column = param.split(':')[1] ?? (object.routeKeyName ?? 'id')
+			elif isString(object) && object.substring(0, 'query:'.length) === 'query:'
+				const query = object.split(':')[1]
 
-					response = new object({ [column]: value }).fetch!
-				else
-					response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
+				response = request.query(query, undefined) || undefined
+
+			elif isString(object) && object.substring(0, 'param:'.length) === 'param:'
+				const param = object.split(':')[1]
+
+				response = request.param(param) || undefined
+				
+			elif isString(object) && object === 'param'
+				response = Object.values(request.params!)[key] || undefined
+
+			elif object === Number
+				const param = Object.values(request.params!)[key] || undefined
+
+				if isNaN(param) then throw new TypeError "Argument {key++} must be of the type Number."
+
+				response = param
+
+			elif object === String
+				const param = Object.values(request.params!)[key] || undefined
+
+				if !isNaN(param) then throw new TypeError "Argument {key++} must be of the type String."
+
+				response = param
+
+			elif object instanceof Bind
+				response = object.handle(request, key)
 
 			elif object == Request
 				response = request
@@ -65,7 +89,7 @@ export def @use target, key, descriptor
 					request.request,
 					request.route,
 					reply.raw,
-					request.configRepository
+					request.config
 				)
 
 				if !isEmpty(request.auth)

@@ -20,7 +20,7 @@ const settings = {
 
 export default class PersonalAccessToken
 
-	static def create name\String, id\Number, table\String, abilities\Array = ['*']
+	static def create name\String, id\Number, table\String, abilities\Array = ['*'], ttl\Number|null = null, data\object = {}
 		if !isString(name) then throw new TypeError 'name must be a string.'
 
 		if !isNumber(id) then throw new TypeError 'id must be an int.'
@@ -39,11 +39,18 @@ export default class PersonalAccessToken
 				tokenable_id: id
 				name: name
 				abilities: JSON.stringify(abilities)
+				payload: Encrypter.encrypt(data)
+				ttl: ttl
 			}, returning)
 			.then do([ token ])
 				token = (typeof token === 'object' && token.hasOwnProperty('id')) ? token.id : token
 
-				await jwt.sign({ id: self.getEncryper!.encrypt(token) }, self.getEncryper!.key!, {
+				if typeof data === 'object' && !isEmpty(data)
+					data = Object.assign(data, { id: self.getEncrypter!.encrypt(token) })
+				else
+					data = { id: self.getEncrypter!.encrypt(token) }
+
+				await jwt.sign(data, self.getEncrypter!.key!, {
 					issuer: settings.config.get('app.url')
 				})
 
@@ -59,8 +66,10 @@ export default class PersonalAccessToken
 
 		if !decodedToken then return response
 
+		const sessionToken = token
+
 		token = await self.getDatabase!.table('personal_access_tokens')
-			.where(id: self.getEncryper!.decrypt(decodedToken.id))
+			.where(id: self.getEncrypter!.decrypt(decodedToken.id))
 			.first!
 
 		if isEmpty(token) then return response
@@ -68,7 +77,7 @@ export default class PersonalAccessToken
 		let tokenable
 
 		if !isEmpty(settings.event)
-			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol)
+			const results = await settings.event(token.tokenable_type, token.tokenable_id, protocol, { token: decodedToken, session: sessionToken })
 
 			if !isEmpty(results) then tokenable = results
 
@@ -99,20 +108,20 @@ export default class PersonalAccessToken
 		const decodedToken = await self.verify(token)
 
 		await self.getDatabase!.table('personal_access_tokens')
-			.where(id: self.getEncryper!.decrypt(decodedToken.id))
+			.where(id: self.getEncrypter!.decrypt(decodedToken.id))
 			.del!
 
 	static def verify token\String
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
-		try return await jwt.verify(token, self.getEncryper!.key!)
+		try return await jwt.verify(token, self.getEncrypter!.key!)
 
 		false
 
 	static def getDatabase
 		settings.database ? settings.database : Database
 
-	static def getEncryper
+	static def getEncrypter
 		settings.encryption ? settings.encryption : Encrypter
 
 	static def setDatabase database\Database

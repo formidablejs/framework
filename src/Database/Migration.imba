@@ -22,6 +22,13 @@ export default class Migration
 
 		Database.migrate.latest!
 
+	def fresh
+		if isEmpty(Database) then return false
+
+		await Database.migrate.rollback({}, true)
+
+		await Database.migrate.latest!
+
 	def rollback all\Boolean = false
 		if isEmpty(Database) then return false
 

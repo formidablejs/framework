@@ -167,7 +167,9 @@ export default class File {
     @param {Boolean} overwrite
     */
     move(destination: string, overwrite?: boolean): void;
+    [$2]($$?: {}): void;
     [$1]($$?: any): void;
 }
+declare const $2: unique symbol;
 declare const $1: unique symbol;
 export {};

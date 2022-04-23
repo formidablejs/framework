@@ -73,10 +73,8 @@ export default class Kernel
 
 		return list
 
-	def listen config, errorHandler, hooks, plugins, returnMode
-		const router = fastify({
-			ignoreTrailingSlash: true
-		})
+	def listen config, errorHandler, hooks, plugins, serverConfig, returnMode
+		const router = fastify(serverConfig)
 
 		hasContentTypes(router)
 
@@ -142,7 +140,7 @@ export default class Kernel
 
 	def hasRoutes router, config
 		for route in Route.all!
-			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action)) || route.action.constructor.name === 'AsyncFunction'
+			if isArray(route.action) || isFunction(route.action) || isClass(route.action) || route.action.constructor.name === 'AsyncFunction'
 				router[route.method.toLowerCase!] route.path, do(req\FastifyRequest, reply\FastifyReply)
 					const request = await new FormRequest(req, route, reply, config)
 

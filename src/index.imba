@@ -15,6 +15,7 @@ import Authenticate from './Auth/Http/Middleware/Authenticate'
 import AuthenticationServiceResolver from './Auth/AuthenticationServiceResolver'
 import AuthService from './Auth/AuthService'
 import ConfigRepository from './Config/Repository'
+import Console from './Foundation/Console'
 import ConsoleKernel from './Foundation/ConsoleKernel'
 import Controller from './Http/Controller'
 import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
@@ -40,7 +41,6 @@ import Language from './Support/Language/Language'
 import LanguageServiceResolver from './Support/Language/LanguageServiceResolver'
 import MaintenanceModeException from './Foundation/Exceptions/MaintenanceModeException'
 import MaintenanceServiceResolver from './Foundation/MaintenanceServiceResolver'
-import Model from './Database/Model'
 import MultipartServiceResolver from './Http/Request/MultipartServiceResolver'
 import NotFoundException from './Http/Exceptions/NotFoundException'
 import PersonalAccessToken from './Auth/Tokens/PersonalAccessToken'
@@ -81,6 +81,7 @@ export {
 	AuthService
 	Command
 	ConfigRepository
+	Console
 	ConsoleKernel
 	Context
 	Controller
@@ -116,7 +117,6 @@ export {
 	MailServiceResolver
 	MaintenanceModeException
 	MaintenanceServiceResolver
-	Model
 	MultipartServiceResolver
 	NotFoundException
 	PersonalAccessToken

@@ -5,10 +5,12 @@ import isObject from '../../Support/Helpers/isObject'
 import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
 import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
+import Language from '../../Support/Language/Language'
 
 export default class View
 
 	prop #_data\Object = {}
+	prop #_language\Language
 
 	def constructor data\Object = {}
 		if !isObject(data) then throw TypeError "Expected object."
@@ -24,6 +26,20 @@ export default class View
 		self.#_data\Object = Object.assign(self.#_data, data)
 
 		self
+
+	def setLanguage language\Language
+		self.#_language = language
+
+		self
+	
+	def translate key\String, default\any
+		self.#_language.get(key, default)
+	
+	def t key\String, default\any
+		self.translate key, default
+
+	def __ key\String, default\any
+		self.translate key, default
 
 	def old key\String, default\any
 		const results = dot(self.#_data, "_old.{key}") ?? (isEmpty(default) ? '' : default )

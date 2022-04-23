@@ -9,6 +9,25 @@ export default class View {
     */
     setData(data: any): View;
     /**
+    @param {Language} language
+    */
+    setLanguage(language: Language): View;
+    /**
+    @param {String} key
+    @param {any} default
+    */
+    translate(key: string, default$: any): any;
+    /**
+    @param {String} key
+    @param {any} default
+    */
+    t(key: string, default$: any): any;
+    /**
+    @param {String} key
+    @param {any} default
+    */
+    __(key: string, default$: any): any;
+    /**
     @param {String} key
     @param {any} default
     */
@@ -50,9 +69,14 @@ export default class View {
     handle(): any;
     render(): any;
     make(): Promise<string>;
-    [$2]($$?: any): void;
+    [$4]($$?: {}): void;
+    [$3]($$?: any): void;
     [$1]: any;
+    [$2]: any;
 }
-declare const $2: unique symbol;
+import Language from "../../Support/Language/Language";
+declare const $4: unique symbol;
+declare const $3: unique symbol;
 declare const $1: unique symbol;
+declare const $2: unique symbol;
 export {};
