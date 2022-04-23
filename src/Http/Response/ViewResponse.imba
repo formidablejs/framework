@@ -24,12 +24,14 @@ export default class ViewResponse
 		const oldData = !isEmpty(request.req.session._flashed) ? (request.req.session._flashed._old ?? {}) : {}
 		const token = !isEmpty(request.req.session) && !isEmpty(request.req.session.token) ? encrypt(request.req.session.token) : null
 
-		self.view.setData {
-			locale: request.locale!
-			csrf_token: token
-			_flashed: without(request.req.session._flashed ?? {}, ['_old'])
-			_old: without(oldData, ['_token']) ?? {}
-		}
+		self.view
+			.setLanguage(request.request.language)
+			.setData {
+				locale: request.locale!
+				csrf_token: token
+				_flashed: without(request.req.session._flashed ?? {}, ['_old'])
+				_old: without(oldData, ['_token']) ?? {}
+			}
 
 		delete request.req.session._flashed
 
@@ -39,4 +41,3 @@ export default class ViewResponse
 			.type('text/html')
 			.send(output)
 			.sent = true
-
