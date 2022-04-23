@@ -140,7 +140,7 @@ export default class Kernel
 
 	def hasRoutes router, config
 		for route in Route.all!
-			if isArray(route.action) || (isFunction(route.action) && !isClass(route.action)) || route.action.constructor.name === 'AsyncFunction'
+			if isArray(route.action) || isFunction(route.action) || isClass(route.action) || route.action.constructor.name === 'AsyncFunction'
 				router[route.method.toLowerCase!] route.path, do(req\FastifyRequest, reply\FastifyReply)
 					const request = await new FormRequest(req, route, reply, config)
 
