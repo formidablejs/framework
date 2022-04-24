@@ -93,8 +93,10 @@ export default class ConsoleKernel
 	def registerCommands app\Application, ctx
 		for command in self.default
 			command.ctx = ctx
+			command.kernel = self
 			app.register(command)
 		
 		for command in self.registered
 			command.ctx = ctx
+			command.kernel = self
 			app.register(command)
