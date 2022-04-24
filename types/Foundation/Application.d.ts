@@ -24,6 +24,7 @@ export default class Application {
     context: ContextAPI;
     serverConfig: any;
     get version(): any;
+    get scheduler(): any;
     /**
     @param {Number} default
     */
