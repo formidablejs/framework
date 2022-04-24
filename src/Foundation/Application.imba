@@ -16,6 +16,7 @@ import Migration from '../Database/Migration'
 import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
 import version from '../Support/Helpers/version'
+import cron from 'node-cron'
 import type ConsoleKernel from './ConsoleKernel'
 
 const settings = {
@@ -68,6 +69,9 @@ export default class Application
 
 	get version
 		appVersion!
+
+	get scheduler
+		cron
 
 	def port default\Number = 3000
 		settings.port || default
