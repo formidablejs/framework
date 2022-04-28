@@ -1,4 +1,4 @@
-import cookie from 'fastify-cookie'
+import cookie from '@fastify/cookie'
 import Encrypter from '../../Foundation/Encrypter'
 import ServiceResolver from '../../Support/ServiceResolver'
 
