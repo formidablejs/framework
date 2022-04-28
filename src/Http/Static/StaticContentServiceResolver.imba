@@ -1,5 +1,5 @@
 import { join } from 'path'
-import fastifystatic from 'fastify-static'
+import fastifystatic from '@fastify/static'
 import ServiceResolver from '../../Support/ServiceResolver'
 
 export default class StaticContentServiceResolver < ServiceResolver
