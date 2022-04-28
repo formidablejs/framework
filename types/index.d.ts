@@ -23,7 +23,7 @@ import Encrypter from "./Foundation/Encrypter";
 import ErrorIfAuthenticated from "./Auth/Http/Middleware/ErrorIfAuthenticated";
 import ExceptionHandler from "./Foundation/Exceptions/Handler";
 import expiresIn from "./Support/Helpers/expiresIn";
-import { FastifyInstance } from "fastify/types/instance";
+import { FastifyInstance } from "fastify";
 import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify/types/request";
 import ForbiddenException from "./Http/Exceptions/ForbiddenException";
