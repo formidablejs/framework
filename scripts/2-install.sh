@@ -19,8 +19,7 @@ echo
 echo "Install dependencies..."
 echo
 
-cd $E2E                           && \
-npm i --legacy-peer-deps          && \
-npm i -g pm2                      && \
-npm i @vscode/sqlite3 --save      && \
-npm i $PACKAGE --legacy-peer-deps
+cd $E2E        && \
+npm i          && \
+npm i -g pm2   && \
+npm i $PACKAGE
