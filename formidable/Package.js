@@ -8,6 +8,7 @@ exports.Package = class Package {
       },
       'web': {
         paths: {
+          'config': './formidable/web/config',
           'public': './formidable/web/public',
           'app/Resolvers': './formidable/web/resolvers',
           'routes': './formidable/web/routes',
