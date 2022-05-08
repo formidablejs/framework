@@ -138,4 +138,4 @@ export default class SessionDriver < Driver
 
 		const results = await self.afterSessionDestroyed!
 
-		isEmpty ? { status: 'success' } : results
+		isEmpty(results) ? { status: 'success' } : results
