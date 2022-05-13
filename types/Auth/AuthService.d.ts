@@ -80,6 +80,10 @@ export default class AuthService {
     */
     static onEmailResend(callback: Function): typeof AuthService;
     /**
+    @param {Function} callback
+    */
+    static onEmailVerified(callback: Function): typeof AuthService;
+    /**
     @param {Mailable} mailer
     */
     static verificationMailer(mailer: Mailable): typeof AuthService;
