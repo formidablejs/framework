@@ -73,9 +73,9 @@ export default class Driver
 		if isFunction(events.onSessionDestroyed)
 			events.onSessionDestroyed(self.request, self.reply, self.protocol, self.params)
 
-	def afterEmailVerified
+	def afterEmailVerified verified\Boolean
 		if isFunction(events.onEmailVerified)
-			events.onEmailVerified(self.request, self.reply, self.protocol, self.params)
+			events.onEmailVerified(self.request, self.reply, verified, self.protocol, self.params)
 
 	def onSuccessfulAuthAttemptEvent
 		events.onSuccessfulAttempt
@@ -109,9 +109,13 @@ export default class Driver
 			.update('email_verified_at', now!)
 
 		if response == null || response == undefined || response == 0
-			throw new Error 'Could not verify email.'
+			const results = await self.afterEmailVerified(false)
+			
+			throw new EmailNotVerifiedException 'Could not verify email.' if isEmpty(results)
+			
+			return results
 
-		const results = await self.afterEmailVerified!
+		const results = await self.afterEmailVerified(true)
 
 		return isEmpty(results) ? { status: 'success' } : results
 
