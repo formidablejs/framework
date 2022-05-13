@@ -22,6 +22,7 @@ const events = {
 	onSessionDestroyed: null
 	onSuccessfulAttempt: null
 	onCreateUser: null
+	onEmailVerified: null
 }
 
 const mailers = {
@@ -72,6 +73,10 @@ export default class Driver
 		if isFunction(events.onSessionDestroyed)
 			events.onSessionDestroyed(self.request, self.reply, self.protocol, self.params)
 
+	def afterEmailVerified user\Object
+		if isFunction(events.onEmailVerified)
+			events.onEmailVerified(self.request, self.reply, user, self.protocol, self.params)
+
 	def onSuccessfulAuthAttemptEvent
 		events.onSuccessfulAttempt
 
@@ -106,7 +111,9 @@ export default class Driver
 		if response == null || response == undefined || response == 0
 			throw new Error 'Could not verify email.'
 
-		return { status: 'success' }
+		const results = await self.afterEmailVerified response
+
+		return isEmpty(results) ? { status: 'success' } : results
 
 	def requestEmailVerificationUrl body\Object = new Object
 		const user = await self.findUser body
@@ -269,6 +276,14 @@ export default class Driver
 		})
 
 		clientUrl + signature
+
+	static def onEmailVerified handler\Function
+		if events.onEmailVerified !== null
+			throw new Error 'onEmailVerified handler is already set.'
+
+			return
+		
+		events.onEmailVerified = handler
 
 	static def onCreateUser handler\Function
 		if events.onCreateUser !== null
