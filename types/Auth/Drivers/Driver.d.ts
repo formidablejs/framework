@@ -83,9 +83,9 @@ export default class Driver {
     afterAuthenticated(user: any): any;
     afterSessionDestroyed(): any;
     /**
-    @param {Object} user
+    @param {Boolean} verified
     */
-    afterEmailVerified(user: any): any;
+    afterEmailVerified(verified: boolean): any;
     onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
     /**
