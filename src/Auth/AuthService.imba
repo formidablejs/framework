@@ -124,6 +124,21 @@ export default class AuthService
 
 		self
 
+	static def onRequestEmailVerificationUrl callback\Function
+		Driver.onRequestEmailVerificationUrl callback
+
+		self
+	
+	static def onRequestForgotPasswordUrl callback\Function
+		Driver.onRequestForgotPasswordUrl callback
+
+		self
+	
+	static def onUpdatePassword callback\Function
+		Driver.onUpdatePassword callback
+
+		self
+
 	static def verificationMailer mailer\Mailable
 		Driver.verificationMailer mailer
 
