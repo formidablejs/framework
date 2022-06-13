@@ -84,6 +84,18 @@ export default class AuthService {
     */
     static onEmailVerified(callback: Function): typeof AuthService;
     /**
+    @param {Function} callback
+    */
+    static onRequestEmailVerificationUrl(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
+    static onRequestForgotPasswordUrl(callback: Function): typeof AuthService;
+    /**
+    @param {Function} callback
+    */
+    static onUpdatePassword(callback: Function): typeof AuthService;
+    /**
     @param {Mailable} mailer
     */
     static verificationMailer(mailer: Mailable): typeof AuthService;

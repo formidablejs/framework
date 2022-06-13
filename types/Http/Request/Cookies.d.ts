@@ -28,7 +28,7 @@ export default class Cookies {
     */
     forget(key: string | string[]): any[];
     [$4]($$?: {}): void;
-    [$3]($$?: any): void;
+    [$3]($$?: any, deep?: boolean): void;
     [$1]: any;
     [$2]: any;
 }

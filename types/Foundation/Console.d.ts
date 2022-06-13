@@ -11,7 +11,7 @@ export default class Console {
     config: any;
     run(): import("child_process").ChildProcessWithoutNullStreams;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 declare const $2: unique symbol;
 declare const $1: unique symbol;
