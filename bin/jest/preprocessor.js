@@ -12,6 +12,6 @@ module.exports = {
             encoding: 'utf-8'
         })
 
-        return data.stdout
+        return { code: data.stdout }
     }
 }

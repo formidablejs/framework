@@ -48,9 +48,14 @@ class Config
 				})
 			}
 
-			const useNullAsDefault = isEmpty(config('database.useNullAsDefault')) ? { } : { useNullAsDefault: config('database.useNullAsDefault') }
+			connection.debug = config('database.debug') if !isEmpty(config('database.debug'))
+			connection.asyncStackTraces = config('database.asyncStackTraces') if !isEmpty(config('database.asyncStackTraces'))
+			connection.pool = config('database.pool') if !isEmpty(config('database.pool'))
+			connection.acquireConnectionTimeout = config('database.acquireConnectionTimeout') if !isEmpty(config('database.acquireConnectionTimeout'))
+			connection.fetchAsString = config('database.fetchAsString') if !isEmpty(config('database.fetchAsString'))
+			connection.useNullAsDefault = config('database.useNullAsDefault') if !isEmpty(config('database.useNullAsDefault'))
 
-			return Object.assign(connection, useNullAsDefault)
+			return connection
 
 		{}
 

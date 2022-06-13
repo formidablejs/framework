@@ -7,7 +7,7 @@ export default class ServiceResolver {
     boot(): any;
     register(): any;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 import Application from "../Foundation/Application";
 declare const $2: unique symbol;

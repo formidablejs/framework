@@ -549,7 +549,6 @@ export default class FormRequest {
     [$1]: any;
     [$2]: any;
 }
-import FileCollection from "./FileCollection";
 import Auth from "../../Auth/Auth";
 import FileCollection from "./FileCollection";
 import type Repository from '../../Config/Repository';

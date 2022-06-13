@@ -119,6 +119,11 @@ export default class AuthService
 
 		self
 
+	static def onEmailVerified callback\Function
+		Driver.onEmailVerified callback
+
+		self
+
 	static def verificationMailer mailer\Mailable
 		Driver.verificationMailer mailer
 

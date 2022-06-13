@@ -10,7 +10,7 @@ export default class Repository {
     */
     get(key: string, default$?: any): any;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 declare const $2: unique symbol;
 declare const $1: unique symbol;

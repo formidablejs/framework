@@ -27,7 +27,7 @@ export default class Session {
     */
     forget(key: string | string[]): any[];
     [$3]($$?: {}): void;
-    [$2]($$?: any): void;
+    [$2]($$?: any, deep?: boolean): void;
     [$1]: any;
 }
 declare const $3: unique symbol;

@@ -10,7 +10,7 @@ export default class LoginRequest extends FormRequest {
     };
     persist(): Promise<any>;
     [$2]($$?: {}): void;
-    [$1]($$?: any, ...args: any[]): void;
+    [$1]($$?: any, deep?: boolean, ...args: any[]): void;
 }
 import FormRequest from "../../../Http/Request/FormRequest";
 declare const $2: unique symbol;

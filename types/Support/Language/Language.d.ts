@@ -27,7 +27,7 @@ export default class Language {
         packs: {};
     };
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 declare const $2: unique symbol;
 declare const $1: unique symbol;

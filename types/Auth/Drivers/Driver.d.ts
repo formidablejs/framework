@@ -2,6 +2,10 @@ export default class Driver {
     /**
     @param {Function} handler
     */
+    static onEmailVerified(handler: Function): Function;
+    /**
+    @param {Function} handler
+    */
     static onCreateUser(handler: Function): Function;
     /**
     @param {Function} handler
@@ -78,6 +82,10 @@ export default class Driver {
     */
     afterAuthenticated(user: any): any;
     afterSessionDestroyed(): any;
+    /**
+    @param {Boolean} verified
+    */
+    afterEmailVerified(verified: boolean): any;
     onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
     /**
@@ -90,9 +98,7 @@ export default class Driver {
     @param {String} token
     */
     sendResetPasswordEmail(user: any, token: string): Promise<any>;
-    verifyEmail(): Promise<{
-        status: string;
-    }>;
+    verifyEmail(): Promise<any>;
     /**
     @param {Object} body
     */

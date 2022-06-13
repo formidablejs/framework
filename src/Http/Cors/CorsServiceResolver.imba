@@ -1,6 +1,6 @@
 import NotFoundException from '../Exceptions/NotFoundException'
 import isEmpty from '../../Support/Helpers/isEmpty'
-import cors from 'fastify-cors'
+import cors from '@fastify/cors'
 import ServiceResolver from '../../Support/ServiceResolver'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 
