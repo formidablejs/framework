@@ -13,7 +13,7 @@ export default class Protocol {
     */
     configure(protocol: string): any;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 import Repository from "../Config/Repository";
 declare const $2: unique symbol;

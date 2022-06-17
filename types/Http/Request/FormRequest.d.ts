@@ -545,11 +545,11 @@ export default class FormRequest {
         can: (perform: string) => boolean;
     };
     user(): any;
-    [$3]($$?: any): void;
+    [$4]($$?: {}): void;
+    [$3]($$?: any, deep?: boolean): void;
     [$1]: any;
     [$2]: any;
 }
-import FileCollection from "./FileCollection";
 import Auth from "../../Auth/Auth";
 import FileCollection from "./FileCollection";
 import type Repository from '../../Config/Repository';

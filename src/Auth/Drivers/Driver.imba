@@ -23,6 +23,9 @@ const events = {
 	onSuccessfulAttempt: null
 	onCreateUser: null
 	onEmailVerified: null
+	onRequestEmailVerificationUrl: null
+	onRequestForgotPasswordUrl: null
+	onUpdatePassword: null
 }
 
 const mailers = {
@@ -76,6 +79,18 @@ export default class Driver
 	def afterEmailVerified verified\Boolean
 		if isFunction(events.onEmailVerified)
 			events.onEmailVerified(self.request, self.reply, verified, self.protocol, self.params)
+	
+	def afterRequestEmailVerificationUrl
+		if isFunction(events.onRequestEmailVerificationUrl)
+			events.onRequestEmailVerificationUrl(self.request, self.reply, self.protocol, self.params)
+
+	def afterRequestForgotPasswordUrl
+		if isFunction(events.onRequestForgotPasswordUrl)
+			events.onRequestForgotPasswordUrl(self.request, self.reply, self.protocol, self.params)
+	
+	def afterUpdatePassword
+		if isFunction(events.onUpdatePassword)
+			events.onUpdatePassword(self.request, self.reply, self.protocol, self.params)
 
 	def onSuccessfulAuthAttemptEvent
 		events.onSuccessfulAttempt
@@ -128,9 +143,11 @@ export default class Driver
 
 			self.sendVerificationEmail user
 
+		const results = await self.afterRequestEmailVerificationUrl!
+
 		# we will always return success even if the email was not sent
 		# to prevent attackers from knowing if the email was sent or not.
-		return { status: 'success' }
+		return isEmpty(results) ? { status: 'success' } : results
 
 	def requestForgotPasswordUrl body\Object = new Object
 		const user = await self.findUser body
@@ -155,8 +172,10 @@ export default class Driver
 				throw new Error 'Could not create password reset token.'
 
 			self.sendResetPasswordEmail user, token
+		
+		const results = await self.afterRequestForgotPasswordUrl!
 
-		return { status: 'success' }
+		return isEmpty(results) ? { status: 'success' } : results
 
 	def updatePassword body\Object = new Object
 		# get email and token from url.
@@ -203,8 +222,9 @@ export default class Driver
 			.where('email', email)
 			.delete!
 
-		# return success.
-		return { status: 'success' }
+		const results = await self.afterUpdatePassword!
+
+		return isEmpty(results) ? { status: 'success' } : results
 
 	def logout body\Object = new Object
 		self
@@ -328,6 +348,30 @@ export default class Driver
 			return
 
 		events.onSuccessfulAttempt = handler
+
+	static def onRequestEmailVerificationUrl handler\Function
+		if events.onRequestEmailVerificationUrl !== null
+			throw new Error 'onRequestEmailVerificationUrl handler is already set.'
+
+			return
+
+		events.onRequestEmailVerificationUrl = handler
+
+	static def onRequestForgotPasswordUrl handler\Function
+		if events.onRequestForgotPasswordUrl !== null
+			throw new Error 'onRequestForgotPasswordUrl handler is already set.'
+
+			return
+
+		events.onRequestForgotPasswordUrl = handler
+	
+	static def onUpdatePassword handler\Function
+		if events.onUpdatePassword !== null
+			throw new Error 'onUpdatePassword handler is already set.'
+
+			return
+
+		events.onUpdatePassword = handler
 
 	static def verificationMailer mailer\Mailable
 		if mailers.verificationEmail

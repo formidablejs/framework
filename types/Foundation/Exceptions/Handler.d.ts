@@ -23,7 +23,7 @@ export default class Handler {
     */
     shouldReport(error: Error): boolean;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 import HttpException from "../../Http/Exceptions/HttpException";
 declare const $2: unique symbol;

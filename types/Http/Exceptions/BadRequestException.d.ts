@@ -3,7 +3,7 @@ declare class BadRequestException extends HttpException {
     static [$1](): typeof BadRequestException;
     constructor(...args: any[]);
     [$2]($$?: {}): void;
-    [$1]($$?: any, ...args: any[]): void;
+    [$1]($$?: any, deep?: boolean, ...args: any[]): void;
 }
 import HttpException from "./HttpException";
 declare const $2: unique symbol;
