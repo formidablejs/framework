@@ -24,6 +24,18 @@ export default class Driver {
     */
     static onSuccessfulAttempt(handler: Function): Function;
     /**
+    @param {Function} handler
+    */
+    static onRequestEmailVerificationUrl(handler: Function): Function;
+    /**
+    @param {Function} handler
+    */
+    static onRequestForgotPasswordUrl(handler: Function): Function;
+    /**
+    @param {Function} handler
+    */
+    static onUpdatePassword(handler: Function): Function;
+    /**
     @param {Mailable} mailer
     */
     static verificationMailer(mailer: Mailable): Mailable;
@@ -86,6 +98,9 @@ export default class Driver {
     @param {Boolean} verified
     */
     afterEmailVerified(verified: boolean): any;
+    afterRequestEmailVerificationUrl(): any;
+    afterRequestForgotPasswordUrl(): any;
+    afterUpdatePassword(): any;
     onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
     /**
@@ -102,21 +117,15 @@ export default class Driver {
     /**
     @param {Object} body
     */
-    requestEmailVerificationUrl(body?: any): Promise<{
-        status: string;
-    }>;
+    requestEmailVerificationUrl(body?: any): Promise<any>;
     /**
     @param {Object} body
     */
-    requestForgotPasswordUrl(body?: any): Promise<{
-        status: string;
-    }>;
+    requestForgotPasswordUrl(body?: any): Promise<any>;
     /**
     @param {Object} body
     */
-    updatePassword(body?: any): Promise<{
-        status: string;
-    }>;
+    updatePassword(body?: any): Promise<any>;
     /**
     @param {Object} body
     */

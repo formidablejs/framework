@@ -20,7 +20,7 @@ export default class Response {
     */
     code(statusCode: number): number;
     [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$1]($$?: any, deep?: boolean): void;
 }
 import JsonResponse from "./JsonResponse";
 import ViewResponse from "./ViewResponse";

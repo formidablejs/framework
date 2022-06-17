@@ -70,7 +70,7 @@ export default class View {
     render(): any;
     make(): Promise<string>;
     [$4]($$?: {}): void;
-    [$3]($$?: any): void;
+    [$3]($$?: any, deep?: boolean): void;
     [$1]: any;
     [$2]: any;
 }
