@@ -346,8 +346,10 @@ export default class FormRequest
 
 		let response = {}
 
+		const all\Object = this.all!
+
 		keys.forEach do(key)
-			const value = this.all![key]
+			const value = all[key]
 
 			if value
 				Object.assign response, {
