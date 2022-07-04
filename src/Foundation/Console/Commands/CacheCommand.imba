@@ -24,3 +24,5 @@ export class CacheCommand < Command
 
 		self.info 'Configuration address cleared!'
 		self.info 'Configuration cache cleared!'
+
+		self.exit!
