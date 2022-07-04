@@ -40,4 +40,4 @@ export default class Repository
 
 		if isEmpty(output) then return default
 
-		['true', 'false'].includes(output.toLowerCase!) ? output = JSON.parse(output) : output
+		['true', 'false'].includes(output.toLowerCase!) ? output = JSON.parse(output) : (output === 'null' ? null : output)

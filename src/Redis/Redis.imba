@@ -1,6 +1,6 @@
-import redis from 'redis'
+import * as redis from 'redis'
 
-const settings = { instances: {}, config: {} }
+const settings = { instances: {}, config: {}, running: [] }
 
 export default class Redis
 	def constructor database\String = 'default'
@@ -36,15 +36,20 @@ export default class Redis
 
 		settings.instances[database].on 'error', do(error) throw error
 
-		settings.instances[database]
-
 	static def connection database\String = 'default'
 		let instance = settings.instances[database]
 
 		if instance == undefined || instance == null
-			new Redis(database)
+			new Redis(database, config)
 
-			return settings.instances[database]
+			instance = settings.instances[database]
+
+		if settings.running.indexOf(database) == -1
+			await instance.connect!
+
+			settings.running.push(database)
+
+			settings.instances[database] = instance
 
 		instance
 
@@ -53,16 +58,26 @@ export default class Redis
 
 	static def closeAll
 		for own database, instance of settings.instances
+			settings.running.splice(settings.running.indexOf(database), 1)
+
 			instance.quit!
 
 	static def set key\String, value\String, options\any = null
-		self.connection!.set key, value, options
+		const i = await self.connection!
+
+		await i.set key, value, options
 
 	static def get key\String
-		self.connection!.get key
+		const i = await self.connection!
+
+		await i.get key
 
 	static def del key\String
-		self.connection!.del key
+		const i = await self.connection!
+
+		await i.del key
 
 	static def command command\String, key\String, value\String|null = null, nx\any = null
-		self.connection!.sendCommand command, key, value, nx
+		const i = await self.connection!
+
+		await i.sendCommand command, key, value, nx
