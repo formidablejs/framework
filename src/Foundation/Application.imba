@@ -168,7 +168,7 @@ export default class Application
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
 
-		await self.resolve!
+		self.resolve!
 
 		self
 
@@ -180,11 +180,11 @@ export default class Application
 			for resolver in resolvers
 				resolver = resolver.default ?? resolver
 
-				await self.bootResolver(resolver)
-				await self.registerResolver(resolver)
+				self.bootResolver(resolver)
+				self.registerResolver(resolver)
 
 	def bootResolver resolver
-		await (new resolver(self)).boot!
+		new resolver(self).boot!
 
 	def registerResolver resolver
-		await (new resolver(self)).register!
+		new resolver(self).register!
