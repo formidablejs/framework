@@ -12,7 +12,7 @@ export default class RedisServiceResolver < ServiceResolver
 
 		if self.app.config.get('session.driver') == 'redis'
 			const store = redisStore(session)
-			const client = Redis.connection('default')
+			const client = Redis.connection('auth', { legacyMode: true })
 
 			# register redis store driver.
 			SessionDriverManager.register('redis', new store({

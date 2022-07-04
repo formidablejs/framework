@@ -3,11 +3,11 @@ import * as redis from 'redis'
 const settings = { instances: {}, config: {}, running: [] }
 
 export default class Redis
-	def constructor database\String = 'default'
+	def constructor database\String = 'default', config\Object = {}
 
 		if settings.instances[database] then return settings.instances[database]
 
-		let connection = settings.config.get("database.redis.{database}")
+		let connection = Object.assign(config, settings.config.get("database.redis.{database}"))
 
 		# merge redis options to redis connection.
 
@@ -36,16 +36,19 @@ export default class Redis
 
 		settings.instances[database].on 'error', do(error) throw error
 
-	static def connection database\String = 'default'
+	static def connection database\String = 'default', config\Object = {}
 		let instance = settings.instances[database]
 
 		if instance == undefined || instance == null
-			new Redis(database)
+			new Redis(database, config)
 
 			instance = settings.instances[database]
 
 		if settings.running.indexOf(database) == -1
-			await instance.connect!
+			if config.legacyMode == true
+				instance.connect!.catch(console.error)
+			else
+				await instance.connect!
 
 			settings.running.push(database)
 
