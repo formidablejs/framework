@@ -1,4 +1,5 @@
 import * as redis from 'redis'
+import Redis from './Redis'
 import ServiceResolver from '../Support/ServiceResolver'
 import session from '@fastify/session'
 import SessionDriverManager from '../Http/Session/DriverManager'
