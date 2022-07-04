@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.11.7",
+  "version": "0.11.7-dev",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -64,9 +64,12 @@
   "devDependencies": {
     "@formidablejs/mailer": "0.3.0",
     "@formidablejs/stubs": "^0.2.7",
+    "@types/connect-redis": "^0.0.18",
+    "@types/express-session": "^1.17.4",
     "@types/jest": "^27.5.0",
     "@types/node": "^17.0.31",
-    "imba": "^2.0.0-alpha.207",
+    "@types/redis": "^4.0.11",
+    "imba": "^2.0.0-alpha.209",
     "imba-shell": "^0.4.0",
     "jest": "^28.1.0",
     "sqlite3": "^5.0.8",

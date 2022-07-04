@@ -1,4 +1,4 @@
-import redis from 'redis'
+import * as redis from 'redis'
 
 const settings = { instances: {}, config: {} }
 
@@ -44,7 +44,9 @@ export default class Redis
 		if instance == undefined || instance == null
 			new Redis(database)
 
-			return settings.instances[database]
+			instance = settings.instances[database]
+
+		if !instance.connected then await instance.connect!
 
 		instance
 
