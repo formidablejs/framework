@@ -1,9 +1,8 @@
 export default class Redis {
     /**
     @param {String} database
-    @param {Object} config
     */
-    static connection(database?: string, config?: any): Promise<any>;
+    static connection(database?: string): Promise<any>;
     static configure(config: any): any;
     static closeAll(): any[];
     /**
@@ -29,7 +28,6 @@ export default class Redis {
     static command(command: string, key: string, value?: string | null, nx?: any): Promise<any>;
     /**
     @param {String} database
-    @param {Object} config
     */
-    constructor(database?: string, config?: any);
+    constructor(database?: string);
 }
