@@ -71,7 +71,7 @@ export default class Application
 
 	def port default\Number = 3000
 		settings.port || default
-	
+
 	def host default = '0.0.0.0'
 		settings.host || default
 
@@ -93,7 +93,7 @@ export default class Application
 		hooks[hook].push(handler)
 
 		self
-	
+
 	def registerCommand command
 		settings.console.register(command)
 
@@ -155,7 +155,7 @@ export default class Application
 		)
 
 		return self
-	
+
 	def craftsman kernel\ConsoleKernel
 		kernel.registerCommands(settings.console, this)
 
@@ -168,7 +168,7 @@ export default class Application
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
 
-		self.resolve!
+		await self.resolve!
 
 		self
 
@@ -180,11 +180,11 @@ export default class Application
 			for resolver in resolvers
 				resolver = resolver.default ?? resolver
 
-				self.bootResolver(resolver)
-				self.registerResolver(resolver)
+				await self.bootResolver(resolver)
+				await self.registerResolver(resolver)
 
 	def bootResolver resolver
-		new resolver(self).boot!
+		await (new resolver(self)).boot!
 
 	def registerResolver resolver
-		new resolver(self).register!
+		await (new resolver(self)).register!
