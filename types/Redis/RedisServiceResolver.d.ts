@@ -1,4 +1,4 @@
 export default class RedisServiceResolver extends ServiceResolver {
-    boot(): Promise<import("..").Application>;
+    boot(): import("..").Application;
 }
 import ServiceResolver from "../Support/ServiceResolver";
