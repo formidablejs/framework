@@ -12,10 +12,11 @@ export default class RedisServiceResolver < ServiceResolver
 
 		if self.app.config.get('session.driver') == 'redis'
 			const store = redisStore(session)
+			const client = await Redis.connection('default')
 
 			# register redis store driver.
 			SessionDriverManager.register('redis', new store({
-				client: Redis.connection('default')
+				client: client
 			}))
 
 		# close redis connections.
