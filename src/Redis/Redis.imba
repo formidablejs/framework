@@ -58,13 +58,21 @@ export default class Redis
 			instance.quit!
 
 	static def set key\String, value\String, options\any = null
-		self.connection!.set key, value, options
+		const i = await self.connection!
+
+		await i.set key, value, options
 
 	static def get key\String
-		self.connection!.get key
+		const i = await self.connection!
+
+		await i.get key
 
 	static def del key\String
-		self.connection!.del key
+		const i = await self.connection!
+
+		await i.del key
 
 	static def command command\String, key\String, value\String|null = null, nx\any = null
-		self.connection!.sendCommand command, key, value, nx
+		const i = await self.connection!
+
+		await i.sendCommand command, key, value, nx
