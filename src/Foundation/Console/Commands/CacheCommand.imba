@@ -17,6 +17,8 @@ export class CacheCommand < Command
 
 		self.info 'Configuration cached successfully!'
 
+		self.exit!
+
 	def clear
 		if existsSync(self.config) then unlinkSync(self.config)
 

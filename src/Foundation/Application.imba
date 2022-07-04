@@ -71,7 +71,7 @@ export default class Application
 
 	def port default\Number = 3000
 		settings.port || default
-	
+
 	def host default = '0.0.0.0'
 		settings.host || default
 
@@ -93,7 +93,7 @@ export default class Application
 		hooks[hook].push(handler)
 
 		self
-	
+
 	def registerCommand command
 		settings.console.register(command)
 
@@ -155,7 +155,7 @@ export default class Application
 		)
 
 		return self
-	
+
 	def craftsman kernel\ConsoleKernel
 		kernel.registerCommands(settings.console, this)
 
