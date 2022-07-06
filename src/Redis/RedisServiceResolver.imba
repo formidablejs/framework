@@ -9,7 +9,7 @@ export default class RedisServiceResolver < ServiceResolver
 
 	get connection
 		const connection = self.app.config.get('database.redis.default')
-		const options = self.app.config.get('database.redis.options')
+		const options    = self.app.config.get('database.redis.options')
 
 		Object.assign(connection, options)
 
@@ -23,13 +23,20 @@ export default class RedisServiceResolver < ServiceResolver
 		# configure redis.
 		Redis.configure(self.app.config)
 
+		let sessionClient;
+
 		if self.app.config.get('session.driver') == 'redis'
+			sessionClient = self.redis!
+
 			const store = redisStore(session)
 
 			# register redis store driver.
 			SessionDriverManager.register('redis', new store({
-				client: self.redis!
+				client: sessionClient
 			}))
 
 		# close redis connections.
-		self.app.addHook('onClose', do Redis.closeAll!)
+		self.app.addHook 'onClose', do
+			if sessionClient then sessionClient.quit!
+
+			Redis.closeAll!
