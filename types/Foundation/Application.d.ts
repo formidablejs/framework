@@ -44,6 +44,11 @@ export default class Application {
     */
     register(plugin: Function, options?: any, handler?: Function): Application;
     /**
+    @param {String} event
+    @param {Function} callback
+    */
+    on(event: string, callback: Function): Application;
+    /**
     @param {Function} handler
     */
     onResponse(handler: Function): Application;
@@ -78,13 +83,13 @@ export default class Application {
     resolve(): any[];
     bootResolver(resolver: any): any;
     registerResolver(resolver: any): any;
-    [$2]($$?: {}): void;
-    [$1]($$?: any): void;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean): void;
 }
 import Kernel from "../Http/Kernel";
 import type ConsoleKernel from './ConsoleKernel'
 import type ConfigRepository from '../Config/Repository'
 import type { ContextAPI } from './Context'
-declare const $2: unique symbol;
-declare const $1: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
 export {};
