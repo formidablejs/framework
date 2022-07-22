@@ -108,6 +108,14 @@ export default class Application
 
 		self
 
+	def on event\String, callback\Function
+		if event === 'onDefaultCommand'
+			settings.console.onDefaultCommand(callback)
+		else
+			throw new Error `Application.on: event ${event} not supported`
+
+		self
+
 	def onResponse handler\Function
 		addResolver(handler)
 		addExceptionResolver(handler)
