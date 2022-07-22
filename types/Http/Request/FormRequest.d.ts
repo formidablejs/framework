@@ -25,7 +25,7 @@ export default class FormRequest {
     /**
     *
          * Get request locale.
-         
+
     */
     locale(): any;
     /**
@@ -34,7 +34,7 @@ export default class FormRequest {
     /**
     *
          * Get request default locale.
-         
+
     */
     defaultLocale(): any;
     /**
@@ -43,7 +43,7 @@ export default class FormRequest {
     /**
     *
          * Set locale.
-         
+
     @param {String} locale
     */
     setLocale(locale: string): any;
@@ -53,7 +53,7 @@ export default class FormRequest {
     /**
     *
          * Set fallback locale.
-         
+
     @param {String} locale
     */
     setFallbackLocale(locale: string): any;
@@ -63,7 +63,7 @@ export default class FormRequest {
     /**
     *
          * Translate text.
-         
+
     @param {String} path
     @param {String} default
     */
@@ -74,7 +74,7 @@ export default class FormRequest {
     /**
     *
          * Translate text.
-         
+
     @param {String} path
     @param {String} default
     */
@@ -85,7 +85,7 @@ export default class FormRequest {
     /**
     *
          * Translate text.
-         
+
     @param {String} path
     @param {String} default
     */
@@ -96,7 +96,7 @@ export default class FormRequest {
     /**
     *
          * Flash data.
-         
+
     @param {String} key
     @param {any} value
     */
@@ -107,7 +107,7 @@ export default class FormRequest {
     /**
     *
          * Flash many.
-         
+
     @param {Object} object
     */
     flashMany(object: any): FormRequest;
@@ -117,7 +117,7 @@ export default class FormRequest {
     /**
     *
          * Get url signature.
-         
+
     */
     signature(): any;
     /**
@@ -126,7 +126,7 @@ export default class FormRequest {
     /**
     *
          * Get request url.
-         
+
     */
     url(): any;
     /**
@@ -135,7 +135,7 @@ export default class FormRequest {
     /**
     *
          * Get request url without query.
-         
+
     */
     urlWithoutQuery(): any;
     /**
@@ -144,7 +144,7 @@ export default class FormRequest {
     /**
     *
          * Get request url without signature.
-         
+
     */
     urlWithoutSignature(): any;
     /**
@@ -153,7 +153,7 @@ export default class FormRequest {
     /**
     *
          * Get full request url.
-         
+
     */
     fullUrl(): any;
     /**
@@ -162,7 +162,7 @@ export default class FormRequest {
     /**
     *
          * Get request method.
-         
+
     */
     method(): any;
     /**
@@ -171,7 +171,7 @@ export default class FormRequest {
     /**
     *
          * Check if path matches current request path.
-         
+
     */
     isUrl(path: any): boolean;
     /**
@@ -180,7 +180,7 @@ export default class FormRequest {
     /**
     *
          * Check if path matches current request path.
-         
+
     */
     isFullUrl(path: any): boolean;
     /**
@@ -189,7 +189,7 @@ export default class FormRequest {
     /**
     *
          * Check if method matches current request method.
-         
+
     @param {string} method
     */
     isMethod(method: string): boolean;
@@ -199,7 +199,7 @@ export default class FormRequest {
     /**
     *
          * Get request headers.
-         
+
     */
     headers(): any;
     /**
@@ -208,7 +208,7 @@ export default class FormRequest {
     /**
     *
          * Check if header is present.
-         
+
     @param {string} header
     */
     hasHeader(header: string): boolean;
@@ -218,7 +218,7 @@ export default class FormRequest {
     /**
     *
          * Set request header.
-         
+
     @param {string} header
     @param {string} value
     */
@@ -229,7 +229,7 @@ export default class FormRequest {
     /**
     *
          * Set request headers.
-         
+
     @param {object} headers
     */
     setHeaders(headers: object): FormRequest;
@@ -239,7 +239,7 @@ export default class FormRequest {
     /**
     *
          * Get specified header.
-         
+
     @param {string} header
     */
     header(header: string, default$?: any): any;
@@ -249,7 +249,7 @@ export default class FormRequest {
     /**
     *
          * Get bearer token used to authenticate current request.
-         
+
     */
     bearerToken(): any;
     /**
@@ -258,7 +258,7 @@ export default class FormRequest {
     /**
     *
          * Get request referer.
-         
+
     */
     referer(): any;
     /**
@@ -267,7 +267,7 @@ export default class FormRequest {
     /**
     *
          * Get request host.
-         
+
     */
     getHost(): any;
     /**
@@ -276,7 +276,7 @@ export default class FormRequest {
     /**
     *
          * Get full request host.
-         
+
     */
     getFullOrigin(): any;
     /**
@@ -285,7 +285,7 @@ export default class FormRequest {
     /**
     *
          * Get request origin.
-         
+
     */
     getOrigin(): any;
     /**
@@ -294,7 +294,7 @@ export default class FormRequest {
     /**
     *
          * Get request origin protocol.
-         
+
     */
     getOriginProtocol(): string;
     /**
@@ -303,7 +303,7 @@ export default class FormRequest {
     /**
     *
          * Get request ip address.
-         
+
     */
     ip(): any;
     /**
@@ -312,7 +312,7 @@ export default class FormRequest {
     /**
     *
          * Check if path matches.
-         
+
     @param {string} path
     */
     pathIs(path: string): boolean;
@@ -322,7 +322,7 @@ export default class FormRequest {
     /**
     *
          * Check if request matches specified route.
-         
+
     @param {string} route
     */
     routeIs(route: string): boolean;
@@ -332,7 +332,7 @@ export default class FormRequest {
     /**
     *
          * Get url param.
-         
+
     @param {String} name
     */
     param(name: string): any;
@@ -342,7 +342,7 @@ export default class FormRequest {
     /**
     *
          * Get all url params.
-         
+
     */
     params(): any;
     /**
@@ -351,7 +351,7 @@ export default class FormRequest {
     /**
     *
          * Get request body.
-         
+
     */
     body(): any;
     /**
@@ -360,7 +360,7 @@ export default class FormRequest {
     /**
     *
          * Get body input or specified query keys.
-         
+
     @param {String[]} keys
     */
     all(keys?: string[]): any;
@@ -370,7 +370,7 @@ export default class FormRequest {
     /**
     *
          * Get specified input from body.
-         
+
     @param {string|null} key
     */
     input(key?: string | null, default$?: any): any;
@@ -380,7 +380,7 @@ export default class FormRequest {
     /**
     *
          * Check body/query has key.
-         
+
     @param {string} key
     */
     has(key: string): boolean;
@@ -390,7 +390,7 @@ export default class FormRequest {
     /**
     *
          * Get key from body/query.
-         
+
     @param {string} key
     */
     get(key: string, default$?: any): any;
@@ -400,7 +400,7 @@ export default class FormRequest {
     /**
     *
          * Get specified keys from request.
-         
+
     @param {string[]} keys
     */
     only(keys: string[]): {};
@@ -410,7 +410,7 @@ export default class FormRequest {
     /**
     *
          * Get filled input.
-         
+
     @param {String[]} keys
     */
     filled(keys: string[]): {};
@@ -420,7 +420,7 @@ export default class FormRequest {
     /**
     *
          * Get specified query.
-         
+
     @param {string|null} key
     */
     query(key?: string | null, default$?: any): any;
@@ -434,7 +434,7 @@ export default class FormRequest {
          * Get files.
          *
          * @returns {FileCollection[]|[]}
-         
+
     */
     files(): FileCollection[] | [];
     /**
@@ -447,7 +447,7 @@ export default class FormRequest {
          * Get file.
          *
          * @returns {FileCollection|null}
-         
+
     @param {String} name
     */
     file(name: string): FileCollection | null;
@@ -461,7 +461,7 @@ export default class FormRequest {
          * Check if request has file.
          *
          * @returns {Boolean}
-         
+
     @param {String} name
     */
     hasFile(name: string): boolean;
@@ -475,7 +475,7 @@ export default class FormRequest {
          * Check if request expects a json response.
          *
          * @returns {Boolean}
-         
+
     */
     expectsJson(): boolean;
     /**
@@ -488,7 +488,7 @@ export default class FormRequest {
          * Check if request expects an html response.
          *
          * @returns {Boolean}
-         
+
     */
     expectsHtml(): boolean;
     /**
@@ -497,7 +497,7 @@ export default class FormRequest {
     /**
     *
          * Validate a request using specified rules.
-         
+
     @param {Object|null} rules
     */
     validate(rules?: any | null): any;
@@ -513,7 +513,7 @@ export default class FormRequest {
          *
          * @param {Object} rules
          * @returns {FormRequest}
-         
+
     @param {Object} rules
     */
     setRules(rules: any): FormRequest;
@@ -527,7 +527,7 @@ export default class FormRequest {
          * Get request rules.
          *
          * @returns {Object}
-         
+
     */
     getRules(): any;
     /**
@@ -536,7 +536,7 @@ export default class FormRequest {
     /**
     *
          * Get currently authenticated user.
-         
+
     */
     auth(): Auth | {
         user: () => any;
@@ -545,10 +545,10 @@ export default class FormRequest {
         can: (perform: string) => boolean;
     };
     user(): any;
-    [$4]($$?: {}): void;
-    [$3]($$?: any, deep?: boolean): void;
-    [$1]: any;
-    [$2]: any;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean): void;
+    [$session$]: any;
+    [$cookies$]: any;
 }
 import Auth from "../../Auth/Auth";
 import FileCollection from "./FileCollection";
@@ -557,7 +557,8 @@ import type Session from './Session';
 import type Cookies from './Cookies';
 import type { FastifyRequest } from 'fastify';
 import type { FastifyReply } from 'fastify';
-declare const $3: unique symbol;
-declare const $1: unique symbol;
-declare const $2: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
+declare const $session$: unique symbol;
+declare const $cookies$: unique symbol;
 export {};

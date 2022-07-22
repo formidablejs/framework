@@ -1,4 +1,4 @@
 export class ConfigCacheCommand extends CacheCommand {
-    handle(): void;
+    handle(): never;
 }
 import { CacheCommand } from "./CacheCommand";

@@ -167,9 +167,9 @@ export default class File {
     @param {Boolean} overwrite
     */
     move(destination: string, overwrite?: boolean): void;
-    [$2]($$?: {}): void;
-    [$1]($$?: any, deep?: boolean): void;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean): void;
 }
-declare const $2: unique symbol;
-declare const $1: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
 export {};

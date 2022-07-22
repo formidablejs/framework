@@ -26,11 +26,11 @@ export default class Session {
     @param {String|String[]} key
     */
     forget(key: string | string[]): any[];
-    [$3]($$?: {}): void;
-    [$2]($$?: any, deep?: boolean): void;
-    [$1]: any;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean): void;
+    [$ref$]: any;
 }
-declare const $3: unique symbol;
-declare const $2: unique symbol;
-declare const $1: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
+declare const $ref$: unique symbol;
 export {};

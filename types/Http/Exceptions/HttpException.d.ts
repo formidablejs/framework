@@ -1,6 +1,6 @@
 export default HttpException;
 declare class HttpException extends Error {
-    static [$1](): typeof HttpException;
+    static [$__init__$](): typeof HttpException;
     /**
     @param {String} response
     @param {Number|null} statusCode
@@ -11,8 +11,8 @@ declare class HttpException extends Error {
     initMessage(): string;
     initName(): string;
     getStatus(): number;
-    [$2]($$?: {}): void;
-    [$1]($$?: any, deep?: boolean, ...args: any[]): void;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean, ...args: any[]): void;
 }
-declare const $2: unique symbol;
-declare const $1: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
