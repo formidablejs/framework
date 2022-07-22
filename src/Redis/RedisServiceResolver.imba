@@ -26,14 +26,16 @@ export default class RedisServiceResolver < ServiceResolver
 		let sessionClient;
 
 		if self.app.config.get('session.driver') == 'redis'
-			sessionClient = self.redis!
+			if process.argv && process.argv[1] && process.argv[1].substr(-10) !== 'console.js'
+				sessionClient = self.redis!
 
-			const store = redisStore(session)
+				const store = redisStore(session)
 
-			# register redis store driver.
-			SessionDriverManager.register('redis', new store({
-				client: sessionClient
-			}))
+				SessionDriverManager.register('redis', new store({
+					client: sessionClient
+				}))
+			else
+				SessionDriverManager.register('redis', do)
 
 		# close redis connections.
 		self.app.addHook 'onClose', do
