@@ -44,6 +44,11 @@ export default class Application {
     */
     register(plugin: Function, options?: any, handler?: Function): Application;
     /**
+    @param {String} event
+    @param {Function} callback
+    */
+    on(event: string, callback: Function): Application;
+    /**
     @param {Function} handler
     */
     onResponse(handler: Function): Application;
