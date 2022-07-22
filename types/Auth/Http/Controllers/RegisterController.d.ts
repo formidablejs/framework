@@ -4,7 +4,7 @@ declare class RegisterController extends Controller {
     @param {Function} handler
     */
     static onRegister(handler: Function): Function;
-    static [$1](): typeof RegisterController;
+    static [$__init__$](): typeof RegisterController;
     constructor(...args: any[]);
     /**
     @param {RegisterRequest} request
@@ -13,4 +13,4 @@ declare class RegisterController extends Controller {
 }
 import Controller from "../../../Http/Controller";
 import RegisterRequest from "../Requests/RegisterRequest";
-declare const $1: unique symbol;
+declare const $__init__$: unique symbol;

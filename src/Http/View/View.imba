@@ -31,10 +31,10 @@ export default class View
 		self.#_language = language
 
 		self
-	
+
 	def translate key\String, default\any
 		self.#_language.get(key, default)
-	
+
 	def t key\String, default\any
 		self.translate key, default
 
@@ -76,6 +76,9 @@ export default class View
 		if !isString(property) then throw TypeError "Expected string."
 
 		dot(self.#_data, property) != null && dot(self.#_data, property) != undefined
+
+	def csrf
+		"<input type='hidden' name='_token' value={get('csrf_token')}>"
 
 	def beforeRender
 		null

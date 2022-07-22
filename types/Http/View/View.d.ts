@@ -64,19 +64,20 @@ export default class View {
     @param {String} property
     */
     has(property: string): boolean;
+    csrf(): string;
     beforeRender(): any;
     afterRender(): any;
     handle(): any;
     render(): any;
     make(): Promise<string>;
-    [$4]($$?: {}): void;
-    [$3]($$?: any, deep?: boolean): void;
-    [$1]: any;
-    [$2]: any;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean): void;
+    [$_data$]: any;
+    [$_language$]: any;
 }
 import Language from "../../Support/Language/Language";
-declare const $4: unique symbol;
-declare const $3: unique symbol;
-declare const $1: unique symbol;
-declare const $2: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
+declare const $_data$: unique symbol;
+declare const $_language$: unique symbol;
 export {};

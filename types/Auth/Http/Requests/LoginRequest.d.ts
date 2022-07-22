@@ -1,5 +1,5 @@
 export default class LoginRequest extends FormRequest {
-    static [$1](): typeof LoginRequest;
+    static [$__init__$](): typeof LoginRequest;
     constructor(...args: any[]);
     authDriver: any;
     authorize(): boolean;
@@ -9,10 +9,10 @@ export default class LoginRequest extends FormRequest {
         remember_me: string;
     };
     persist(): Promise<any>;
-    [$2]($$?: {}): void;
-    [$1]($$?: any, deep?: boolean, ...args: any[]): void;
+    [$__patch__$]($$?: {}): void;
+    [$__init__$]($$?: any, deep?: boolean, ...args: any[]): void;
 }
 import FormRequest from "../../../Http/Request/FormRequest";
-declare const $2: unique symbol;
-declare const $1: unique symbol;
+declare const $__patch__$: unique symbol;
+declare const $__init__$: unique symbol;
 export {};

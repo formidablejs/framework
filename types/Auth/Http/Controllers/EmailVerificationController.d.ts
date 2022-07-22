@@ -8,7 +8,7 @@ declare class EmailVerificationController extends Controller {
     @param {Function} handler
     */
     static onEmailResend(handler: Function): Function;
-    static [$1](): typeof EmailVerificationController;
+    static [$__init__$](): typeof EmailVerificationController;
     constructor(...args: any[]);
     /**
     @param {VerifyEmailRequest} request
@@ -22,4 +22,4 @@ declare class EmailVerificationController extends Controller {
 import Controller from "../../../Http/Controller";
 import VerifyEmailRequest from "../Requests/VerifyEmailRequest";
 import EmailResendRequest from "../Requests/EmailResendRequest";
-declare const $1: unique symbol;
+declare const $__init__$: unique symbol;
