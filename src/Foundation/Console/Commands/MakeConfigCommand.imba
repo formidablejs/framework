@@ -11,12 +11,12 @@ export class MakeConfigCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the file')
 		}
-	
+
 	get description
 		'Create a new config file'
 
 	get resource
 		'Config'
-	
+
 	get stub
-		new Config(self.argument('name'), {}, 'config')
+		new Config(self.argument('name'), {}, 'config', self.language.toLowerCase!)

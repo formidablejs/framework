@@ -11,12 +11,12 @@ export class MakeControllerCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new controller class'
 
 	get resource
 		'Controller'
-	
+
 	get stub
-		new Controller(self.argument('name'), {}, 'controller')
+		new Controller(self.argument('name'), {}, 'controller', self.language.toLowerCase!)
