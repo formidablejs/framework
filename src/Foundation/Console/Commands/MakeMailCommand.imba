@@ -11,12 +11,12 @@ export class MakeMailCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new email class'
 
 	get resource
 		'Mail'
-	
+
 	get stub
-		new Mail(self.argument('name'), {}, 'mail')
+		new Mail(self.argument('name'), {}, 'mail', self.language.toLowerCase!)

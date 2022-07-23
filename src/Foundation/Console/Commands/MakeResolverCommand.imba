@@ -11,12 +11,12 @@ export class MakeResolverCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new resolver class'
 
 	get resource
 		'Resolver'
-	
+
 	get stub
-		new Resolver(self.argument('name'), {}, 'resolver')
+		new Resolver(self.argument('name'), {}, 'resolver', self.language.toLowerCase!)
