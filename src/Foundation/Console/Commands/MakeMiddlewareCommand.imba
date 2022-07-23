@@ -11,12 +11,12 @@ export class MakeMiddlewareCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new middleware class'
 
 	get resource
 		'Middleware'
-	
+
 	get stub
-		new Middleware(self.argument('name'), {}, 'middleware')
+		new Middleware(self.argument('name'), {}, 'middleware', self.language.toLowerCase!)

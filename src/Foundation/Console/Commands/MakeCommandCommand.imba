@@ -11,12 +11,12 @@ export class MakeCommandCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new command class'
 
 	get resource
 		'Command'
-	
+
 	get stub
-		new Command(self.argument('name'), {}, 'command')
+		new Command(self.argument('name'), {}, 'command', self.language.toLowerCase!)

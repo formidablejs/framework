@@ -13,13 +13,13 @@ export class MakeMigrationCommand < MakeResourceCommand
 			table: Prop.string!.description('The table to migrate')
 			alter: Prop.boolean!.description('Alter existing table')
 		}
-	
+
 	get description
 		'Create a new migration class'
 
 	get resource
 		'Migration'
-	
+
 	get stub
 		new Migration(
 			self.argument('name'),
@@ -27,5 +27,6 @@ export class MakeMigrationCommand < MakeResourceCommand
 				table: self.option('table')
 				alter: self.option('alter', false)
 			},
-			'migration'
+			'migration',
+			self.language.toLowerCase!
 		)

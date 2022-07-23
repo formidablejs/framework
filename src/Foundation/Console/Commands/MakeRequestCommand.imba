@@ -11,12 +11,12 @@ export class MakeRequestCommand < MakeResourceCommand
 		{
 			name: Prop.string!.description('The name of the class')
 		}
-	
+
 	get description
 		'Create a new form request class'
 
 	get resource
 		'Request'
-	
+
 	get stub
-		new Request(self.argument('name'), {}, 'request')
+		new Request(self.argument('name'), {}, 'request', self.language.toLowerCase!)
