@@ -29,6 +29,7 @@ const settings = {
 	migration: null
 	seeder: null
 	handler: null
+	interceptors: []
 }
 
 export default class Application
@@ -85,6 +86,11 @@ export default class Application
 
 	def fastify
 		settings.server
+
+	def intercept callback\Function
+		settings.interceptors.push(callback)
+
+		self
 
 	def addHook hook, handler
 		if self.hooks[hook] == undefined || self.hooks[hook] == null
@@ -156,6 +162,7 @@ export default class Application
 		settings.server = await kernel.listen(
 			self.config,
 			self.handler,
+			settings.interceptors,
 			self.hooks,
 			self.plugins,
 			self.serverConfig,
