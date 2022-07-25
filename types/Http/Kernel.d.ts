@@ -3,7 +3,7 @@ export default class Kernel {
     get middlewareGroups(): {};
     get routeMiddleware(): {};
     getAllMiddleware(route: any, _middleware?: any): any[];
-    listen(config: any, errorHandler: any, hooks: any, plugins: any, serverConfig: any, returnMode: any): Promise<any>;
+    listen(config: any, errorHandler: any, interceptors: any, hooks: any, plugins: any, serverConfig: any, returnMode: any): Promise<any>;
     /**
     @param {String} address
     */

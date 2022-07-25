@@ -35,6 +35,10 @@ export default class Application {
     */
     server(config: any): Application;
     fastify(): any;
+    /**
+    @param {Function} callback
+    */
+    intercept(callback: Function): Application;
     addHook(hook: any, handler: any): Application;
     registerCommand(command: any): Application;
     /**
