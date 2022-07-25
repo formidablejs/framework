@@ -73,13 +73,16 @@ export default class Kernel
 
 		return list
 
-	def listen config, errorHandler, hooks, plugins, serverConfig, returnMode
+	def listen config, errorHandler, interceptors, hooks, plugins, serverConfig, returnMode
 		const router = fastify(serverConfig)
 
 		hasContentTypes(router)
 
 		router.addHook 'onRoute', do(options)
 			routes.invalid = routes.invalid.filter do(route) route !== options.path
+
+		for await interceptor of interceptors
+			interceptor(router)
 
 		for plugin in plugins
 			router.register(plugin.plugin, plugin.options).after do(error)
@@ -115,13 +118,17 @@ export default class Kernel
 
 		if returnMode isa Boolean && returnMode == true then return router
 
-		router.listen Number(port), host, do(error, address)
+		router.listen({
+			port: Number(port),
+			host: host
+		}, do(error, address)
 			if routes.invalid.length > 0
 				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
 
 			if error then throw error
 
 			if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress address
+		)
 
 		imba.serve router.server
 
