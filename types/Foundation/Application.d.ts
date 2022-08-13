@@ -83,6 +83,7 @@ export default class Application {
     craftsman(kernel: ConsoleKernel): {
         run: () => any;
     };
+    console(): ApplicationConsole;
     prepare(): Application;
     resolve(): any[];
     bootResolver(resolver: any): any;
@@ -94,6 +95,7 @@ import Kernel from "../Http/Kernel";
 import type ConsoleKernel from './ConsoleKernel'
 import type ConfigRepository from '../Config/Repository'
 import type { ContextAPI } from './Context'
+import type { Application as ApplicationConsole } from '@formidablejs/console'
 declare const $__patch__$: unique symbol;
 declare const $__init__$: unique symbol;
 export {};
