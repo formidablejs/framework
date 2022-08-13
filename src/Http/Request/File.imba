@@ -1,6 +1,6 @@
-import { existsSync } from 'fs'
-import { moveSync } from 'fs'
-import { statSync } from 'fs'
+import { existsSync } from 'fs-extra'
+import { moveSync } from 'fs-extra'
+import { statSync } from 'fs-extra'
 import DestinationExistsException from './Exceptions/DestinationExistsException'
 
 export default class File

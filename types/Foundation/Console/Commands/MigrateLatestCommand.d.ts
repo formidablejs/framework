@@ -1,4 +1,4 @@
 export class MigrateLatestCommand extends MigrationCommand {
-    handle(): Promise<never>;
+    handle(): Promise<void>;
 }
 import { MigrationCommand } from "./MigrationCommand";

@@ -42,6 +42,7 @@
     "connect-redis": "^6.1.3",
     "dotenv": "^16.0.1",
     "fastify": "^3.29.0",
+    "fs-extra": "^10.1.0",
     "html-escaper": "^3.0.3",
     "inquirer": "^8.2.4",
     "jsonwebtoken": "^8.5.1",

@@ -2,6 +2,6 @@ export class MigrateUpCommand extends MigrationCommand {
     get props(): {
         migration: import("@formidablejs/console/types/Props/Prop").default;
     };
-    handle(): Promise<never>;
+    handle(): Promise<void>;
 }
 import { MigrationCommand } from "./MigrationCommand";
