@@ -11,18 +11,18 @@ export class CacheCommand < Command
 		join process.cwd!, 'storage', 'framework', 'address.json'
 
 	def cache
-		self.clear!
+		self.clear false
 
 		app.cache!
 
-		self.info 'Configuration cached successfully!'
+		self.message 'info', 'Configuration cached successfully!'
 
 		self.exit!
 
-	def clear
+	def clear newLine\boolean = true
 		if existsSync(self.config) then unlinkSync(self.config)
 
 		if existsSync(self.address) then unlinkSync(self.address)
 
-		self.info 'Configuration address cleared!'
-		self.info 'Configuration cache cleared!'
+		self.message 'info', 'Configuration address cleared!', false
+		self.message 'info', 'Configuration cache cleared!', newLine

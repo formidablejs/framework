@@ -9,7 +9,7 @@ export class GenerateKeyCommand < Command
 
 	get signature
 		'key:generate {?--env} {?--show}'
-	
+
 	get description
 		'Application key set successfully'
 
@@ -18,7 +18,7 @@ export class GenerateKeyCommand < Command
 			env: Prop.string!.alias('e').description('Environment file')
 			show: Prop.boolean!.description('Display the key instead of modifying files')
 		}
-	
+
 	get envFile
 		let env = self.option('env')
 
@@ -35,11 +35,11 @@ export class GenerateKeyCommand < Command
 		const key = self.key 32
 
 		if self.option('show', false)
-			return self.info "Application key [{key}] generated successfully."
+			return self.message 'info', "Application key [{key}] generated successfully."
 
 		self.updateEnv key
 
-		this.info "Application key set successfully."
+		this.message 'info', "Application key set successfully."
 
 	def key length\Number = 32
 		const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
@@ -49,9 +49,9 @@ export class GenerateKeyCommand < Command
 			key += chars.charAt(Math.floor(Math.random() * chars.length));
 
 		'base64:' + Buffer.from(key + ':' + randomBytes(8).toString('hex')).toString('base64');
-	
+
 	def updateEnv key\String
 		updateLine self.envPath, do(line)
 			if line.startsWith('APP_KEY=') then return "APP_KEY={key}"
-			
+
 			line
