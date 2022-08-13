@@ -1,4 +1,4 @@
 export class SessionPruneExpiredCommand extends Command {
-    handle(): Promise<never>;
+    handle(): Promise<void>;
 }
 import { Command } from "../Command";

@@ -9,7 +9,7 @@ export class ServeCommand extends Command {
     get runtime(): string;
     get fallbackPort(): string;
     get fallbackHost(): string;
-    handle(): import("child_process").SpawnSyncReturns<Buffer> & import("child_process").SpawnSyncReturns<string> & import("child_process").SpawnSyncReturns<string | Buffer>;
+    handle(): void | (import("child_process").SpawnSyncReturns<Buffer> & import("child_process").SpawnSyncReturns<string> & import("child_process").SpawnSyncReturns<string | Buffer>);
     setEnvVars(): mixed;
 }
 import { Command } from "../Command";
