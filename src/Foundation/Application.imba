@@ -179,6 +179,9 @@ export default class Application
 				settings.console.run!
 		}
 
+	def console
+		settings.console
+
 	def prepare
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
