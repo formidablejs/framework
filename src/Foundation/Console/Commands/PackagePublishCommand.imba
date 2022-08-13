@@ -1,10 +1,10 @@
 import { Command } from '../Command'
-import { copySync } from 'fs-extra'
-import { existsSync } from 'fs-extra'
+import { copySync } from 'fs'
+import { existsSync } from 'fs'
 import { isString } from '../../../Support/Helpers'
 import { join } from 'path'
 import { Prop } from '@formidablejs/console'
-import { readFileSync } from 'fs-extra'
+import { readFileSync } from 'fs'
 
 export class PackagePublishCommand < Command
 

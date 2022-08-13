@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs-extra'
+import { writeFileSync } from 'fs'
 import { join } from 'path'
 import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
 import fastify from 'fastify'

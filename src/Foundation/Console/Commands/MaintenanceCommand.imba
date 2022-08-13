@@ -2,7 +2,7 @@ import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
 import { unlinkSync } from 'fs'
-import { outputFileSync } from 'fs-extra'
+import { outputFileSync } from 'fs'
 import { isEmpty } from '../../../Support/Helpers'
 
 export class MaintenanceCommand < Command
@@ -13,12 +13,12 @@ export class MaintenanceCommand < Command
 	def down
 		if existsSync(file)
 			return self.info "Application is already down."
-		
+
 		const content = { }
 
 		if !isEmpty(self.option('message'))
 			content.message = self.option('message')
-		
+
 		if !isEmpty(self.option('redirect'))
 			content.redirect = self.option('redirect')
 
@@ -33,7 +33,7 @@ export class MaintenanceCommand < Command
 
 		if self.option('status') !== 503
 			content.status = self.option('status')
-		
+
 		outputFileSync(file, JSON.stringify(content, null, 4), {
 			encoding: 'utf8'
 		})
@@ -46,10 +46,10 @@ export class MaintenanceCommand < Command
 	def up
 		if !existsSync(file)
 			return self.info "Application is already up."
-		
+
 		unlinkSync(file)
 
 		if existsSync(file)
 			return self.error "Failed to bring application out of maintenance."
-		
+
 		self.info "Application is now live."
