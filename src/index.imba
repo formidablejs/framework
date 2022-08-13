@@ -50,6 +50,7 @@ import Redis from './Redis/Redis'
 import RedisServiceResolver from './Redis/RedisServiceResolver'
 import Request from './Http/Request/Request'
 import response from './Support/Helpers/response'
+import Response from './Http/Response/Response'
 import Route from './Http/Router/Route'
 import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
@@ -128,6 +129,7 @@ export {
 	Request
 	RequestGenericInterface
 	response
+	Response
 	Route
 	ServiceResolver
 	SessionDriverManager
