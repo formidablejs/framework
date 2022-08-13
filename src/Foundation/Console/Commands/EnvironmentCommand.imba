@@ -10,4 +10,4 @@ export class EnvironmentCommand < Command
 		'Display the current framework environment'
 
 	def handle
-		self.info "Current application environment: {app.config.get('app.env', 'development')}"
+		self.message 'info', "Current application environment: {app.config.get('app.env', 'development')}"

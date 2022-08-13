@@ -1,10 +1,10 @@
 import { Command } from '../Command'
-import { copySync } from 'fs'
-import { existsSync } from 'fs'
+import { copySync } from 'fs-extra'
+import { existsSync } from 'fs-extra'
 import { isString } from '../../../Support/Helpers'
 import { join } from 'path'
 import { Prop } from '@formidablejs/console'
-import { readFileSync } from 'fs'
+import { readFileSync } from 'fs-extra'
 
 export class PackagePublishCommand < Command
 
@@ -36,7 +36,7 @@ export class PackagePublishCommand < Command
 	get definition
 		const npmFile = join self.package, 'package.json'
 
-		if !existsSync npmFile then return self.error('Package is not installed.')
+		if !existsSync npmFile then return self.message('error', 'Package is not installed.')
 
 		JSON.parse readFileSync(npmFile, 'utf8').toString!
 
@@ -45,19 +45,19 @@ export class PackagePublishCommand < Command
 
 	get publisher
 		if !self.publisherPath
-			return self.error 'This package is not publishable.'
+			return self.message 'error', 'This package is not publishable.'
 
 		const publisherModule = join(package, self.publisherPath)
 
 		if !existsSync(publisherModule)
-			return self.error 'Publisher does not exist.'
+			return self.message 'error', 'Publisher does not exist.'
 
 		let publisher = require(publisherModule).Package
 
 		publisher = new publisher
 
 		if typeof publisher.publish !== 'function'
-			return self.error 'Publish function missing.'
+			return self.message 'error', 'Publish function missing.'
 
 		publisher.publish(self.language.toLowerCase!)
 

@@ -2,7 +2,7 @@ import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
 import { unlinkSync } from 'fs'
-import { outputFileSync } from 'fs'
+import { outputFileSync } from 'fs-extra'
 import { isEmpty } from '../../../Support/Helpers'
 
 export class MaintenanceCommand < Command
@@ -12,7 +12,7 @@ export class MaintenanceCommand < Command
 
 	def down
 		if existsSync(file)
-			return self.info "Application is already down."
+			return self.message 'error', "Application is already down."
 
 		const content = { }
 
@@ -39,17 +39,17 @@ export class MaintenanceCommand < Command
 		})
 
 		if existsSync(file)
-			return self.info "Application is now in maintenance mode."
+			return self.message 'info', "Application is now in maintenance mode."
 
-		self.error 'Failed to put application in maintenance mode.'
+		self.message 'error', 'Failed to put application in maintenance mode.'
 
 	def up
 		if !existsSync(file)
-			return self.info "Application is already up."
+			return self.message 'info', "Application is already up."
 
 		unlinkSync(file)
 
 		if existsSync(file)
-			return self.error "Failed to bring application out of maintenance."
+			return self.message 'error', "Failed to bring application out of maintenance."
 
-		self.info "Application is now live."
+		self.message 'info', "Application is now live."

@@ -18,7 +18,7 @@ export class ServeCommand < Command
 			dev: Prop.boolean!.alias('d').description 'Serve in dev mode (build, serve and watch)'
 			addr: Prop.boolean!.description 'Store address in a config file'
 		}
-		
+
 	get runtime
 		join process.cwd!, 'node_modules', '.bin', 'imbar' + (process.platform === 'win32' ? '.cmd' : '')
 
@@ -29,7 +29,7 @@ export class ServeCommand < Command
 		process.env.HOST !== undefined && process.env.HOST !== null ? process.env.HOST : undefined
 
 	def handle
-		if isNaN self.option('port') then return self.error 'Port must be a valid number.'
+		if isNaN self.option('port') then return self.message 'error', 'Port must be a valid number.'
 
 		self.setEnvVars!
 
@@ -50,7 +50,7 @@ export class ServeCommand < Command
 			conf.windowsVerbatimArguments = true
 
 			return spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
-		
+
 		spawnSync self.runtime, [...args, 'server.imba'], conf
 
 	def setEnvVars
