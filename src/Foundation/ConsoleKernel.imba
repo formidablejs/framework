@@ -1,3 +1,4 @@
+import { MakeCrudCommand } from './Console/Commands/MakeCrudCommand'
 import { SessionPruneExpiredCommand } from './Console/Commands/SessionPruneExpiredCommand'
 import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
 import { ConfigCacheCommand } from './Console/Commands/ConfigCacheCommand'
@@ -60,6 +61,7 @@ export default class ConsoleKernel
 			MakeCommandCommand
 			MakeConfigCommand
 			MakeControllerCommand
+			MakeCrudCommand
 			MakeExceptionCommand
 			MakeMailCommand
 			MakeMiddlewareCommand
@@ -85,14 +87,14 @@ export default class ConsoleKernel
 
 	get registered
 		[
-			
+
 		]
-	
+
 	def registerCommands app\Application, ctx
 		for command in self.default
 			command.ctx = ctx
 			app.register(command)
-		
+
 		for command in self.registered
 			command.ctx = ctx
 			app.register(command)
