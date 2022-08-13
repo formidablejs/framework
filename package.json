@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "@fastify/multipart": "^6.0.0",
     "@fastify/session": "^8.2.0",
     "@fastify/static": "^5.0.2",
-    "@formidablejs/console": "^0.0.5",
+    "@formidablejs/console": "^0.0.6",
     "argon2": "^0.28.7",
     "bcrypt": "^5.0.1",
     "connect-redis": "^6.1.3",
