@@ -1,4 +1,4 @@
-import { unlinkSync, existsSync } from 'fs-extra'
+import { unlinkSync, existsSync } from 'fs'
 import { Command } from '../Command'
 import { join } from 'path'
 
