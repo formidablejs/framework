@@ -1,3 +1,4 @@
+import { existsSync } from 'fs-extra'
 import { MakeCrudCommand } from './Console/Commands/MakeCrudCommand'
 import { SessionPruneExpiredCommand } from './Console/Commands/SessionPruneExpiredCommand'
 import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
@@ -26,6 +27,8 @@ import { RouteListCommand } from './Console/Commands/RouteListCommand'
 import { ServeCommand } from './Console/Commands/ServeCommand'
 import { ShellCommand } from './Console/Commands/ShellCommand'
 import { UpCommand } from './Console/Commands/UpCommand'
+import { execSync } from 'child_process'
+import { join } from 'path'
 import type { Application } from '@formidablejs/console'
 
 export default class ConsoleKernel
@@ -98,3 +101,24 @@ export default class ConsoleKernel
 		for command in self.registered
 			command.ctx = ctx
 			app.register(command)
+
+		self.loadEvents app\Application
+
+	def loadEvents app\Application
+		const appPackage = join(process.cwd!, 'package.json')
+
+		if !existsSync(appPackage)
+			return
+
+		const hooks = require(appPackage).hooks || {}
+
+		for own event, commands of hooks
+			if !Array.isArray(commands)
+				commands = []
+
+			for command in commands
+				app.onEvent event, do
+					execSync(command, {
+						cwd: process.cwd!,
+						stdio: 'inherit'
+					})
