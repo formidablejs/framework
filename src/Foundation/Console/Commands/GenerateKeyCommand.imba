@@ -11,7 +11,7 @@ export class GenerateKeyCommand < Command
 		'key:generate {?--env} {?--show}'
 
 	get description
-		'Application key set successfully'
+		'Set the application key'
 
 	get props
 		{
