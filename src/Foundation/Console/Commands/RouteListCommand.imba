@@ -1,4 +1,4 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { Prop } from '@formidablejs/console'
 import type Application from '../../Application'
 
