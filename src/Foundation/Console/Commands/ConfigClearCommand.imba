@@ -10,3 +10,5 @@ export class ConfigClearCommand < CacheCommand
 
 	def handle
 		self.clear!
+
+		self.exit!

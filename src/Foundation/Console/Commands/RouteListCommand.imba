@@ -48,4 +48,4 @@ export class RouteListCommand < Command
 
 		self.write list.join("\n")
 
-
+		self.exit!

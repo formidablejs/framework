@@ -41,6 +41,8 @@ export class GenerateKeyCommand < Command
 
 		this.message 'info', "Application key set successfully."
 
+		self.exit!
+
 	def key length\Number = 32
 		const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
