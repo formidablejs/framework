@@ -105,6 +105,9 @@ export default class ConsoleKernel
 		self.loadEvents app\Application
 
 	def loadEvents app\Application
+		app.onDefaultCommand do(e)
+			process.exit!
+
 		const appPackage = join(process.cwd!, 'package.json')
 
 		if !existsSync(appPackage)
