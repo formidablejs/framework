@@ -1,4 +1,4 @@
 export class EnvironmentCommand extends Command {
-    handle(): void;
+    handle(): never;
 }
 import { Command } from "../Command";

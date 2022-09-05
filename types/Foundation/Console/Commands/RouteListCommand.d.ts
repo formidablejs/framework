@@ -3,6 +3,5 @@ export class RouteListCommand extends Command {
         method: import("@formidablejs/console/types/Props/Prop").default;
     };
     get app(): any;
-    handle(): void;
 }
 import { Command } from "@formidablejs/console";
