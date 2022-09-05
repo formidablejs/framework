@@ -7,6 +7,6 @@ export class DownCommand extends MaintenanceCommand {
         status: import("@formidablejs/console/types/Props/Prop").default;
         redirect: import("@formidablejs/console/types/Props/Prop").default;
     };
-    handle(): void;
+    handle(): never;
 }
 import { MaintenanceCommand } from "./MaintenanceCommand";

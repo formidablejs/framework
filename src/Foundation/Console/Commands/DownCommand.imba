@@ -21,3 +21,5 @@ export class DownCommand < MaintenanceCommand
 
 	def handle
 		down!
+
+		self.exit!

@@ -10,3 +10,5 @@ export class UpCommand < MaintenanceCommand
 
 	def handle
 		up!
+
+		self.exit!
