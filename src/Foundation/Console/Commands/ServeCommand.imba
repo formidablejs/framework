@@ -86,7 +86,6 @@ export class ServeCommand < Command
 			server.on 'stderr', do(e)
 				const data = e.toString()
 
-				console.log 'here'
 				console.log data.trim()
 
 			server.on 'restart', do
