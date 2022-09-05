@@ -10,13 +10,13 @@ export default class Console
 		cwd: process.cwd!
 	}
 
-	def constructor runtime\String, console\String
-		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imbar')
+	def constructor runtime\String = null, console\String = null
+		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imba')
 		self.console = console || join('bootstrap', 'console.imba')
-	
-	static def make runtime, console
+
+	static def make runtime\String = null, console\String = null
 		new Console(runtime, console)
-	
+
 	def run
 		if process.platform == 'win32'
 			const sh = process.env.comspec || 'cmd'
@@ -24,5 +24,5 @@ export default class Console
 			self.config.windowsVerbatimArguments = true
 
 			return spawn(sh, [shFlag, self.runtime, self.console, ...process.argv.slice(2)], self.config)
-		
+
 		spawn(runtime, [self.console, ...process.argv.slice(2)], self.config)
