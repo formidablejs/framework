@@ -45,3 +45,5 @@ export class MakeResourceCommand < Command
 			return self.message 'info', "{self.resource} created successfully."
 
 		self.message 'error', "{self.resource} not created."
+
+		self.exit!

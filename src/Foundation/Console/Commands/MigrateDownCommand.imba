@@ -10,7 +10,7 @@ export class MigrateDownCommand < MigrationCommand
 		{
 			migration: Prop.string!.alias('m').nullable!.description 'Migration file to run'
 		}
-	
+
 	get description
 		'Reverse migration(s)'
 

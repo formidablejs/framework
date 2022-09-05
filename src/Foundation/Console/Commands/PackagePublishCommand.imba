@@ -66,6 +66,8 @@ export class PackagePublishCommand < Command
 
 		tags.forEach do(optTag) self.persist optTag
 
+		self.exit!
+
 	def persist optTag\String
 		if !self.publisher[optTag] || (self.publisher[optTag] && self.publisher[optTag].paths === undefined || self.publisher[optTag].paths === null)
 			return self.write "<fg:red>{optTag} is missing.</fg:red>"
