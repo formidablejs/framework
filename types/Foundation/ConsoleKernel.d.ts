@@ -1,5 +1,5 @@
 export default class ConsoleKernel {
-    get default(): (typeof MakeCrudCommand | typeof DbSeedCommand | typeof GenerateKeyCommand | typeof MakeCommandCommand | typeof ServeCommand | typeof ShellCommand | typeof UpCommand)[];
+    get default(): (typeof MakeCrudCommand | typeof DbSeedCommand | typeof GenerateKeyCommand | typeof MakeCommandCommand | typeof ServeCommand | typeof ShellCommand)[];
     get registered(): any[];
     /**
     @param {Application} app
@@ -16,4 +16,3 @@ import { GenerateKeyCommand } from "./Console/Commands/GenerateKeyCommand";
 import { MakeCommandCommand } from "./Console/Commands/MakeCommandCommand";
 import { ServeCommand } from "./Console/Commands/ServeCommand";
 import { ShellCommand } from "./Console/Commands/ShellCommand";
-import { UpCommand } from "./Console/Commands/UpCommand";

@@ -1,4 +1,4 @@
 export class UpCommand extends MaintenanceCommand {
-    handle(): void;
+    handle(): never;
 }
 import { MaintenanceCommand } from "./MaintenanceCommand";
