@@ -1,11 +1,15 @@
 /// <reference types="node" />
 export default class Console {
-    static make(runtime: any, console: any): Console;
     /**
     @param {String} runtime
     @param {String} console
     */
-    constructor(runtime: string, console: string);
+    static make(runtime?: string, console?: string): Console;
+    /**
+    @param {String} runtime
+    @param {String} console
+    */
+    constructor(runtime?: string, console?: string);
     runtime: string;
     console: string;
     config: any;

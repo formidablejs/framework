@@ -22,3 +22,4 @@ export class SessionPruneExpiredCommand < Command
 
 		self.message('error', 'An error occured while trying to prune expired sessions')
 
+		self.exit!

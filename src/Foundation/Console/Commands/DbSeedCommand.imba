@@ -24,3 +24,5 @@ export class DbSeedCommand < Command
 			exit!
 
 		console.error results
+
+		self.exit!

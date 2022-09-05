@@ -11,3 +11,5 @@ export class EnvironmentCommand < Command
 
 	def handle
 		self.message 'info', "Current application environment: {app.config.get('app.env', 'development')}"
+
+		self.exit!

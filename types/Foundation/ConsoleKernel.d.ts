@@ -1,5 +1,5 @@
 export default class ConsoleKernel {
-    get default(): (typeof EnvironmentCommand | typeof RouteListCommand)[];
+    get default(): (typeof MakeCrudCommand | typeof DbSeedCommand | typeof GenerateKeyCommand | typeof MakeCommandCommand | typeof ServeCommand | typeof ShellCommand | typeof UpCommand)[];
     get registered(): any[];
     /**
     @param {Application} app
@@ -10,5 +10,10 @@ export default class ConsoleKernel {
     */
     loadEvents(app: Application): any[][];
 }
-import { EnvironmentCommand } from "./Console/Commands/EnvironmentCommand";
-import { RouteListCommand } from "./Console/Commands/RouteListCommand";
+import { MakeCrudCommand } from "./Console/Commands/MakeCrudCommand";
+import { DbSeedCommand } from "./Console/Commands/DbSeedCommand";
+import { GenerateKeyCommand } from "./Console/Commands/GenerateKeyCommand";
+import { MakeCommandCommand } from "./Console/Commands/MakeCommandCommand";
+import { ServeCommand } from "./Console/Commands/ServeCommand";
+import { ShellCommand } from "./Console/Commands/ShellCommand";
+import { UpCommand } from "./Console/Commands/UpCommand";

@@ -43,6 +43,8 @@ export class MaintenanceCommand < Command
 
 		self.message 'error', 'Failed to put application in maintenance mode.'
 
+		self.exit!
+
 	def up
 		if !existsSync(file)
 			return self.message 'info', "Application is already up."
@@ -53,3 +55,5 @@ export class MaintenanceCommand < Command
 			return self.message 'error', "Failed to bring application out of maintenance."
 
 		self.message 'info', "Application is now live."
+
+		self.exit!

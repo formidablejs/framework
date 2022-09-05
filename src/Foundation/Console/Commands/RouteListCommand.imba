@@ -1,4 +1,4 @@
-import { Command } from '@formidablejs/console'
+import { Command } from '../Command'
 import { Prop } from '@formidablejs/console'
 import type Application from '../../Application'
 
@@ -48,4 +48,4 @@ export class RouteListCommand < Command
 
 		self.write list.join("\n")
 
-
+		self.exit!
