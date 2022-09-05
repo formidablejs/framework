@@ -14,7 +14,7 @@ export class Welcome < View
 				<title> title
 
 				<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'>
-				<style src="./welcome">
+				<style src="*">
 
 			<body[m:0 ff:Nunito]>
 				<div[pos:relative d:flex ji:center min-height:100vh bg:gray1 ai:center pt@sm:0]>
