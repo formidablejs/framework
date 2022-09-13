@@ -21,12 +21,18 @@ export class MigrationCommand < Command
 			results = await app.migration!.fresh!
 
 		if results === false
-			return self.message 'error', 'Migration failed'
+			self.message 'error', 'Migration failed'
+
+			self.exit!
+
+			return
 
 		if results[1].length > 0
 			results[1].forEach do(migration) self.write "<fg:green>{action === 'rollback' ? 'Rollback' : 'Migrate'}:</fg:green> {migration}"
 
 			exit!
+
+			return
 
 		self.write "<fg:red>No migration to run</fg:red>"
 
