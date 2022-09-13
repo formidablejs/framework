@@ -39,17 +39,33 @@ export class MaintenanceCommand < Command
 		})
 
 		if existsSync(file)
-			return self.message 'info', "Application is now in maintenance mode."
+			self.message 'info', "Application is now in maintenance mode."
+
+			self.exit!
+
+			return
 
 		self.message 'error', 'Failed to put application in maintenance mode.'
 
+		self.exit!
+
 	def up
 		if !existsSync(file)
-			return self.message 'info', "Application is already up."
+			self.message 'info', "Application is already up."
+
+			self.exit!
+
+			return
 
 		unlinkSync(file)
 
 		if existsSync(file)
-			return self.message 'error', "Failed to bring application out of maintenance."
+			self.message 'error', "Failed to bring application out of maintenance."
+
+			self.exit!
+
+			return
 
 		self.message 'info', "Application is now live."
+
+		self.exit!

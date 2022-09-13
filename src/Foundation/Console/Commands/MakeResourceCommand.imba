@@ -32,7 +32,11 @@ export class MakeResourceCommand < Command
 		const filePath = join(process.cwd!, information.destination, reference.namespace, information.fileName)
 
 		if existsSync(filePath)
-			return self.message 'error', "{self.resource} already exists."
+			self.message 'error', "{self.resource} already exists."
+
+			self.exit!
+
+			return
 
 		const directory = dirname(filePath)
 
@@ -42,7 +46,11 @@ export class MakeResourceCommand < Command
 		writeFileSync(normalize(filePath), information.output)
 
 		if existsSync(filePath)
-			return self.message 'info', "{self.resource} created successfully."
+			self.message 'info', "{self.resource} created successfully."
+
+			self.exit!
+
+			return
 
 		self.message 'error', "{self.resource} not created."
 
