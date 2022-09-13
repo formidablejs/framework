@@ -88,11 +88,10 @@ export default class MaintenanceServiceResolver < ServiceResolver
 
 		const cookie\String|null = request.request.cookies[self.cookieName]
 
-		if !isEmpty(cookie)
-			const unsignCookie\Object = request.reply.unsignCookie cookie
+		if !isEmpty(cookie) && decrypt(cookie) == secret
+			return true
 
-			if !isEmpty(unsignCookie.valid) && !isEmpty(unsignCookie.value) && decrypt(unsignCookie.value) == secret
-				return true
+		false
 
 	def setBypassMaintenanceModeCookie secret, request\FormRequest
 		const session = self.app.config.get('session')
@@ -104,7 +103,6 @@ export default class MaintenanceServiceResolver < ServiceResolver
 			path: session.path
 			sameSite: session.same_site
 			secure: session.secure
-			signed: session.encrypt
 		}
 
 	def isFile request\FormRequest
