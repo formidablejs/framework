@@ -88,8 +88,9 @@ export default class MaintenanceServiceResolver < ServiceResolver
 
 		const cookie\String|null = request.request.cookies[self.cookieName]
 
-		if !isEmpty(cookie) && decrypt(cookie) == secret
-			return true
+		try
+			if !isEmpty(cookie) && decrypt(cookie) == secret
+				return true
 
 		false
 
