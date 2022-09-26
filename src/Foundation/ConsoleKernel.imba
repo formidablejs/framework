@@ -129,4 +129,6 @@ export default class ConsoleKernel
 						stdio: 'inherit'
 					})
 
-					Output.write "<dim>  " + ('-'.repeat((process.stdout.columns / 2) - '  '.length)) + "</dim>"
+					const repeat = process.stdout.columns <= 85 ? process.stdout.columns : (process.stdout.columns / 2)
+
+					Output.write "<dim>  " + ('-'.repeat(repeat - '  '.length)) + "</dim>"
