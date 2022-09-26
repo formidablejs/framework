@@ -10,7 +10,6 @@ export class PackagePublishCommand extends Command {
     get definition(): any;
     get publisherPath(): any;
     get publisher(): any;
-    handle(): never;
     /**
     @param {String} optTag
     */
