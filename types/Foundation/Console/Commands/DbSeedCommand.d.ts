@@ -1,4 +1,4 @@
 export class DbSeedCommand extends Command {
-    handle(): Promise<void>;
+    handle(): Promise<any>;
 }
 import { Command } from "../Command";

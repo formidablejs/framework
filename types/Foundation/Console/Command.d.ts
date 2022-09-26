@@ -16,9 +16,5 @@ export class Command extends BaseCommand {
     */
     confirm(message: string): Promise<any>;
     shouldRun(): Promise<any>;
-    /**
-    @param {Number} code
-    */
-    exit(code?: number): never;
 }
 import { Command as BaseCommand } from "@formidablejs/console";

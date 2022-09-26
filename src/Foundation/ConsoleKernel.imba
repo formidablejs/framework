@@ -29,6 +29,7 @@ import { ShellCommand } from './Console/Commands/ShellCommand'
 import { UpCommand } from './Console/Commands/UpCommand'
 import { execSync } from 'child_process'
 import { join } from 'path'
+import Output from '@formidablejs/console/lib/Output'
 import type { Application } from '@formidablejs/console'
 
 export default class ConsoleKernel
@@ -121,7 +122,13 @@ export default class ConsoleKernel
 
 			for command in commands
 				app.onEvent event, do
+					Output.write "\n  <dim>> {command}</dim>\n"
+
 					execSync(command, {
 						cwd: process.cwd!,
 						stdio: 'inherit'
 					})
+
+					const repeat = process.stdout.columns <= 85 ? process.stdout.columns : (process.stdout.columns / 2)
+
+					Output.write "<dim>  " + ('-'.repeat(repeat - '  '.length)) + "</dim>"

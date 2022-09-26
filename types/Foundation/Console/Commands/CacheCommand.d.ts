@@ -1,7 +1,7 @@
 export class CacheCommand extends Command {
     get config(): string;
     get address(): string;
-    cache(): never;
+    cache(): mixed;
     /**
     @param {boolean} newLine
     */
