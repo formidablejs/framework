@@ -28,3 +28,5 @@ export class MakeCrudCommand < Command
 		self.app.console!.run("make:request Store{self.argument('name')}Request")
 		self.app.console!.run("make:request Update{self.argument('name')}Request")
 		self.app.console!.run("make:seeder {name} --table={name}")
+
+		exit!
