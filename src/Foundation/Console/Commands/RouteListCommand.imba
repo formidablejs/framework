@@ -5,7 +5,7 @@ import type Application from '../../Application'
 export class RouteListCommand < Command
 
 	get signature
-		'route:list {--method}'
+		'route:list {--method} {--legacy}'
 
 	get description
 		'List all registered routes'
@@ -13,6 +13,7 @@ export class RouteListCommand < Command
 	get props
 		{
 			method: Prop.string().multiple().nullable().description('Filter the routes by method')
+			legacy: Prop.boolean().default(false).description('Display routes in legacy mode')
 		}
 
 	# @returns {Application}
@@ -27,25 +28,28 @@ export class RouteListCommand < Command
 			methods.map(do(method) method.toUpperCase!).includes(route.method.toUpperCase!)
 		)
 
-		for route of routes
-			let color
+		if self.option('legacy')
+			self.table(routes)
+		else
+			for route of routes
+				let color
 
-			if route.method == 'post'
-				color = 'green'
-			elif route.method == 'get'
-				color = 'blue'
-			elif route.method == 'delete'
-				color = 'red'
-			else
-				color = 'green'
+				if route.method == 'post'
+					color = 'green'
+				elif route.method == 'get'
+					color = 'blue'
+				elif route.method == 'delete'
+					color = 'red'
+				else
+					color = 'green'
 
-			const path = "<fg:{color}>{route.method.toUpperCase!}</fg:{color}>" + ' ' + (route.path.padStart((6 - route.method.length) + route.path.length, ' '))
-			const name = route.name || ''
-			const action = Array.isArray(route.action) ? "{route.action[0].name}@{route.action[1]}" : ''
-			const description = name != '' && action != '' ? name + ' › ' + action : (name != '' ? name : action != '' ? action : '')
+				const path = "<fg:{color}>{route.method.toUpperCase!}</fg:{color}>" + ' ' + (route.path.padStart((6 - route.method.length) + route.path.length, ' '))
+				const name = route.name || ''
+				const action = Array.isArray(route.action) ? "{route.action[0].name}@{route.action[1]}" : ''
+				const description = name != '' && action != '' ? name + ' › ' + action : (name != '' ? name : action != '' ? action : '')
 
-			list.push path + ' \x1b[2m' + (description == '' ? '' : ' ' + description).padStart((process.stdout.columns - path.length - 2) + ("<fg:{color}>".length * 2), "...") + '\x1b[0m'
+				list.push path + ' \x1b[2m' + (description == '' ? '' : ' ' + description).padStart((process.stdout.columns - path.length - 2) + ("<fg:{color}>".length * 2), "...") + '\x1b[0m'
 
-		self.write list.join("\n")
+			self.write list.join("\n")
 
 		self.exit!
