@@ -18,13 +18,22 @@ export class MakeCrudCommand < Command
 		'Create a new Crud'
 
 	def handle
-		const name = pluralize(self.argument('name'))
+		let path = self.argument('name').split('/')
+
+		path.pop()
+
+		const name = pluralize(self.argument('name').split('/').pop())
+		const namespace = path.length > 0 ? "{path.join('/')}/" : ''
+		const storeRequest = "{namespace}Store{self.argument('name').split('/').pop()}Request"
+		const updateRequest = "{namespace}Update{self.argument('name').split('/').pop()}Request"
 
 		const tableName = "Create{name}Table"
 		const controllerName = "{self.argument('name')}Controller"
 
-		self.app.console!.run("make:controller {controllerName} {self.option('--api') ? '--api' : '-r'}")
-		self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!}")
-		self.app.console!.run("make:request Store{self.argument('name')}Request")
-		self.app.console!.run("make:request Update{self.argument('name')}Request")
-		self.app.console!.run("make:seeder {name} --table={name}")
+		await self.app.console!.run("make:controller {controllerName} --store-request={storeRequest} --update-request={updateRequest} {self.option('--api') ? '--api' : '-r'}")
+		await self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!}")
+		await self.app.console!.run("make:request {storeRequest}")
+		await self.app.console!.run("make:request {updateRequest}")
+		await self.app.console!.run("make:seeder {name} --table={name.toLowerCase!}")
+
+		self.exit()

@@ -61,6 +61,3 @@ export class Command < BaseCommand
 			confirmed
 
 		else true
-
-	def exit code\Number = 0
-		process.exit code

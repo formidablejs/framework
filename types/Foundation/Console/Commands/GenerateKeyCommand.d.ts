@@ -5,7 +5,6 @@ export class GenerateKeyCommand extends Command {
     };
     get envFile(): mixed;
     get envPath(): string;
-    handle(): void;
     /**
     @param {Number} length
     */

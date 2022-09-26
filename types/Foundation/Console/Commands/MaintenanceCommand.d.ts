@@ -1,6 +1,6 @@
 export class MaintenanceCommand extends Command {
     get file(): string;
-    down(): void;
-    up(): never;
+    down(): any;
+    up(): mixed;
 }
 import { Command } from "../Command";

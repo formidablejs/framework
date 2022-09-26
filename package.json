@@ -36,7 +36,7 @@
     "@fastify/multipart": "^6.0.0",
     "@fastify/session": "^8.2.0",
     "@fastify/static": "^5.0.2",
-    "@formidablejs/console": "^0.0.8",
+    "@formidablejs/console": "^0.0.9",
     "argon2": "^0.28.7",
     "bcrypt": "^5.0.1",
     "connect-redis": "^6.1.3",

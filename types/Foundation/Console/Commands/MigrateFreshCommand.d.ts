@@ -1,4 +1,4 @@
 export class MigrateFreshCommand extends MigrationCommand {
-    handle(): Promise<never>;
+    handle(): Promise<mixed>;
 }
 import { MigrationCommand } from "./MigrationCommand";
