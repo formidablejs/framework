@@ -68,6 +68,8 @@ export default class RedisServiceResolver extends ServiceResolver {
             _list: typeof import("@redis/search/dist/commands/_LIST");
             ALTER: typeof import("@redis/search/dist/commands/ALTER");
             alter: typeof import("@redis/search/dist/commands/ALTER");
+            AGGREGATE_WITHCURSOR: typeof import("@redis/search/dist/commands/AGGREGATE_WITHCURSOR");
+            aggregateWithCursor: typeof import("@redis/search/dist/commands/AGGREGATE_WITHCURSOR");
             AGGREGATE: typeof import("@redis/search/dist/commands/AGGREGATE");
             aggregate: typeof import("@redis/search/dist/commands/AGGREGATE");
             ALIASADD: typeof import("@redis/search/dist/commands/ALIASADD");
@@ -82,6 +84,10 @@ export default class RedisServiceResolver extends ServiceResolver {
             configSet: typeof import("@redis/search/dist/commands/CONFIG_SET");
             CREATE: typeof import("@redis/search/dist/commands/CREATE");
             create: typeof import("@redis/search/dist/commands/CREATE");
+            CURSOR_DEL: typeof import("@redis/search/dist/commands/CURSOR_DEL");
+            cursorDel: typeof import("@redis/search/dist/commands/CURSOR_DEL");
+            CURSOR_READ: typeof import("@redis/search/dist/commands/CURSOR_READ");
+            cursorRead: typeof import("@redis/search/dist/commands/CURSOR_READ");
             DICTADD: typeof import("@redis/search/dist/commands/DICTADD");
             dictAdd: typeof import("@redis/search/dist/commands/DICTADD");
             DICTDEL: typeof import("@redis/search/dist/commands/DICTDEL");
