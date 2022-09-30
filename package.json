@@ -10,6 +10,19 @@
   "bugs": "https://github.com/formidablejs/framework/issues",
   "homepage": "https://formidablejs.org",
   "repository": "https://github.com/formidablejs/framework",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package": "./package.json",
+    "./package.json": "./package.json",
+    "./auth": "./lib/Auth/index.js",
+    "./auth/drivers": "./lib/Auth/Drivers/index.js",
+    "./auth/exceptions": "./lib/Auth/Exceptions/index.js",
+    "./auth/http/controllers": "./lib/Auth/Http/Controllers/index.js",
+    "./auth/http/middleware": "./lib/Auth/Http/Middleware/index.js",
+    "./auth/http/requests": "./lib/Auth/Http/Requests/index.js",
+    "./auth/mail": "./lib/Auth/Mail/index.js",
+    "./auth/tokens": "./lib/Auth/Tokens/index.js"
+  },
   "files": [
     "formidable",
     "bin",
