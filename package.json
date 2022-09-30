@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.12.11",
+  "version": "0.12.12",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -10,6 +10,19 @@
   "bugs": "https://github.com/formidablejs/framework/issues",
   "homepage": "https://formidablejs.org",
   "repository": "https://github.com/formidablejs/framework",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package": "./package.json",
+    "./package.json": "./package.json",
+    "./auth": "./lib/Auth/index.js",
+    "./auth/drivers": "./lib/Auth/Drivers/index.js",
+    "./auth/exceptions": "./lib/Auth/Exceptions/index.js",
+    "./auth/http/controllers": "./lib/Auth/Http/Controllers/index.js",
+    "./auth/http/middleware": "./lib/Auth/Http/Middleware/index.js",
+    "./auth/http/requests": "./lib/Auth/Http/Requests/index.js",
+    "./auth/mail": "./lib/Auth/Mail/index.js",
+    "./auth/tokens": "./lib/Auth/Tokens/index.js"
+  },
   "files": [
     "formidable",
     "bin",
@@ -36,7 +49,7 @@
     "@fastify/multipart": "^6.0.0",
     "@fastify/session": "^8.2.0",
     "@fastify/static": "^5.0.2",
-    "@formidablejs/console": "^0.0.9",
+    "@formidablejs/console": "0.0.10",
     "argon2": "^0.28.7",
     "bcrypt": "^5.0.1",
     "connect-redis": "^6.1.3",
