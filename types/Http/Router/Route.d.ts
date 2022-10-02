@@ -2,7 +2,7 @@ export default class Route {
     /**
     @param {string} verb
     @param {string} pattern
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static addRoute(verb: string, pattern: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -36,7 +36,7 @@ export default class Route {
          * Add a delete route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static delete(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -47,7 +47,7 @@ export default class Route {
          * Add a get route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static get(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -58,7 +58,7 @@ export default class Route {
          * Add a options route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static options(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -69,7 +69,7 @@ export default class Route {
          * Add a patch route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static patch(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -80,7 +80,7 @@ export default class Route {
          * Add a post route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static post(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -91,7 +91,7 @@ export default class Route {
          * Add a put route.
          
     @param {string} path
-    @param {Function|[Function, String]} action
+    @param {function|[function, string]} action
     */
     static put(path: string, action: Function | [Function, string]): typeof Route;
     /**
@@ -111,7 +111,7 @@ export default class Route {
     *
          * Add middleware to route.
          
-    @param {string|String[]} name
+    @param {string|string[]} name
     */
     static middleware(name: string | string[]): typeof Route;
     /**
@@ -121,7 +121,7 @@ export default class Route {
     *
          * Add grouped routes.
          
-    @param {Function} callable
+    @param {function} callable
     */
     static group(options: Object, callable: Function): void;
     static all(): any[];

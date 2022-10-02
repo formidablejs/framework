@@ -1,6 +1,6 @@
 export default class BeforeLogout {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeLogout(handler: Function): Function;
     constructor(config: any);

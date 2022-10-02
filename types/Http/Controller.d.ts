@@ -34,7 +34,7 @@ export default class Controller {
     *
          * Render a view.
          
-    @param {Function|View} view
+    @param {function|View} view
     @param {object} data
     */
     view(view: Function | View, data?: object): ViewResponse;

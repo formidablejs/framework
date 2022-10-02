@@ -1,38 +1,38 @@
 export default class Driver {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onEmailVerified(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onCreateUser(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRegistered(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onAuthenticated(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onSessionDestroyed(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onSuccessfulAttempt(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRequestEmailVerificationUrl(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRequestForgotPasswordUrl(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onUpdatePassword(handler: Function): Function;
     /**

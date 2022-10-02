@@ -16,7 +16,7 @@ export default class PersonalAccessToken {
         tokenable: any;
     }>;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onFetchAuthenticated(handler: Function): Function;
     /**

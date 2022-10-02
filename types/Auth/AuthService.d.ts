@@ -1,98 +1,98 @@
 export default class AuthService {
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeLogin(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeLogout(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeRegister(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeVerify(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeResend(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeForgot(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static beforeReset(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onLogin(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onLogout(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onRegister(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onForgot(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onReset(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onAuthenticated(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onFetchAuthenticated(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onSessionDestroyed(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onSuccessfulAttempt(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onCreateUser(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onRegistered(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onVerification(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onEmailResend(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onEmailVerified(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onRequestEmailVerificationUrl(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onRequestForgotPasswordUrl(callback: Function): typeof AuthService;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     static onUpdatePassword(callback: Function): typeof AuthService;
     /**

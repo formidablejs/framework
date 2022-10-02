@@ -36,36 +36,36 @@ export default class Application {
     server(config: object): Application;
     fastify(): any;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     intercept(callback: Function): Application;
     addHook(hook: any, handler: any): Application;
     registerCommand(command: any): Application;
     /**
-    @param {Function} plugin
+    @param {function} plugin
     @param {object} options
-    @param {Function} handler
+    @param {function} handler
     */
     register(plugin: Function, options?: object, handler?: Function): Application;
     /**
     @param {string} event
-    @param {Function} callback
+    @param {function} callback
     */
     on(event: string, callback: Function): Application;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     onResponse(handler: Function): Application;
     migration(): any;
     seeder(): any;
     /**
-    @param {Function} abstract
+    @param {function} abstract
     @param {array} params
     */
     make(abstract: Function, params?: any[]): any;
     /**
-    @param {Function} abstract
-    @param {Function} concrete
+    @param {function} abstract
+    @param {function} concrete
     */
     bind(abstract: Function, concrete: Function): Application;
     /**

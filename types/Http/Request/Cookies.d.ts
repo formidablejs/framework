@@ -24,7 +24,7 @@ export default class Cookies {
     */
     set(key: string, value: string): any;
     /**
-    @param {string|String[]} key
+    @param {string|string[]} key
     */
     forget(key: string | string[]): any[];
     [$__patch__$]($$?: {}): void;

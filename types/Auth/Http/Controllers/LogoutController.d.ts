@@ -1,7 +1,7 @@
 export default LogoutController;
 declare class LogoutController extends Controller {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onLogout(handler: Function): Function;
     static [$__init__$](): typeof LogoutController;

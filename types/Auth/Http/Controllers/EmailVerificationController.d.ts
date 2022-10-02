@@ -1,11 +1,11 @@
 export default EmailVerificationController;
 declare class EmailVerificationController extends Controller {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onVerification(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onEmailResend(handler: Function): Function;
     static [$__init__$](): typeof EmailVerificationController;
