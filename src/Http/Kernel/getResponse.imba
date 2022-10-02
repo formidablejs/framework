@@ -1,6 +1,6 @@
 import isClass from '../../Support/Helpers/isClass'
 
-export default def getResponse route\Object, request, reply
+export default def getResponse route\object, request, reply
 	if route.action instanceof Function && !isClass(route.action)
 		return await route.action request, reply
 

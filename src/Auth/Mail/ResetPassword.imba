@@ -3,8 +3,8 @@ import FormRequest from '../../Http/Request/FormRequest'
 
 export default class ResetPassword < Mailable
 
-	prop subject\String
-	prop request\Object
+	prop subject\string
+	prop request\object
 
 	def constructor request\FormRequest
 		super()

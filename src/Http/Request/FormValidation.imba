@@ -102,7 +102,7 @@ const locales = {
 
 export default class FormValidation
 
-	def constructor locale\String = 'en'
+	def constructor locale\string = 'en'
 		if !locales[locale]
 			console.warn "The '{locale}' locale is missing in validatorjs. Reverting back to the 'en' locale."
 

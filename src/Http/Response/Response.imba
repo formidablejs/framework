@@ -7,15 +7,15 @@ export default class Response
 	prop data = null
 	prop statusCode = 200
 
-	def constructor data\any = null, statusCode\Number = 200
+	def constructor data\any = null, statusCode\number = 200
 		self.data = data
 		self.statusCode = statusCode
 
-	def json object\Object
+	def json object\object
 		JsonResponse.make object
 
-	def view view\View, data\Object|null = null
+	def view view\View, data\object|null = null
 		ViewResponse.make(view, data)
 
-	def code statusCode\Number
+	def code statusCode\number
 		self.statusCode = statusCode

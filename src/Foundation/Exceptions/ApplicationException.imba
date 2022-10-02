@@ -2,7 +2,7 @@ class ApplicationException < Error
 	prop response
 	prop status
 
-	def constructor response\any, status\Number = 500
+	def constructor response\any, status\number = 500
 		super()
 
 		this.response = response

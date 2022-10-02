@@ -9,7 +9,7 @@ export default class FileCollection
 	/**
 	 * Count the number of files in the collection.
 	 *
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	get length
 		self._object.length
@@ -17,7 +17,7 @@ export default class FileCollection
 	/**
 	 * Count the number of files in the collection.
 	 *
-	 * @returns {Number}
+	 * @returns {number}
 	 */
 	def count
 		self.length
@@ -99,11 +99,11 @@ export default class FileCollection
 	/**
 	 * Filter files using the where condition.
 	 *
-	 * @param {String} key
+	 * @param {string} key
 	 * @param {any} value
 	 * @returns {File[]}
 	 */
-	def where key\String, value
+	def where key\string, value
 		self._conditions.push { [key]: value }
 
 		self

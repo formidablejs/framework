@@ -41,11 +41,11 @@ export default class Application
 	prop root = null
 	prop handler\ExceptionHandler = null
 	prop context\Context = Context
-	prop serverConfig\Object = {
+	prop serverConfig\object = {
 		ignoreTrailingSlash: true
 	}
 
-	def constructor root\String
+	def constructor root\string
 		self.root = root
 
 		settings.console = new ApplicationConsole('Formidable Framework', version!)
@@ -55,10 +55,10 @@ export default class Application
 		settings.port = Number(process.env.FORMIDABLE_PORT) || 3000
 		settings.host = process.env.HOST || '0.0.0.0'
 
-	static def getConfig notation\String, default\any = null
+	static def getConfig notation\string, default\any = null
 		settings.config.get(notation, default)
 
-	static def getEnv key\String, default\any = null
+	static def getEnv key\string, default\any = null
 		settings.environment.get(key, default)
 
 	static def env
@@ -70,7 +70,7 @@ export default class Application
 	get version
 		appVersion!
 
-	def port default\Number = 3000
+	def port default\number = 3000
 		settings.port || default
 
 	def host default = '0.0.0.0'
@@ -79,7 +79,7 @@ export default class Application
 	def routes
 		Route.all!
 
-	def server config\Object
+	def server config\object
 		self.serverConfig = config
 
 		self
@@ -105,7 +105,7 @@ export default class Application
 
 		self
 
-	def register plugin\Function, options\Object = {}, handler\Function = null
+	def register plugin\Function, options\object = {}, handler\Function = null
 		self.plugins.push({
 			plugin: plugin
 			options: options
@@ -114,7 +114,7 @@ export default class Application
 
 		self
 
-	def on event\String, callback\Function
+	def on event\string, callback\Function
 		if event === 'onDefaultCommand'
 			settings.console.onDefaultCommand(callback)
 		else
@@ -152,13 +152,13 @@ export default class Application
 
 		self
 
-	def cache distribute\Boolean = false
+	def cache distribute\boolean = false
 		Bootstrap.cache "./bootstrap/cache/config.json", self.make(ConfigRepository).all!
 
 		if distribute && fs.existsSync('./.formidable')
 			Bootstrap.cache "./.formidable/config.json", self.make(ConfigRepository).all!
 
-	def initiate kernel\Kernel, returnMode\Boolean = false
+	def initiate kernel\Kernel, returnMode\boolean = false
 		settings.server = await kernel.listen(
 			self.config,
 			self.handler,

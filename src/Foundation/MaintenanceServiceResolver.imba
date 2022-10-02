@@ -22,14 +22,14 @@ export default class MaintenanceServiceResolver < ServiceResolver
 
 		if isEmpty(isDown) then return false
 
-		const down\Object = JSON.parse(fs.readFileSync(maintenanceFile, 'utf8'))
+		const down\object = JSON.parse(fs.readFileSync(maintenanceFile, 'utf8'))
 
-		const message\String = (!isEmpty(down) && !isEmpty(down.message)) ? down.message : 'Service Unavailable'
-		const statusCode\Number = (!isEmpty(down) && !isEmpty(down.statusCode)) ? down.statusCode : 503
-		const secret\String = (!isEmpty(down) && !isEmpty(down.secret)) ? down.secret : null
-		const redirect\String = (!isEmpty(down) && !isEmpty(down.redirect)) ? down.redirect : null
-		const retry\Number = (!isEmpty(down) && !isEmpty(down.retry)) ? Number(down.retry) : null
-		const refresh\Number = (!isEmpty(down) && !isEmpty(down.refresh)) ? Number(down.refresh) : null
+		const message\string = (!isEmpty(down) && !isEmpty(down.message)) ? down.message : 'Service Unavailable'
+		const statusCode\number = (!isEmpty(down) && !isEmpty(down.statusCode)) ? down.statusCode : 503
+		const secret\string = (!isEmpty(down) && !isEmpty(down.secret)) ? down.secret : null
+		const redirect\string = (!isEmpty(down) && !isEmpty(down.redirect)) ? down.redirect : null
+		const retry\number = (!isEmpty(down) && !isEmpty(down.retry)) ? Number(down.retry) : null
+		const refresh\number = (!isEmpty(down) && !isEmpty(down.refresh)) ? Number(down.refresh) : null
 
 		return {
 			message
@@ -42,7 +42,7 @@ export default class MaintenanceServiceResolver < ServiceResolver
 
 	def boot
 		self.app.addHook 'onRequest', do(req\FastifyRequest, reply\FastifyReply, done\Function)
-			const down\Object = self.getDown!
+			const down\object = self.getDown!
 
 			if isEmpty(down) then return done!
 
@@ -84,9 +84,9 @@ export default class MaintenanceServiceResolver < ServiceResolver
 
 		self
 
-	def hasBypassMaintenanceModeCookie secret\String, request\FormRequest
+	def hasBypassMaintenanceModeCookie secret\string, request\FormRequest
 
-		const cookie\String|null = request.request.cookies[self.cookieName]
+		const cookie\string|null = request.request.cookies[self.cookieName]
 
 		try
 			if !isEmpty(cookie) && decrypt(cookie) == secret

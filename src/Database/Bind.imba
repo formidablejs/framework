@@ -3,14 +3,14 @@ import Database from './Database'
 import type Request from '../Http/Request/Request'
 
 export default class Bind
-	prop table\String
-	prop first\Boolean
+	prop table\string
+	prop first\boolean
 
-	def constructor table\String, first\Boolean = false
+	def constructor table\string, first\boolean = false
 		self.table = table
 		self.first = first
-	
-	def handle request\Request, key\Number
+
+	def handle request\Request, key\number
 		const param  = Object.keys(request.request.params)[key]
 
 		const value  = Object.values(request.request.params)[key]

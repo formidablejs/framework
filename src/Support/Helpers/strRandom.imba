@@ -1,7 +1,7 @@
 import isNumber from './isNumber'
 import crypto from 'crypto'
 
-export default def strRandom length\Number = 8
+export default def strRandom length\number = 8
 	if !isNumber length
 		throw new TypeError 'length must be a number'
 

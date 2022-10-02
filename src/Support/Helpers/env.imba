@@ -2,7 +2,7 @@ import Application from '../../Foundation/Application'
 import isEmpty from './isEmpty'
 import isString from './isString'
 
-export default def env key\String, default\any = null
+export default def env key\string, default\any = null
 	try Application.getEnv(key, default)
 	catch
 		if !isString(key) then throw new TypeError 'Expected string.'

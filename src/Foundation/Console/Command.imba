@@ -27,15 +27,15 @@ export class Command < BaseCommand
 
 		self.write "\n  <bg:{bgMap[type]}>{fg ? '<' + fg + '>' : ''} {type.toUpperCase!} {fg ? '</' + fg + '>' : ''}</bg:{bgMap[type]}> {message}{newLine ? "\n" : ''}"
 
-	# @returns {String}
-	def env default\String
+	# @returns {string}
+	def env default\string
 		app.config.get('app.env', default)
 
 	def usingEnv
 		self.write "Using environment: <fg:green>{env('development')}</fg:green>"
 
 	# @returns {Promise<Boolean>}
-	def confirm message\String
+	def confirm message\string
 		const results = await inquirer.prompt([{
 			name: 'run'
 			message: message

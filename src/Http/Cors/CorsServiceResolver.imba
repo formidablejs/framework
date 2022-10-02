@@ -9,10 +9,10 @@ export default class CorsServiceResolver < ServiceResolver
 	/**
 	 * Get allowed origins.
 	 *
-	 * @oaram {String} origin
-	 * @returns {String[]}
+	 * @param {string} origin
+	 * @returns {string[]}
 	 */
-	def getOrigins origin\String
+	def getOrigins origin\string
 		const origins = []
 		const requestOrigin = origin.split('://')[1]
 
@@ -70,7 +70,7 @@ export default class CorsServiceResolver < ServiceResolver
 		self.app.register cors, do
 			do(request\FastifyRequest, callback)
 				const options = {
-					origin: do(origin\String, cb)
+					origin: do(origin\string, cb)
 						if isEmpty(origin) then return cb(null, true)
 
 						const requestOrigin = origin.split('://')[1]

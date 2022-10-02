@@ -42,7 +42,7 @@ export default class Handler
 		else
 			handleException(error, request, reply, false, self.shouldReport(error))
 
-	def handle error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, shouldReport\Boolean
+	def handle error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, shouldReport\boolean
 		null
 
 	def shouldReport error\Error

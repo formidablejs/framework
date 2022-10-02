@@ -50,12 +50,12 @@ export default class ExitMiddleware
 		else
 			response
 
-	def errorHandler request\Request, reply\FastifyReply, returns\Boolean = false, shouldReport\Boolean = true
+	def errorHandler request\Request, reply\FastifyReply, returns\boolean = false, shouldReport\boolean = true
 		const customResponse = self.handleRegistered(request, reply)
 
 		if !isEmpty(customResponse) then return customResponse
 
-		const response\Object = {
+		const response\object = {
 			message: 'An error has occured.'
 			exception: self.response.name
 		}
@@ -70,8 +70,8 @@ export default class ExitMiddleware
 			else
 				const stack = await StackTrace.fromError(self.response)
 
-				response.file\String = stack[0].fileName
-				response.line\Number = stack[0].lineNumber
+				response.file\string = stack[0].fileName
+				response.line\number = stack[0].lineNumber
 				response.stack\Array = stack
 
 				if shouldReport then console.error self.response
@@ -82,7 +82,7 @@ export default class ExitMiddleware
 
 		if returns then return response
 
-		const statusCode\Number = typeof self.response.getStatus === 'function' ? self.response.getStatus! : 500
+		const statusCode\number = typeof self.response.getStatus === 'function' ? self.response.getStatus! : 500
 
 		if response.message !== undefined && response.message !== null && response.message.constructor == Object
 			return reply.code(statusCode)

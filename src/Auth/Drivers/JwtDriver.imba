@@ -21,7 +21,7 @@ export default class JwtDriver < Driver
 
 		personalAccessToken
 
-	def authenticate body\Object
+	def authenticate body\object
 		const user = asObject(await Auth.attempt(body))
 
 		const token = await self.createPersonalAccessToken('auth:jwt', user.id)
@@ -37,7 +37,7 @@ export default class JwtDriver < Driver
 
 		isEmpty(results) ? payload : results
 
-	def register body\Object
+	def register body\object
 		const user = asObject(await self.insertUser(body))
 
 		const token = await self.createPersonalAccessToken('auth:jwt', user.id)
@@ -55,7 +55,7 @@ export default class JwtDriver < Driver
 
 		isEmpty(results) ? payload : results
 
-	def logout body\Object = new Object
+	def logout body\object = new Object
 		const personalAccessToken = await self.getPersonalAccessToken!
 
 		await Database.table('personal_access_tokens')

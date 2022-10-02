@@ -4,10 +4,10 @@ const drivers = {}
 
 export default class DriverManager
 
-	static def register name\String, driver\Object
+	static def register name\string, driver\object
 		drivers[name] = driver
 
-	static def get name\String
+	static def get name\string
 		const driver = drivers[name]
 
 		if driver == null || driver == undefined
@@ -15,7 +15,7 @@ export default class DriverManager
 
 		driver
 
-	static def isRegistered name\String
+	static def isRegistered name\string
 		const driver = drivers[name]
 
 		driver !== undefined || driver !== null

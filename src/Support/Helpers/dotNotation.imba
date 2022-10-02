@@ -1,7 +1,7 @@
 import isObject from './isObject'
 import isString from './isString'
 
-export default def dotNotation object\Object, key\string
+export default def dotNotation object\object, key\string
 	if !isObject object
 		throw new TypeError 'Expected object'
 

@@ -65,7 +65,7 @@ export default class VerifyCsrfToken
 	def addCookieToResponse request\FormRequest, reply\FastifyReply
 		const session = self.config.get('session')
 
-		const token\String = request.request.session.token
+		const token\string = request.request.session.token
 
 		if isEmpty(token) then return false;
 

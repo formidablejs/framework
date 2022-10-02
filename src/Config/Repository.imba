@@ -12,14 +12,14 @@ export default class Repository
 	get registered
 		new Object
 
-	def has key\String
+	def has key\string
 		let tempCheck = dot(temp, key)
 
 		if tempCheck !== undefined && tempCheck !== null then return true
 
 		dot(this.registered, key) !== undefined && dot(this.registered, key) !== null
 
-	def get key\String, default\any
+	def get key\string, default\any
 		let tempValue = dot(temp, key)
 
 		if tempValue !== undefined && tempValue !== null then return tempValue
@@ -28,7 +28,7 @@ export default class Repository
 
 		output ?? default
 
-	def set key\String, value\any
+	def set key\string, value\any
 		self.temp[key] = value
 
 	def all

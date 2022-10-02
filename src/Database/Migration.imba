@@ -3,12 +3,12 @@ import isEmpty from '../Support/Helpers/isEmpty'
 
 export default class Migration
 
-	def make name\String
+	def make name\string
 		if isEmpty(Database) then return false
 
 		Database.migrate.make name
 
-	def migrate name\String|null = null, up\Boolean = true
+	def migrate name\string|null = null, up\boolean = true
 		if isEmpty(Database) then return false
 
 		const config = {}
@@ -29,7 +29,7 @@ export default class Migration
 
 		await Database.migrate.latest!
 
-	def rollback all\Boolean = false
+	def rollback all\boolean = false
 		if isEmpty(Database) then return false
 
 		Database.migrate.rollback({}, all)

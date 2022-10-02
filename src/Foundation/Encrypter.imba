@@ -26,7 +26,7 @@ configureEncrypter!
 
 export default class Encrypter
 
-	static def configure config\Object
+	static def configure config\object
 		if !isObject(config) then throw TypeError 'Expected an object.'
 
 		if !isEmpty(config.algorithm) && isEmpty(settings.algorithm)
@@ -37,13 +37,13 @@ export default class Encrypter
 
 		Encrypter
 
-	static def appKey type\String
+	static def appKey type\string
 		configureEncrypter!
 
 		if !isEmpty(type) && ['key', 'iv'].includes(type.toLowerCase()) == false
 			throw new InvalidEncryptionKeyTypeException 'Encryption key type is not valid.'
 
-		let key\String = isString(settings.appKey) ? settings.appKey : new String
+		let key\string = isString(settings.appKey) ? settings.appKey : new String
 
 		if key.startsWith('base64:')
 			key = Buffer.from(key.split('base64:')[1], 'base64').toString('utf-8')
@@ -71,7 +71,7 @@ export default class Encrypter
 		catch
 			throw new EncryptException 'Encryption failed.'
 
-	static def decrypt hash\String
+	static def decrypt hash\string
 		if isEmpty(settings.algorithm) || isEmpty(settings.appKey)
 			throw new InvalidAppKeyException 'Application key is not valid.'
 

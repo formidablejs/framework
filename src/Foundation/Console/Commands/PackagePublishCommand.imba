@@ -62,13 +62,13 @@ export class PackagePublishCommand < Command
 		publisher.publish(self.language.toLowerCase!)
 
 	def handle
-		let tags\String[] = self.option('tag').split(',')
+		let tags\string[] = self.option('tag').split(',')
 
 		tags.forEach do(optTag) self.persist optTag
 
 		self.exit!
 
-	def persist optTag\String
+	def persist optTag\string
 		if !self.publisher[optTag] || (self.publisher[optTag] && self.publisher[optTag].paths === undefined || self.publisher[optTag].paths === null)
 			return self.write "<fg:red>{optTag} is missing.</fg:red>"
 

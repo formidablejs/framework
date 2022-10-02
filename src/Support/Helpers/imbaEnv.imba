@@ -1,4 +1,4 @@
-export default def imbaEnv stringify\Boolean = true
+export default def imbaEnv stringify\boolean = true
 	const prefix = 'IMBA_APP_'
 	const envList = {}
 
