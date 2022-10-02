@@ -550,6 +550,7 @@ export default class FormRequest {
     [$session$]: any;
     [$cookies$]: any;
 }
+import Auth from "../../Auth/Auth";
 import FileCollection from "./FileCollection";
 import type Repository from '../../Config/Repository';
 import type Session from './Session';
