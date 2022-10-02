@@ -2,8 +2,8 @@ export default HttpException;
 declare class HttpException extends Error {
     static [$__init__$](): typeof HttpException;
     /**
-    @param {String} response
-    @param {Number|null} statusCode
+    @param {string} response
+    @param {number|null} statusCode
     */
     constructor(response: string, statusCode?: number | null);
     response: string;

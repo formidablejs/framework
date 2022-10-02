@@ -1,7 +1,7 @@
 export default class Path {
     /**
-    @param {String[]} prefix
-    @param {String} pattern
+    @param {string[]} prefix
+    @param {string} pattern
     */
     static clean(prefix: string[], pattern: string): string;
 }

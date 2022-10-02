@@ -1,6 +1,6 @@
 export default class Seeder {
     /**
-    @param {String} name
+    @param {string} name
     */
     make(name: string): any;
     run(): any;

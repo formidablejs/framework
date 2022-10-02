@@ -1,9 +1,9 @@
 export default ValidationException;
 declare class ValidationException extends HttpException {
     /**
-    @param {Object} messages
+    @param {object} messages
     */
-    static withMessages(messages: any): ValidationException;
+    static withMessages(messages: object): ValidationException;
     static [$__init__$](): typeof ValidationException;
     constructor(...args: any[]);
     [$__patch__$]($$?: {}): void;

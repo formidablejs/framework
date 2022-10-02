@@ -104,9 +104,9 @@ export default class AuthService {
     */
     static resetPasswordMailer(mailer: Mailable): typeof AuthService;
     /**
-    @param {Object} config
+    @param {object} config
     */
-    static routes(config?: any): typeof Route;
+    static routes(config?: object): typeof Route;
 }
 import { Mailable } from "@formidablejs/mailer";
 import Route from "../Http/Router/Route";

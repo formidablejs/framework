@@ -1,6 +1,6 @@
 /**
 @param {View} view
-@param {Object|null} data
+@param {object|null} data
 */
-export default function view(view: View, data?: any | null): ViewResponse;
+export default function view(view: View, data?: object | null): ViewResponse;
 import ViewResponse from "../../Http/Response/ViewResponse";

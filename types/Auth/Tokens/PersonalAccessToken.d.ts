@@ -1,15 +1,15 @@
 export default class PersonalAccessToken {
     /**
-    @param {String} name
-    @param {Number} id
-    @param {String} table
+    @param {string} name
+    @param {number} id
+    @param {string} table
     @param {Array} abilities
-    @param {Number|null} ttl
+    @param {number|null} ttl
     @param {object} data
     */
     static create(name: string, id: number, table: string, abilities?: any[], ttl?: number | null, data?: object): any;
     /**
-    @param {String} token
+    @param {string} token
     */
     static find(token: string, protocol?: any): Promise<{
         token: any;
@@ -20,15 +20,15 @@ export default class PersonalAccessToken {
     */
     static onFetchAuthenticated(handler: Function): Function;
     /**
-    @param {Object} token
+    @param {object} token
     */
-    static using(token: any): Promise<any>;
+    static using(token: object): Promise<any>;
     /**
-    @param {String} token
+    @param {string} token
     */
     static destroy(token: string): Promise<any>;
     /**
-    @param {String} token
+    @param {string} token
     */
     static verify(token: string): Promise<any>;
     static getDatabase(): any;
@@ -38,11 +38,11 @@ export default class PersonalAccessToken {
     */
     static setDatabase(database: any): typeof PersonalAccessToken;
     /**
-    @param {Object} config
+    @param {object} config
     */
-    static setConfig(config: any): typeof PersonalAccessToken;
+    static setConfig(config: object): typeof PersonalAccessToken;
     /**
-    @param {String} secret
+    @param {string} secret
     */
     static setSecret(secret: string): typeof PersonalAccessToken;
     /**

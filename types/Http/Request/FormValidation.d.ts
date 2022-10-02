@@ -1,6 +1,6 @@
 export default class FormValidation {
     /**
-    @param {String} locale
+    @param {string} locale
     */
     constructor(locale?: string);
     locale: string;

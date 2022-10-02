@@ -5,26 +5,26 @@ export default class FileCollection {
     /**
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          */
     /**
     *
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          
     */
     get length(): number;
     /**
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          */
     /**
     *
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          
     */
     count(): number;
@@ -141,7 +141,7 @@ export default class FileCollection {
     /**
          * Filter files using the where condition.
          *
-         * @param {String} key
+         * @param {string} key
          * @param {any} value
          * @returns {File[]}
          */
@@ -149,11 +149,11 @@ export default class FileCollection {
     *
          * Filter files using the where condition.
          *
-         * @param {String} key
+         * @param {string} key
          * @param {any} value
          * @returns {File[]}
          
-    @param {String} key
+    @param {string} key
     */
     where(key: string, value: any): File[];
     /**

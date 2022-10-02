@@ -4,26 +4,26 @@ export default class Session {
     */
     constructor(request: FastifyRequest);
     /**
-    @param {String} key
+    @param {string} key
     */
     has(key: string): boolean;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     get(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     pull(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} value
     */
     set(key: string, value: any): any;
     /**
-    @param {String|String[]} key
+    @param {string|String[]} key
     */
     forget(key: string | string[]): any[];
     [$__patch__$]($$?: {}): void;

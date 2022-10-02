@@ -9,7 +9,7 @@ export default class Protocol {
     constructor(config: Repository);
     config: Repository;
     /**
-    @param {String} protocol
+    @param {string} protocol
     */
     configure(protocol: string): any;
     [$__patch__$]($$?: {}): void;

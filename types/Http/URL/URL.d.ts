@@ -1,45 +1,45 @@
 export default class URL {
     /**
-    @param {String} name
-    @param {Object} params
-    @param {Object} query
+    @param {string} name
+    @param {object} params
+    @param {object} query
     */
-    static route(name: string, params?: any, query?: any): any;
+    static route(name: string, params?: object, query?: object): any;
     /**
-    @param {String} name
-    @param {Object} params
-    @param {Object} query
+    @param {string} name
+    @param {object} params
+    @param {object} query
     */
-    static signedRoute(name: string, params?: any, query?: any): Promise<string>;
+    static signedRoute(name: string, params?: object, query?: object): Promise<string>;
     /**
-    @param {String} name
-    @param {String} expiresIn
-    @param {Object} params
-    @param {Object} query
+    @param {string} name
+    @param {string} expiresIn
+    @param {object} params
+    @param {object} query
     */
-    static temporarySignedRoute(name: string, expiresIn: string, params?: any, query?: any): Promise<string>;
+    static temporarySignedRoute(name: string, expiresIn: string, params?: object, query?: object): Promise<string>;
     /**
-    @param {String} uri
-    @param {Object} query
+    @param {string} uri
+    @param {object} query
     */
-    static path(uri: string, query?: any): string;
+    static path(uri: string, query?: object): string;
     /**
-    @param {String} uri
-    @param {Object} query
+    @param {string} uri
+    @param {object} query
     */
-    static signed(uri: string, query?: any): Promise<string>;
+    static signed(uri: string, query?: object): Promise<string>;
     /**
-    @param {String} uri
-    @param {String} expiresIn
-    @param {Object} query
+    @param {string} uri
+    @param {string} expiresIn
+    @param {object} query
     */
-    static temporarySigned(uri: string, expiresIn: string, query?: any): Promise<string>;
+    static temporarySigned(uri: string, expiresIn: string, query?: object): Promise<string>;
     /**
-    @param {Object} params
+    @param {object} params
     */
-    static toQuery(params?: any): string;
+    static toQuery(params?: object): string;
     /**
-    @param {String} secret
+    @param {string} secret
     */
     static setSecret(secret: string): typeof URL;
 }

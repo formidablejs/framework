@@ -1,26 +1,26 @@
 export default Auth;
 declare class Auth {
     /**
-    @param {Object} provider
+    @param {object} provider
     */
-    static setProvider(provider: any): any;
+    static setProvider(provider: object): any;
     static getTable(): any;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    static attempt(body: any): Promise<any>;
+    static attempt(body: object): Promise<any>;
     /**
-    @param {Object} user
-    @param {String} abilities
+    @param {object} user
+    @param {string} abilities
     @param {Driver} driverManager
     */
-    constructor(user: any, abilities: string, driverManager: Driver);
+    constructor(user: object, abilities: string, driverManager: Driver);
     _driver: Driver;
     abilities: () => any;
     user: () => {};
     driver(): Driver;
     /**
-    @param {String} perform
+    @param {string} perform
     */
     can(perform: string): any;
     check(): boolean;

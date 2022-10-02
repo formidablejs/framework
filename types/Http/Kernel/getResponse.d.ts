@@ -1,4 +1,4 @@
 /**
-@param {Object} route
+@param {object} route
 */
-export default function getResponse(route: any, request: any, reply: any): Promise<any>;
+export default function getResponse(route: object, request: any, reply: any): Promise<any>;
