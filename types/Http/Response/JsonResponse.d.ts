@@ -1,14 +1,16 @@
 export default class JsonResponse {
     /**
     @param {object} object
+    @param {number} statusCode
     */
-    static make(object: object): JsonResponse;
+    static make(object: object, statusCode: number): JsonResponse;
     /**
     @param {object} object
+    @param {number} statusCode
     */
-    constructor(object: object);
+    constructor(object: object, statusCode?: number);
     data: any;
-    statusCode: any;
+    statusCode: number;
     /**
     @param {number} statusCode
     */
