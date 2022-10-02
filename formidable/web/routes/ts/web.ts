@@ -1,7 +1,7 @@
-import { Request } from '@formidablejs/framework';
-import { Route } from '@formidablejs/framework';
-import { view } from '@formidablejs/framework';
-import { Welcome } from '../resources/views/welcome';
+import { Request } from '@formidablejs/framework'
+import { Route } from '@formidablejs/framework'
+import { view } from '@formidablejs/framework'
+import { Welcome } from '../resources/views/welcome'
 
 /**
  * --------------------------------------------------------------------------
@@ -18,5 +18,5 @@ Route.get('/', (request: Request) => {
 		locale: request.locale(),
 		formidableVersion: request.version,
 		nodeVersion: process.version
-	});
+	})
 })
