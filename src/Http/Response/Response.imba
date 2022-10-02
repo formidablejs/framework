@@ -11,8 +11,8 @@ export default class Response
 		self.data = data
 		self.statusCode = statusCode
 
-	def json object\object
-		JsonResponse.make object
+	def json object\object, statusCode\number = 200
+		JsonResponse.make(object, statusCode)
 
 	def view view\View, data\object|null = null
 		ViewResponse.make(view, data)
