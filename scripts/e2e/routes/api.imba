@@ -1,6 +1,7 @@
 import { PostController } from '../app/Http/Controllers/PostController'
 import { Request } from '@formidablejs/framework'
 import { Route } from '@formidablejs/framework'
+import { response } from '@formidablejs/framework'
 
 Route.get('/', do(request\Request)
 	request.translate 'index.hello', 'Hello World'
@@ -19,3 +20,8 @@ Route.group { prefix: 'routes' }, do
 
 	Route.get 'function', do
 		'hello'
+
+Route.get '/json-response', do
+	response().json({
+		message: "Hello world"
+	}, 201)
