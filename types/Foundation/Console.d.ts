@@ -13,6 +13,7 @@ export default class Console {
     runtime: string;
     console: string;
     config: any;
+    get ext(): ".imba" | ".ts";
     run(): import("child_process").ChildProcessWithoutNullStreams;
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;

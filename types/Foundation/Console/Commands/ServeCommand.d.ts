@@ -7,6 +7,7 @@ export class ServeCommand extends Command {
         dev: import("@formidablejs/console/types/Props/Prop").default;
         addr: import("@formidablejs/console/types/Props/Prop").default;
     };
+    get ext(): ".imba" | ".ts";
     get runtime(): string;
     get devConfigDefaults(): {
         commands: any[];
