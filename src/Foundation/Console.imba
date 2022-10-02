@@ -1,3 +1,4 @@
+import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn } from 'child_process'
 
@@ -10,9 +11,19 @@ export default class Console
 		cwd: process.cwd!
 	}
 
+	get ext
+		const appPackage = join(process.cwd!, 'package.json')
+
+		if !existsSync(appPackage)
+			return '.imba'
+
+		const language = require(appPackage).language || 'imba'
+
+		language.toLowerCase! == 'typescript' ? '.ts' : '.imba'
+
 	def constructor runtime\string = null, console\string = null
-		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imba')
-		self.console = console || join('bootstrap', 'console.imba')
+		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imba' + (process.platform === 'win32' ? '.cmd' : ''))
+		self.console = console || join('bootstrap', "console{ext}")
 
 	static def make runtime\string = null, console\string = null
 		new Console(runtime, console)

@@ -26,6 +26,16 @@ export class ServeCommand < Command
 
 	prop #fullAddress\string
 
+	get ext
+		const appPackage = join(process.cwd!, 'package.json')
+
+		if !existsSync(appPackage)
+			return '.imba'
+
+		const language = require(appPackage).language || 'imba'
+
+		language.toLowerCase! == 'typescript' ? '.ts' : '.imba'
+
 	get runtime
 		join process.cwd!, 'node_modules', '.bin', 'imba' + (process.platform === 'win32' ? '.cmd' : '')
 
@@ -121,9 +131,9 @@ export class ServeCommand < Command
 				const shFlag = '/d /s /c'
 				conf.windowsVerbatimArguments = true
 
-				return spawnSync sh, [ shFlag, self.runtime, 'server.imba', ...args ], conf
+				return spawnSync sh, [ shFlag, self.runtime, "server{ext}", ...args ], conf
 
-			spawnSync self.runtime, [ 'server.imba', ...args ], conf
+			spawnSync self.runtime, [ "server{ext}", ...args ], conf
 		else
 			const server = nodemon({
 				ext: devExt.join(',')
