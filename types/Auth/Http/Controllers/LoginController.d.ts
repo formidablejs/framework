@@ -1,7 +1,7 @@
 export default LoginController;
 declare class LoginController extends Controller {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onLogin(handler: Function): Function;
     static [$__init__$](): typeof LoginController;

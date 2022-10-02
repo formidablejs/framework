@@ -10,16 +10,16 @@ export default class File
 	/**
 	 * Instantiate file instance.
 	 *
-	 * @param {Object} file
+	 * @param {object} file
 	 * @returns {void}
 	 */
-	def constructor file\Object
+	def constructor file\object
 		self._object = file
 
 	/**
 	 * File name.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get name
 		self._object.filename
@@ -27,7 +27,7 @@ export default class File
 	/**
 	 * File name.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get filename
 		self.name
@@ -35,7 +35,7 @@ export default class File
 	/**
 	 * File encoding.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get encoding
 		self._object.encoding
@@ -43,7 +43,7 @@ export default class File
 	/**
 	 * File mime type.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get mime
 		self._object.mimetype
@@ -51,7 +51,7 @@ export default class File
 	/**
 	 * File mime type.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get mimetype
 		self._object.mimetype
@@ -59,7 +59,7 @@ export default class File
 	/**
 	 * File mime type.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get type
 		self._object.mimetype
@@ -67,7 +67,7 @@ export default class File
 	/**
 	 * Temp file path.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get path
 		self._object.filepath
@@ -75,7 +75,7 @@ export default class File
 	/**
 	 * File extension.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get extension
 		const i = self._object.filepath.lastIndexOf('.')
@@ -85,7 +85,7 @@ export default class File
 	/**
 	 * File extension.
 	 *
-	 * @type {String}
+	 * @type {string}
 	 */
 	get ext
 		self.extension
@@ -93,7 +93,7 @@ export default class File
 	/**
 	 * File size in MB.
 	 *
-	 * @type {Number}
+	 * @type {number}
 	 */
 	get size
 		(self._object.file.bytesRead ?? 0) / 1048576
@@ -101,12 +101,12 @@ export default class File
 	/**
 	 * Move file.
 	 *
-	 * @param {String} destination
+	 * @param {string} destination
 	 * @param {Boolean} overwrite
 	 * @throws {DestinationExistsException}
 	 * @returns {void}
 	 */
-	def move destination\String, overwrite\Boolean = false
+	def move destination\string, overwrite\boolean = false
 		if !overwrite && existsSync(destination) && statSync(destination).isFile!
 			throw new DestinationExistsException 'Destination already exist.'
 

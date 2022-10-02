@@ -6,11 +6,11 @@ export class GenerateKeyCommand extends Command {
     get envFile(): mixed;
     get envPath(): string;
     /**
-    @param {Number} length
+    @param {number} length
     */
     key(length?: number): string;
     /**
-    @param {String} key
+    @param {string} key
     */
     updateEnv(key: string): boolean;
 }

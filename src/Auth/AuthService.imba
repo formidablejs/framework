@@ -19,122 +19,122 @@ import Route from '../Http/Router/Route'
 
 export default class AuthService
 
-	static def beforeLogin callback\Function
+	static def beforeLogin callback\function
 		BeforeLogin.beforeLogin callback
 
 		self
 
-	static def beforeLogout callback\Function
+	static def beforeLogout callback\function
 		BeforeLogout.beforeLogout callback
 
 		self
 
-	static def beforeRegister callback\Function
+	static def beforeRegister callback\function
 		BeforeRegister.beforeRegister callback
 
 		self
 
-	static def beforeVerify callback\Function
+	static def beforeVerify callback\function
 		BeforeVerify.beforeVerify callback
 
 		self
 
-	static def beforeResend callback\Function
+	static def beforeResend callback\function
 		BeforeResend.beforeResend callback
 
 		self
 
-	static def beforeForgot callback\Function
+	static def beforeForgot callback\function
 		BeforeForgot.beforeForgot callback
 
 		self
 
-	static def beforeReset callback\Function
+	static def beforeReset callback\function
 		BeforeReset.beforeReset callback
 
 		self
 
-	static def onLogin callback\Function
+	static def onLogin callback\function
 		LoginController.onLogin callback
 
 		self
 
-	static def onLogout callback\Function
+	static def onLogout callback\function
 		LogoutController.onLogout callback
 
 		self
 
-	static def onRegister callback\Function
+	static def onRegister callback\function
 		RegisterController.onRegister callback
 
 		self
 
-	static def onForgot callback\Function
+	static def onForgot callback\function
 		PasswordController.onForgot callback
 
 		self
 
-	static def onReset callback\Function
+	static def onReset callback\function
 		PasswordController.onReset callback
 
 		self
 
-	static def onAuthenticated callback\Function
+	static def onAuthenticated callback\function
 		Driver.onAuthenticated callback
 
 		self
 
-	static def onFetchAuthenticated callback\Function
+	static def onFetchAuthenticated callback\function
 		PersonalAccessToken.onFetchAuthenticated callback
 
 		self
 
-	static def onSessionDestroyed callback\Function
+	static def onSessionDestroyed callback\function
 		Driver.onSessionDestroyed callback
 
 		self
 
-	static def onSuccessfulAttempt callback\Function
+	static def onSuccessfulAttempt callback\function
 		Driver.onSuccessfulAttempt callback
 
 		self
 
-	static def onCreateUser callback\Function
+	static def onCreateUser callback\function
 		Driver.onCreateUser callback
 
 		self
 
-	static def onRegistered callback\Function
+	static def onRegistered callback\function
 		Driver.onRegistered callback
 
 		self
 
-	static def onVerification callback\Function
+	static def onVerification callback\function
 		EmailVerificationController.onVerification callback
 
 		self
 
-	static def onEmailResend callback\Function
+	static def onEmailResend callback\function
 		EmailVerificationController.onEmailResend callback
 
 		self
 
-	static def onEmailVerified callback\Function
+	static def onEmailVerified callback\function
 		Driver.onEmailVerified callback
 
 		self
 
-	static def onRequestEmailVerificationUrl callback\Function
+	static def onRequestEmailVerificationUrl callback\function
 		Driver.onRequestEmailVerificationUrl callback
 
 		self
-	
-	static def onRequestForgotPasswordUrl callback\Function
+
+	static def onRequestForgotPasswordUrl callback\function
 		Driver.onRequestForgotPasswordUrl callback
 
 		self
-	
-	static def onUpdatePassword callback\Function
+
+	static def onUpdatePassword callback\function
 		Driver.onUpdatePassword callback
 
 		self
@@ -149,7 +149,7 @@ export default class AuthService
 
 		self
 
-	static def routes config\Object = {}
+	static def routes config\object = {}
 		const login    = config.login ? config.login : true
 		const register = config.register ? config.register : true
 		const logout   = config.logout ? config.logout : true

@@ -14,10 +14,10 @@ const drivers = {
 
 export default class DriverManager
 
-	static def register name\String, driver\Object
+	static def register name\string, driver\object
 		drivers[name] = driver
 
-	static def get protocol\String, request\FormRequest, reply\FastifyReply, params\any[]|null, config\Repository
+	static def get protocol\string, request\FormRequest, reply\FastifyReply, params\any[]|null, config\Repository
 		const provider = config.get("auth.protocols.{protocol}.provider")
 
 		const driver = drivers[provider]

@@ -3,8 +3,8 @@ export function addExceptionResolver(resolver: any): number;
 @param {Error|ApplicationException|HttpException} error
 @param {FormRequest} request
 @param {FastifyReply} reply
-@param {Boolean} returns
-@param {Boolean} shouldReport
+@param {boolean} returns
+@param {boolean} shouldReport
 */
 export function handleException(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply, returns?: boolean, shouldReport?: boolean): Promise<any>;
 /**

@@ -35,40 +35,40 @@ const mailers = {
 
 export default class Driver
 
-	def constructor protocol\String, request\Request, reply\FastifyReply, params\any[]|null, config\Repository
+	def constructor protocol\string, request\Request, reply\FastifyReply, params\any[]|null, config\Repository
 		this.protocol = protocol
 		this.request = request
 		this.reply = reply
 		this.params = params
 		this.config = config
 
-	def attempt name\String, user\Object, ttl\Number|null = null
+	def attempt name\string, user\object, ttl\number|null = null
 		const token = await self.createPersonalAccessToken(name, user.id, ttl)
 
 		self.request.request.session.personal_access_token = token
 
 		await self.getPersonalAccessToken(token)
 
-	def getPersonalAccessToken token\String = null
+	def getPersonalAccessToken token\string = null
 		await PersonalAccessToken.find(!isEmpty(token) ? token : self.request.bearerToken!, self.protocol)
 
-	def usingPersonalAccessToken token\Object
+	def usingPersonalAccessToken token\object
 		await PersonalAccessToken.using(token)
 
 	def verify
 		null
 
-	def authenticate body\Object
+	def authenticate body\object
 		null
 
-	def register body\Object
+	def register body\object
 		null
 
-	def afterRegistered user\Object
+	def afterRegistered user\object
 		if isFunction(events.onRegistered)
 			events.onRegistered(self.request, self.reply, user, self.protocol, self.params)
 
-	def afterAuthenticated user\Object
+	def afterAuthenticated user\object
 		if isFunction(events.onAuthenticated)
 			events.onAuthenticated(self.request, self.reply, user, self.protocol, self.params)
 
@@ -76,10 +76,10 @@ export default class Driver
 		if isFunction(events.onSessionDestroyed)
 			events.onSessionDestroyed(self.request, self.reply, self.protocol, self.params)
 
-	def afterEmailVerified verified\Boolean
+	def afterEmailVerified verified\boolean
 		if isFunction(events.onEmailVerified)
 			events.onEmailVerified(self.request, self.reply, verified, self.protocol, self.params)
-	
+
 	def afterRequestEmailVerificationUrl
 		if isFunction(events.onRequestEmailVerificationUrl)
 			events.onRequestEmailVerificationUrl(self.request, self.reply, self.protocol, self.params)
@@ -87,7 +87,7 @@ export default class Driver
 	def afterRequestForgotPasswordUrl
 		if isFunction(events.onRequestForgotPasswordUrl)
 			events.onRequestForgotPasswordUrl(self.request, self.reply, self.protocol, self.params)
-	
+
 	def afterUpdatePassword
 		if isFunction(events.onUpdatePassword)
 			events.onUpdatePassword(self.request, self.reply, self.protocol, self.params)
@@ -98,7 +98,7 @@ export default class Driver
 	def getVerificationMailer
 		mailers.verificationEmail
 
-	def sendVerificationEmail user\Object
+	def sendVerificationEmail user\object
 		if self.getVerificationMailer!
 			self.request.verificationUrl = await self.verificationUrl(user)
 
@@ -107,7 +107,7 @@ export default class Driver
 	def getResetPasswordMailer
 		mailers.resetPasswordMailer
 
-	def sendResetPasswordEmail user\Object, token\String
+	def sendResetPasswordEmail user\object, token\string
 		if self.getResetPasswordMailer!
 			self.request.passwordResetUrl = await self.passwordResetUrl(user, token)
 
@@ -125,16 +125,16 @@ export default class Driver
 
 		if response == null || response == undefined || response == 0
 			const results = await self.afterEmailVerified(false)
-			
+
 			throw new EmailNotVerifiedException 'Could not verify email.' if isEmpty(results)
-			
+
 			return results
 
 		const results = await self.afterEmailVerified(true)
 
 		return isEmpty(results) ? { status: 'success' } : results
 
-	def requestEmailVerificationUrl body\Object = new Object
+	def requestEmailVerificationUrl body\object = new Object
 		const user = await self.findUser body
 
 		if user
@@ -149,7 +149,7 @@ export default class Driver
 		# to prevent attackers from knowing if the email was sent or not.
 		return isEmpty(results) ? { status: 'success' } : results
 
-	def requestForgotPasswordUrl body\Object = new Object
+	def requestForgotPasswordUrl body\object = new Object
 		const user = await self.findUser body
 
 		if user && !user.email_verified_at
@@ -172,12 +172,12 @@ export default class Driver
 				throw new Error 'Could not create password reset token.'
 
 			self.sendResetPasswordEmail user, token
-		
+
 		const results = await self.afterRequestForgotPasswordUrl!
 
 		return isEmpty(results) ? { status: 'success' } : results
 
-	def updatePassword body\Object = new Object
+	def updatePassword body\object = new Object
 		# get email and token from url.
 		const email = self.request.query 'email'
 		const token = self.request.query 'token'
@@ -226,13 +226,13 @@ export default class Driver
 
 		return isEmpty(results) ? { status: 'success' } : results
 
-	def logout body\Object = new Object
+	def logout body\object = new Object
 		self
 
-	def destroy token\String = null, body\Object = new Object
+	def destroy token\string = null, body\object = new Object
 		await PersonalAccessToken.destroy(!isEmpty(token) ? token : self.request.bearerToken!)
 
-	def createPersonalAccessToken name\String, id\Number, ttl\Number|null = null
+	def createPersonalAccessToken name\string, id\number, ttl\number|null = null
 		await PersonalAccessToken.create(name, id, self.getProvider.table, ['*'], ttl, {
 			protocol: self.protocol
 			ip_address: self.request.ip! || null
@@ -244,7 +244,7 @@ export default class Driver
 
 		self.config.get("auth.providers.{protocol.provider}")
 
-	def insertUser body\Object
+	def insertUser body\object
 		let user = await self.findUser(body)
 
 		if user !== undefined
@@ -256,7 +256,7 @@ export default class Driver
 
 		await this.createUser(body)
 
-	def createUser body\Object
+	def createUser body\object
 		if events.onCreateUser !== null
 			return events.onCreateUser(
 				self.request,
@@ -270,19 +270,19 @@ export default class Driver
 				email: body.email,
 				password: await Hash.make(body.password)
 			}, DatabaseConfig.client == 'pg' ? ['id'] : null)
-			.then do([ user\Object|Number ])
+			.then do([ user\object|Number ])
 				user = (typeof user === 'object' && user.hasOwnProperty('id')) ? user.id : user
 
 				return await Database.table(self.getProvider.table)
 					.where('id', user)
 					.first!
 
-	def findUser body\Object
+	def findUser body\object
 		return await Database.table(self.getProvider.table)
 			.where('email', body.email)
 			.first!
 
-	def verificationUrl user\Object
+	def verificationUrl user\object
 		const clientUrl = self.config.get('app.client_url', self.config.get('app.url'))
 
 		const signature = await URL.temporarySignedRoute('email.verify','2h',null,{
@@ -291,7 +291,7 @@ export default class Driver
 
 		clientUrl + signature
 
-	def passwordResetUrl user\Object, token\String
+	def passwordResetUrl user\object, token\string
 		const clientUrl = self.config.get('app.client_url', self.config.get('app.url'))
 
 		const signature = await URL.temporarySignedRoute('password.reset', '15m', null, {
@@ -301,23 +301,23 @@ export default class Driver
 
 		clientUrl + signature
 
-	static def onEmailVerified handler\Function
+	static def onEmailVerified handler\function
 		if events.onEmailVerified !== null
 			throw new Error 'onEmailVerified handler is already set.'
 
 			return
-		
+
 		events.onEmailVerified = handler
 
-	static def onCreateUser handler\Function
+	static def onCreateUser handler\function
 		if events.onCreateUser !== null
 			throw new Error 'onCreateUser handler is already set.'
 
 			return
-		
+
 		events.onCreateUser = handler
 
-	static def onRegistered handler\Function
+	static def onRegistered handler\function
 		if events.onRegistered !== null
 			throw new Error 'onRegistered handler is already set.'
 
@@ -325,7 +325,7 @@ export default class Driver
 
 		events.onRegistered = handler
 
-	static def onAuthenticated handler\Function
+	static def onAuthenticated handler\function
 		if events.onAuthenticated !== null
 			throw new Error 'onAuthenticated handler is already set.'
 
@@ -333,7 +333,7 @@ export default class Driver
 
 		events.onAuthenticated = handler
 
-	static def onSessionDestroyed handler\Function
+	static def onSessionDestroyed handler\function
 		if events.onSessionDestroyed !== null
 			throw new Error 'onSessionDestroyed handler is already set.'
 
@@ -341,7 +341,7 @@ export default class Driver
 
 		events.onSessionDestroyed = handler
 
-	static def onSuccessfulAttempt handler\Function
+	static def onSuccessfulAttempt handler\function
 		if events.onSuccessfulAttempt !== null
 			throw new Error 'onSuccessfulAttempt handler is already set.'
 
@@ -349,7 +349,7 @@ export default class Driver
 
 		events.onSuccessfulAttempt = handler
 
-	static def onRequestEmailVerificationUrl handler\Function
+	static def onRequestEmailVerificationUrl handler\function
 		if events.onRequestEmailVerificationUrl !== null
 			throw new Error 'onRequestEmailVerificationUrl handler is already set.'
 
@@ -357,15 +357,15 @@ export default class Driver
 
 		events.onRequestEmailVerificationUrl = handler
 
-	static def onRequestForgotPasswordUrl handler\Function
+	static def onRequestForgotPasswordUrl handler\function
 		if events.onRequestForgotPasswordUrl !== null
 			throw new Error 'onRequestForgotPasswordUrl handler is already set.'
 
 			return
 
 		events.onRequestForgotPasswordUrl = handler
-	
-	static def onUpdatePassword handler\Function
+
+	static def onUpdatePassword handler\function
 		if events.onUpdatePassword !== null
 			throw new Error 'onUpdatePassword handler is already set.'
 

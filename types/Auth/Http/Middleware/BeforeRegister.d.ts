@@ -1,6 +1,6 @@
 export default class BeforeRegister {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeRegister(handler: Function): Function;
     constructor(config: any);

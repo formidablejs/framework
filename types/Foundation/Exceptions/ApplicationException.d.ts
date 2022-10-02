@@ -3,7 +3,7 @@ declare class ApplicationException extends Error {
     static [$__init__$](): typeof ApplicationException;
     /**
     @param {any} response
-    @param {Number} status
+    @param {number} status
     */
     constructor(response: any, status?: number);
     response: any;

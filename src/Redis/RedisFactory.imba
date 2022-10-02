@@ -4,7 +4,7 @@ const settings = { instances: {}, config: {} }
 
 export default class RedisFactory
 
-	def constructor database\String = 'default'
+	def constructor database\string = 'default'
 		if settings.instances[database] then return settings.instances[database]
 
 		let connection = settings.config.get("database.redis.{database}")
@@ -36,7 +36,7 @@ export default class RedisFactory
 		# return redis connection.
 		settings.instances[database]
 
-	static def connection database\String = 'default'
+	static def connection database\string = 'default'
 		let instance = settings.instances[database]
 
 		if instance == undefined || instance == null

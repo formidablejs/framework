@@ -1,20 +1,20 @@
 export default class ViewResponse {
     /**
     @param {View} view
-    @param {Object|null} data
-    @param {Number} statusCode
+    @param {object|null} data
+    @param {number} statusCode
     */
-    static make(view: View, data?: any | null, statusCode?: number): ViewResponse;
+    static make(view: View, data?: object | null, statusCode?: number): ViewResponse;
     /**
     @param {View} view
-    @param {Object|null} data
-    @param {Number} statusCode
+    @param {object|null} data
+    @param {number} statusCode
     */
-    constructor(view: View, data?: any | null, statusCode?: number);
+    constructor(view: View, data?: object | null, statusCode?: number);
     view: any;
     statusCode: number;
     /**
-    @param {Number} statusCode
+    @param {number} statusCode
     */
     code(statusCode: number): number;
     /**

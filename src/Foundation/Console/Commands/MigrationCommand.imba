@@ -4,7 +4,7 @@ import type Application from '../../Application'
 
 export class MigrationCommand < Command
 
-	def call action\String
+	def call action\string
 		await shouldRun!
 
 		self.usingEnv!

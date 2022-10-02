@@ -2,7 +2,7 @@ import FormValidation from '../Http/Request/FormValidation'
 
 export default class Validator
 
-	static def make body\Object, rules\Object, messages\Object = {}
+	static def make body\object, rules\object, messages\object = {}
 		const validation = this.get!
 
 		new validation(body, rules, messages)

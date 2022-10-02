@@ -27,17 +27,17 @@ export default class Language
 	get packs
 		self.lang.packs
 
-	def setLocale locale\String
+	def setLocale locale\string
 		self.lang.locale = locale
 
 		self
 
-	def setFallbackLocale locale\String
+	def setFallbackLocale locale\string
 		self.lang.fallback_locale = locale
 
 		self
 
-	def register location\String
+	def register location\string
 		const packs = getDirectories location
 
 		packs.forEach do(pack)
@@ -59,7 +59,7 @@ export default class Language
 					)
 		this
 
-	def get path\String, default\String
+	def get path\string, default\string
 		const output = dot(self.lang.packs, "{self.lang.locale}.{path}") ?? dot(self.lang.packs, "{self.lang.fallback_locale}.{path}")
 
 		output !== undefined && output !== null ? output : default

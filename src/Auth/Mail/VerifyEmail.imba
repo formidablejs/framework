@@ -3,11 +3,11 @@ import FormRequest from '../../Http/Request/FormRequest'
 
 export default class VerifyEmail < Mailable
 
-	prop subject\String
+	prop subject\string
 	prop request\FormRequest
-	prop user\Object
+	prop user\object
 
-	def constructor request\FormRequest, user\Object
+	def constructor request\FormRequest, user\object
 		super()
 
 		self.request = request

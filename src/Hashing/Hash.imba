@@ -8,7 +8,7 @@ const settings = {
 
 export default class Hash
 
-	static def make value\String
+	static def make value\string
 		if settings.config.driver == 'argon2'
 			return await argon2.hash(value, settings.config.argon2)
 
@@ -17,7 +17,7 @@ export default class Hash
 
 		throw new InvalidHashDriverException "{settings.config.driver} is not a valid driver."
 
-	static def check value\String, hash\String
+	static def check value\string, hash\string
 		if settings.config.driver == 'argon2'
 			return await argon2.verify(value, hash, settings.config.argon2)
 
@@ -26,7 +26,7 @@ export default class Hash
 
 		throw new InvalidHashDriverException "{settings.config.driver} is not a valid driver."
 
-	static def configure config\Object
+	static def configure config\object
 		if settings.config != null then throw new Error 'Hashing has been already configured.'
 
 		settings.config = config

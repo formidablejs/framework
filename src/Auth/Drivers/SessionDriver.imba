@@ -48,7 +48,7 @@ export default class SessionDriver < Driver
 
 		false
 
-	def authenticate body\Object
+	def authenticate body\object
 		const user = await Auth.attempt(body)
 
 		const date = new Date!
@@ -81,7 +81,7 @@ export default class SessionDriver < Driver
 
 		isEmpty(results) ? { status: 'success' } : results
 
-	def register body\Object
+	def register body\object
 		const user = await self.insertUser(body)
 
 		const date = new Date!
@@ -116,7 +116,7 @@ export default class SessionDriver < Driver
 
 		isEmpty(results) ? { status: 'success' } : results
 
-	def logout body\Object = new Object
+	def logout body\object = new Object
 		const userId = self.request.auth!.user!.id
 		const remember = self.request.request.cookies.remember
 

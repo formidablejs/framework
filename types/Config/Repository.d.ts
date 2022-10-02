@@ -5,16 +5,16 @@ export default class Repository {
     temp: any;
     get registered(): Object;
     /**
-    @param {String} key
+    @param {string} key
     */
     has(key: string): boolean;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     get(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} value
     */
     set(key: string, value: any): any;

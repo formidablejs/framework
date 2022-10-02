@@ -1,7 +1,7 @@
 import isArray from './isArray'
 import isObject from './isObject'
 
-export default def without object\Object, exclude\string[]
+export default def without object\object, exclude\string[]
 	if !isObject(object) then throw new TypeError 'Expected object'
 
 	if !isArray(exclude) then throw new TypeError 'Expected array'

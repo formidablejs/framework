@@ -17,7 +17,7 @@ class RegisterController < Controller
 
 		request.persist!
 
-	static def onRegister handler\Function
+	static def onRegister handler\function
 		if registerAuth.onRegister !== null
 			throw new Error 'onRegister handler is already set.'
 

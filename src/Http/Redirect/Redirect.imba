@@ -3,24 +3,24 @@ import URL from '../URL/URL'
 
 export default class Redirect
 
-	prop path\String
-	prop statusCode\Number
-	prop _flashed\Object = {}
+	prop path\string
+	prop statusCode\number
+	prop _flashed\object = {}
 
-	def constructor path\String, statusCode\Number = 302
+	def constructor path\string, statusCode\number = 302
 		self.path = path
 		self.statusCode = statusCode
 
-	static def to path\String
+	static def to path\string
 		new self(path)
 
-	static def back statucCode\Number|null = 302
+	static def back statucCode\number|null = 302
 		new self(null, statucCode)
 
-	static def route name\String, params\Object = {}
+	static def route name\string, params\object = {}
 		new self(URL.route(name, params))
 
-	def with key\String, value\any
+	def with key\string, value\any
 		self._flashed = Object.assign(self._flashed, {
 			[key]: value
 		})
@@ -33,7 +33,7 @@ export default class Redirect
 	def flashed
 		self._flashed
 
-	def code statusCode\Number
+	def code statusCode\number
 		self.statusCode = statusCode
 
 		self

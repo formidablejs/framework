@@ -7,17 +7,17 @@ export default class MultipartServiceResolver extends ServiceResolver {
     handleFile(value: File): boolean;
     /**
     @param {File} value
-    @param {String} mimes
+    @param {string} mimes
     */
     handleMimes(value: File, mimes: string): boolean;
     /**
     @param {File} value
-    @param {String} mimes
+    @param {string} mimes
     */
     handleMimetypes(value: File, mimes: string): boolean;
     /**
     @param {File} value
-    @param {String|null} mimes
+    @param {string|null} mimes
     */
     handleImages(value: File, mimes: string | null): boolean;
     /**
@@ -26,7 +26,7 @@ export default class MultipartServiceResolver extends ServiceResolver {
     handleVideos(value: File): boolean;
     /**
     @param {File} value
-    @param {Number} size
+    @param {number} size
     */
     handleSize(value: File, size: number): boolean;
 }

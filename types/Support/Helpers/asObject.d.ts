@@ -1,4 +1,4 @@
 /**
-@param {Object} object
+@param {object} object
 */
-export default function asObject(object: any): Object;
+export default function asObject(object: object): Object;

@@ -1,15 +1,15 @@
 export default class Hash {
     /**
-    @param {String} value
+    @param {string} value
     */
     static make(value: string): Promise<any>;
     /**
-    @param {String} value
-    @param {String} hash
+    @param {string} value
+    @param {string} hash
     */
     static check(value: string, hash: string): Promise<any>;
     /**
-    @param {Object} config
+    @param {object} config
     */
-    static configure(config: any): any;
+    static configure(config: object): any;
 }

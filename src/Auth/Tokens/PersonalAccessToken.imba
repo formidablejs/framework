@@ -20,7 +20,7 @@ const settings = {
 
 export default class PersonalAccessToken
 
-	static def create name\String, id\Number, table\String, abilities\Array = ['*'], ttl\Number|null = null, data\object = {}
+	static def create name\string, id\number, table\string, abilities\Array = ['*'], ttl\number|null = null, data\object = {}
 		if !isString(name) then throw new TypeError 'name must be a string.'
 
 		if !isNumber(id) then throw new TypeError 'id must be an int.'
@@ -54,7 +54,7 @@ export default class PersonalAccessToken
 					issuer: settings.config.get('app.url')
 				})
 
-	static def find token\String, protocol = null
+	static def find token\string, protocol = null
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
 		const response = {
@@ -91,7 +91,7 @@ export default class PersonalAccessToken
 			tokenable: !isEmpty(tokenable) ? tokenable : null
 		}
 
-	static def onFetchAuthenticated handler\Function
+	static def onFetchAuthenticated handler\function
 		if settings.event !== null
 			throw new Error 'onFetchAuthenticated handler is already set.'
 
@@ -99,19 +99,19 @@ export default class PersonalAccessToken
 
 		settings.event = handler
 
-	static def using token\Object
+	static def using token\object
 		await self.getDatabase!.table('personal_access_tokens')
 			.where(id: token.id)
 			.update('last_used_at', self.getDatabase!.fn.now!)
 
-	static def destroy token\String
+	static def destroy token\string
 		const decodedToken = await self.verify(token)
 
 		await self.getDatabase!.table('personal_access_tokens')
 			.where(id: self.getEncrypter!.decrypt(decodedToken.id))
 			.del!
 
-	static def verify token\String
+	static def verify token\string
 		if !isString(token) then throw new TypeError 'token must be a string.'
 
 		try return await jwt.verify(token, self.getEncrypter!.key!)
@@ -131,7 +131,7 @@ export default class PersonalAccessToken
 
 		self
 
-	static def setConfig config\Object
+	static def setConfig config\object
 		if !(config instanceof ConfigRepository)
 			throw new TypeError 'config must be an instance of ConfigRepository.'
 
@@ -139,7 +139,7 @@ export default class PersonalAccessToken
 
 		self
 
-	static def setSecret secret\String
+	static def setSecret secret\string
 		if !isString(secret) then throw new TypeError 'secret must be a string.'
 
 		settings.secret = secret

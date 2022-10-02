@@ -26,7 +26,7 @@ class EmailVerificationController < Controller
 
 		request.persist!
 
-	static def onVerification handler\Function
+	static def onVerification handler\function
 		if emailVerification.onVerification !== null
 			throw new Error 'onVerification handler is already set.'
 
@@ -34,7 +34,7 @@ class EmailVerificationController < Controller
 
 		emailVerification.onVerification = handler
 
-	static def onEmailResend handler\Function
+	static def onEmailResend handler\function
 		if emailVerification.onEmailResend !== null
 			throw new Error 'onEmailResend handler is already set.'
 

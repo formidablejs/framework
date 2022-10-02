@@ -2,7 +2,7 @@ import ConfigNotCachedError from './Error/ConfigNotCachedError'
 import dot from './dotNotation'
 import path from 'path'
 
-def fallback notation\String, default\any = null
+def fallback notation\string, default\any = null
 	try
 		const app = require('../../Foundation/Application').default
 
@@ -10,7 +10,7 @@ def fallback notation\String, default\any = null
 	catch e
 		throw new ConfigNotCachedError
 
-export default def config notation\String, default\any = null
+export default def config notation\string, default\any = null
 	try
 		const config = require(path.join(process.cwd!, 'bootstrap', 'cache', 'config.json'))
 

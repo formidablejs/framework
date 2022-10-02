@@ -8,16 +8,16 @@ import type View from '../View/View'
 export default class ViewResponse
 
 	prop view\View
-	prop statusCode\Number = 200
+	prop statusCode\number = 200
 
-	def constructor view\View, data\Object|null = null, statusCode\Number = 200
+	def constructor view\View, data\object|null = null, statusCode\number = 200
 		self.view = new view(data || {})
 		self.statusCode = statusCode
 
-	static def make view\View, data\Object|null = null, statusCode\Number = 200
+	static def make view\View, data\object|null = null, statusCode\number = 200
 		new ViewResponse(view, data || {}, statusCode)
 
-	def code statusCode\Number
+	def code statusCode\number
 		self.statusCode = statusCode
 
 	def toView request\FormRequest, reply\FastifyReply

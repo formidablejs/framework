@@ -60,19 +60,19 @@ export default class SessionServiceResolver < ServiceResolver
 				return reply.redirect(request.header('referer')).sent = true
 
 	def attemptAuth request\FastifyRequest, reply\FastifyReply
-		const token\String = await request.session.personal_access_token
+		const token\string = await request.session.personal_access_token
 
 		if !(typeof token === 'string' && !isEmpty(token))
 			return remove(request)
-		
+
 		# get decoded token
-		const decodedToken\Boolean|Object = await PersonalAccessToken.verify(token)
+		const decodedToken\boolean|Object = await PersonalAccessToken.verify(token)
 
 		if decodedToken === false then return remove(request)
-		
+
 		# get auth protocol from token.
 		const protocol = decodedToken.protocol || null
-		
+
 		if isEmpty(protocol) then return remove(request)
 
 		# configure auth protocol.
@@ -108,5 +108,4 @@ export default class SessionServiceResolver < ServiceResolver
 		delete request.session.personal_access_token
 
 		return
-	
-	
+

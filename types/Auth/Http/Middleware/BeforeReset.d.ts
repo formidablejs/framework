@@ -1,6 +1,6 @@
 export default class BeforeReset {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeReset(handler: Function): Function;
     constructor(config: any);

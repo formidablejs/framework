@@ -1,6 +1,6 @@
 export default class BeforeResend {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeResend(handler: Function): Function;
     constructor(config: any);

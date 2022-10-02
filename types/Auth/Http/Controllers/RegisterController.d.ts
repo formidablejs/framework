@@ -1,7 +1,7 @@
 export default RegisterController;
 declare class RegisterController extends Controller {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRegister(handler: Function): Function;
     static [$__init__$](): typeof RegisterController;

@@ -8,16 +8,16 @@ export default class SessionDriver extends Driver {
         tokenable: any;
     }>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    authenticate(body: any): Promise<any>;
+    authenticate(body: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    register(body: any): Promise<any>;
+    register(body: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    logout(body?: any): Promise<any>;
+    logout(body?: object): Promise<any>;
 }
 import Driver from "./Driver";

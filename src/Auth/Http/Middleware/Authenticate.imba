@@ -32,5 +32,5 @@ export default class Authenticate
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	def configure protocol\String
+	def configure protocol\string
 		Protocol.make(self.config).configure(protocol)

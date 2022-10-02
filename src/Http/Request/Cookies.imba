@@ -17,13 +17,13 @@ export default class Cookies
 		if isEmpty(self.#ref.cookies)
 			self.#ref.cookies = {}
 
-	def has key\String
+	def has key\string
 		!isEmpty(self.#ref.cookies[key])
 
-	def get key\String, default\any
+	def get key\string, default\any
 		self.#ref.cookies[key] ?? default
 
-	def pull key\String, default\any
+	def pull key\string, default\any
 		if self.has(key)
 			const value = self.get(key)
 
@@ -33,7 +33,7 @@ export default class Cookies
 
 		default
 
-	def set key\String, value\String
+	def set key\string, value\string
 		const session = config('session')
 
 		self.#reply.setCookie(key, value, {
@@ -45,7 +45,7 @@ export default class Cookies
 			secure: session.secure
 		})
 
-	def forget key\String|String[]
+	def forget key\string|string[]
 		if !isArray(key) then key = [key]
 
 		for i in key

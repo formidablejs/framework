@@ -14,7 +14,7 @@ export default class Controller
 	 *
 	 * @throws {NotFoundException}
 	 */
-	def notFound message\String = 'Not Found'
+	def notFound message\string = 'Not Found'
 		throw new NotFoundException message
 
 	/**
@@ -22,23 +22,23 @@ export default class Controller
 	 *
 	 * @throws {HttpException}
 	 */
-	def badRequest message\String = 'Bad Request'
+	def badRequest message\string = 'Bad Request'
 		throw new HttpException message, 400
 
 	/**
 	 * Render a view.
 	 */
-	def view view\Function|View, data\Object = {}
+	def view view\function|View, data\object = {}
 		ViewResponse.make(view, data)
 
 	/**
 	 * Validate request.
 	 */
-	def validate request\FormRequest|Request, rules\Object = null
+	def validate request\FormRequest|Request, rules\object = null
 		Validator.make(request.input!, rules)
 
 	/**
 	 * Bind route param.
 	 */
-	def bind table\String, first\Boolean = true
+	def bind table\string, first\boolean = true
 		bind(table, first)

@@ -27,7 +27,7 @@ export default class FormRequest
 	prop #cookies\Cookies
 	prop _rules = null
 
-	def constructor request\FastifyRequest, route\Object = {}, reply\FastifyReply, config\Repository
+	def constructor request\FastifyRequest, route\object = {}, reply\FastifyReply, config\Repository
 		self.req = request
 		self.request = request
 		self.reply = reply
@@ -78,37 +78,37 @@ export default class FormRequest
 	/**
 	 * Set locale.
 	 */
-	def setLocale locale\String
+	def setLocale locale\string
 		self.request.language.setLocale(locale)
 
 	/**
 	 * Set fallback locale.
 	 */
-	def setFallbackLocale locale\String
+	def setFallbackLocale locale\string
 		self.request.language.setFallbackLocale(locale)
 
 	/**
 	 * Translate text.
 	 */
-	def translate path\String, default\String
+	def translate path\string, default\string
 		self.request.language.get(path, default)
 
 	/**
 	 * Translate text.
 	 */
-	def t path\String, default\String
+	def t path\string, default\string
 		self.translate(path, default)
 
 	/**
 	 * Translate text.
 	 */
-	def __ path\String, default\String
+	def __ path\string, default\string
 		self.translate(path, default)
 
 	/**
 	 * Flash data.
 	 */
-	def flash key\String, value\any
+	def flash key\string, value\any
 		if !isString(key) then throw TypeError 'Expected key to be a string.'
 
 		self.req.session._flashed = Object.assign(self.req.session._flashed ?? {}, {
@@ -120,8 +120,8 @@ export default class FormRequest
 	/**
 	 * Flash many.
 	 */
-	def flashMany object\Object
-		for own key\String, value of object
+	def flashMany object\object
+		for own key\string, value of object
 			self.flash key, value
 
 		self
@@ -287,7 +287,7 @@ export default class FormRequest
 	/**
 	 * Get url param.
 	 */
-	def param name\String
+	def param name\string
 		self.request.params[name]
 
 	/**
@@ -305,7 +305,7 @@ export default class FormRequest
 	/**
 	 * Get body input or specified query keys.
 	 */
-	def all keys\String[] = null
+	def all keys\string[] = null
 		if isArray(keys) && !isEmpty(keys)
 			const all = Object.assign(self.query!, self.body!)
 			const res = {}
@@ -346,7 +346,7 @@ export default class FormRequest
 
 		let response = {}
 
-		const all\Object = this.all!
+		const all\object = this.all!
 
 		keys.forEach do(key)
 			const value = all[key]
@@ -361,7 +361,7 @@ export default class FormRequest
 	/**
 	 * Get filled input.
 	 */
-	def filled keys\String[]
+	def filled keys\string[]
 		if isArray(keys) then keys = Object.keys(self.body!)
 
 		let filled = {}
@@ -400,7 +400,7 @@ export default class FormRequest
 	 *
 	 * @returns {FileCollection|null}
 	 */
-	def file name\String
+	def file name\string
 		!(isEmpty(request.rawFiles) && isEmpty(request.rawFiles[name])) ? request.rawFiles[name] : null
 
 	/**
@@ -408,7 +408,7 @@ export default class FormRequest
 	 *
 	 * @returns {Boolean}
 	 */
-	def hasFile name\String
+	def hasFile name\string
 		!isEmpty(self.file(name))
 
 	/**
@@ -430,20 +430,20 @@ export default class FormRequest
 	/**
 	 * Validate a request using specified rules.
 	 */
-	def validate rules\Object|null = null
-		const requestRules\Object = isEmpty(rules) ? self.getRules! : rules
-		const files\Object = !isEmpty(request._rawFiles) ? request._rawFiles : {}
-		const body\Object = Object.assign(self.input! ?? {}, files ?? {})
+	def validate rules\object|null = null
+		const requestRules\object = isEmpty(rules) ? self.getRules! : rules
+		const files\object = !isEmpty(request._rawFiles) ? request._rawFiles : {}
+		const body\object = Object.assign(self.input! ?? {}, files ?? {})
 
 		Validator.make(body, requestRules, self.messages!)
 
 	/**
 	 * Set request rules.
 	 *
-	 * @param {Object} rules
+	 * @param {object} rules
 	 * @returns {FormRequest}
 	 */
-	def setRules rules\Object
+	def setRules rules\object
 		if self._rules !== null
 			throw new Error('FormRequest rules have already been set.')
 
@@ -454,7 +454,7 @@ export default class FormRequest
 	/**
 	 * Get request rules.
 	 *
-	 * @returns {Object}
+	 * @returns {object}
 	 */
 	def getRules
 		self._rules === null ? this.rules! : self._rules
@@ -472,7 +472,7 @@ export default class FormRequest
 			user: do null
 			driver: do null
 			check: do false
-			can: do(perform\String) false
+			can: do(perform\string) false
 		}
 
 	def user

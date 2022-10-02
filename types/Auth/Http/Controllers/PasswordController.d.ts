@@ -1,11 +1,11 @@
 export default PasswordController;
 declare class PasswordController extends Controller {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onForgot(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onReset(handler: Function): Function;
     static [$__init__$](): typeof PasswordController;

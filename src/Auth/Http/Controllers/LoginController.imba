@@ -16,7 +16,7 @@ class LoginController < Controller
 
 		request.persist!
 
-	static def onLogin handler\Function
+	static def onLogin handler\function
 		if loginAuth.onLogin !== null
 			throw new Error 'onLogin handler is already set.'
 

@@ -21,7 +21,7 @@ export default class BeforeLogout
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeLogout handler\Function
+	static def beforeLogout handler\function
 		if logoutAuth.beforeLogout !== null
 			throw new Error 'beforeLogout handler is already set.'
 

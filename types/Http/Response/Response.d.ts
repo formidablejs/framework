@@ -1,22 +1,22 @@
 export default class Response {
     /**
     @param {any} data
-    @param {Number} statusCode
+    @param {number} statusCode
     */
     constructor(data?: any, statusCode?: number);
     data: any;
     statusCode: number;
     /**
-    @param {Object} object
+    @param {object} object
     */
-    json(object: any): JsonResponse;
+    json(object: object): JsonResponse;
     /**
     @param {View} view
-    @param {Object|null} data
+    @param {object|null} data
     */
-    view(view: View, data?: any | null): ViewResponse;
+    view(view: View, data?: object | null): ViewResponse;
     /**
-    @param {Number} statusCode
+    @param {number} statusCode
     */
     code(statusCode: number): number;
     [$__patch__$]($$?: {}): void;

@@ -1,38 +1,38 @@
 export default class Driver {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onEmailVerified(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onCreateUser(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRegistered(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onAuthenticated(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onSessionDestroyed(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onSuccessfulAttempt(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRequestEmailVerificationUrl(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onRequestForgotPasswordUrl(handler: Function): Function;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static onUpdatePassword(handler: Function): Function;
     /**
@@ -44,7 +44,7 @@ export default class Driver {
     */
     static resetPasswordMailer(mailer: Mailable): Mailable;
     /**
-    @param {String} protocol
+    @param {string} protocol
     @param {Request} request
     @param {FastifyReply} reply
     @param {any[]|null} params
@@ -57,45 +57,45 @@ export default class Driver {
     params: any[];
     config: Repository;
     /**
-    @param {String} name
-    @param {Object} user
-    @param {Number|null} ttl
+    @param {string} name
+    @param {object} user
+    @param {number|null} ttl
     */
-    attempt(name: string, user: any, ttl?: number | null): Promise<{
+    attempt(name: string, user: object, ttl?: number | null): Promise<{
         token: any;
         tokenable: any;
     }>;
     /**
-    @param {String} token
+    @param {string} token
     */
     getPersonalAccessToken(token?: string): Promise<{
         token: any;
         tokenable: any;
     }>;
     /**
-    @param {Object} token
+    @param {object} token
     */
-    usingPersonalAccessToken(token: any): Promise<any>;
+    usingPersonalAccessToken(token: object): Promise<any>;
     verify(): any;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    authenticate(body: any): any;
+    authenticate(body: object): any;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    register(body: any): any;
+    register(body: object): any;
     /**
-    @param {Object} user
+    @param {object} user
     */
-    afterRegistered(user: any): any;
+    afterRegistered(user: object): any;
     /**
-    @param {Object} user
+    @param {object} user
     */
-    afterAuthenticated(user: any): any;
+    afterAuthenticated(user: object): any;
     afterSessionDestroyed(): any;
     /**
-    @param {Boolean} verified
+    @param {boolean} verified
     */
     afterEmailVerified(verified: boolean): any;
     afterRequestEmailVerificationUrl(): any;
@@ -104,63 +104,63 @@ export default class Driver {
     onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
     /**
-    @param {Object} user
+    @param {object} user
     */
-    sendVerificationEmail(user: any): Promise<any>;
+    sendVerificationEmail(user: object): Promise<any>;
     getResetPasswordMailer(): any;
     /**
-    @param {Object} user
-    @param {String} token
+    @param {object} user
+    @param {string} token
     */
-    sendResetPasswordEmail(user: any, token: string): Promise<any>;
+    sendResetPasswordEmail(user: object, token: string): Promise<any>;
     verifyEmail(): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    requestEmailVerificationUrl(body?: any): Promise<any>;
+    requestEmailVerificationUrl(body?: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    requestForgotPasswordUrl(body?: any): Promise<any>;
+    requestForgotPasswordUrl(body?: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    updatePassword(body?: any): Promise<any>;
+    updatePassword(body?: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    logout(body?: any): Driver;
+    logout(body?: object): Driver;
     /**
-    @param {String} token
-    @param {Object} body
+    @param {string} token
+    @param {object} body
     */
-    destroy(token?: string, body?: any): Promise<any>;
+    destroy(token?: string, body?: object): Promise<any>;
     /**
-    @param {String} name
-    @param {Number} id
-    @param {Number|null} ttl
+    @param {string} name
+    @param {number} id
+    @param {number|null} ttl
     */
     createPersonalAccessToken(name: string, id: number, ttl?: number | null): Promise<any>;
     get getProvider(): any;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    insertUser(body: any): Promise<any>;
+    insertUser(body: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    createUser(body: any): Promise<any>;
+    createUser(body: object): Promise<any>;
     /**
-    @param {Object} body
+    @param {object} body
     */
-    findUser(body: any): Promise<any>;
+    findUser(body: object): Promise<any>;
     /**
-    @param {Object} user
+    @param {object} user
     */
-    verificationUrl(user: any): Promise<string>;
+    verificationUrl(user: object): Promise<string>;
     /**
-    @param {Object} user
-    @param {String} token
+    @param {object} user
+    @param {string} token
     */
-    passwordResetUrl(user: any, token: string): Promise<string>;
+    passwordResetUrl(user: object, token: string): Promise<string>;
 }

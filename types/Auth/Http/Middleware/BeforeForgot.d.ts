@@ -1,6 +1,6 @@
 export default class BeforeForgot {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeForgot(handler: Function): Function;
     constructor(config: any);

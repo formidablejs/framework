@@ -2,5 +2,5 @@ import HttpException from '../../Http/Exceptions/HttpException'
 
 export default class MaintenanceModeException < HttpException
 
-	prop response\String = 'Service Unavailable'
-	prop status\Number = 503
+	prop response\string = 'Service Unavailable'
+	prop status\number = 503

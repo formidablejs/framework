@@ -12,7 +12,7 @@ export default class Protocol
 	static def make config\Repository
 		new self(config)
 
-	def configure protocol\String
+	def configure protocol\string
 		const fetchedProtocol = self.config.get "auth.protocols.{protocol}.provider"
 
 		if isEmpty(fetchedProtocol)

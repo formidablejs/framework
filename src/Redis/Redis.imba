@@ -3,7 +3,7 @@ import * as redis from 'redis'
 const settings = { instances: {}, config: {}, running: [] }
 
 export default class Redis
-	def constructor database\String = 'default'
+	def constructor database\string = 'default'
 
 		if settings.instances[database] then return settings.instances[database]
 
@@ -36,7 +36,7 @@ export default class Redis
 
 		settings.instances[database].on 'error', do(error) throw error
 
-	static def connection database\String = 'default'
+	static def connection database\string = 'default'
 		let instance = settings.instances[database]
 
 		if instance == undefined || instance == null
@@ -62,22 +62,22 @@ export default class Redis
 
 			instance.quit!
 
-	static def set key\String, value\String, options\any = null
+	static def set key\string, value\string, options\any = null
 		const i = await self.connection!
 
 		await i.set key, value, options
 
-	static def get key\String
+	static def get key\string
 		const i = await self.connection!
 
 		await i.get key
 
-	static def del key\String
+	static def del key\string
 		const i = await self.connection!
 
 		await i.del key
 
-	static def command command\String, key\String, value\String|null = null, nx\any = null
+	static def command command\string, key\string, value\string|null = null, nx\any = null
 		const i = await self.connection!
 
 		await i.sendCommand command, key, value, nx

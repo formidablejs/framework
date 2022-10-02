@@ -11,7 +11,7 @@ export class PackagePublishCommand extends Command {
     get publisherPath(): any;
     get publisher(): any;
     /**
-    @param {String} optTag
+    @param {string} optTag
     */
     persist(optTag: string): void;
 }

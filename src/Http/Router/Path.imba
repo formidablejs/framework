@@ -1,6 +1,6 @@
 export default class Path
 
-	static def clean prefix\String[], pattern\String
+	static def clean prefix\string[], pattern\string
 		prefix = prefix
 			.join('/')
 			.replace /^\s*\/*\s*|\s*\/*\s*$/gm, ''

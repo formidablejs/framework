@@ -7,12 +7,12 @@ export class Command extends BaseCommand {
     */
     message(type: string, message: string, newLine?: boolean): void;
     /**
-    @param {String} default
+    @param {string} default
     */
     env(default$: any): any;
     usingEnv(): void;
     /**
-    @param {String} message
+    @param {string} message
     */
     confirm(message: string): Promise<any>;
     shouldRun(): Promise<any>;

@@ -1,17 +1,17 @@
 export default class Migration {
     /**
-    @param {String} name
+    @param {string} name
     */
     make(name: string): any;
     /**
-    @param {String|null} name
-    @param {Boolean} up
+    @param {string|null} name
+    @param {boolean} up
     */
     migrate(name?: string | null, up?: boolean): any;
     latest(): any;
     fresh(): Promise<any>;
     /**
-    @param {Boolean} all
+    @param {boolean} all
     */
     rollback(all?: boolean): any;
     list(): any;

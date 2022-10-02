@@ -21,7 +21,7 @@ export default class BeforeLogin
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeLogin handler\Function
+	static def beforeLogin handler\function
 		if loginAuth.beforeLogin !== null
 			throw new Error 'beforeLogin handler is already set.'
 
