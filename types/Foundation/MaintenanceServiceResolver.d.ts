@@ -10,7 +10,7 @@ export default class MaintenanceServiceResolver extends ServiceResolver {
     };
     boot(): MaintenanceServiceResolver;
     /**
-    @param {String} secret
+    @param {string} secret
     @param {FormRequest} request
     */
     hasBypassMaintenanceModeCookie(secret: string, request: FormRequest): boolean;

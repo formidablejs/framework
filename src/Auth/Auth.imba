@@ -13,7 +13,7 @@ const config = {
 class Auth
 	prop _driver\Driver
 
-	def constructor user\Object = null, abilities\String = null, driverManager\Driver
+	def constructor user\object = null, abilities\string = null, driverManager\Driver
 		self.abilities = do abilities isa String ? JSON.parse(abilities) : null
 
 		let userObject = {}
@@ -27,19 +27,19 @@ class Auth
 	def driver
 		self._driver
 
-	def can perform\String
+	def can perform\string
 		self.abilities!.includes('*') || self.abilities!.includes(perform)
 
 	def check
 		self.user! !== null || self.user! !== undefined
 
-	static def setProvider provider\Object
+	static def setProvider provider\object
 		config.provider = provider
 
 	static def getTable
 		config.provider.table
 
-	static def attempt body\Object
+	static def attempt body\object
 		const dbTable = config.provider.table
 
 		const user = await Database.table(dbTable)

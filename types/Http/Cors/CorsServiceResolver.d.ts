@@ -2,17 +2,17 @@ export default class CorsServiceResolver extends ServiceResolver {
     /**
          * Get allowed origins.
          *
-         * @oaram {String} origin
-         * @returns {String[]}
+         * @param {string} origin
+         * @returns {string[]}
          */
     /**
     *
          * Get allowed origins.
          *
-         * @oaram {String} origin
-         * @returns {String[]}
+         * @param {string} origin
+         * @returns {string[]}
          
-    @param {String} origin
+    @param {string} origin
     */
     getOrigins(origin: string): string[];
     /**

@@ -1,18 +1,18 @@
 export default class Application {
     /**
-    @param {String} notation
+    @param {string} notation
     @param {any} default
     */
     static getConfig(notation: string, default$?: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     static getEnv(key: string, default$?: any): any;
     static env(): any;
     static get version(): any;
     /**
-    @param {String} root
+    @param {string} root
     */
     constructor(root: string);
     bindings: any;
@@ -25,56 +25,56 @@ export default class Application {
     serverConfig: any;
     get version(): any;
     /**
-    @param {Number} default
+    @param {number} default
     */
     port(default$?: number): number;
     host(default$?: string): string;
     routes(): any[];
     /**
-    @param {Object} config
+    @param {object} config
     */
-    server(config: any): Application;
+    server(config: object): Application;
     fastify(): any;
     /**
-    @param {Function} callback
+    @param {function} callback
     */
     intercept(callback: Function): Application;
     addHook(hook: any, handler: any): Application;
     registerCommand(command: any): Application;
     /**
-    @param {Function} plugin
-    @param {Object} options
-    @param {Function} handler
+    @param {function} plugin
+    @param {object} options
+    @param {function} handler
     */
-    register(plugin: Function, options?: any, handler?: Function): Application;
+    register(plugin: Function, options?: object, handler?: Function): Application;
     /**
-    @param {String} event
-    @param {Function} callback
+    @param {string} event
+    @param {function} callback
     */
     on(event: string, callback: Function): Application;
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     onResponse(handler: Function): Application;
     migration(): any;
     seeder(): any;
     /**
-    @param {Function} abstract
+    @param {function} abstract
     @param {array} params
     */
     make(abstract: Function, params?: any[]): any;
     /**
-    @param {Function} abstract
-    @param {Function} concrete
+    @param {function} abstract
+    @param {function} concrete
     */
     bind(abstract: Function, concrete: Function): Application;
     /**
-    @param {Boolean} distribute
+    @param {boolean} distribute
     */
     cache(distribute?: boolean): any;
     /**
     @param {Kernel} kernel
-    @param {Boolean} returnMode
+    @param {boolean} returnMode
     */
     initiate(kernel: Kernel, returnMode?: boolean): Promise<Application>;
     /**

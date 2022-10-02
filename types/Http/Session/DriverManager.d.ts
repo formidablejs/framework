@@ -1,15 +1,15 @@
 export default class DriverManager {
     /**
-    @param {String} name
-    @param {Object} driver
+    @param {string} name
+    @param {object} driver
     */
-    static register(name: string, driver: any): any;
+    static register(name: string, driver: object): any;
     /**
-    @param {String} name
+    @param {string} name
     */
     static get(name: string): any;
     /**
-    @param {String} name
+    @param {string} name
     */
     static isRegistered(name: string): boolean;
 }

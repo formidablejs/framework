@@ -1,6 +1,6 @@
 export default class BeforeVerify {
     /**
-    @param {Function} handler
+    @param {function} handler
     */
     static beforeVerify(handler: Function): Function;
     constructor(config: any);

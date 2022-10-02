@@ -16,7 +16,7 @@ class LogoutController < Controller
 
 		request.persist!
 
-	static def onLogout handler\Function
+	static def onLogout handler\function
 		if logoutAuth.onLogout !== null
 			throw new Error 'onLogout handler is already set.'
 

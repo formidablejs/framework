@@ -1,9 +1,9 @@
 export default class Validator {
     /**
-    @param {Object} body
-    @param {Object} rules
-    @param {Object} messages
+    @param {object} body
+    @param {object} rules
+    @param {object} messages
     */
-    static make(body: any, rules: any, messages?: any): any;
+    static make(body: object, rules: object, messages?: object): any;
     static get(): any;
 }

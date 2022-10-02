@@ -1,67 +1,67 @@
 export default class View {
     /**
-    @param {Object} data
+    @param {object} data
     */
-    constructor(data?: any);
+    constructor(data?: object);
     get data(): any;
     /**
-    @param {Object} data
+    @param {object} data
     */
-    setData(data: any): View;
+    setData(data: object): View;
     /**
     @param {Language} language
     */
     setLanguage(language: Language): View;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     translate(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     t(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     __(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     old(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} default
     */
     session(key: string, default$: any): any;
     /**
-    @param {String} key
+    @param {string} key
     */
     hasSession(key: string): boolean;
     /**
-    @param {String} key
+    @param {string} key
     */
     hasError(key: string): boolean;
     /**
-    @param {String} key
+    @param {string} key
     */
     error(key: string): any;
     /**
-    @param {String} property
+    @param {string} property
     @param {any} default
     @param {boolean} escape
     */
     get(property: string, default$?: any, escape?: boolean): any;
     /**
-    @param {String} property
+    @param {string} property
     @param {any} default
     */
     raw(property: string, default$?: any): any;
     /**
-    @param {String} property
+    @param {string} property
     */
     has(property: string): boolean;
     csrf(): string;

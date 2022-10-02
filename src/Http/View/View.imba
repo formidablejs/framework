@@ -9,21 +9,21 @@ import Language from '../../Support/Language/Language'
 
 export default class View
 
-	prop #_data\Object = {}
+	prop #_data\object = {}
 	prop #_language\Language
 
-	def constructor data\Object = {}
+	def constructor data\object = {}
 		if !isObject(data) then throw TypeError "Expected object."
 
-		self.#_data\Object = data
+		self.#_data\object = data
 
 	get data
 		self.#_data
 
-	def setData data\Object
+	def setData data\object
 		if !isObject(data) then throw TypeError "Expected object."
 
-		self.#_data\Object = Object.assign(self.#_data, data)
+		self.#_data\object = Object.assign(self.#_data, data)
 
 		self
 
@@ -32,31 +32,31 @@ export default class View
 
 		self
 
-	def translate key\String, default\any
+	def translate key\string, default\any
 		self.#_language.get(key, default)
 
-	def t key\String, default\any
+	def t key\string, default\any
 		self.translate key, default
 
-	def __ key\String, default\any
+	def __ key\string, default\any
 		self.translate key, default
 
-	def old key\String, default\any
+	def old key\string, default\any
 		const results = dot(self.#_data, "_old.{key}") ?? (isEmpty(default) ? '' : default )
 
-	def session key\String, default\any
+	def session key\string, default\any
 		dot(self.#_data, "_flashed.{key}") ?? (isEmpty(default) ? '' : default )
 
-	def hasSession key\String
+	def hasSession key\string
 		!isEmpty(dot(self.#_data, "_flashed.{key}"))
 
-	def hasError key\String
+	def hasError key\string
 		!isEmpty(dot(self.#_data, "_flashed._errors.{key}"))
 
-	def error key\String
+	def error key\string
 		dot(self.#_data, "_flashed._errors.{key}")
 
-	def get property\String, default\any = null, escape\boolean = true
+	def get property\string, default\any = null, escape\boolean = true
 		if !isString(property) then throw TypeError "Expected string."
 
 		const value = dot(self.#_data, property)
@@ -69,10 +69,10 @@ export default class View
 
 		default
 
-	def raw property\String, default\any = null
+	def raw property\string, default\any = null
 		self.get(property, default, false)
 
-	def has property\String
+	def has property\string
 		if !isString(property) then throw TypeError "Expected string."
 
 		dot(self.#_data, property) != null && dot(self.#_data, property) != undefined

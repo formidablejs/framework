@@ -3,7 +3,7 @@ import isEmpty from '../Support/Helpers/isEmpty'
 
 export default class Seeder
 
-	def make name\String
+	def make name\string
 		if isEmpty(Database) then return false
 
 		Database.seed.make name

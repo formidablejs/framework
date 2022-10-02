@@ -26,7 +26,7 @@ class PasswordController < Controller
 
 		request.persist!
 
-	static def onForgot handler\Function
+	static def onForgot handler\function
 		if password.onForgot !== null
 			throw new Error 'onForgot handler is already set.'
 
@@ -34,7 +34,7 @@ class PasswordController < Controller
 
 		password.onForgot = handler
 
-	static def onReset handler\Function
+	static def onReset handler\function
 		if password.onReset !== null
 			throw new Error 'onReset handler is already set.'
 

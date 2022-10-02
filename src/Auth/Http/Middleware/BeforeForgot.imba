@@ -21,7 +21,7 @@ export default class BeforeForgot
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeForgot handler\Function
+	static def beforeForgot handler\function
 		if password.beforeForgot !== null
 			throw new Error 'beforeForgot handler is already set.'
 

@@ -1,5 +1,5 @@
-import { Request } from '@formidablejs/framework';
-import { Route } from '@formidablejs/framework';
+import { Request } from '@formidablejs/framework'
+import { Route } from '@formidablejs/framework'
 
 /**
  * --------------------------------------------------------------------------
@@ -11,6 +11,4 @@ import { Route } from '@formidablejs/framework';
  * is assigned the "jwt" middleware group.
  */
 
-Route.get('/user', (request: Request) => {
-	return request.auth().user();
-}).middleware(['auth']);
+Route.get('/user', (request: Request) => request.auth().user()).middleware(['auth'])

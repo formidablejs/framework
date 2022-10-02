@@ -1,13 +1,13 @@
 /// <reference types="node" />
 export default class Console {
     /**
-    @param {String} runtime
-    @param {String} console
+    @param {string} runtime
+    @param {string} console
     */
     static make(runtime?: string, console?: string): Console;
     /**
-    @param {String} runtime
-    @param {String} console
+    @param {string} runtime
+    @param {string} console
     */
     constructor(runtime?: string, console?: string);
     runtime: string;

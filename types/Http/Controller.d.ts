@@ -10,7 +10,7 @@ export default class Controller {
          *
          * @throws {NotFoundException}
          
-    @param {String} message
+    @param {string} message
     */
     notFound(message?: string): void;
     /**
@@ -24,7 +24,7 @@ export default class Controller {
          *
          * @throws {HttpException}
          
-    @param {String} message
+    @param {string} message
     */
     badRequest(message?: string): void;
     /**
@@ -34,10 +34,10 @@ export default class Controller {
     *
          * Render a view.
          
-    @param {Function|View} view
-    @param {Object} data
+    @param {function|View} view
+    @param {object} data
     */
-    view(view: Function | View, data?: any): ViewResponse;
+    view(view: Function | View, data?: object): ViewResponse;
     /**
          * Validate request.
          */
@@ -46,9 +46,9 @@ export default class Controller {
          * Validate request.
          
     @param {FormRequest|Request} request
-    @param {Object} rules
+    @param {object} rules
     */
-    validate(request: FormRequest | Request, rules?: any): any;
+    validate(request: FormRequest | Request, rules?: object): any;
     /**
          * Bind route param.
          */
@@ -56,8 +56,8 @@ export default class Controller {
     *
          * Bind route param.
          
-    @param {String} table
-    @param {Boolean} first
+    @param {string} table
+    @param {boolean} first
     */
     bind(table: string, first?: boolean): import("../Database/Bind").default;
 }

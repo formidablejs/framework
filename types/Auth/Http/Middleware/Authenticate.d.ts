@@ -12,7 +12,7 @@ export default class Authenticate {
     handle(request: FormRequest, reply: FastifyReply, params: any[] | null): Promise<() => Auth>;
     get defaultProtocol(): any;
     /**
-    @param {String} protocol
+    @param {string} protocol
     */
     configure(protocol: string): any;
 }

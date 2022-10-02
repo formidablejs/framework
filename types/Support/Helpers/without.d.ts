@@ -1,5 +1,5 @@
 /**
-@param {Object} object
+@param {object} object
 @param {string[]} exclude
 */
-export default function without(object: any, exclude: string[]): {};
+export default function without(object: object, exclude: string[]): {};

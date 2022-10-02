@@ -69,28 +69,28 @@ export default class MultipartServiceResolver < ServiceResolver
 
 		true
 
-	def handleMimes value\File, mimes\String
+	def handleMimes value\File, mimes\string
 		if !(value instanceof File) then return false
 
-		mimes\String = isEmpty(mimes) ? '' : mimes
+		mimes\string = isEmpty(mimes) ? '' : mimes
 
 		if isEmpty(mimes) then throw new TypeError 'Expected an array of mimes.'
 
 		mimes.split(',').includes(value.mime.split('/')[1])
 
-	def handleMimetypes value\File, mimes\String
+	def handleMimetypes value\File, mimes\string
 		if !(value instanceof File) then return false
 
-		mimes\String = isEmpty(mimes) ? '' : mimes
+		mimes\string = isEmpty(mimes) ? '' : mimes
 
 		if isEmpty(mimes) then throw new TypeError 'Expected an array of mimes.'
 
 		mimes.split(',').includes(value.mime)
 
-	def handleImages value\File, mimes\String|null
+	def handleImages value\File, mimes\string|null
 		if !(value instanceof File) then return false
 
-		mimes\String = isEmpty(mimes) ? '' : mimes
+		mimes\string = isEmpty(mimes) ? '' : mimes
 
 		isEmpty(mimes) ? value.mime.startsWith('image/') : mimes.split(',').includes(value.mime.split('/')[1])
 
@@ -99,7 +99,7 @@ export default class MultipartServiceResolver < ServiceResolver
 
 		value.mime.startsWith('video/') || value.mime == 'application/x-mpegURL'
 
-	def handleSize value\File, size\Number
+	def handleSize value\File, size\number
 		if !(value instanceof File) then return false
 
 		if Number.isNaN(size) then throw new TypeError 'Expected a numeric value.'

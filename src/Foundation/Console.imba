@@ -10,11 +10,11 @@ export default class Console
 		cwd: process.cwd!
 	}
 
-	def constructor runtime\String = null, console\String = null
+	def constructor runtime\string = null, console\string = null
 		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imba')
 		self.console = console || join('bootstrap', 'console.imba')
 
-	static def make runtime\String = null, console\String = null
+	static def make runtime\string = null, console\string = null
 		new Console(runtime, console)
 
 	def run

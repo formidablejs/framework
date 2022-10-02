@@ -5,20 +5,20 @@ export default class Language {
     get fallbackLocale(): any;
     get packs(): any;
     /**
-    @param {String} locale
+    @param {string} locale
     */
     setLocale(locale: string): Language;
     /**
-    @param {String} locale
+    @param {string} locale
     */
     setFallbackLocale(locale: string): Language;
     /**
-    @param {String} location
+    @param {string} location
     */
     register(location: string): Language;
     /**
-    @param {String} path
-    @param {String} default
+    @param {string} path
+    @param {string} default
     */
     get(path: string, default$: any): any;
     unset(): {

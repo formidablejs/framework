@@ -3,13 +3,14 @@ export default class JsonResponse
 	prop data = {}
 	prop statusCode = 200
 
-	def constructor object\Object
+	def constructor object\object, statusCode\number = 200
 		self.data = object
+		self.statusCode = statusCode
 
-	static def make object\Object
-		new JsonResponse(object)
+	static def make object\object, statusCode\number
+		new JsonResponse(object, statusCode)
 
-	def code statusCode\Number = 200
+	def code statusCode\number = 200
 		self.statusCode = statusCode
 
 		self

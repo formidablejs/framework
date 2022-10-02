@@ -9,7 +9,7 @@ const prefix = []
 
 export default class Route
 
-	static def addRoute verb\String, pattern\String, action\Function|[Function, String]
+	static def addRoute verb\string, pattern\string, action\function|[function, string]
 		if !['delete', 'get', 'options', 'patch', 'post', 'put'].includes verb
 			throw new Error "{verb} is not a valid HTTP verb."
 
@@ -29,7 +29,7 @@ export default class Route
 	/**
 	 * Check if route exists.
 	 */
-	static def has name\String
+	static def has name\string
 		if routes.length === 0 then return false
 
 		const names = routes.map do(route) route.name
@@ -39,50 +39,50 @@ export default class Route
 	/**
 	 * Add a get route that renders a view.
 	 */
-	static def view path\String, view\View, data\Object = {}, statusCode\Number|null = null
+	static def view path\string, view\View, data\object = {}, statusCode\number|null = null
 		self.get path, do
 			ViewResponse.make(view, data, statusCode ?? 200)
 
 	/**
 	 * Add a delete route.
 	 */
-	static def delete path\String, action\Function|[Function, String]
+	static def delete path\string, action\function|[function, string]
 		self.addRoute 'delete', path, action
 
 	/**
 	 * Add a get route.
 	 */
-	static def get path\String, action\Function|[Function, String]
+	static def get path\string, action\function|[function, string]
 		self.addRoute 'get', path, action
 
 	/**
 	 * Add a options route.
 	 */
-	static def options path\String, action\Function|[Function, String]
+	static def options path\string, action\function|[function, string]
 		self.addRoute 'options', path, action
 
 	/**
 	 * Add a patch route.
 	 */
-	static def patch path\String, action\Function|[Function, String]
+	static def patch path\string, action\function|[function, string]
 		self.addRoute 'patch', path, action
 
 	/**
 	 * Add a post route.
 	 */
-	static def post path\String, action\Function|[Function, String]
+	static def post path\string, action\function|[function, string]
 		self.addRoute 'post', path, action
 
 	/**
 	 * Add a put route.
 	 */
-	static def put path\String, action\Function|[Function, String]
+	static def put path\string, action\function|[function, string]
 		self.addRoute 'put', path, action
 
 	/**
 	 * Set route name.
 	 */
-	static def name name\String
+	static def name name\string
 		if routes.length === 0 then return this
 
 		const names = routes.map do(route) route.name
@@ -97,7 +97,7 @@ export default class Route
 	/**
 	 * Add middleware to route.
 	 */
-	static def middleware name\String|String[]
+	static def middleware name\string|string[]
 		if routes.length === 0 then return this
 
 		if !Array.isArray name then name = [name]
@@ -110,7 +110,7 @@ export default class Route
 	/**
 	 * Add grouped routes.
 	 */
-	static def group options = new Object, callable\Function
+	static def group options = new Object, callable\function
 		if !options || options && typeof options !== 'object'
 			throw new Error 'Invalid route group.'
 

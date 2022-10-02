@@ -12,7 +12,7 @@ const settings = {
 
 export default class URL
 
-	static def route name\String, params\Object = new Object, query\Object = new Object
+	static def route name\string, params\object = new Object, query\object = new Object
 		let selected;
 
 		for route, key in Route.all!
@@ -44,21 +44,21 @@ export default class URL
 
 		uri
 
-	static def signedRoute name\String, params\Object = new Object, query\Object = new Object
+	static def signedRoute name\string, params\object = new Object, query\object = new Object
 		const uri = self.route name, params, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, {})
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def temporarySignedRoute name\String, expiresIn\String, params\Object = new Object, query\Object = new Object
+	static def temporarySignedRoute name\string, expiresIn\string, params\object = new Object, query\object = new Object
 		let uri = self.route name, params, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, { expiresIn })
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def path uri\String, query\Object = new Object
+	static def path uri\string, query\object = new Object
 		uri = Path.clean([], uri)
 
 		if Object.keys(query).length > 0
@@ -66,21 +66,21 @@ export default class URL
 
 		uri
 
-	static def signed uri\String, query\Object = new Object
+	static def signed uri\string, query\object = new Object
 		uri = self.path uri, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, {})
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def temporarySigned uri\String, expiresIn\String, query\Object = new Object
+	static def temporarySigned uri\string, expiresIn\string, query\object = new Object
 		luri = self.route uri, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, { expiresIn })
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def toQuery params\Object = new Object
+	static def toQuery params\object = new Object
 		const query = []
 
 		Object.keys(params).forEach do(key)
@@ -88,7 +88,7 @@ export default class URL
 
 		query.join '&'
 
-	static def setSecret secret\String
+	static def setSecret secret\string
 		if !isString(secret) then throw new TypeError 'secret must be a String'
 
 		settings.secret = secret

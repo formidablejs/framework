@@ -15,7 +15,7 @@ export default class Handler {
     @param {Error|ApplicationException|HttpException} error
     @param {FormRequest} request
     @param {FastifyReply} reply
-    @param {Boolean} shouldReport
+    @param {boolean} shouldReport
     */
     handle(error: Error | ApplicationException | HttpException, request: FormRequest, reply: FastifyReply, shouldReport: boolean): any;
     /**

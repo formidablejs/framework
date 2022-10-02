@@ -1,10 +1,10 @@
 export default class Encrypter {
     /**
-    @param {Object} config
+    @param {object} config
     */
-    static configure(config: any): typeof Encrypter;
+    static configure(config: object): typeof Encrypter;
     /**
-    @param {String} type
+    @param {string} type
     */
     static appKey(type: string): any;
     static key(): any;
@@ -14,7 +14,7 @@ export default class Encrypter {
     */
     static encrypt(value: any): string;
     /**
-    @param {String} hash
+    @param {string} hash
     */
     static decrypt(hash: string): any;
 }

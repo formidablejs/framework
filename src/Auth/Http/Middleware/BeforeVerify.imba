@@ -21,7 +21,7 @@ export default class BeforeVerify
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeVerify handler\Function
+	static def beforeVerify handler\function
 		if emailVerification.beforeVerify !== null
 			throw new Error 'beforeVerify handler is already set'
 

@@ -1,19 +1,19 @@
 export default class FormRequest {
     /**
     @param {FastifyRequest} request
-    @param {Object} route
+    @param {object} route
     @param {FastifyReply} reply
     @param {Repository} config
     */
-    constructor(request: FastifyRequest, route: any, reply: FastifyReply, config: Repository);
+    constructor(request: FastifyRequest, route: object, reply: FastifyReply, config: Repository);
     req: FastifyRequest;
     request: FastifyRequest;
     reply: FastifyReply;
     route: any;
     config: Repository;
     _rules: any;
-    get version(): String|null;
-    passesAuthorization(): Boolean;
+    get version(): string|null;
+    passesAuthorization(): boolean;
     failedAuthorization(): void;
     rules(): {};
     messages(): {};
@@ -44,7 +44,7 @@ export default class FormRequest {
     *
          * Set locale.
 
-    @param {String} locale
+    @param {string} locale
     */
     setLocale(locale: string): any;
     /**
@@ -54,7 +54,7 @@ export default class FormRequest {
     *
          * Set fallback locale.
 
-    @param {String} locale
+    @param {string} locale
     */
     setFallbackLocale(locale: string): any;
     /**
@@ -64,8 +64,8 @@ export default class FormRequest {
     *
          * Translate text.
 
-    @param {String} path
-    @param {String} default
+    @param {string} path
+    @param {string} default
     */
     translate(path: string, default$: any): any;
     /**
@@ -75,8 +75,8 @@ export default class FormRequest {
     *
          * Translate text.
 
-    @param {String} path
-    @param {String} default
+    @param {string} path
+    @param {string} default
     */
     t(path: string, default$: any): any;
     /**
@@ -86,8 +86,8 @@ export default class FormRequest {
     *
          * Translate text.
 
-    @param {String} path
-    @param {String} default
+    @param {string} path
+    @param {string} default
     */
     __(path: string, default$: any): any;
     /**
@@ -97,7 +97,7 @@ export default class FormRequest {
     *
          * Flash data.
 
-    @param {String} key
+    @param {string} key
     @param {any} value
     */
     flash(key: string, value: any): FormRequest;
@@ -108,9 +108,9 @@ export default class FormRequest {
     *
          * Flash many.
 
-    @param {Object} object
+    @param {object} object
     */
-    flashMany(object: any): FormRequest;
+    flashMany(object: object): FormRequest;
     /**
          * Get url signature.
          */
@@ -333,7 +333,7 @@ export default class FormRequest {
     *
          * Get url param.
 
-    @param {String} name
+    @param {string} name
     */
     param(name: string): any;
     /**
@@ -361,7 +361,7 @@ export default class FormRequest {
     *
          * Get body input or specified query keys.
 
-    @param {String[]} keys
+    @param {string[]} keys
     */
     all(keys?: string[]): any;
     /**
@@ -411,7 +411,7 @@ export default class FormRequest {
     *
          * Get filled input.
 
-    @param {String[]} keys
+    @param {string[]} keys
     */
     filled(keys: string[]): {};
     /**
@@ -448,7 +448,7 @@ export default class FormRequest {
          *
          * @returns {FileCollection|null}
 
-    @param {String} name
+    @param {string} name
     */
     file(name: string): FileCollection | null;
     /**
@@ -462,7 +462,7 @@ export default class FormRequest {
          *
          * @returns {Boolean}
 
-    @param {String} name
+    @param {string} name
     */
     hasFile(name: string): boolean;
     /**
@@ -498,38 +498,38 @@ export default class FormRequest {
     *
          * Validate a request using specified rules.
 
-    @param {Object|null} rules
+    @param {object|null} rules
     */
-    validate(rules?: any | null): any;
+    validate(rules?: object | null): any;
     /**
          * Set request rules.
          *
-         * @param {Object} rules
+         * @param {object} rules
          * @returns {FormRequest}
          */
     /**
     *
          * Set request rules.
          *
-         * @param {Object} rules
+         * @param {object} rules
          * @returns {FormRequest}
 
-    @param {Object} rules
+    @param {object} rules
     */
-    setRules(rules: any): FormRequest;
+    setRules(rules: object): FormRequest;
     /**
          * Get request rules.
          *
-         * @returns {Object}
+         * @returns {object}
          */
     /**
     *
          * Get request rules.
          *
-         * @returns {Object}
+         * @returns {object}
 
     */
-    getRules(): any;
+    getRules(): object;
     /**
          * Get currently authenticated user.
          */

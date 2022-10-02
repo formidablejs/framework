@@ -23,18 +23,18 @@ def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, r
 			if hook == 'onMaintenance'
 				hookHandler(error, request, reply)
 
-	const message\String = error.response
-	const statusCode\Number = error.getStatus!
+	const message\string = error.response
+	const statusCode\number = error.getStatus!
 
 	reply.code(statusCode).send { message }
 
-def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\Boolean = false, shouldReport\Boolean = true
+def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\boolean = false, shouldReport\boolean = true
 	for resolver of settings.resolvers
 		const results = resolver(error, request, reply)
 
 		if !isEmpty(results) then return results
 
-	const statusCode\Number = typeof error.getStatus === 'function' ? error.getStatus! : 500
+	const statusCode\number = typeof error.getStatus === 'function' ? error.getStatus! : 500
 
 	const response = {
 		message: 'An error has occured.'

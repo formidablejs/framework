@@ -6,9 +6,9 @@ import path from 'path'
 
 export default class Repository
 
-	prop variables\Object = {}
+	prop variables\object = {}
 
-	def constructor root\String
+	def constructor root\string
 		let env = process.env.BUILD_ENV ? ".{process.env.BUILD_ENV}" : ''
 
 		const envPath = path.join root, ".env{env}"
@@ -23,7 +23,7 @@ export default class Repository
 
 		self.variables = process.env
 
-	def get key\String, default\any = null
+	def get key\string, default\any = null
 		if !isString(key) then throw new TypeError 'Expected string.'
 
 		let output = self.variables[key]

@@ -1,6 +1,6 @@
 export class MigrationCommand extends Command {
     /**
-    @param {String} action
+    @param {string} action
     */
     call(action: string): Promise<mixed>;
 }

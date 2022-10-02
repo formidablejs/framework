@@ -1,7 +1,9 @@
 import { Command } from '../Command'
 import { join } from 'path'
+import { existsSync } from 'fs'
 import { Prop } from '@formidablejs/console'
 import { spawnSync } from 'child_process'
+import isNumber from '../../../Support/Helpers/isNumber'
 import nodemon from 'nodemon'
 
 export class ServeCommand < Command
@@ -27,7 +29,71 @@ export class ServeCommand < Command
 	get runtime
 		join process.cwd!, 'node_modules', '.bin', 'imba' + (process.platform === 'win32' ? '.cmd' : '')
 
-	prop #command\string = "./node_modules/.bin/imba{(process.platform === 'win32' ? '.cmd' : '')} server.imba -f"
+	get devConfigDefaults
+		{
+			commands: []
+			ignore: ['node_modules', 'dist', 'test', 'tests']
+			ext: ['imba' ,'js', 'ts']
+			delay: 5
+		}
+
+	get devConfig
+		const appPackage = join(process.cwd!, 'package.json')
+
+		if !existsSync(appPackage)
+			devConfigDefaults
+
+		require(appPackage).development || devConfigDefaults
+
+	get devCommands
+		const list = devConfig.commands || devConfigDefaults.commands
+
+		if !Array.isArray(list)
+			self.message 'error', "Expected \"development.commands\" to be an Array."
+
+			process.exit(1)
+
+		list
+
+	get devIgnore
+		const list = devConfig.ignore || devConfigDefaults.ignore
+
+		if !Array.isArray(list)
+			self.message 'error', "Expected \"development.ignore\" to be an Array."
+
+			process.exit(1)
+
+		list
+
+	get devExt
+		const list = devConfig.ext || devConfigDefaults.ext
+
+		if !Array.isArray(list)
+			self.message 'error', "Expected \"development.ext\" to be an Array."
+
+			process.exit(1)
+
+		list
+
+	get devDelay
+		const delay\number = devConfig.delay || devConfigDefaults.delay
+
+		if !isNumber(delay)
+			self.message 'error', "Expected \"development.delay\" to be an Integer."
+
+			process.exit(1)
+
+		delay
+
+	get commandList
+		const list\array = self.devCommands
+
+		list.push("{runtime} server.imba -f -s -v")
+
+		list.join(' && ')
+
+	get #command
+		commandList
 
 	get fallbackPort
 		process.env.PORT !== undefined && process.env.PORT !== null ? process.env.PORT : undefined
@@ -40,7 +106,7 @@ export class ServeCommand < Command
 
 		self.setEnvVars!
 
-		const args = [ ]
+		const args = ['-s']
 
 		if self.option('addr') then process.env.FORMIDABLE_ADDRESS_SET = '1'
 
@@ -55,22 +121,22 @@ export class ServeCommand < Command
 				const shFlag = '/d /s /c'
 				conf.windowsVerbatimArguments = true
 
-				return spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
+				return spawnSync sh, [ shFlag, self.runtime, 'server.imba', ...args ], conf
 
-			spawnSync self.runtime, [...args, 'server.imba'], conf
+			spawnSync self.runtime, [ 'server.imba', ...args ], conf
 		else
 			const server = nodemon({
-				ext: 'imba,js,ts'
+				ext: devExt.join(',')
 				exec: #command
-				ignore: ['node_modules', 'dist', 'test', 'tests']
+				ignore: devIgnore
 				stdout: false
-				delay: 5
+				delay: devDelay
 			})
 
 			server.on 'stdout', do(e)
 				const data = e.toString()
 
-				if #address == null or #address == undefined
+				if (#address == null or #address == undefined) && data.trim().startsWith('listening on http')
 					#address     = data.split(' ')[2]
 					#fullAddress = data
 
@@ -80,7 +146,7 @@ export class ServeCommand < Command
 
 					self.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
-				if #fullAddress != data
+				if data.trim().startsWith('listening on http') == false
 					console.log data.trim()
 
 			server.on 'stderr', do(e)

@@ -1,4 +1,4 @@
 /**
-@param {Boolean} stringify
+@param {boolean} stringify
 */
 export default function imbaEnv(stringify?: boolean): {};

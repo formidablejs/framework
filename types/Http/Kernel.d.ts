@@ -5,12 +5,12 @@ export default class Kernel {
     getAllMiddleware(route: any, _middleware?: any): any[];
     listen(config: any, errorHandler: any, interceptors: any, hooks: any, plugins: any, serverConfig: any, returnMode: any): Promise<any>;
     /**
-    @param {String} address
+    @param {string} address
     */
     storeAddress(address: string): string;
     hasRoutes(router: any, config: any): any[];
     /**
-    @param {Object} route
+    @param {object} route
     */
-    resolveMiddleware(route: any, request: any, reply: any, config: any, _middleware?: any): Promise<any[]>;
+    resolveMiddleware(route: object, request: any, reply: any, config: any, _middleware?: any): Promise<any[]>;
 }

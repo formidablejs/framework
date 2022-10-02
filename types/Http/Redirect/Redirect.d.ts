@@ -1,34 +1,34 @@
 export default class Redirect {
     /**
-    @param {String} path
+    @param {string} path
     */
     static to(path: string): Redirect;
     /**
-    @param {Number|null} statucCode
+    @param {number|null} statucCode
     */
     static back(statucCode?: number | null): Redirect;
     /**
-    @param {String} name
-    @param {Object} params
+    @param {string} name
+    @param {object} params
     */
-    static route(name: string, params?: any): Redirect;
+    static route(name: string, params?: object): Redirect;
     /**
-    @param {String} path
-    @param {Number} statusCode
+    @param {string} path
+    @param {number} statusCode
     */
     constructor(path: string, statusCode?: number);
     path: string;
     statusCode: number;
     _flashed: any;
     /**
-    @param {String} key
+    @param {string} key
     @param {any} value
     */
     with(key: string, value: any): Redirect;
     hasFlash(): boolean;
     flashed(): any;
     /**
-    @param {Number} statusCode
+    @param {number} statusCode
     */
     code(statusCode: number): Redirect;
     handle(request: any, reply: any): any;

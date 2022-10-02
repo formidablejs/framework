@@ -1,7 +1,7 @@
 export default class Bootstrap {
     /**
-    @param {String} location
-    @param {Object} config
+    @param {string} location
+    @param {object} config
     */
-    static cache(location: string, config: any): any;
+    static cache(location: string, config: object): any;
 }

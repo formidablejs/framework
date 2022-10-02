@@ -5,26 +5,26 @@ export default class FileCollection {
     /**
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          */
     /**
     *
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          
     */
     get length(): number;
     /**
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          */
     /**
     *
          * Count the number of files in the collection.
          *
-         * @returns {Number}
+         * @returns {number}
          
     */
     count(): number;
@@ -84,7 +84,7 @@ export default class FileCollection {
     /**
          * Performs the specified action for each File in an array.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {void}
          */
@@ -92,18 +92,18 @@ export default class FileCollection {
     *
          * Performs the specified action for each File in an array.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {void}
          
-    @param {Function} callback
+    @param {function} callback
     @param {null} _this
     */
     each(callback: Function, _this: any): void;
     /**
          * Calls a defined callback function on each File of an array, and returns an array that contains the results.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {File[]}
          */
@@ -111,18 +111,18 @@ export default class FileCollection {
     *
          * Calls a defined callback function on each File of an array, and returns an array that contains the results.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {File[]}
          
-    @param {Function} callback
+    @param {function} callback
     @param {null} _this
     */
     map(callback: Function, _this: any): File[];
     /**
          * Returns the files of an array that meet the condition specified in a callback function.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {File[]}
          */
@@ -130,18 +130,18 @@ export default class FileCollection {
     *
          * Returns the files of an array that meet the condition specified in a callback function.
          *
-         * @param {Function} callback
+         * @param {function} callback
          * @param {any} _this
          * @returns {File[]}
          
-    @param {Function} callback
+    @param {function} callback
     @param {null} _this
     */
     filter(callback: Function, _this: any): File[];
     /**
          * Filter files using the where condition.
          *
-         * @param {String} key
+         * @param {string} key
          * @param {any} value
          * @returns {File[]}
          */
@@ -149,11 +149,11 @@ export default class FileCollection {
     *
          * Filter files using the where condition.
          *
-         * @param {String} key
+         * @param {string} key
          * @param {any} value
          * @returns {File[]}
          
-    @param {String} key
+    @param {string} key
     */
     where(key: string, value: any): File[];
     /**

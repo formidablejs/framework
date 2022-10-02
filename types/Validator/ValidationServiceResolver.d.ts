@@ -3,8 +3,8 @@ export default class ValidationServiceResolver extends ServiceResolver {
     nullable(): boolean;
     registeredRules(): {};
     /**
-    @param {Object} rules
+    @param {object} rules
     */
-    registerRules(rules: any): ValidationServiceResolver;
+    registerRules(rules: object): ValidationServiceResolver;
 }
 import ServiceResolver from "../Support/ServiceResolver";

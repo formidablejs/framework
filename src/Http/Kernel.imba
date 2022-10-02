@@ -132,7 +132,7 @@ export default class Kernel
 
 		imba.serve router.server
 
-	def storeAddress address\String
+	def storeAddress address\string
 		const location = join(process.cwd!, 'storage', 'framework', 'address.json')
 
 		const object = {
@@ -159,7 +159,7 @@ export default class Kernel
 			else
 				routes.invalid.push(route.path)
 
-	def resolveMiddleware route\Object, request, reply, config, _middleware = null
+	def resolveMiddleware route\object, request, reply, config, _middleware = null
 		for middleware in self.getAllMiddleware(route, _middleware)
 			if middleware == undefined || typeof middleware == 'string'
 				throw new UndefinedMiddlewareException "Middleware {middleware} is undefined."

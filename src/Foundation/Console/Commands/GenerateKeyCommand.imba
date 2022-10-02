@@ -43,7 +43,7 @@ export class GenerateKeyCommand < Command
 
 		self.exit!
 
-	def key length\Number = 32
+	def key length\number = 32
 		const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
 		let key = ''
@@ -52,7 +52,7 @@ export class GenerateKeyCommand < Command
 
 		'base64:' + Buffer.from(key + ':' + randomBytes(8).toString('hex')).toString('base64');
 
-	def updateEnv key\String
+	def updateEnv key\string
 		updateLine self.envPath, do(line)
 			if line.startsWith('APP_KEY=') then return "APP_KEY={key}"
 
