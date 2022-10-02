@@ -45,7 +45,7 @@ export default class Cookies
 			secure: session.secure
 		})
 
-	def forget key\string|String[]
+	def forget key\string|string[]
 		if !isArray(key) then key = [key]
 
 		for i in key

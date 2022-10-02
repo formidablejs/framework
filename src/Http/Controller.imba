@@ -28,7 +28,7 @@ export default class Controller
 	/**
 	 * Render a view.
 	 */
-	def view view\Function|View, data\object = {}
+	def view view\function|View, data\object = {}
 		ViewResponse.make(view, data)
 
 	/**

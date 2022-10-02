@@ -21,7 +21,7 @@ export default class BeforeRegister
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeRegister handler\Function
+	static def beforeRegister handler\function
 		if registerAuth.beforeRegister !== null
 			throw new Error 'beforeRegister handler is already set'
 

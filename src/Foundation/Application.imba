@@ -87,7 +87,7 @@ export default class Application
 	def fastify
 		settings.server
 
-	def intercept callback\Function
+	def intercept callback\function
 		settings.interceptors.push(callback)
 
 		self
@@ -105,7 +105,7 @@ export default class Application
 
 		self
 
-	def register plugin\Function, options\object = {}, handler\Function = null
+	def register plugin\function, options\object = {}, handler\function = null
 		self.plugins.push({
 			plugin: plugin
 			options: options
@@ -114,7 +114,7 @@ export default class Application
 
 		self
 
-	def on event\string, callback\Function
+	def on event\string, callback\function
 		if event === 'onDefaultCommand'
 			settings.console.onDefaultCommand(callback)
 		else
@@ -122,7 +122,7 @@ export default class Application
 
 		self
 
-	def onResponse handler\Function
+	def onResponse handler\function
 		addResolver(handler)
 		addExceptionResolver(handler)
 
@@ -134,13 +134,13 @@ export default class Application
 	def seeder
 		settings.seeder
 
-	def make abstract\Function, params\array = []
+	def make abstract\function, params\array = []
 		const key = Object.keys({[abstract]: null})[0]
 
 		try
 			new self.bindings[key.replace(/\t/g, '').split('\r\n')](...params)
 
-	def bind abstract\Function, concrete\Function
+	def bind abstract\function, concrete\function
 		const key = Object.keys({[abstract]: null})[0]
 
 		Object.assign self.bindings, {

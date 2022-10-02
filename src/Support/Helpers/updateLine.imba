@@ -2,7 +2,7 @@ import { existsSync } from 'fs'
 import { readFileSync } from 'fs'
 import { writeFileSync } from 'fs'
 
-export def updateLine file\string, callback\Function
+export def updateLine file\string, callback\function
 	if !existsSync(file) then return false
 
 	const contents = readFileSync(file, 'utf8')

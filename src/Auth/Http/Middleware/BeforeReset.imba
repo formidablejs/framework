@@ -21,7 +21,7 @@ export default class BeforeReset
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeReset handler\Function
+	static def beforeReset handler\function
 		if password.beforeReset !== null
 			throw new Error 'beforeReset handler is already set.'
 

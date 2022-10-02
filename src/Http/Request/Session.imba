@@ -32,7 +32,7 @@ export default class Session
 	def set key\string, value\any
 		self.#ref.session[key] = value
 
-	def forget key\string|String[]
+	def forget key\string|string[]
 		if !isArray(key) then key = [key]
 
 		for i in key

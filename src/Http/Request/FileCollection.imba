@@ -63,11 +63,11 @@ export default class FileCollection
 	/**
 	 * Performs the specified action for each File in an array.
 	 *
-	 * @param {Function} callback
+	 * @param {function} callback
 	 * @param {any} _this
 	 * @returns {void}
 	 */
-	def each callback\Function, _this\null
+	def each callback\function, _this\null
 		if isEmpty(_this) then return self._object.forEach callback, _this
 
 		self._object.forEach callback
@@ -75,11 +75,11 @@ export default class FileCollection
 	/**
 	 * Calls a defined callback function on each File of an array, and returns an array that contains the results.
 	 *
-	 * @param {Function} callback
+	 * @param {function} callback
 	 * @param {any} _this
 	 * @returns {File[]}
 	 */
-	def map callback\Function, _this\null
+	def map callback\function, _this\null
 		if isEmpty(_this) then return self._object.map callback, _this
 
 		self._object.map callback
@@ -87,11 +87,11 @@ export default class FileCollection
 	/**
 	 * Returns the files of an array that meet the condition specified in a callback function.
 	 *
-	 * @param {Function} callback
+	 * @param {function} callback
 	 * @param {any} _this
 	 * @returns {File[]}
 	 */
-	def filter callback\Function, _this\null
+	def filter callback\function, _this\null
 		if isEmpty(_this) then return self._object.filter callback, _this
 
 		self._object.filter callback
@@ -124,7 +124,7 @@ export default class FileCollection
 	def get
 		let filtered = self._object
 
-		for condition\{ key: String, value: any } in self._conditions
+		for condition\{ key: string, value: any } in self._conditions
 			filtered = filtered.filter do(file) file[condition.key] == condition.value
 
 		filtered

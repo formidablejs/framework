@@ -91,7 +91,7 @@ export default class PersonalAccessToken
 			tokenable: !isEmpty(tokenable) ? tokenable : null
 		}
 
-	static def onFetchAuthenticated handler\Function
+	static def onFetchAuthenticated handler\function
 		if settings.event !== null
 			throw new Error 'onFetchAuthenticated handler is already set.'
 

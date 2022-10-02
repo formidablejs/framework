@@ -301,7 +301,7 @@ export default class Driver
 
 		clientUrl + signature
 
-	static def onEmailVerified handler\Function
+	static def onEmailVerified handler\function
 		if events.onEmailVerified !== null
 			throw new Error 'onEmailVerified handler is already set.'
 
@@ -309,7 +309,7 @@ export default class Driver
 
 		events.onEmailVerified = handler
 
-	static def onCreateUser handler\Function
+	static def onCreateUser handler\function
 		if events.onCreateUser !== null
 			throw new Error 'onCreateUser handler is already set.'
 
@@ -317,7 +317,7 @@ export default class Driver
 
 		events.onCreateUser = handler
 
-	static def onRegistered handler\Function
+	static def onRegistered handler\function
 		if events.onRegistered !== null
 			throw new Error 'onRegistered handler is already set.'
 
@@ -325,7 +325,7 @@ export default class Driver
 
 		events.onRegistered = handler
 
-	static def onAuthenticated handler\Function
+	static def onAuthenticated handler\function
 		if events.onAuthenticated !== null
 			throw new Error 'onAuthenticated handler is already set.'
 
@@ -333,7 +333,7 @@ export default class Driver
 
 		events.onAuthenticated = handler
 
-	static def onSessionDestroyed handler\Function
+	static def onSessionDestroyed handler\function
 		if events.onSessionDestroyed !== null
 			throw new Error 'onSessionDestroyed handler is already set.'
 
@@ -341,7 +341,7 @@ export default class Driver
 
 		events.onSessionDestroyed = handler
 
-	static def onSuccessfulAttempt handler\Function
+	static def onSuccessfulAttempt handler\function
 		if events.onSuccessfulAttempt !== null
 			throw new Error 'onSuccessfulAttempt handler is already set.'
 
@@ -349,7 +349,7 @@ export default class Driver
 
 		events.onSuccessfulAttempt = handler
 
-	static def onRequestEmailVerificationUrl handler\Function
+	static def onRequestEmailVerificationUrl handler\function
 		if events.onRequestEmailVerificationUrl !== null
 			throw new Error 'onRequestEmailVerificationUrl handler is already set.'
 
@@ -357,7 +357,7 @@ export default class Driver
 
 		events.onRequestEmailVerificationUrl = handler
 
-	static def onRequestForgotPasswordUrl handler\Function
+	static def onRequestForgotPasswordUrl handler\function
 		if events.onRequestForgotPasswordUrl !== null
 			throw new Error 'onRequestForgotPasswordUrl handler is already set.'
 
@@ -365,7 +365,7 @@ export default class Driver
 
 		events.onRequestForgotPasswordUrl = handler
 
-	static def onUpdatePassword handler\Function
+	static def onUpdatePassword handler\function
 		if events.onUpdatePassword !== null
 			throw new Error 'onUpdatePassword handler is already set.'
 

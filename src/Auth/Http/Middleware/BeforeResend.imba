@@ -21,7 +21,7 @@ export default class BeforeResend
 	get defaultProtocol
 		self.config.get('auth.defaults.protocol', 'api')
 
-	static def beforeResend handler\Function
+	static def beforeResend handler\function
 		if emailVerification.beforeResend !== null
 			throw new Error 'beforeResend handler is already set'
 

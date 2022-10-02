@@ -41,7 +41,7 @@ export default class MaintenanceServiceResolver < ServiceResolver
 		}
 
 	def boot
-		self.app.addHook 'onRequest', do(req\FastifyRequest, reply\FastifyReply, done\Function)
+		self.app.addHook 'onRequest', do(req\FastifyRequest, reply\FastifyReply, done\function)
 			const down\object = self.getDown!
 
 			if isEmpty(down) then return done!
