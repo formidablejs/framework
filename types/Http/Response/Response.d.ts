@@ -8,8 +8,9 @@ export default class Response {
     statusCode: number;
     /**
     @param {object} object
+    @param {number} statusCode
     */
-    json(object: object): JsonResponse;
+    json(object: object, statusCode?: number): JsonResponse;
     /**
     @param {View} view
     @param {object|null} data
