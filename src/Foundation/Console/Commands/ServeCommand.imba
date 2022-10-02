@@ -88,7 +88,7 @@ export class ServeCommand < Command
 	get commandList
 		const list\array = self.devCommands
 
-		list.push("./node_modules/.bin/imba{(process.platform === 'win32' ? '.cmd' : '')} server.imba -f")
+		list.push("{runtime} server.imba -f -s -v")
 
 		list.join(' && ')
 
@@ -106,7 +106,7 @@ export class ServeCommand < Command
 
 		self.setEnvVars!
 
-		const args = [ ]
+		const args = ['-s']
 
 		if self.option('addr') then process.env.FORMIDABLE_ADDRESS_SET = '1'
 
@@ -121,9 +121,9 @@ export class ServeCommand < Command
 				const shFlag = '/d /s /c'
 				conf.windowsVerbatimArguments = true
 
-				return spawnSync sh, [shFlag, self.runtime, ...args, 'server.imba'], conf
+				return spawnSync sh, [ shFlag, self.runtime, 'server.imba', ...args ], conf
 
-			spawnSync self.runtime, [...args, 'server.imba'], conf
+			spawnSync self.runtime, [ 'server.imba', ...args ], conf
 		else
 			const server = nodemon({
 				ext: devExt.join(',')
