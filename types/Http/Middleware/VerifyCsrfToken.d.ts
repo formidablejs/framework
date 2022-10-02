@@ -1,7 +1,3 @@
-import Repository from '../../Config/Repository';
-import FormRequest from '../../Http/Request/FormRequest';
-import type { FastifyReply } from 'fastify'
-
 export default class VerifyCsrfToken {
     /**
     @param {Repository} config

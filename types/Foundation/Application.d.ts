@@ -16,12 +16,12 @@ export default class Application {
     */
     constructor(root: string);
     bindings: any;
-    config: ConfigRepository;
-    hooks: Array;
-    plugins: Array;
+    config: any;
+    hooks: any;
+    plugins: any;
     root: string;
     handler: any;
-    context: ContextAPI;
+    context: any;
     serverConfig: any;
     get version(): any;
     /**
@@ -83,7 +83,7 @@ export default class Application {
     craftsman(kernel: ConsoleKernel): {
         run: () => any;
     };
-    console(): ApplicationConsole;
+    console(): any;
     prepare(): Application;
     resolve(): any[];
     bootResolver(resolver: any): any;
@@ -92,10 +92,6 @@ export default class Application {
     [$__init__$]($$?: any, deep?: boolean): void;
 }
 import Kernel from "../Http/Kernel";
-import type ConsoleKernel from './ConsoleKernel'
-import type ConfigRepository from '../Config/Repository'
-import type { ContextAPI } from './Context'
-import type { Application as ApplicationConsole } from '@formidablejs/console'
 declare const $__patch__$: unique symbol;
 declare const $__init__$: unique symbol;
 export {};
