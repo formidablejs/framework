@@ -1,5 +1,5 @@
-import { @context } from './Support/Decorators/context'
-import { @use } from './Support/Decorators/use'
+import { @context, context } from './Support/Decorators/context'
+import { @use, use } from './Support/Decorators/use'
 import { Command } from './Foundation/Console/Command'
 import { Context } from './Foundation/Context'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
@@ -84,6 +84,7 @@ export {
 	ConfigRepository
 	Console
 	ConsoleKernel
+	context
 	Context
 	Controller
 	ConvertEmptyStringsToNull
@@ -140,6 +141,7 @@ export {
 	TransformsRequest
 	TrimStrings
 	URL
+	use
 	ValidateSignature
 	ValidationException
 	ValidationServiceResolver
