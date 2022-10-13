@@ -8,7 +8,7 @@ import isString from '../Helpers/isString'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
-export def @use target, key, descriptor
+def use target, key, descriptor
 	if isClass target then return
 
 	const value = descriptor.value
@@ -47,7 +47,7 @@ export def @use target, key, descriptor
 				const param = object.split(':')[1]
 
 				response = request.param(param) || undefined
-				
+
 			elif isString(object) && object === 'param'
 				response = Object.values(request.params!)[key] || undefined
 
@@ -118,3 +118,6 @@ export def @use target, key, descriptor
 		return value.apply(this, args)
 
 	return descriptor
+
+exports.use = use
+exports.@use = use

@@ -1,4 +1,7 @@
 import { Context } from '../../Foundation/Context'
 
-export def @context target
+def context target
 	Context.inject target
+
+exports.context = context
+exports.@context = context
