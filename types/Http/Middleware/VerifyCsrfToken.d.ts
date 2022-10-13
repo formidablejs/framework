@@ -38,3 +38,7 @@ export default class VerifyCsrfToken {
     */
     forgetTokens(request: FormRequest): FormRequest;
 }
+
+import Repository from "../../Config/Repository";
+import FormRequest from "../../Http/Request/FormRequest";
+import type { FastifyReply } from "fastify";
