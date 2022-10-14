@@ -14,6 +14,7 @@ import Auth from './Auth/Auth'
 import Authenticate from './Auth/Http/Middleware/Authenticate'
 import AuthenticationServiceResolver from './Auth/AuthenticationServiceResolver'
 import AuthService from './Auth/AuthService'
+import config from './Support/Helpers/config'
 import ConfigRepository from './Config/Repository'
 import Console from './Foundation/Console'
 import ConsoleKernel from './Foundation/ConsoleKernel'
@@ -24,7 +25,10 @@ import CorsServiceResolver from './Http/Cors/CorsServiceResolver'
 import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
 import Database from './Database/Database'
 import DB from './Database/Database'
+import decrypt from './Support/Helpers/decrypt'
+import encrypt from './Support/Helpers/encrypt'
 import Encrypter from './Foundation/Encrypter'
+import env from './Support/Helpers/env'
 import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
 import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
@@ -49,15 +53,17 @@ import Redirect from './Http/Redirect/Redirect'
 import Redis from './Redis/Redis'
 import RedisServiceResolver from './Redis/RedisServiceResolver'
 import Request from './Http/Request/Request'
-import response from './Support/Helpers/response'
 import Response from './Http/Response/Response'
+import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
 import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
 import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
 import SessionMemoryStoreServiceResolver from './Http/Session/SessionMemoryStoreServiceResolver'
 import SessionServiceResolver from './Http/Session/SessionServiceResolver'
+import slug from './Support/Helpers/slug'
 import StaticContentServiceResolver from './Http/Static/StaticContentServiceResolver'
+import strRandom from './Support/Helpers/strRandom'
 import TransformsRequest from './Http/Middleware/TransformsRequest'
 import TrimStrings from './Http/Middleware/TrimStrings'
 import URL from './Http/URL/URL'
@@ -81,6 +87,7 @@ export {
 	AuthenticationServiceResolver
 	AuthService
 	Command
+	config
 	ConfigRepository
 	Console
 	ConsoleKernel
@@ -93,7 +100,10 @@ export {
 	CsrfServiceResolver
 	Database
 	DB
+	decrypt
+	encrypt
 	Encrypter
+	env
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn
@@ -137,7 +147,9 @@ export {
 	SessionFileStoreServiceResolver
 	SessionMemoryStoreServiceResolver
 	SessionServiceResolver
+	slug
 	StaticContentServiceResolver
+	strRandom
 	TransformsRequest
 	TrimStrings
 	URL
