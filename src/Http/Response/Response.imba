@@ -1,11 +1,12 @@
-import type View from '../View/View'
 import JsonResponse from './JsonResponse'
 import ViewResponse from './ViewResponse'
+import type { FastifyReply } from 'fastify'
+import type View from '../View/View'
 
 export default class Response
 
-	prop data = null
-	prop statusCode = 200
+	prop data\object|null = null
+	prop statusCode\number = 200
 
 	def constructor data\any = null, statusCode\number = 200
 		self.data = data
@@ -19,3 +20,10 @@ export default class Response
 
 	def code statusCode\number
 		self.statusCode = statusCode
+
+		self
+
+	def toResponse reply\FastifyReply
+		reply.code(self.statusCode)
+
+		self.data
