@@ -15,7 +15,10 @@ export default class JsonResponse {
     @param {number} statusCode
     */
     code(statusCode?: number): JsonResponse;
-    toJson(reply: any): any;
+    /**
+    @param {FastifyReply} reply
+    */
+    toJson(reply: FastifyReply): any;
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;
 }
