@@ -1,7 +1,9 @@
+import type { FastifyReply } from 'fastify'
+
 export default class JsonResponse
 
-	prop data = {}
-	prop statusCode = 200
+	prop data\object = {}
+	prop statusCode\number = 200
 
 	def constructor object\object, statusCode\number = 200
 		self.data = object
@@ -15,7 +17,7 @@ export default class JsonResponse
 
 		self
 
-	def toJson reply
+	def toJson reply\FastifyReply
 		reply.type('application/json')
 		reply.code(self.statusCode)
 

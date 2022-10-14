@@ -19,7 +19,11 @@ export default class Response {
     /**
     @param {number} statusCode
     */
-    code(statusCode: number): number;
+    code(statusCode: number): Response;
+    /**
+    @param {FastifyReply} reply
+    */
+    toResponse(reply: FastifyReply): any;
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;
 }

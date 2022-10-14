@@ -1,8 +1,8 @@
 import { encrypt } from '../../Support/Helpers'
 import { isEmpty } from '../../Support/Helpers'
 import { without } from '../../Support/Helpers'
-import type FormRequest from '../Request/FormRequest'
 import type { FastifyReply } from 'fastify'
+import type FormRequest from '../Request/FormRequest'
 import type View from '../View/View'
 
 export default class ViewResponse
