@@ -119,5 +119,4 @@ def use target, key, descriptor
 
 	return descriptor
 
-exports.use = use
 exports.@use = use
