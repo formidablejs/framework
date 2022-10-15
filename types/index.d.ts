@@ -71,6 +71,7 @@ import strRandom from "./Support/Helpers/strRandom";
 import TransformsRequest from "./Http/Middleware/TransformsRequest";
 import TrimStrings from "./Http/Middleware/TrimStrings";
 import URL from "./Http/URL/URL";
+import { use } from "./Support/Decorators/tsUse";
 import ValidateSignature from "./Http/Middleware/ValidateSignature";
 import ValidationException from "./Validator/Exceptions/ValidationException";
 import ValidationServiceResolver from "./Validator/ValidationServiceResolver";
