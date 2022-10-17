@@ -10,6 +10,7 @@ import DatabaseConfig from '../Database/Config'
 import EnvironmentRepository from '../Environment/Repository'
 import ExceptionHandler from './Exceptions/Handler'
 import fs from 'fs'
+import ServiceResolver from '../Support/ServiceResolver'
 import isEmpty from '../Support/Helpers/isEmpty'
 import Kernel from '../Http/Kernel'
 import Migration from '../Database/Migration'
@@ -195,14 +196,12 @@ export default class Application
 
 		if resolvers && resolvers instanceof Array
 
-			for resolver in resolvers
-				resolver = resolver.default ?? resolver
+			for resolver\ServiceResolver in resolvers
+				resolver = new (resolver.default ?? resolver)(self)
 
-				self.bootResolver(resolver)
-				self.registerResolver(resolver)
+				resolver.boot!
+				resolver.register!
 
-	def bootResolver resolver
-		new resolver(self).boot!
-
-	def registerResolver resolver
-		new resolver(self).register!
+				if resolver.context && Array.isArray(resolver.context)
+					resolver.context.forEach do(context)
+						self.context.inject(context)

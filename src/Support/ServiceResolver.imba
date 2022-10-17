@@ -4,6 +4,11 @@ export default class ServiceResolver
 
 	prop app\Application
 
+	get context
+		[
+
+		]
+
 	def constructor app\Application
 		self.app = app
 
