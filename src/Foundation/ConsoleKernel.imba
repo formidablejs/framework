@@ -1,16 +1,15 @@
 import { existsSync } from 'fs-extra'
-import { MakeCrudCommand } from './Console/Commands/MakeCrudCommand'
-import { SessionPruneExpiredCommand } from './Console/Commands/SessionPruneExpiredCommand'
-import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
 import { ConfigCacheCommand } from './Console/Commands/ConfigCacheCommand'
 import { ConfigClearCommand } from './Console/Commands/ConfigClearCommand'
 import { DbSeedCommand } from './Console/Commands/DbSeedCommand'
 import { DownCommand } from './Console/Commands/DownCommand'
 import { EnvironmentCommand } from './Console/Commands/EnvironmentCommand'
 import { GenerateKeyCommand } from './Console/Commands/GenerateKeyCommand'
+import { InspireCommand } from './Console/Commands/InspireCommand'
 import { MakeCommandCommand } from './Console/Commands/MakeCommandCommand'
 import { MakeConfigCommand } from './Console/Commands/MakeConfigCommand'
 import { MakeControllerCommand } from './Console/Commands/MakeControllerCommand'
+import { MakeCrudCommand } from './Console/Commands/MakeCrudCommand'
 import { MakeExceptionCommand } from './Console/Commands/MakeExceptionCommand'
 import { MakeMailCommand } from './Console/Commands/MakeMailCommand'
 import { MakeMiddlewareCommand } from './Console/Commands/MakeMiddlewareCommand'
@@ -24,8 +23,10 @@ import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
 import { MigrateLatestCommand } from './Console/Commands/MigrateLatestCommand'
 import { MigrateRollbackCommand } from './Console/Commands/MigrateRollbackCommand'
 import { MigrateUpCommand } from './Console/Commands/MigrateUpCommand'
+import { PackagePublishCommand } from './Console/Commands/PackagePublishCommand'
 import { RouteListCommand } from './Console/Commands/RouteListCommand'
 import { ServeCommand } from './Console/Commands/ServeCommand'
+import { SessionPruneExpiredCommand } from './Console/Commands/SessionPruneExpiredCommand'
 import { ShellCommand } from './Console/Commands/ShellCommand'
 import { UpCommand } from './Console/Commands/UpCommand'
 import { execSync } from 'child_process'
@@ -89,6 +90,9 @@ export default class ConsoleKernel
 
 			# route commands
 			RouteListCommand
+
+			# other
+			InspireCommand
 		]
 
 	get registered
