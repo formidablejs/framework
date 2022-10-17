@@ -1,7 +1,8 @@
-import type { Knex } from "knex";
+import type { Knex } from 'knex'
 
 export default class Repository {
-    get table(): string;
+    get tableName(): string;
+    get db(): Knex;
     get database(): Knex;
-    get db(): Knex
+    get table(): Knex;
 }
