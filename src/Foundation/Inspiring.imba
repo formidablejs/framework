@@ -38,4 +38,4 @@ export class Inspiring
 	static def formatForConsole quote
 		const [ text, author ] = quote.split(' — ')
 
-		`\n  \x1b[1m“ ${text} ”\x1b[1m\n  <dim>— ${author}</dim>\n`
+		"\n  \x1b[1m“ {text} ”\x1b[1m\n  <dim>— {author}</dim>\n"
