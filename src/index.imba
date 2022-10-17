@@ -53,6 +53,7 @@ import PersonalAccessTokenServiceResolver from './Auth/Tokens/PersonalAccessToke
 import Redirect from './Http/Redirect/Redirect'
 import Redis from './Redis/Redis'
 import RedisServiceResolver from './Redis/RedisServiceResolver'
+import Repository from './Database/Repository'
 import Request from './Http/Request/Request'
 import Response from './Http/Response/Response'
 import response from './Support/Helpers/response'
@@ -138,6 +139,7 @@ export {
 	Redirect
 	Redis
 	RedisServiceResolver
+	Repository
 	Request
 	RequestGenericInterface
 	response
