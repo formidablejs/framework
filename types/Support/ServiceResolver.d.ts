@@ -4,6 +4,7 @@ export default class ServiceResolver {
     */
     constructor(app: Application);
     app: Application;
+    get context(): any[];
     boot(): any;
     register(): any;
     [$__patch__$]($$?: {}): void;
