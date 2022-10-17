@@ -14,6 +14,7 @@ import { MakeExceptionCommand } from './Console/Commands/MakeExceptionCommand'
 import { MakeMailCommand } from './Console/Commands/MakeMailCommand'
 import { MakeMiddlewareCommand } from './Console/Commands/MakeMiddlewareCommand'
 import { MakeMigrationCommand } from './Console/Commands/MakeMigrationCommand'
+import { MakeRepositoryCommand } from './Console/Commands/MakeRepositoryCommand'
 import { MakeRequestCommand } from './Console/Commands/MakeRequestCommand'
 import { MakeResolverCommand } from './Console/Commands/MakeResolverCommand'
 import { MakeSeederCommand } from './Console/Commands/MakeSeederCommand'
@@ -72,6 +73,7 @@ export default class ConsoleKernel
 			MakeMailCommand
 			MakeMiddlewareCommand
 			MakeMigrationCommand
+			MakeRepositoryCommand
 			MakeRequestCommand
 			MakeResolverCommand
 			MakeSeederCommand
