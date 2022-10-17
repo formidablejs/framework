@@ -3,7 +3,7 @@ import pluralize from 'pluralize'
 
 export default class Repository
 
-	get table
+	get tableName
 		const className = this.constructor.name.split(/(?=[A-Z])/)
 
 		if className.length > 0 && className[className.length - 1].toLowerCase() == 'repository'
@@ -11,8 +11,11 @@ export default class Repository
 
 		pluralize(className.join('_').toLowerCase())
 
-	get database
-		Database.table(self.table)
-
 	get db
-		Database.table(self.table)
+		Database
+
+	get database
+		Database
+
+	get table
+		Database.table(self.tableName)
