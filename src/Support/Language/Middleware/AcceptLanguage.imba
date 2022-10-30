@@ -22,7 +22,9 @@ export default class AcceptLanguage
 		for own key, value of self.mappings
 			languageMaps[key.toLowerCase!] = value
 
-		const language = languageMaps[request.header('accept-language')]
+		const locale\string = request.header('accept-language') || ''
+
+		const language\string|undefined = languageMaps[locale.toLowerCase!]
 
 		if language !== undefined
 			return language
