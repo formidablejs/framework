@@ -30,12 +30,17 @@ export class GenerateKeyCommand < Command
 		join process.cwd!, self.envFile
 
 	def handle
-		if !existsSync self.envPath then return this.error "No {self.envFile} file found."
+		if !existsSync self.envPath
+			this.error "No {self.envFile} file found."
+
+			self.exit!
 
 		const key = self.key 32
 
 		if self.option('show', false)
-			return self.message 'info', "Application key [{key}] generated successfully."
+			self.message 'info', "Application key [{key}] generated successfully."
+
+			self.exit!
 
 		self.updateEnv key
 
