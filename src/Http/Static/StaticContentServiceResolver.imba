@@ -11,6 +11,8 @@ export default class StaticContentServiceResolver < ServiceResolver
 		{
 			root: join(process.cwd!, 'public')
 			wildcard: false
+			decorateReply: true
+			prefixAvoidTrailingSlash: true
 		}
 
 	/**
