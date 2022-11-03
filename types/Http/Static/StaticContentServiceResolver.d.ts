@@ -10,6 +10,8 @@ export default class StaticContentServiceResolver extends ServiceResolver {
     get public(): {
         root: string;
         wildcard: boolean;
+        decorateReply: boolean;
+        prefixAvoidTrailingSlash: boolean;
     };
     /**
          * Formidable assets directory.
