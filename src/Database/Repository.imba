@@ -7,7 +7,7 @@ export default class Repository
 		const className = this.constructor.name.split(/(?=[A-Z])/)
 
 		if className.length > 0 && className[className.length - 1].toLowerCase() == 'repository'
-			clsasName.pop!
+			className.pop!
 
 		pluralize(className.join('_').toLowerCase())
 
