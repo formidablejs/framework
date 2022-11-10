@@ -2,7 +2,7 @@ import { Command } from '../Command'
 import { homedir } from 'os'
 import { ImbaRepl } from 'imba-shell'
 import { join } from 'path'
-import type { REPLServer } from 'repl' 
+import type { REPLServer } from 'repl'
 
 export class ShellCommand < Command
 
@@ -14,7 +14,7 @@ export class ShellCommand < Command
 
 	get history
 		join homedir!, '.formidable_shell_history'
-	
+
 	def handle
 		const repl = new ImbaRepl '>>> ', history
 
