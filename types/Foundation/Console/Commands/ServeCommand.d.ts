@@ -14,6 +14,7 @@ export class ServeCommand extends Command {
         ignore: string[];
         ext: string[];
         delay: number;
+        mode: string;
     };
     get devConfig(): any;
     get devCommands(): any[];
