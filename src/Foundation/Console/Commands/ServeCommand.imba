@@ -42,9 +42,18 @@ export class ServeCommand < Command
 	get devConfigDefaults
 		{
 			commands: []
-			ignore: ['node_modules', 'dist', 'test', 'tests']
+			ignore: [
+				'bootstrap/config',
+				'database',
+				'dist',
+				'node_modules',
+				'public',
+				'storage',
+				'test',
+				'tests',
+			]
 			ext: ['imba' ,'js', 'ts']
-			delay: 5
+			delay: 2
 			mode: 'imba' # nodemon
 		}
 
