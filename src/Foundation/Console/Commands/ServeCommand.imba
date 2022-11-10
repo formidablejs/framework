@@ -45,6 +45,7 @@ export class ServeCommand < Command
 			ignore: ['node_modules', 'dist', 'test', 'tests']
 			ext: ['imba' ,'js', 'ts']
 			delay: 5
+			mode: 'imba' # nodemon
 		}
 
 	get devConfig
