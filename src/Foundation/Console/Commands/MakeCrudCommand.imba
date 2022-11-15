@@ -15,7 +15,7 @@ export class MakeCrudCommand < Command
 		}
 
 	get description
-		'Create a new Crud'
+		'Create a new crud'
 
 	def handle
 		let path = self.argument('name').split('/')

@@ -18,6 +18,7 @@ import { MakeRepositoryCommand } from './Console/Commands/MakeRepositoryCommand'
 import { MakeRequestCommand } from './Console/Commands/MakeRequestCommand'
 import { MakeResolverCommand } from './Console/Commands/MakeResolverCommand'
 import { MakeSeederCommand } from './Console/Commands/MakeSeederCommand'
+import { MakeTagCommand } from './Console/Commands/MakeTagCommand'
 import { MakeViewCommand } from './Console/Commands/MakeViewCommand'
 import { MigrateDownCommand } from './Console/Commands/MigrateDownCommand'
 import { MigrateFreshCommand } from './Console/Commands/MigrateFreshCommand'
@@ -77,6 +78,7 @@ export default class ConsoleKernel
 			MakeRequestCommand
 			MakeResolverCommand
 			MakeSeederCommand
+			MakeTagCommand
 			MakeViewCommand
 
 			# maintenance commands

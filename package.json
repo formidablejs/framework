@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.13.3",
+  "version": "0.13.4",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@formidablejs/mailer": "0.3.1",
-    "@formidablejs/stubs": "^0.2.14",
+    "@formidablejs/stubs": "^0.2.17",
     "@types/connect-redis": "^0.0.18",
     "@types/express-session": "^1.17.5",
     "@types/jest": "^29.1.2",
