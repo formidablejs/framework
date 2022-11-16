@@ -5,13 +5,14 @@ import Migration from '@formidablejs/stubs/src/stubs/migration/migration'
 export class MakeMigrationCommand < MakeResourceCommand
 
 	get signature
-		'make:migration {name} {--table} {?--alter}'
+		'make:migration {name} {--table} {?--alter} {?--schema}'
 
 	get props
 		{
 			name: Prop.string!.description('The name of the migration')
 			table: Prop.string!.description('The table to migrate')
 			alter: Prop.boolean!.description('Alter existing table')
+			schema: Prop.string!.alias('s').description('Set database schema').nullable!
 		}
 
 	get description
@@ -26,6 +27,7 @@ export class MakeMigrationCommand < MakeResourceCommand
 			{
 				table: self.option('table')
 				alter: self.option('alter', false)
+				schema: self.option('schema', null)
 			},
 			'migration',
 			self.language.toLowerCase!
