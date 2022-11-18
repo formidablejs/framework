@@ -167,12 +167,12 @@ export class ServeCommand < Command
 					self.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
 				if data.trim().startsWith('listening on http') == false
-					console.log data.trim()
+					process.stdout.write data
 
 			server.on 'stderr', do(e)
 				const data = e.toString()
 
-				console.log data.trim()
+				process.stdout.write data
 
 			server.on 'restart', do
 				self.message 'info', 'Application change detected. Restarting server…'

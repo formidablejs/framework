@@ -20,6 +20,8 @@ export default class Console {
     get devMode(): any;
     get ext(): ".imba" | ".ts";
     run(): import("child_process").ChildProcessWithoutNullStreams;
+    preServeCommands(): any;
+    preServe(): void[];
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;
 }

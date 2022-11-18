@@ -1,7 +1,7 @@
 import { Output } from '@formidablejs/console'
 import { existsSync } from 'fs-extra'
 import { join } from 'path'
-import { spawn, fork } from 'child_process'
+import { spawn, execSync } from 'child_process'
 
 export default class Console
 	prop runtime\string
@@ -58,9 +58,12 @@ export default class Console
 		for arg in process.argv.slice(2)
 			args.push arg
 
-		if devMode == 'imba' && args[1] == 'serve' && args[2] == '--dev' && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
+		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
+			preServe!
+
 			let port = 3000
 			let host = ''
+			let addr = '0'
 
 			args.forEach do(arg)
 				if arg.startsWith('--port')
@@ -69,9 +72,12 @@ export default class Console
 				if arg.startsWith('--host')
 					host = arg.split('=')[1]
 
+				if arg == '--addr'
+					addr = '1'
+
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
-			const instance = spawn(runtime, [srv, '-s', '-w', '--', "--port={port}", "--host={host}"], {
+			const instance = spawn(runtime, [srv, '-s', '-w', '--', "--port={port}", "--host={host}", "--addr={addr}"], {
 				stdio: 'pipe',
 				cwd: process.cwd!,
 			})
@@ -113,3 +119,31 @@ export default class Console
 			return spawn(sh, [shFlag, self.runtime, self.console, ...args], self.config)
 
 		spawn(runtime, [self.console, ...args], self.config)
+
+	def preServeCommands
+		const appPackage = join(process.cwd!, 'package.json')
+
+		if !existsSync(appPackage)
+			return []
+
+		const hooks = require(appPackage).hooks || {}
+
+		hooks ? hooks['pre-serve'] : []
+
+	def preServe
+		let commands = preServeCommands!
+
+		if !Array.isArray(commands)
+			commands = []
+
+		for command in commands
+			Output.write "\n  <dim>> {command}</dim>\n"
+
+			execSync(command, {
+				cwd: process.cwd!,
+				stdio: 'inherit'
+			})
+
+			const repeat = process.stdout.columns <= 200 ? process.stdout.columns : (process.stdout.columns / 2)
+
+			Output.write "<dim>  " + ('-'.repeat(repeat - '  '.length)) + "</dim>"
