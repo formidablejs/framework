@@ -35,7 +35,7 @@ export class MakeCrudCommand < Command
 		const typeName = "Database/{self.argument('name')}"
 
 		await self.app.console!.run("make:controller {controllerName} --store-request={storeRequest} --update-request={updateRequest} {self.option('--api') ? '--api' : '-r'}")
-		await self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!} {self.option('schema') ? '--schema=' + self.option('schema') : ''}")
+		await self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!} --schema={self.option('schema', '')}")
 		await self.app.console!.run("make:request {storeRequest}")
 		await self.app.console!.run("make:request {updateRequest}")
 		await self.app.console!.run("make:seeder {name} --table={name.toLowerCase!}")
@@ -44,6 +44,6 @@ export class MakeCrudCommand < Command
 			await self.app.console!.run("make:repository {self.argument('name')}Repository")
 
 		if self.option('type')
-			await self.app.console!.run("make:type {typeName} {self.option('schema') ? '--schema=' + self.option('schema') : ''}")
+			await self.app.console!.run("make:type {typeName} --schema={self.option('schema', '')}")
 
 		self.exit()
