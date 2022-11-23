@@ -1,6 +1,7 @@
 /node_modules
 /public
 /.temp
+/lib
 /output
 /test/e2e
 .env
