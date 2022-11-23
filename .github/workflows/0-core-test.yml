@@ -13,5 +13,7 @@ jobs:
       uses: supercharge/redis-github-action@1.4.0
     - name: Install modules
       run: npm install
+    - name: Build
+      run: npm run build
     - name: Run tests
       run: npm test
