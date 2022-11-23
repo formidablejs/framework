@@ -9,6 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm install
+    - name: Build
+      run: npm run build
     - name: Prepare e2e tests
       run: npm run pre-test
     - name: Run e2e tests
