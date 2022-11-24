@@ -118,10 +118,7 @@ export default class Kernel
 
 		if returnMode isa Boolean && returnMode == true then return router
 
-		router.listen({
-			port: Number(port),
-			host: host
-		}, do(error, address)
+		router.listen(Number(port), host, do(error, address)
 			if routes.invalid.length > 0
 				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
 
