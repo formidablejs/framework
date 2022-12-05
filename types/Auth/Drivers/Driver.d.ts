@@ -44,6 +44,14 @@ export default class Driver {
     */
     static resetPasswordMailer(mailer: Mailable): Mailable;
     /**
+    @param {MailHandle} mailEvents
+    */
+    static verificationMailerEvents(mailEvents: MailHandle): MailHandle;
+    /**
+    @param {MailHandle} mailEvents
+    */
+    static resetMailerEvents(mailEvents: MailHandle): MailHandle;
+    /**
     @param {string} protocol
     @param {Request} request
     @param {FastifyReply} reply
@@ -103,11 +111,13 @@ export default class Driver {
     afterUpdatePassword(): any;
     onSuccessfulAuthAttemptEvent(): any;
     getVerificationMailer(): any;
+    getVerificationMailerEvents(): any;
     /**
     @param {object} user
     */
     sendVerificationEmail(user: object): Promise<any>;
     getResetPasswordMailer(): any;
+    getResetMailerEvents(): any;
     /**
     @param {object} user
     @param {string} token
@@ -164,3 +174,6 @@ export default class Driver {
     */
     passwordResetUrl(user: object, token: string): Promise<string>;
 }
+
+import { Mailable } from "@formidablejs/mailer";
+import { MailHandle } from "@formidablejs/mailer";
