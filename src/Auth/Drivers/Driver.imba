@@ -111,14 +111,14 @@ export default class Driver
 
 			Mail.to(user.email).send(new (self.getVerificationMailer!)(self.request, user), {
 				onSuccess: do(response)
-					events.onSuccess(response, user, self.request) if events.onSuccess
+					events.onSuccess(response, user, self.request) if events && events.onSuccess
 				onError: do(reason)
-					if events.onError
+					if events && events.onError
 						events.onError(reason, user, self.request)
 					else
 						throw reason
 				onComplete: do
-					events.onComplete(user, self.request) if events.onComplete
+					events.onComplete(user, self.request) if events && events.onComplete
 			})
 
 	def getResetPasswordMailer
@@ -135,14 +135,14 @@ export default class Driver
 
 			Mail.to(user.email).send(new (self.getResetPasswordMailer!)(self.request, user), {
 				onSuccess: do(response)
-					events.onSuccess(response, user, self.request) if events.onSuccess
+					events.onSuccess(response, user, self.request) if events && events.onSuccess
 				onError: do(reason)
-					if events.onError
+					if events && events.onError
 						events.onError(reason, user, self.request)
 					else
 						throw reason
 				onComplete: do
-					events.onComplete(user, self.request) if events.onComplete
+					events.onComplete(user, self.request) if events && events.onComplete
 			})
 
 	def verifyEmail
