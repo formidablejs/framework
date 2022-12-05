@@ -12,7 +12,7 @@ import strRandom from '../../Support/Helpers/strRandom'
 import URL from '../../Http/URL/URL'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 import type { FastifyReply } from 'fastify'
-import type { Mailable } from '@formidablejs/mailer'
+import type { MailHandle, Mailable } from '@formidablejs/mailer'
 import type Repository from '../../Config/Repository'
 import type Request from '../../Http/Request/Request'
 
@@ -26,6 +26,8 @@ const events = {
 	onRequestEmailVerificationUrl: null
 	onRequestForgotPasswordUrl: null
 	onUpdatePassword: null
+	onVerificationMailerEvents: null
+	onResetMailerEvents: null
 }
 
 const mailers = {
@@ -98,20 +100,26 @@ export default class Driver
 	def getVerificationMailer
 		mailers.verificationEmail
 
+	def getVerificationMailerEvents
+		events.onVerificationMailerEvents
+
 	def sendVerificationEmail user\object
 		if self.getVerificationMailer!
 			self.request.verificationUrl = await self.verificationUrl(user)
 
-			Mail.to(user.email).send(new (self.getVerificationMailer!)(self.request, user))
+			Mail.to(user.email).send(new (self.getVerificationMailer!)(self.request, user), self.getVerificationMailerEvents!)
 
 	def getResetPasswordMailer
 		mailers.resetPasswordMailer
+
+	def getResetMailerEvents
+		events.onResetMailerEvents
 
 	def sendResetPasswordEmail user\object, token\string
 		if self.getResetPasswordMailer!
 			self.request.passwordResetUrl = await self.passwordResetUrl(user, token)
 
-			Mail.to(user.email).send(new (self.getResetPasswordMailer!)(self.request, user))
+			Mail.to(user.email).send(new (self.getResetPasswordMailer!)(self.request, user), self.getResetMailerEvents!)
 
 	def verifyEmail
 		const email = self.request.query 'email'
@@ -385,3 +393,14 @@ export default class Driver
 
 		mailers.resetPasswordMailer = mailer
 
+	static def verificationMailerEvents mailEvents\MailHandle
+		if events.onVerificationMailerEvents
+			throw new Error 'Verification Mailer events already set'
+
+		events.onVerificationMailerEvents = mailEvents
+
+	static def resetMailerEvents mailEvents\MailHandle
+		if events.onResetMailerEvents
+			throw new Error 'Reset Mailer events already set'
+
+		events.onResetMailerEvents = mailEvents

@@ -1,3 +1,4 @@
+import type { MailHandle } from '@formidablejs/mailer'
 import PersonalAccessToken from './Tokens/PersonalAccessToken'
 import { Mailable } from '@formidablejs/mailer'
 import Driver from './Drivers/Driver'
@@ -146,6 +147,16 @@ export default class AuthService
 
 	static def resetPasswordMailer mailer\Mailable
 		Driver.resetPasswordMailer mailer
+
+		self
+
+	static def verificationMailerEvents events\MailHandle
+		Driver.verificationMailerEvents events
+
+		self
+
+	static def resetMailerEvents events\MailHandle
+		Driver.resetMailerEvents events
 
 		self
 
