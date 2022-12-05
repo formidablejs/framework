@@ -107,7 +107,19 @@ export default class Driver
 		if self.getVerificationMailer!
 			self.request.verificationUrl = await self.verificationUrl(user)
 
-			Mail.to(user.email).send(new (self.getVerificationMailer!)(self.request, user), self.getVerificationMailerEvents!)
+			const events = self.getVerificationMailerEvents!
+
+			Mail.to(user.email).send(new (self.getVerificationMailer!)(self.request, user), {
+				onSuccess: do(response)
+					events.onSuccess(response, user, self.request) if events.onSuccess
+				onError: do(reason)
+					if events.onError
+						events.onError(reason, user, self.request)
+					else
+						throw reason
+				onComplete: do
+					events.onComplete(user, self.request)
+			})
 
 	def getResetPasswordMailer
 		mailers.resetPasswordMailer
@@ -119,7 +131,19 @@ export default class Driver
 		if self.getResetPasswordMailer!
 			self.request.passwordResetUrl = await self.passwordResetUrl(user, token)
 
-			Mail.to(user.email).send(new (self.getResetPasswordMailer!)(self.request, user), self.getResetMailerEvents!)
+			const events = self.getResetMailerEvents!
+
+			Mail.to(user.email).send(new (self.getResetPasswordMailer!)(self.request, user), {
+				onSuccess: do(response)
+					events.onSuccess(response, user, self.request) if events.onSuccess
+				onError: do(reason)
+					if events.onError
+						events.onError(reason, user, self.request)
+					else
+						throw reason
+				onComplete: do
+					events.onComplete(user, self.request)
+			})
 
 	def verifyEmail
 		const email = self.request.query 'email'
