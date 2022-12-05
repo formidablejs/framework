@@ -118,7 +118,7 @@ export default class Driver
 					else
 						throw reason
 				onComplete: do
-					events.onComplete(user, self.request)
+					events.onComplete(user, self.request) if events.onComplete
 			})
 
 	def getResetPasswordMailer
@@ -142,7 +142,7 @@ export default class Driver
 					else
 						throw reason
 				onComplete: do
-					events.onComplete(user, self.request)
+					events.onComplete(user, self.request) if events.onComplete
 			})
 
 	def verifyEmail
