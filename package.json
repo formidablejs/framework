@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.13.8",
+  "version": "0.13.9",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -58,12 +58,12 @@
     "validatorjs": "^3.22.1"
   },
   "peerDependencies": {
-    "@formidablejs/mailer": ">=0.3.0",
+    "@formidablejs/mailer": ">=0.4.0",
     "@formidablejs/stubs": ">= 0.3.0",
     "imba-shell": ">=0.4.0 <0.5.0"
   },
   "devDependencies": {
-    "@formidablejs/mailer": "0.3.1",
+    "@formidablejs/mailer": "0.4.0",
     "@formidablejs/stubs": "^0.3.0",
     "@types/connect-redis": "^0.0.18",
     "@types/express-session": "^1.17.5",
