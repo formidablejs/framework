@@ -1,3 +1,4 @@
+import { existsSync } from 'fs'
 import { Command } from '../Command'
 import { homedir } from 'os'
 import { ImbaRepl } from 'imba-shell'
