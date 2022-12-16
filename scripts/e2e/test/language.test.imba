@@ -1,3 +1,4 @@
+const { current } = require '../storage/framework/address.json'
 const { SuperTest } = require 'supertest'
 const request = require 'supertest'
 
@@ -5,7 +6,7 @@ describe 'Language', do
 	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request 'http://localhost:3000'
+	beforeAll do app = request current
 
 	it '/ (GET: Hello World)', do
 		app.get('/')
