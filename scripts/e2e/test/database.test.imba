@@ -1,4 +1,3 @@
-const { current } = require '../storage/framework/address.json'
 const { SuperTest } = require 'supertest'
 const request = require 'supertest'
 
@@ -6,7 +5,7 @@ describe 'Database', do
 	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request current
+	beforeAll do app = request 'http://localhost:3000'
 
 	it '/ (PUT: Create Post)', do
 		app.put('/posts')

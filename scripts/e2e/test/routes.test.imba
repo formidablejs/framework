@@ -1,4 +1,3 @@
-const { current } = require '../storage/framework/address.json'
 const { SuperTest } = require 'supertest'
 const request = require 'supertest'
 
@@ -6,12 +5,12 @@ describe 'Routes', do
 	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request current
+	beforeAll do app = request 'http://localhost:3000'
 
 	it '/ (GET: hello)', do
 		app.get('/routes/invoke')
 			.expect(200)
-			.expect('hello')		
+			.expect('hello')
 
 	it '/ (GET: hello)', do
 		app.get('/routes/function')
