@@ -2,14 +2,11 @@ name: Automated
 
 on:
   schedule:
-    - cron: "0 */5 * * *"
-  push:
-    branches:
-      - main
+    - cron: "11 */1 * * *"
 
 jobs:
-  build:
-
+  test:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
