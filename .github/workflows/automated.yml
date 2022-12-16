@@ -2,7 +2,7 @@ name: Automated
 
 on:
   schedule:
-    - cron: "11 */1 * * *"
+    - cron: '*/5 * * * *'
 
 jobs:
   test:
