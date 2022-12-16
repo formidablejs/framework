@@ -1,4 +1,4 @@
-name: Automated
+name: Automated Tests
 
 on:
   schedule:
@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     strategy:
       matrix:
