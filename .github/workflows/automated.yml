@@ -1,0 +1,30 @@
+name: Automated
+
+on:
+  schedule:
+    - cron: "0 */5 * * *"
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
+    - name: Install modules
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Run tests
+      run: npm test
+    - name: Prepare e2e tests
+      run: npm run pre-test
+    - name: Run e2e tests
+      run: npm run test:e2e
+    - name: Clean up
+      run: ./scripts/5-clean-up.sh
