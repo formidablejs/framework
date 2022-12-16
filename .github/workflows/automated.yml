@@ -1,4 +1,4 @@
-name: Automated
+name: Automated Tests
 
 on:
   schedule:
@@ -7,20 +7,24 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Start Redis
       uses: supercharge/redis-github-action@1.4.0
-    - name: Install modules
-      run: npm install
-    - name: Build
-      run: npm run build
-    - name: Run tests
-      run: npm test
-    - name: Prepare e2e tests
-      run: npm run pre-test
-    - name: Run e2e tests
-      run: npm run test:e2e
-    - name: Clean up
-      run: ./scripts/5-clean-up.sh
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - run: npm run build
+    - run: npm test
+    - run: npm run pre-test
+    - run: npm run test:e2e
+    - run: ./scripts/5-clean-up.sh
