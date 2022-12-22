@@ -5,11 +5,12 @@ import Request from '@formidablejs/stubs/src/stubs/request/request'
 export class MakeRequestCommand < MakeResourceCommand
 
 	get signature
-		'make:request {name}'
+		'make:request {name} {?--domain}'
 
 	get props
 		{
 			name: Prop.string!.description('The name of the class')
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -19,4 +20,6 @@ export class MakeRequestCommand < MakeResourceCommand
 		'Request'
 
 	get stub
-		new Request(self.argument('name'), {}, 'request', self.language.toLowerCase!)
+		new Request(self.argument('name'), {
+			domain: self.option('domain', null)
+		}, 'request', self.language.toLowerCase!)

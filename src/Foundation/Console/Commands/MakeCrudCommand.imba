@@ -6,7 +6,7 @@ import { MakeResourceCommand } from './MakeResourceCommand'
 export class MakeCrudCommand < Command
 
 	get signature
-		'make:crud {name} {--api} {--type} {--repository} {?--schema}'
+		'make:crud {name} {--api} {--type} {--repository} {?--schema} {?--domain}'
 
 	get props
 		{
@@ -15,6 +15,7 @@ export class MakeCrudCommand < Command
 			schema: Prop.string!.alias('s').description('Set database schema').nullable!
 			repository: Prop.boolean!.default(false).alias('r').description('Add a repository').nullable!
 			type: Prop.boolean!.default(false).alias('t').description('Add a type').nullable!
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -33,17 +34,18 @@ export class MakeCrudCommand < Command
 		const tableName = "Create{name}Table"
 		const controllerName = "{self.argument('name')}Controller"
 		const typeName = "Database/{self.argument('name')}"
+		const domain = self.option('domain', null) ? " --domain={self.option('domain')}" : ''
 
-		await self.app.console!.run("make:controller {controllerName} --store-request={storeRequest} --update-request={updateRequest} {self.option('--api') ? '--api' : '-r'}")
+		await self.app.console!.run("make:controller {controllerName} --store-request={storeRequest} --update-request={updateRequest} {self.option('--api') ? '--api' : '-r'}{domain}")
 		await self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!} --schema={self.option('schema', '')}")
-		await self.app.console!.run("make:request {storeRequest}")
-		await self.app.console!.run("make:request {updateRequest}")
+		await self.app.console!.run("make:request {storeRequest}{domain}")
+		await self.app.console!.run("make:request {updateRequest}{domain}")
 		await self.app.console!.run("make:seeder {name} --table={name.toLowerCase!}")
 
 		if self.option('repository')
-			await self.app.console!.run("make:repository {self.argument('name')}Repository")
+			await self.app.console!.run("make:repository {self.argument('name')}Repository{domain}")
 
 		if self.option('type')
-			await self.app.console!.run("make:type {typeName} --schema={self.option('schema', '')}")
+			await self.app.console!.run("make:type {typeName} --schema={self.option('schema', '')}{domain}")
 
 		self.exit()

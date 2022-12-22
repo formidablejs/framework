@@ -5,11 +5,12 @@ import Repository from '@formidablejs/stubs/src/stubs/repository/repository'
 export class MakeRepositoryCommand < MakeResourceCommand
 
 	get signature
-		'make:repository {name}'
+		'make:repository {name} {?--domain}'
 
 	get props
 		{
 			name: Prop.string!.description('The name of the class')
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -19,4 +20,6 @@ export class MakeRepositoryCommand < MakeResourceCommand
 		'Repository'
 
 	get stub
-		new Repository(self.argument('name'), {}, 'repository', self.language.toLowerCase!)
+		new Repository(self.argument('name'), {
+			domain: self.option('domain', null)
+		}, 'repository', self.language.toLowerCase!)

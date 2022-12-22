@@ -5,7 +5,7 @@ import Controller from '@formidablejs/stubs/src/stubs/controller/controller'
 export class MakeControllerCommand < MakeResourceCommand
 
 	get signature
-		'make:controller {name} {--api} {--invokable} {--resource} {--store-request} {--update-request}-'
+		'make:controller {name} {--api} {--invokable} {--resource} {--store-request} {--update-request} {?--domain}'
 
 	get props
 		{
@@ -15,6 +15,7 @@ export class MakeControllerCommand < MakeResourceCommand
 			resource: Prop.boolean!.description('Generate a resource controller class').alias('r').nullable!
 			"store-request": Prop.string!.nullable().description('Store Request class')
 			"update-request": Prop.string!.nullable().description('Update Request class')
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -30,4 +31,5 @@ export class MakeControllerCommand < MakeResourceCommand
 			resource: self.option('resource') ?? false
 			"store-request": self.option('store-request') ?? 'null'
 			"update-request": self.option('update-request') ?? 'null'
+			domain: self.option('domain', null)
 		}, 'controller', self.language.toLowerCase!)
