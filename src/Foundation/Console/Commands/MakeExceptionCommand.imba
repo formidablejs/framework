@@ -5,11 +5,12 @@ import Exception from '@formidablejs/stubs/src/stubs/exception/exception'
 export class MakeExceptionCommand < MakeResourceCommand
 
 	get signature
-		'make:exception {name}'
+		'make:exception {name} {?--domain}'
 
 	get props
 		{
 			name: Prop.string!.description('The name of the class')
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -19,4 +20,6 @@ export class MakeExceptionCommand < MakeResourceCommand
 		'Exception'
 
 	get stub
-		new Exception(self.argument('name'), {}, 'exception', self.language.toLowerCase!)
+		new Exception(self.argument('name'), {
+			domain: self.option('domain', null)
+		}, 'exception', self.language.toLowerCase!)
