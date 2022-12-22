@@ -539,13 +539,13 @@ export default class FormRequest {
 
      */
      auth(): Auth | {
-          user: () => any;
-          driver: () => any;
+          user: () => User | null;
+          driver: () => Driver;
           check: () => boolean;
           can: (perform: string) => boolean;
      };
 
-     user(): any;
+     user(): User | null;
      [$__patch__$]($$?: {}): void;
      [$__init__$]($$?: any, deep?: boolean): void;
      [$session$]: any;
@@ -553,6 +553,7 @@ export default class FormRequest {
 }
 import Auth from "../../Auth/Auth";
 import FileCollection from "./FileCollection";
+import Driver from '../../Auth/Drivers/Driver'
 import type Repository from "../../Config/Repository";
 import type Session from "./Session";
 import type Cookies from "./Cookies";
