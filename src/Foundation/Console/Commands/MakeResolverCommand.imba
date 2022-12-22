@@ -5,11 +5,12 @@ import Resolver from '@formidablejs/stubs/src/stubs/resolver/resolver'
 export class MakeResolverCommand < MakeResourceCommand
 
 	get signature
-		'make:resolver {name}'
+		'make:resolver {name} {?--domain}'
 
 	get props
 		{
 			name: Prop.string!.description('The name of the class')
+			domain: Prop.string!.nullable!.description('Domain name')
 		}
 
 	get description
@@ -19,4 +20,6 @@ export class MakeResolverCommand < MakeResourceCommand
 		'Resolver'
 
 	get stub
-		new Resolver(self.argument('name'), {}, 'resolver', self.language.toLowerCase!)
+		new Resolver(self.argument('name'), {
+			domain: self.option('domain', null)
+		}, 'resolver', self.language.toLowerCase!)
