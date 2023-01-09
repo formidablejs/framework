@@ -11,7 +11,7 @@ export default class Route {
     /**
     *
          * Check if route exists.
-         
+
     @param {string} name
     */
     static has(name: string): boolean;
@@ -21,7 +21,7 @@ export default class Route {
     /**
     *
          * Add a get route that renders a view.
-         
+
     @param {string} path
     @param {View} view
     @param {object} data
@@ -34,7 +34,7 @@ export default class Route {
     /**
     *
          * Add a delete route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -45,7 +45,7 @@ export default class Route {
     /**
     *
          * Add a get route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -56,7 +56,7 @@ export default class Route {
     /**
     *
          * Add a options route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -67,7 +67,7 @@ export default class Route {
     /**
     *
          * Add a patch route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -78,7 +78,7 @@ export default class Route {
     /**
     *
          * Add a post route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -89,7 +89,7 @@ export default class Route {
     /**
     *
          * Add a put route.
-         
+
     @param {string} path
     @param {function|[function, string]} action
     */
@@ -100,7 +100,7 @@ export default class Route {
     /**
     *
          * Set route name.
-         
+
     @param {string} name
     */
     static name(name: string): typeof Route;
@@ -110,17 +110,17 @@ export default class Route {
     /**
     *
          * Add middleware to route.
-         
-    @param {string|string[]} name
+
+    @param {string | object | Array<string|object>} name
     */
-    static middleware(name: string | string[]): typeof Route;
+    static middleware(name: string | object | Array<string|object>): typeof Route;
     /**
          * Add grouped routes.
          */
     /**
     *
          * Add grouped routes.
-         
+
     @param {function} callable
     */
     static group(options: Object, callable: Function): void;

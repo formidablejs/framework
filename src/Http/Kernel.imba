@@ -145,18 +145,38 @@ export default class Kernel
 	def hasRoutes router, config
 		for route in Route.all!
 			if isArray(route.action) || isFunction(route.action) || isClass(route.action) || route.action.constructor.name === 'AsyncFunction'
-				router[route.method.toLowerCase!] route.path, do(req\FastifyRequest, reply\FastifyReply)
-					const request = await new FormRequest(req, route, reply, config)
+				router.route({
+					method: route.method.toUpperCase!
+					url: route.path
+					handler: do(req\FastifyRequest, reply\FastifyReply)
+						const request = req.#context
 
-					await self.resolveMiddleware(route, request, reply, config)
+						const response = await getResponse(route, request, reply)
 
-					const response = await getResponse(route, request, reply)
+						await resolveResponse(response, request, reply)
 
-					return await resolveResponse(response, request, reply)
+					preHandler: do(req\FastifyRequest, reply\FastifyReply)
+						const request = await new FormRequest(req, route, reply, config)
+
+						req.#context = request
+
+						await self.resolveMiddleware('handle', route, request, reply, config)
+
+					onResponse: do(req\FastifyRequest, reply\FastifyReply)
+						const request = req.#context
+
+						await self.resolveMiddleware('terminate', route, request, reply, config)
+
+					onTimeout: do(req\FastifyRequest, reply\FastifyReply)
+						const request = req.#context
+
+						await self.resolveMiddleware('timeout', route, request, reply, config)
+
+				})
 			else
 				routes.invalid.push(route.path)
 
-	def resolveMiddleware route\object, request, reply, config, _middleware = null
+	def resolveMiddleware mode\string = 'handle', route\object, request, reply, config, payload = null, _middleware = null
 		for middleware in self.getAllMiddleware(route, _middleware)
 			if middleware == undefined || typeof middleware == 'string'
 				throw new UndefinedMiddlewareException "Middleware {middleware} is undefined."
@@ -165,4 +185,7 @@ export default class Kernel
 
 			middleware = new middleware config
 
-			await middleware.handle request, reply, (params !== undefined) ? params : []
+			if mode == 'handle'
+				await middleware.handle request, reply, (params !== undefined) ? params : []
+			elif ['terminate', 'timeout'].includes(mode) && middleware[mode]
+				await middleware[mode] request, reply, (params !== undefined) ? params : []
