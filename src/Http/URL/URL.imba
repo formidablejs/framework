@@ -1,3 +1,4 @@
+import querystring from 'querystring'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import isString from '../../Support/Helpers/isString'
 import jwt from 'jsonwebtoken'
@@ -62,7 +63,7 @@ export default class URL
 		uri = Path.clean([], uri)
 
 		if Object.keys(query).length > 0
-			uri = uri + '?' + self.toQuery(query)
+			uri = uri + '?' + querystring.stringify(query)
 
 		uri
 
@@ -80,13 +81,10 @@ export default class URL
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def toQuery params\object = new Object
+	static def toQuery params\object = {}
 		const query = []
 
-		Object.keys(params).forEach do(key)
-			query.push "{key}={params[key]}"
-
-		query.join '&'
+		querystring.stringify(params)
 
 	static def setSecret secret\string
 		if !isString(secret) then throw new TypeError 'secret must be a String'
