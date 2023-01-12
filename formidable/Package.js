@@ -20,6 +20,11 @@ exports.Package = class Package {
           'test': `./formidable/web/test/${path}`,
           'resources/views': './formidable/web/views',
         }
+      },
+      'auth': {
+        paths: {
+          './': `./formidable/auth/${language.toLowerCase()}`,
+        }
       }
     }
   }
