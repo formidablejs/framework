@@ -13,6 +13,7 @@ import isEmpty from '../Support/Helpers/isEmpty'
 import isFunction from '../Support/Helpers/isFunction'
 import MaintenanceModeException from '../Foundation/Exceptions/MaintenanceModeException'
 import resolveResponse from './Kernel/resolveResponse'
+import Redirect from './Redirect/Redirect'
 import Route from './Router/Route'
 import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
 import type { FastifyReply, FastifyRequest } from 'fastify'
@@ -186,6 +187,10 @@ export default class Kernel
 			middleware = new middleware config
 
 			if mode == 'handle'
-				await middleware.handle request, reply, (params !== undefined) ? params : []
+				const results = await middleware.handle request, reply, (params !== undefined) ? params : []
+
+				if results instanceof Redirect
+					results.handle(request, reply)
+
 			elif ['terminate', 'timeout'].includes(mode) && middleware[mode]
 				await middleware[mode] request, reply, (params !== undefined) ? params : []
