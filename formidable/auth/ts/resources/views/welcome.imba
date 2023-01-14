@@ -30,7 +30,7 @@ export class Welcome < View
 
 						<section[d:flex g:1 jc:center]>
 							<p[fw:bolder]> "Congrats!"
-							<p> "Your app is ready with Auth enabled"
+							<p> "Your app is ready with Auth scaffolding"
 
 						<p[font-style:italic]> "Your frontend is located at { <code> './resources/frontend' }"
 

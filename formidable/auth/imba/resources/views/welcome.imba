@@ -26,11 +26,11 @@ export class Welcome < View
 				<div[ta:center d:flex ai:center jc:center h:80vh]>
 					<div>
 						<section>
-							<img[w:150px p:10px] alt="Formidable logo" src="/formidable.svg">
+							<img[w:150px p:10px] alt="Formidable logo" src="/formidable.png">
 
 						<section[d:flex g:1 jc:center]>
 							<p[fw:bolder]> "Congrats!"
-							<p> "Your app is ready with Auth enabled"
+							<p> "Your app is ready with Auth scaffolding"
 
 						<p[font-style:italic]> "Your frontend is located at { <code> './resources/frontend' }"
 

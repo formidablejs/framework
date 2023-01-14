@@ -5,6 +5,7 @@ import { View } from '@formidablejs/framework'
 export class EmailUnverified < View
 
 	def render
+		const user\User = self.get('user', '')
 		const locale = get('locale', config('app.locale', new String)).replace(/_/g, '-')
 
 		<html lang=locale>
@@ -29,7 +30,7 @@ export class EmailUnverified < View
 					<form action=URL.route('email.resend') method="POST">
 						csrf()
 
-						<input type="hidden" name="email" value=get('user').email>
+						<input type="hidden" name="email" value=user.email>
 
 						<button[bw:0 p:0 m:0 bgc:transparent c:#069 fs:unset td:underline cursor:pointer]> "here"
 					" to resend the verification link"

@@ -23,7 +23,7 @@ exports.Package = class Package {
       },
       'auth': {
         paths: {
-          './': `./formidable/auth/${language.toLowerCase()}`,
+          './': `./formidable/auth/${path}`,
         }
       }
     }
