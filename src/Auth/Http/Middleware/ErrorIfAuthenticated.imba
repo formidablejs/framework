@@ -12,7 +12,7 @@ export default class ErrorIfAuthenticated
 			const token = await PersonalAccessToken.find( self.getPersonalAccessToken(request) )
 
 			if !isEmpty(token.token) && !isEmpty(token.tokenable)
-				return self.onAuthenticated(request, reply, params)
+				return await self.onAuthenticated(request, reply, params)
 
 			delete request.request.session.personal_access_token
 
