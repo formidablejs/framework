@@ -98,11 +98,6 @@ export class ServeCommand < Command
 	get devDelay
 		const delay\number = devConfig.delay || devConfigDefaults.delay
 
-		# if !isNumber(delay)
-		# 	self.message 'error', "Expected \"development.delay\" to be an Integer."
-
-		# 	process.exit(1)
-
 		delay
 
 	get commandList
@@ -152,6 +147,12 @@ export class ServeCommand < Command
 				stdout: false
 				delay: devDelay
 			})
+
+			process.once('SIGUSR2', do
+				gracefulShutdown(do
+					process.kill(process.pid, 'SIGUSR2')
+				)
+			)
 
 			server.on 'stdout', do(e)
 				const data = e.toString()
