@@ -53,8 +53,8 @@ export class ServeCommand < Command
 				'tests',
 			]
 			ext: ['imba' ,'js', 'ts']
-			delay: 2
-			mode: 'imba' # nodemon
+			delay: "500ms"
+			mode: 'nodemon' # imba
 		}
 
 	get devConfig
@@ -98,10 +98,10 @@ export class ServeCommand < Command
 	get devDelay
 		const delay\number = devConfig.delay || devConfigDefaults.delay
 
-		if !isNumber(delay)
-			self.message 'error', "Expected \"development.delay\" to be an Integer."
+		# if !isNumber(delay)
+		# 	self.message 'error', "Expected \"development.delay\" to be an Integer."
 
-			process.exit(1)
+		# 	process.exit(1)
 
 		delay
 
