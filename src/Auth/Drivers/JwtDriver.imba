@@ -22,7 +22,9 @@ export default class JwtDriver < Driver
 		personalAccessToken
 
 	def authenticate body\object
-		const user = asObject(await Auth.attempt(body))
+		let user = await Auth.attempt(body)
+
+		user = asObject(user)
 
 		const token = await self.createPersonalAccessToken('auth:jwt', user.id)
 		const hidden = !isEmpty(self.getProvider.hidden) ? self.getProvider.hidden : []

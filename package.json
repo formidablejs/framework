@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.13.12",
+  "version": "0.13.13",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "types"
   ],
   "scripts": {
-    "build": "npm run imba:build && npm run imba:build:temp && npm run ts:build",
+    "build": "npm run imba:build",
     "imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
     "imba:build:temp": "imbac src --output=.temp --platform=node --clean",
     "imba:watch": "imbac -w src --output=lib --platform=node --clean",
@@ -36,7 +36,7 @@
     "@fastify/multipart": "^6.0.0",
     "@fastify/session": "^8.2.0",
     "@fastify/static": "^5.0.2",
-    "@formidablejs/console": "0.0.10",
+    "@formidablejs/console": "0.0.11",
     "argon2": "^0.30.2",
     "bcrypt": "^5.1.0",
     "connect-redis": "^6.1.3",
@@ -46,7 +46,7 @@
     "html-escaper": "^3.0.3",
     "inquirer": "^8.2.4",
     "jsonwebtoken": "^9.0.0",
-    "knex": "^2.3.0",
+    "knex": "^2.4.0",
     "knex-paginate": "^3.0.2",
     "memorystore": "^1.6.7",
     "ms": "^2.1.3",

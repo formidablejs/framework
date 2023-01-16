@@ -26,4 +26,4 @@ export default class Response
 	def toResponse reply\FastifyReply
 		reply.code(self.statusCode)
 
-		self.data
+		reply.send(self.data)

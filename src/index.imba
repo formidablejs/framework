@@ -30,6 +30,8 @@ import decrypt from './Support/Helpers/decrypt'
 import encrypt from './Support/Helpers/encrypt'
 import Encrypter from './Foundation/Encrypter'
 import env from './Support/Helpers/env'
+import EmailNotVerifiedException from './Auth/Exceptions/EmailNotVerifiedException'
+import EnsureEmailIsVerified from './Http/Middleware/EnsureEmailIsVerified'
 import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
 import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
@@ -106,6 +108,8 @@ export {
 	encrypt
 	Encrypter
 	env
+	EmailNotVerifiedException
+	EnsureEmailIsVerified
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn
