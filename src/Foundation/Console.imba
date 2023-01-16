@@ -14,7 +14,7 @@ export default class Console
 
 	get devConfigDefaults
 		{
-			mode: 'imba' # nodemon
+			mode: 'nodemon' # imba
 		}
 
 	get devConfig
