@@ -14,7 +14,7 @@ export class EmailUnverified < View
 				<meta name='viewport' content='width=device-width,initial-scale=1'>
 				<title> "Email Unverified"
 
-				<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'>
+				<link rel='stylesheet' href='https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap'>
 				<style src="*">
 
 			<body[ff:Nunito m:0]>
