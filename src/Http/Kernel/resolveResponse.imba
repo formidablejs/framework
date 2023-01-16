@@ -15,7 +15,7 @@ exports.addResolver = addResolver
 export default def resolveResponse response\any, request\FormRequest, reply, skipResolvers = false
 	if skipResolvers !== true
 		for resolver of settings.resolvers
-			const results = resolver(response, request, reply)
+			const results = await resolver(response, request, reply)
 
 			if !isEmpty(results) then return results
 

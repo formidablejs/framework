@@ -28,30 +28,30 @@ export default class ExitMiddleware
 
 	def handleRegistered request\Request, reply\FastifyReply
 		for resolver of config.resolvers
-			const results = resolver(self.response, request, reply)
+			const results = await resolver(self.response, request, reply)
 
 			if !isEmpty(results) then return results
 
 	def handle request\Request, reply\FastifyReply
-		const customResponse = self.handleRegistered(request, reply)
+		const customResponse = await self.handleRegistered(request, reply)
 
 		if !isEmpty(customResponse)
 			return customResponse
 		elif self.response instanceof Redirect
-			return response.handle(request, reply)
+			return await response.handle(request, reply)
 		elif response Response
-			return response.handle(reply)
+			return await response.handle(reply)
 		elif response instanceof JsonResponse
-			return response.toJson(reply)
+			return await response.toJson(reply)
 		elif response instanceof ViewResponse
-			return response.toView(request, reply)
+			return await response.toView(request, reply)
 		elif response === undefined
 			return null
 		else
 			response
 
 	def errorHandler request\Request, reply\FastifyReply, returns\boolean = false, shouldReport\boolean = true
-		const customResponse = self.handleRegistered(request, reply)
+		const customResponse = await self.handleRegistered(request, reply)
 
 		if !isEmpty(customResponse) then return customResponse
 

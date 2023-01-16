@@ -1,6 +1,7 @@
+import querystring from 'querystring'
+import jwt from 'jsonwebtoken'
 import Encrypter from '../../Foundation/Encrypter'
 import InvalidSignatureException from '../Exceptions/InvalidSignatureException'
-import jwt from 'jsonwebtoken'
 import type FormRequest from '../Request/FormRequest'
 
 export default class ValidateSignature
@@ -14,7 +15,7 @@ export default class ValidateSignature
 		try
 			const decodedSignature = await jwt.verify(request.signature! ?? '', Encrypter.key!)
 
-			const uri = decodedSignature.uri
+			const uri = querystring.unescape(decodedSignature.uri)
 
 			if request.urlWithoutSignature! !== uri
 				throw new InvalidSignatureException 'Invalid signature.'
