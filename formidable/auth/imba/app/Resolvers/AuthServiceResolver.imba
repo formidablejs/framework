@@ -23,7 +23,7 @@ export class AuthServiceResolver < ServiceResolver
 
 		Auth.onRequestForgotPasswordUrl(do(request\Request)
 			if request.expectsHtml!
-				return Redirect.back!.with('success', 'Password reset instructions have been send to your email')
+				return Redirect.back!.with('success', 'Password reset instructions have been sent to your email')
 		)
 
 		Auth.onUpdatePassword(do(request\Request)

@@ -1,5 +1,6 @@
 import { isEmpty } from '../../Support/Helpers/index'
 import URL from '../URL/URL'
+import type { FastifyReply } from 'fastify'
 
 export default class Redirect
 
@@ -38,7 +39,7 @@ export default class Redirect
 
 		self
 
-	def handle request, reply
+	def handle request, reply\FastifyReply
 		if isEmpty(self.path) then self.path = request.header('referer')
 
 		if self.hasFlash! then request.flashMany(self.flashed!)

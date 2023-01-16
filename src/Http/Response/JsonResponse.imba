@@ -21,4 +21,4 @@ export default class JsonResponse
 		reply.type('application/json')
 		reply.code(self.statusCode)
 
-		self.data
+		reply.send(self.data)

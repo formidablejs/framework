@@ -40,4 +40,3 @@ export default class ViewResponse
 		reply.code(self.statusCode)
 			.type('text/html')
 			.send(output)
-			.sent = true
