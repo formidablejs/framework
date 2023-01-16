@@ -32,7 +32,7 @@ export class Welcome < View
 							<p[fw:bolder]> "Congrats!"
 							<p> "Your app is ready with Auth scaffolding"
 
-						<p[font-style:italic]> "Your frontend is located at { <code> './resources/frontend' }"
+						<p[font-style:italic]> "Your frontend is located at { <code> './resources/views' }"
 
 						<section[d:flex g:1 jc:center]>
 							if user
