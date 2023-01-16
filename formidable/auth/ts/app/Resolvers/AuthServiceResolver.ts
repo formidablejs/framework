@@ -25,7 +25,7 @@ export class AuthServiceResolver extends ServiceResolver {
 
 		Auth.onRequestForgotPasswordUrl((request: Request) => {
 			if (request.expectsHtml()) {
-				return Redirect.back().with('success', 'Password reset instructions have been send to your email')
+				return Redirect.back().with('success', 'Password reset instructions have been sent to your email')
 			}
 		})
 
