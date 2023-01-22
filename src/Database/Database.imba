@@ -6,7 +6,11 @@ import knex from 'knex'
 let Database\Knex = null
 
 try
-	Database\Knex = knex(Config.make())
+	let config = Config.make()
+
+	delete config.connection.driver
+
+	Database\Knex = knex(config)
 
 	attachPaginate!
 catch
