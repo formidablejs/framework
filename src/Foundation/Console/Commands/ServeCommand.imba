@@ -181,7 +181,7 @@ export class ServeCommand < Command
 			server.on 'quit', do(e)
 				self.message 'info', 'Application shutting down. Stopping server…'
 
-				self.exit()
+				process.exit()
 
 	def setEnvVars
 		process.env.FORMIDABLE_PORT = self.option('port', self.fallbackPort)
