@@ -87,6 +87,15 @@ export default class Console
 			instance.stdout.on 'data', do(data)
 				const line = data.toString!
 
+				if (address == null || address == undefined) && line.trim().includes('exited with error code:')
+					Output.write "\n  <bg:red> ERROR </bg:red> Development Server could not be started…\n"
+
+					Output.write "  <bg:red> ERROR </bg:red> Address in use: <u><fg:blue>http://{host || '127.0.0.1'}:{port ?? 3000}</fg:blue></u>\n"
+
+					process.exit(1)
+
+					return
+
 				if address == null || address == undefined
 					if line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba") && line.includes('listening on')
 						address = line.split('listening on ')[1]

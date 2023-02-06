@@ -130,6 +130,8 @@ export default class Kernel
 
 		imba.serve router.server
 
+		process.on('SIGINT', do process.exit(0))
+
 	def storeAddress address\string
 		const location = join(process.cwd!, 'storage', 'framework', 'address.json')
 

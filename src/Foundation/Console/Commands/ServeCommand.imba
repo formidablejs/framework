@@ -148,11 +148,7 @@ export class ServeCommand < Command
 				delay: devDelay
 			})
 
-			process.once('SIGUSR2', do
-				gracefulShutdown(do
-					process.kill(process.pid, 'SIGUSR2')
-				)
-			)
+			process.once('SIGUSR2', do process.kill(process.pid, 'SIGUSR2'))
 
 			server.on 'stdout', do(e)
 				const data = e.toString()
@@ -163,7 +159,7 @@ export class ServeCommand < Command
 
 					self.message 'info', 'Development Server running…'
 
-					self.write "  Local: <u>{#address}</u>"
+					self.write "  Local: <u><fg:blue>{#address}</fg:blue></u>"
 
 					self.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
@@ -173,6 +169,15 @@ export class ServeCommand < Command
 			server.on 'stderr', do(e)
 				const data = e.toString()
 
+				if data.trim().startsWith('Error: listen EADDRINUSE: address already in use')
+					self.message 'error', 'Development Server could not be started…', false
+
+					self.message 'error', "Address in use: <u><fg:blue>http://{data.split(' ')[7].trim()}</fg:blue></u>\n", false
+
+					process.exit(1)
+
+					return
+
 				process.stdout.write data
 
 			server.on 'restart', do
@@ -181,7 +186,7 @@ export class ServeCommand < Command
 			server.on 'quit', do(e)
 				self.message 'info', 'Application shutting down. Stopping server…'
 
-				self.exit()
+				process.exit()
 
 	def setEnvVars
 		process.env.FORMIDABLE_PORT = self.option('port', self.fallbackPort)
