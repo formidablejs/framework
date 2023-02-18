@@ -46,7 +46,7 @@ export class MakeResourceCommand < Command
 		writeFileSync(normalize(filePath), information.output)
 
 		if existsSync(filePath)
-			self.message 'info', "{self.resource} created successfully."
+			self.message 'info', "{self.resource} <bright>[{join(information.destination, reference.namespace, information.fileName)}]</bright> created successfully."
 
 			self.exit!
 
