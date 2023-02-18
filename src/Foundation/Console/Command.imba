@@ -8,25 +8,6 @@ export class Command < BaseCommand
 	get app
 		self.constructor.ctx
 
-	def message type\string, message\string, newLine\boolean = true
-		type = type.toLowerCase!
-
-		if !['error', 'warning', 'info'].includes(type)
-			throw new Error 'Invalid message type.'
-
-		const bgMap = {
-			error: 'red',
-			info: 'blue',
-			warning: 'yellow'
-		}
-
-		let fg = ''
-
-		if type == 'warning'
-			fg = 'fg:red'
-
-		self.write "\n  <bg:{bgMap[type]}>{fg ? '<' + fg + '>' : ''} {type.toUpperCase!} {fg ? '</' + fg + '>' : ''}</bg:{bgMap[type]}> {message}{newLine ? "\n" : ''}"
-
 	# @returns {string}
 	def env default\string
 		app.config.get('app.env', default)
