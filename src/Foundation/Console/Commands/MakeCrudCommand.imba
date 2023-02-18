@@ -48,4 +48,6 @@ export class MakeCrudCommand < Command
 		if self.option('type')
 			await self.app.console!.run("make:type {typeName} --schema={self.option('schema', '')}{domain}")
 
+		console.log('')
+
 		self.exit()
