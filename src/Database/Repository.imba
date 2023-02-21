@@ -19,3 +19,6 @@ export default class Repository
 
 	get table
 		Database.table(self.tableName)
+
+	get routeKeyName\string
+		'id'
