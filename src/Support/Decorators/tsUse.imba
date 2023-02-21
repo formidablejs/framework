@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
+import Repository from '../../Database/Repository'
 import Bind from '../../Database/Bind'
 import bind from '../Helpers/bind'
 import FormRequest from '../../Http/Request/FormRequest'
@@ -33,7 +34,7 @@ export const use = do(...paramaters)
 
 			config.request = request
 
-			await definition.forEach do(object, key)
+			definition.forEach do(object, key)
 				let response = null
 
 				if isString(object) && object.substring(0, 'table:'.length) === 'table:'
@@ -68,6 +69,14 @@ export const use = do(...paramaters)
 
 				elif object instanceof Bind
 					response = object.handle(request, key)
+
+				elif Repository.isPrototypeOf(object)
+					const param = Object.values(request.params!)[key] || undefined
+					const repo = new object
+
+					const results = repo.table.where(repo.routeKeyName || 'id', param).first!
+
+					response = results
 
 				elif object == Request
 					response = request
