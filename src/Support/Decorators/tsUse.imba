@@ -34,7 +34,7 @@ export const use = do(...paramaters)
 
 			config.request = request
 
-			await definition.forEach do(object, key)
+			definition.forEach do(object, key)
 				let response = null
 
 				if isString(object) && object.substring(0, 'table:'.length) === 'table:'
