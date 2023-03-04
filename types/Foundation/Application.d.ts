@@ -1,3 +1,5 @@
+type beforeListenCallback = (port: number, host: string) => void;
+
 export default class Application {
     /**
     @param {string} notation
@@ -30,6 +32,7 @@ export default class Application {
     port(default$?: number): number;
     host(default$?: string): string;
     routes(): any[];
+    onBeforeListen(event: beforeListenCallback): void;
     /**
     @param {object} config
     */

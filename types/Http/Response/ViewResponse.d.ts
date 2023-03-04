@@ -1,16 +1,20 @@
+import { FastifyReply } from "fastify";
+import { IView } from "../View/View";
+import FormRequest from "../Request/FormRequest";
+
 export default class ViewResponse {
     /**
     @param {View} view
     @param {object|null} data
     @param {number} statusCode
     */
-    static make(view: View, data?: object | null, statusCode?: number): ViewResponse;
+    static make(view: IView, data?: object | null, statusCode?: number): ViewResponse;
     /**
     @param {View} view
     @param {object|null} data
     @param {number} statusCode
     */
-    constructor(view: View, data?: object | null, statusCode?: number);
+    constructor(view: IView, data?: object | null, statusCode?: number);
     view: any;
     statusCode: number;
     /**

@@ -81,3 +81,7 @@ declare const $__init__$: unique symbol;
 declare const $_data$: unique symbol;
 declare const $_language$: unique symbol;
 export {};
+
+export interface IView {
+    new (...args: any[]): View
+}
