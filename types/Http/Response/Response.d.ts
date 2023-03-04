@@ -12,10 +12,10 @@ export default class Response {
     */
     json(object: object, statusCode?: number): JsonResponse;
     /**
-    @param {View} view
+    @param {IView} view
     @param {object|null} data
     */
-    view(view: View, data?: object | null): ViewResponse;
+    view(view: IView, data?: object | null): ViewResponse;
     /**
     @param {number} statusCode
     */
@@ -27,6 +27,8 @@ export default class Response {
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;
 }
+import { FastifyReply } from "fastify";
+import { IView } from "../View/View";
 import JsonResponse from "./JsonResponse";
 import ViewResponse from "./ViewResponse";
 declare const $__patch__$: unique symbol;

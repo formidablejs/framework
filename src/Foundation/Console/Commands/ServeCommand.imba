@@ -1,3 +1,4 @@
+import { alternativePort } from '../alternativePort'
 import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
@@ -119,7 +120,9 @@ export class ServeCommand < Command
 	def handle
 		if isNaN self.option('port') then return self.message 'error', 'Port must be a valid number.'
 
-		self.setEnvVars!
+		const port = await alternativePort(port ?? 3000)
+
+		self.setEnvVars(port)
 
 		const args = ['-s']
 
@@ -188,6 +191,6 @@ export class ServeCommand < Command
 
 				process.exit()
 
-	def setEnvVars
-		process.env.FORMIDABLE_PORT = self.option('port', self.fallbackPort)
+	def setEnvVars port\number
+		process.env.FORMIDABLE_PORT = port ?? self.fallbackPort
 		process.env.FORMIDABLE_HOST = self.option('host', self.fallbackHost)

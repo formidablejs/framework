@@ -45,6 +45,8 @@ export default class Kernel
 
 		let params = []
 
+		const middlewareAliases = self.middlewareAliases ?? self.routeMiddleware
+
 		# get route grouped middleware list.
 		Object.values((_middleware ? _middleware : route.middleware) || []).forEach do(middleware)
 			if typeof middleware === 'string'
@@ -60,13 +62,13 @@ export default class Kernel
 						params = match.split(':')[1].split(',')
 						match  = match.split(':')[0]
 
-					const mappedMiddleware = typeof match === 'string' ? self.routeMiddleware[match] ?? match : match
+					const mappedMiddleware = typeof match === 'string' ? middlewareAliases[match] ?? match : match
 
 					if typeof mappedMiddleware === 'function' then mappedMiddleware._params = params
 
 					list.push( mappedMiddleware )
 			else
-				const namedMiddleware = self.routeMiddleware[middleware]
+				const namedMiddleware = middlewareAliases[middleware]
 
 				if typeof namedMiddleware === 'function' then namedMiddleware._params = params
 
@@ -74,7 +76,7 @@ export default class Kernel
 
 		return list
 
-	def listen config, errorHandler, interceptors, hooks, plugins, serverConfig, returnMode
+	def listen config, errorHandler, interceptors, hooks, plugins, serverConfig, onBeforeListen, returnMode
 		const router = await fastify(serverConfig)
 
 		hasContentTypes(router)
@@ -118,6 +120,9 @@ export default class Kernel
 		delete process.env.FORMIDABLE_HOST
 
 		if returnMode isa Boolean && returnMode == true then return router
+
+		if onBeforeListen
+			await onBeforeListen(port, host)
 
 		router.listen(Number(port), host, do(error, address)
 			if routes.invalid.length > 0

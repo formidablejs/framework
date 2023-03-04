@@ -1,9 +1,11 @@
+import { FastifyReply } from "fastify";
+
+export type JsonData = {
+    [key: string]: number | string | Array<number | string | JsonData> | JsonData
+}
+
 export default class JsonResponse {
-    /**
-    @param {object} object
-    @param {number} statusCode
-    */
-    static make(object: object, statusCode: number): JsonResponse;
+    static make(object: JsonData, statusCode: number): JsonResponse;
     /**
     @param {object} object
     @param {number} statusCode

@@ -1,3 +1,6 @@
+import Repository from "../../Config/Repository";
+import FormRequest from "../../Http/Request/FormRequest";
+
 export default class HasEncryptionKey {
     /**
     @param {Repository} config

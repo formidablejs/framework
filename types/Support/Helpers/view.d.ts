@@ -1,6 +1,4 @@
-/**
-@param {View} view
-@param {object|null} data
-*/
-export default function view(view: View, data?: object | null): ViewResponse;
+import { IView } from "../../Http/View/View";
 import ViewResponse from "../../Http/Response/ViewResponse";
+
+export default function view(view: IView, data?: object | null): ViewResponse;

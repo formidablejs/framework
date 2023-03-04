@@ -32,6 +32,7 @@ import Encrypter from './Foundation/Encrypter'
 import env from './Support/Helpers/env'
 import EmailNotVerifiedException from './Auth/Exceptions/EmailNotVerifiedException'
 import EnsureEmailIsVerified from './Http/Middleware/EnsureEmailIsVerified'
+import EnsureStateless from './Http/Middleware/EnsureStateless'
 import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
 import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
@@ -42,7 +43,6 @@ import HasEncryptionKey from './Support/Encryption/HasEncryptionKey'
 import Hash from './Hashing/Hash'
 import HashServiceResolver from './Hashing/HashServiceResolver'
 import HttpException from './Http/Exceptions/HttpException'
-import IgnoreCookies from './Http/Middleware/IgnoreCookies'
 import Kernel from './Http/Kernel'
 import Language from './Support/Language/Language'
 import LanguageServiceResolver from './Support/Language/LanguageServiceResolver'
@@ -110,6 +110,7 @@ export {
 	env
 	EmailNotVerifiedException
 	EnsureEmailIsVerified
+	EnsureStateless
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn
@@ -126,7 +127,6 @@ export {
 	HashServiceResolver
 	helpers
 	HttpException
-	IgnoreCookies
 	Kernel
 	Language
 	LanguageServiceResolver

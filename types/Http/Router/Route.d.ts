@@ -1,3 +1,6 @@
+import { IMiddleware } from "../Middleware/IMiddleware";
+import { IView } from "../View/View";
+
 export default class Route {
     /**
     @param {string} verb
@@ -27,7 +30,7 @@ export default class Route {
     @param {object} data
     @param {number|null} statusCode
     */
-    static view(path: string, view: View, data?: object, statusCode?: number | null): typeof Route;
+    static view(path: string, view: IView, data?: object, statusCode?: number | null): typeof Route;
     /**
          * Add a delete route.
          */
@@ -111,9 +114,9 @@ export default class Route {
     *
          * Add middleware to route.
 
-    @param {string | object | Array<string|object>} name
+    @param {string | IMiddleware | Array<string|IMiddleware>} name
     */
-    static middleware(name: string | object | Array<string|object>): typeof Route;
+    static middleware(name: string | IMiddleware | Array<string|IMiddleware>): typeof Route;
     /**
          * Add grouped routes.
          */
@@ -123,6 +126,15 @@ export default class Route {
 
     @param {function} callable
     */
-    static group(options: Object, callable: Function): void;
+    static group(options: GroupOptions, callable: Function): void;
     static all(): any[];
+}
+
+export type GroupOptions = {
+     prefix: string;
+     middleware: IMiddleware | string | Array<IMiddleware | string>;
+} | {
+     prefix: string;
+} | {
+     middleware: IMiddleware | string | Array<IMiddleware | string>;
 }
