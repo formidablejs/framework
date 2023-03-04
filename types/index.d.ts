@@ -150,6 +150,8 @@ export {
     MaintenanceModeException,
     MaintenanceServiceResolver,
     Middleware,
+    MiddlewareAliases,
+    MiddlewareGroups,
     MultipartServiceResolver,
     NotFoundException,
     PersonalAccessToken,
