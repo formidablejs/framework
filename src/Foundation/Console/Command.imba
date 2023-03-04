@@ -32,7 +32,7 @@ export class Command < BaseCommand
 *     Application In Production!     *
 **************************************`
 
-			const confirmed = await self.confirm('Do you really wish to run this command')
+			const confirmed = await self.confirm('Do you really wish to run this command?')
 
 			if !confirmed
 				self.info "Command Canceled!"
