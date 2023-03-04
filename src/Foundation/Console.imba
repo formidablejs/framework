@@ -1,4 +1,5 @@
 import { Output } from '@formidablejs/console'
+import { alternativePort } from './Console/alternativePort'
 import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn, execSync } from 'child_process'
@@ -61,7 +62,7 @@ export default class Console
 		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
 			preServe!
 
-			let port = 3000
+			let port = await alternativePort(port ?? 3000)
 			let host = ''
 			let addr = '0'
 
