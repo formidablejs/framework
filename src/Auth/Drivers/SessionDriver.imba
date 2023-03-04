@@ -14,7 +14,10 @@ import strRandom from '../../Support/Helpers/strRandom'
 export default class SessionDriver < Driver
 
 	def verify
-		const token = await self.request.request.session.personal_access_token
+		let token = undefined
+
+		if self.request.request.session
+			token = await self.request.request.session.personal_access_token
 
 		const personalAccessToken = await self.getPersonalAccessToken(
 			!isEmpty(token) ? token : new String
@@ -32,7 +35,7 @@ export default class SessionDriver < Driver
 		personalAccessToken
 
 	def renewSession
-		if !isEmpty(self.request.request.cookies.remember)
+		if self.request.request.cookies && !isEmpty(self.request.request.cookies.remember)
 			const remember = self.request.request.cookies.remember
 
 			if isString(remember)

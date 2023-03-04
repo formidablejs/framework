@@ -42,6 +42,7 @@ export default class Application
 	prop root = null
 	prop handler\ExceptionHandler = null
 	prop context\Context = Context
+	prop beforeListen = null
 	prop serverConfig\object = {
 		ignoreTrailingSlash: true
 	}
@@ -79,6 +80,9 @@ export default class Application
 
 	def routes
 		Route.all!
+
+	def onBeforeListen event
+		self.beforeListen = event
 
 	def server config\object
 		self.serverConfig = config
@@ -167,6 +171,7 @@ export default class Application
 			self.hooks,
 			self.plugins,
 			self.serverConfig,
+			self.beforeListen,
 			returnMode
 		)
 
