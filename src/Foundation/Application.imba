@@ -182,7 +182,7 @@ export default class Application
 
 		{
 			run: do
-				settings.console.run!
+				await settings.console.run!
 		}
 
 	def console
