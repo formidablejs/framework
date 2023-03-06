@@ -4,6 +4,9 @@ import ServiceResolver from '../Support/ServiceResolver'
 
 export default class AuthenticationServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	get protocol
 		const default = self.app.make(ConfigRepository).get 'auth.defaults.protocol'
 

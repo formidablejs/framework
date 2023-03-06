@@ -12,6 +12,9 @@ import type FormRequest from './FormRequest'
 
 export default class MultipartServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	def boot
 		self.saveTempFiles!
 		self.unlinkTempFiles!

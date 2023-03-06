@@ -4,6 +4,9 @@ import ServiceResolver from '../../Support/ServiceResolver'
 
 export default class CookieServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	/**
 	 * Session config.
 	 */

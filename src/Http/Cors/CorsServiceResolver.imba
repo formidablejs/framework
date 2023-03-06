@@ -6,6 +6,9 @@ import type { FastifyInstance, FastifyRequest } from 'fastify'
 
 export default class CorsServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	/**
 	 * Get allowed origins.
 	 *

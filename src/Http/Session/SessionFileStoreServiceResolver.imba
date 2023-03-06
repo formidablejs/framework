@@ -5,6 +5,9 @@ import FileStore from 'session-file-store'
 
 export default class SessionFileStoreServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	def boot
 		if self.app.config.get('session.driver') === 'file'
 			const store = FileStore(session)

@@ -5,6 +5,9 @@ import { ServiceResolver } from '@formidablejs/framework'
 
 export class AuthServiceResolver < ServiceResolver
 
+	static get cli
+		false
+
 	def boot
 		Auth.onAuthenticated(do(request\Request)
 			if request.expectsHtml!
