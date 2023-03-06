@@ -105,12 +105,15 @@ export default class ConsoleKernel
 		]
 
 	def registerCommands app\Application, ctx
-		for command in self.default
-			command.ctx = ctx
-			app.register(command)
+		const commands = self.default.concat(self.registered)
 
-		for command in self.registered
+		let length = commands.length
+
+		while length--
+			const command = commands[length]
+
 			command.ctx = ctx
+
 			app.register(command)
 
 		self.loadEvents app\Application
