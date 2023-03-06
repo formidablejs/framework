@@ -76,6 +76,7 @@ import ValidationException from './Validator/Exceptions/ValidationException'
 import ValidationServiceResolver from './Validator/ValidationServiceResolver'
 import Validator from './Validator/Validator'
 import VerifyCsrfToken from './Http/Middleware/VerifyCsrfToken'
+import VerifyEmail from '.Auth/Mail/VerifyEmail'
 import View from './Http/View/View'
 import view from './Support/Helpers/view'
 import ViewResponse from './Http/Response/ViewResponse'
@@ -166,6 +167,7 @@ export {
 	ValidationServiceResolver
 	Validator
 	VerifyCsrfToken
+	VerifyEmail
 	view
 	View
 	ViewResponse
