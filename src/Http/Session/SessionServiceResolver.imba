@@ -15,6 +15,9 @@ import type { FastifyReply } from 'fastify'
 
 export default class SessionServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	/**
 	 * Session config.
 	 */

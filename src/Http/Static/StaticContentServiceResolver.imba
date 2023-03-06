@@ -4,6 +4,9 @@ import ServiceResolver from '../../Support/ServiceResolver'
 
 export default class StaticContentServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	/**
 	 * Public directory.
 	 */

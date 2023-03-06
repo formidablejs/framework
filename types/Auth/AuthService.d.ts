@@ -1,3 +1,14 @@
+import type { Mailable } from "@formidablejs/mailer";
+import type { MailHandle } from "@formidablejs/mailer";
+import Route from "../Http/Router/Route";
+
+interface IMailable {
+    new (...args: any[]): {
+        subject?: string;
+        render: () => unknown;
+    }
+}
+
 export default class AuthService {
     /**
     @param {function} callback
@@ -96,13 +107,13 @@ export default class AuthService {
     */
     static onUpdatePassword(callback: Function): typeof AuthService;
     /**
-    @param {Mailable} mailer
+    @param {IMailable} mailer
     */
-    static verificationMailer(mailer: Mailable): typeof AuthService;
+    static verificationMailer(mailer: IMailable): typeof AuthService;
     /**
-    @param {Mailable} mailer
+    @param {IMailable} mailer
     */
-    static resetPasswordMailer(mailer: Mailable): typeof AuthService;
+    static resetPasswordMailer(mailer: IMailable): typeof AuthService;
     /**
     @param {MailHandle} events
     */
@@ -116,6 +127,3 @@ export default class AuthService {
     */
     static routes(config?: object): typeof Route;
 }
-import { Mailable } from "@formidablejs/mailer";
-import { MailHandle } from "@formidablejs/mailer";
-import Route from "../Http/Router/Route";

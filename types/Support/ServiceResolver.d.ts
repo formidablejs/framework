@@ -1,16 +1,36 @@
+import Application from "../Foundation/Application";
+
 export default class ServiceResolver {
     /**
-    @param {Application} app
-    */
-    constructor(app: Application);
+     * Application instance.
+     */
     app: Application;
+
+    /**
+     * Whether or not Service Resolver should be loaded in
+     * cli mode.
+     *
+     * @default true
+     */
+    static get runInCli(): boolean;
+
+    /**
+     * Initiate Service Resolver.
+     */
+    constructor(app: Application);
+
+    /**
+     * Get contextual objects.
+     */
     get context(): any[];
-    boot(): any;
-    register(): any;
-    [$__patch__$]($$?: {}): void;
-    [$__init__$]($$?: any, deep?: boolean): void;
+
+    /**
+     * Boot up Service Resolver.
+     */
+    boot(): unknown;
+
+    /**
+     * Register Service Resolver.
+     */
+    register(): unknown;
 }
-import Application from "../Foundation/Application";
-declare const $__patch__$: unique symbol;
-declare const $__init__$: unique symbol;
-export {};

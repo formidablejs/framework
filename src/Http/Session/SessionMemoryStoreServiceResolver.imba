@@ -5,6 +5,9 @@ import MemoryStore from 'memorystore'
 
 export default class SessionMemoryStoreServiceResolver < ServiceResolver
 
+	static get runInCli
+		false
+
 	def boot
 		if self.app.config.get('session.driver') == 'memory'
 			const store = MemoryStore(session)

@@ -72,6 +72,9 @@ export default class Application
 	get version
 		appVersion!
 
+	get isCli?
+		process.argv.at(-1).endsWith('console.js')
+
 	def port default\number = 3000
 		settings.port || default
 
@@ -97,7 +100,7 @@ export default class Application
 
 		self
 
-	def addHook hook, handler
+	def addHook hook\string, handler
 		if self.hooks[hook] == undefined || self.hooks[hook] == null
 			hooks[hook] = new Array
 
@@ -181,14 +184,13 @@ export default class Application
 		kernel.registerCommands(settings.console, this)
 
 		{
-			run: do
-				await settings.console.run!
+			run: do settings.console.run!
 		}
 
 	def console
 		settings.console
 
-	def prepare
+	def prepare\Application
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
 
@@ -199,14 +201,18 @@ export default class Application
 	def resolve
 		const resolvers = self.config.get 'app.resolvers'
 
-		if resolvers && resolvers instanceof Array
+		if !(resolvers && resolvers instanceof Array)
+			return
 
-			for resolver\ServiceResolver in resolvers
-				resolver = new (resolver.default ?? resolver)(self)
+		for resolver\ServiceResolver in resolvers
+			if isCli? && resolver.runInCli !== undefined && resolver.cli == false
+				continue
 
-				resolver.boot!
-				resolver.register!
+			resolver = new resolver(self)
 
-				if resolver.context && Array.isArray(resolver.context)
-					resolver.context.forEach do(context)
-						self.context.inject(context)
+			resolver.boot!
+			resolver.register!
+
+			if resolver.context && Array.isArray(resolver.context)
+				resolver.context.forEach do(context)
+					self.context.inject(context)
