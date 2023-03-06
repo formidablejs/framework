@@ -69,6 +69,7 @@ import Redis from "./Redis/Redis";
 import RedisServiceResolver from "./Redis/RedisServiceResolver";
 import Repository from "./Database/Repository";
 import Request from "./Http/Request/Request";
+import ResetPassword from './Auth/Mail/ResetPassword'
 import Response from "./Http/Response/Response";
 import response from "./Support/Helpers/response";
 import Route from "./Http/Router/Route";
@@ -88,6 +89,7 @@ import ValidationException from "./Validator/Exceptions/ValidationException";
 import ValidationServiceResolver from "./Validator/ValidationServiceResolver";
 import Validator from "./Validator/Validator";
 import VerifyCsrfToken from "./Http/Middleware/VerifyCsrfToken";
+import VerifyEmail from './Auth/Mail/VerifyEmail'
 import View from "./Http/View/View";
 import view from "./Support/Helpers/view";
 import ViewResponse from "./Http/Response/ViewResponse";
@@ -163,6 +165,7 @@ export {
     RedisServiceResolver,
     Repository,
     Request,
+    ResetPassword,
     RequestGenericInterface,
     response,
     Response,
@@ -186,6 +189,7 @@ export {
     ValidationServiceResolver,
     Validator,
     VerifyCsrfToken,
+    VerifyEmail,
     view,
     View,
     ViewResponse

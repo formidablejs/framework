@@ -11,5 +11,9 @@ export default class EnsureStateless {
      * @default false
      */
     get strict(): boolean
+
+    /**
+     * Handle request.
+     */
     handle(request: FormRequest|Request, reply: FastifyReply, params: any[] | null): () => any;
 }
