@@ -56,6 +56,8 @@ export default class Application {
 
     onBeforeListen(event: beforeListenCallback): void;
 
+    onServeInjection(event: CallableFunction): void;
+
     server(config: object): Application;
 
     fastify(): FastifyInstance;

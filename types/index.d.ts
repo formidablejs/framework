@@ -5,6 +5,7 @@ import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify/types/request";
 import { handleException } from "./Foundation/Exceptions/Handler/handleException";
 import { handleMaintenanceMode } from "./Foundation/Exceptions/Handler/handleException";
+import { ICommand } from "./Foundation/Application";
 import { IContextual } from './Database/IContextual'
 import { IMiddleware } from './Http/Middleware/IMiddleware'
 import { Mail } from "@formidablejs/mailer";
@@ -141,6 +142,7 @@ export {
     HashServiceResolver,
     helpers,
     HttpException,
+    ICommand,
     IContextual,
     IMiddleware,
     Kernel,
