@@ -4,6 +4,7 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import { Prop } from '@formidablejs/console'
 import { spawnSync } from 'child_process'
+import { ServeEvents } from '../ServeEvents'
 import isNumber from '../../../Support/Helpers/isNumber'
 import nodemon from 'nodemon'
 
@@ -49,6 +50,8 @@ export class ServeCommand < Command
 				'dist',
 				'node_modules',
 				'public',
+				'resources/css',
+				'resources/js',
 				'storage',
 				'test',
 				'tests',
@@ -120,7 +123,7 @@ export class ServeCommand < Command
 	def handle
 		if isNaN self.option('port') then return self.message 'error', 'Port must be a valid number.'
 
-		const port = await alternativePort(port ?? 3000)
+		const port = await alternativePort(self.option('port', 3000))
 
 		self.setEnvVars(port)
 
@@ -166,6 +169,8 @@ export class ServeCommand < Command
 
 					self.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
+					runEvents!
+
 				if data.trim().startsWith('listening on http') == false
 					process.stdout.write data
 
@@ -191,6 +196,18 @@ export class ServeCommand < Command
 
 				process.exit()
 
+			process.on 'SIGINT', do
+				process.exit()
+
 	def setEnvVars port\number
 		process.env.FORMIDABLE_PORT = port ?? self.fallbackPort
 		process.env.FORMIDABLE_HOST = self.option('host', self.fallbackHost)
+
+	def runEvents
+		for event in ServeEvents.get!
+			event({
+				dev: true,
+				port: port,
+				host: self.option('host', self.fallbackHost),
+				noAnsi: process.argv.includes('--no-ansi')
+			})
