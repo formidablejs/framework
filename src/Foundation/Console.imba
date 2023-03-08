@@ -3,6 +3,7 @@ import { alternativePort } from './Console/alternativePort'
 import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn, execSync } from 'child_process'
+import { ServeEvents } from './Console/ServeEvents'
 
 export default class Console
 	prop runtime\string
@@ -62,8 +63,8 @@ export default class Console
 		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
 			preServe!
 
-			let port = await alternativePort(port ?? 3000)
-			let host = ''
+			let port = 3000
+			let host = 'localhost'
 			let addr = '0'
 
 			args.forEach do(arg)
@@ -75,6 +76,8 @@ export default class Console
 
 				if arg == '--addr'
 					addr = '1'
+
+			port = await alternativePort(port)
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
@@ -106,6 +109,14 @@ export default class Console
 						Output.write "  Local: <u>{address}</u>"
 
 						Output.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
+
+						for event in ServeEvents.get!
+							event({
+								dev: true,
+								port: port,
+								host: host,
+								noAnsi: process.argv.includes('--no-ansi')
+							})
 				else
 					if !line.includes("\x1b[1mnode_modules/@formidablejs/framework/bin/imba/server.imba") && !line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba")
 						process.stdout.write line
