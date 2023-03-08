@@ -2,6 +2,7 @@ import { addExceptionResolver } from './Exceptions/Handler/handleException'
 import { addResolver } from '../Http/Kernel/resolveResponse'
 import { Application as ApplicationConsole } from '@formidablejs/console'
 import { Context } from './Context'
+import { ServeEvents } from './Console/ServeEvents'
 import appVersion from '../Support/Helpers/version'
 import Bootstrap from './Bootstrap'
 import ConfigRepository from '../Config/Repository'
@@ -86,6 +87,9 @@ export default class Application
 
 	def onBeforeListen event
 		self.beforeListen = event
+
+	def onServeInjection event
+		ServeEvents.add event
 
 	def server config\object
 		self.serverConfig = config
