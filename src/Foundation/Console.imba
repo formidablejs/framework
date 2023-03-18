@@ -102,11 +102,11 @@ export default class Console
 
 				if address == null || address == undefined
 					if line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba") && line.includes('listening on')
-						address = line.split('listening on ')[1]
+						address = line.split('listening on ')[1].trim!
 
 						Output.write "\n  <bg:blue> INFO </bg:blue> Development Server running…\n"
 
-						Output.write "  Local: <u>{address}</u>"
+						Output.write "  Local: <u><fg:blue>http://{address}</fg:blue></u>\n"
 
 						Output.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
