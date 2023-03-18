@@ -10,7 +10,7 @@ def noInteraction\boolean
 def alternativePort\number port\number
 	const _p = await detectPort(port)
 
-	if _p !== port
+	if _p != port
 		if noInteraction!
 			Output.write("\n  <bg:red><fg:white> ERROR </fg:white></bg:red> Something is already running on port {port}\n")
 
