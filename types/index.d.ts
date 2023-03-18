@@ -95,6 +95,16 @@ import View from "./Http/View/View";
 import view from "./Support/Helpers/view";
 import ViewResponse from "./Http/Response/ViewResponse";
 
+declare global {
+    interface Window {
+        imba_devtools?: {
+            debug?: boolean
+            manifest?: object
+            socket?: EventSource
+        }
+    }
+}
+
 export {
     αcontext,
     αuse,
