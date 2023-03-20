@@ -7,7 +7,7 @@ export class SessionPruneExpiredCommand < Command
 		'session:prune-expired'
 
 	get description
-		'Prune expired sessions.'
+		'Prune expired sessions'
 
 	def handle
 		const total = await Database.table('personal_access_tokens')

@@ -1,6 +1,6 @@
 name: E2E Tests
 
-on: push
+on: pull_request
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-      run: npm install
+      run: npm ci
     - name: Build
       run: npm run build
     - name: Prepare e2e tests
