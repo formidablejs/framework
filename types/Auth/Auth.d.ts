@@ -10,19 +10,19 @@ declare class Auth {
     */
     static attempt(body: object): Promise<any>;
     /**
-    @param {object} user
+    @param {User} user
     @param {string} abilities
     @param {Driver} driverManager
     */
-    constructor(user: object, abilities: string, driverManager: Driver);
+    constructor(user: User, abilities: string, driverManager: Driver);
     _driver: Driver;
     abilities: () => any;
-    user: () => {};
+    user: () => User;
     driver(): Driver;
     /**
     @param {string} perform
     */
-    can(perform: string): any;
+    can(perform: string): boolean;
     check(): boolean;
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;
