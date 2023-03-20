@@ -1,6 +1,6 @@
 name: Core Tests
 
-on: push
+on: pull_request
 
 jobs:
   build:
