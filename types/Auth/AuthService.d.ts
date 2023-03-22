@@ -1,5 +1,8 @@
 import type { Mailable } from "@formidablejs/mailer";
 import type { MailHandle } from "@formidablejs/mailer";
+import Repository from "../Config/Repository";
+import FormRequest from "../Http/Request/FormRequest";
+import Request from "../Http/Request/Request";
 import Route from "../Http/Router/Route";
 
 interface IMailable {
@@ -9,67 +12,75 @@ interface IMailable {
     }
 }
 
+type RoutesConfig = {
+    login?: boolean
+    register?: boolean
+    logout?: boolean
+    email?: boolean
+    password?: boolean
+}
+
 export default class AuthService {
     /**
     @param {function} callback
     */
-    static beforeLogin(callback: Function): typeof AuthService;
+    static beforeLogin(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeLogout(callback: Function): typeof AuthService;
+    static beforeLogout(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeRegister(callback: Function): typeof AuthService;
+    static beforeRegister(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeVerify(callback: Function): typeof AuthService;
+    static beforeVerify(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeResend(callback: Function): typeof AuthService;
+    static beforeResend(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeForgot(callback: Function): typeof AuthService;
+    static beforeForgot(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static beforeReset(callback: Function): typeof AuthService;
+    static beforeReset(callback: (request: FormRequest | Request, reply: FastifyReply, params: ?Array<string>, config: Repository) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onLogin(callback: Function): typeof AuthService;
+    static onLogin(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onLogout(callback: Function): typeof AuthService;
+    static onLogout(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onRegister(callback: Function): typeof AuthService;
+    static onRegister(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onForgot(callback: Function): typeof AuthService;
+    static onForgot(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onReset(callback: Function): typeof AuthService;
+    static onReset(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onAuthenticated(callback: Function): typeof AuthService;
+    static onAuthenticated(callback: (request: FormRequest | Request, reply: FastifyReply, user: User, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onFetchAuthenticated(callback: Function): typeof AuthService;
+    static onFetchAuthenticated(callback: (tokenableType: string, tokenableId: number, protocol: string, token: { token: string, session: string }) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onSessionDestroyed(callback: Function): typeof AuthService;
+    static onSessionDestroyed(callback: (request: FormRequest | Request, reply: FastifyReply, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
@@ -77,35 +88,35 @@ export default class AuthService {
     /**
     @param {function} callback
     */
-    static onCreateUser(callback: Function): typeof AuthService;
+    static onCreateUser(callback: (request: FormRequest | Request, body: object, table: string) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onRegistered(callback: Function): typeof AuthService;
+    static onRegistered(callback: (request: FormRequest | Request, reply: FastifyReply, user: User, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onVerification(callback: Function): typeof AuthService;
+    static onVerification(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onEmailResend(callback: Function): typeof AuthService;
+    static onEmailResend(callback: (request: FormRequest | Request, reply: FastifyReply) => any): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onEmailVerified(callback: Function): typeof AuthService;
+    static onEmailVerified(callback: (request: FormRequest | Request, reply: FastifyReply, verified: boolean, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onRequestEmailVerificationUrl(callback: Function): typeof AuthService;
+    static onRequestEmailVerificationUrl(callback: (request: FormRequest | Request, reply: FastifyReply, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onRequestForgotPasswordUrl(callback: Function): typeof AuthService;
+    static onRequestForgotPasswordUrl(callback: (request: FormRequest | Request, reply: FastifyReply, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {function} callback
     */
-    static onUpdatePassword(callback: Function): typeof AuthService;
+    static onUpdatePassword(callback: (request: FormRequest | Request, reply: FastifyReply, protocol: string, params: ?Array<string>) => void): typeof AuthService;
     /**
     @param {IMailable} mailer
     */
@@ -123,7 +134,7 @@ export default class AuthService {
     */
     static resetMailerEvents(events: MailHandle): typeof AuthService;
     /**
-    @param {object} config
+    @param {RoutesConfig} config
     */
-    static routes(config?: object): typeof Route;
+    static routes(config?: RoutesConfig): void;
 }
