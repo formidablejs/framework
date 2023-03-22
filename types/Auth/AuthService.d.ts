@@ -47,6 +47,13 @@ type RoutesConfig = {
      * @default true
      */
     password?: boolean
+
+    /**
+     * Set protocol.
+     *
+     * @default undefined
+     */
+    protocol?: string
 }
 
 export default class AuthService {
