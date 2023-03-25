@@ -102,7 +102,7 @@ export default class Console
 
 				if address == null || address == undefined
 					if line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba") && line.includes('listening on')
-						address = line.split('listening on ')[1].trim!
+						address = line.split('listening on ')[1].trim!.replace(/\u001b\[.*?m/g, '')
 
 						Output.write "\n  <bg:blue> INFO </bg:blue> Development Server running…\n"
 
