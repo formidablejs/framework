@@ -154,7 +154,10 @@ export class ServeCommand < Command
 				delay: devDelay
 			})
 
-			process.once('SIGUSR2', do process.kill(process.pid, 'SIGUSR2'))
+			process.once('SIGUSR2', do
+				gracefulShutdown do
+					process.kill(process.pid, 'SIGUSR2')
+			)
 
 			server.on 'stdout', do(e)
 				const data = e.toString()
@@ -192,12 +195,10 @@ export class ServeCommand < Command
 				self.message 'info', 'Application change detected. Restarting server…'
 
 			server.on 'quit', do(e)
-				self.message 'info', 'Application shutting down. Stopping server…'
-
-				process.exit()
+				self.exit()
 
 			process.on 'SIGINT', do
-				process.exit()
+				self.exit()
 
 	def setEnvVars port\number
 		process.env.FORMIDABLE_PORT = port ?? self.fallbackPort
