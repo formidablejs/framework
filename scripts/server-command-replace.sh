@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-sed -i -e 's/return self.gracefulShutdown/gracefulShutdown/g' ${PWD}/lib/Foundation/Console/Commands/ServeCommand.js
+FILE=${PWD}/lib/Foundation/Console/Commands/ServeCommand.js
+
+if [[ $OSTYPE == 'darwin'* ]]; then
+    sed -i '' -e 's/return self.gracefulShutdown/gracefulShutdown/g' $FILE
+else
+    sed -i -e 's/return self.gracefulShutdown/gracefulShutdown/g' $FILE
+fi
