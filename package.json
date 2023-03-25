@@ -17,7 +17,7 @@
     "types"
   ],
   "scripts": {
-    "build": "npm run imba:build",
+    "build": "npm run imba:build && sh ./scripts/server-command-replace.sh",
     "imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
     "imba:build:temp": "imbac src --output=.temp --platform=node --clean",
     "imba:watch": "imbac -w src --output=lib --platform=node --clean",
