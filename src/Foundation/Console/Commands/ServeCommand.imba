@@ -45,7 +45,7 @@ export class ServeCommand < Command
 		{
 			commands: []
 			ignore: [
-				"app/Types",
+				'app/Types',
 				'bootstrap/config',
 				'database',
 				'dist',
