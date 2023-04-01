@@ -18,7 +18,7 @@ def alternativePort\number port\number
 
 			return
 
-		Output.write("\n  <bg:yellow><fg:red> WARNING </fg:red></bg:yellow> Something is already running on port {port}\n")
+		Output.write("\n  <bg:yellow><fg:red> WARN </fg:red></bg:yellow> Something is already running on port {port}\n")
 
 		const results = await inquirer.prompt([{
 			name: 'run'

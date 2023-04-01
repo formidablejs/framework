@@ -2,21 +2,20 @@ import { IMiddleware } from "../Middleware/IMiddleware";
 import { IView } from "../View/View";
 
 export default class Route {
-    /**
-    @param {string} verb
-    @param {string} pattern
-    @param {function|[function, string]} action
-    */
-    static addRoute(verb: string, pattern: string, action: Function | [Function, string]): typeof Route;
+//     /**
+//     @param {string} verb
+//     @param {string} pattern
+//     @param {function|[function, string]} action
+//     */
+//     static addRoute(verb: string, pattern: string, action: Function | [Function, string]): typeof Route;
     /**
          * Check if route exists.
          */
     /**
-    *
-         * Check if route exists.
-
-    @param {string} name
-    */
+     *
+     * Check if route exists.
+     * @param {string} name
+     */
     static has(name: string): boolean;
     /**
          * Add a get route that renders a view.

@@ -4,6 +4,7 @@ import ConfigRepostory from '../../../Config/Repository'
 import HttpException from '../../../Http/Exceptions/HttpException'
 import MaintenanceModeException from '../MaintenanceModeException'
 import StackTrace from 'stacktrace-js'
+import resolveResponse from '../../../Http/Kernel/resolveResponse'
 import ValidationException from '../../../Validator/Exceptions/ValidationException'
 import type { FastifyReply } from 'fastify'
 import type FormRequest from '../../../Http/Request/FormRequest'
@@ -21,7 +22,9 @@ def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, r
 	for own hook, registeredHooks of hooks
 		for hookHandler in registeredHooks
 			if hook == 'onMaintenance'
-				hookHandler(error, request, reply)
+				const response = await hookHandler(error, request, reply)
+
+				if !isEmpty(response) then return resolveResponse(response, request, reply)
 
 	const message\string = error.response
 	const statusCode\number = error.getStatus!
@@ -30,9 +33,9 @@ def handleMaintenanceMode error\MaintenanceModeException, request\FormRequest, r
 
 def handleException error\Error|ApplicationException|HttpException, request\FormRequest, reply\FastifyReply, returns\boolean = false, shouldReport\boolean = true
 	for resolver of settings.resolvers
-		const results = resolver(error, request, reply)
+		const results = await resolver(error, request, reply)
 
-		if !isEmpty(results) then return results
+		if !isEmpty(results) then return resolveResponse(results, request, reply)
 
 	const statusCode\number = typeof error.getStatus === 'function' ? error.getStatus! : 500
 
