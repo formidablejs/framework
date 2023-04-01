@@ -160,7 +160,7 @@ export default class AuthService
 
 		self
 
-	static def routes config\object = {}
+	static def routes\void config\object = {}
 		const login    = config.login ? config.login : true
 		const register = config.register ? config.register : true
 		const logout   = config.logout ? config.logout : true
