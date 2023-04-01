@@ -23,9 +23,9 @@ export default class StaticContentServiceResolver < ServiceResolver
 	 */
 	get assets
 		{
-			root: join(process.cwd!, '.formidable', 'public', '__assets__')
+			root: join(process.cwd!, '.formidable', 'public', 'assets')
 			wildcard: false
-			prefix: '/__assets__/'
+			prefix: '/assets/'
 			decorateReply: false
 		}
 
