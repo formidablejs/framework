@@ -13,14 +13,14 @@ export default class Server
 		new Server(application)
 
 	def start serverOptions
-		const port\number = (serverOptions && serverOptions.port) ? serverOptions.port : 3000
-		const host\string = (serverOptions && serverOptions.host) ? serverOptions.host : '0.0.0.0'
+		const port\number = (serverOptions && serverOptions.port) ? serverOptions.port : (process.env.PORT || 3000)
+		const host\string = (serverOptions && serverOptions.host) ? serverOptions.host : (process.env.HOST || '0.0.0.0')
 		const callback\Function = (serverOptions && serverOptions._) ? serverOptions._ : null
 
 		#_app.then do(app)
 			app.fastify!.listen({
-				port: port || process.env.PORT,
-				host: host || process.env.HOST
+				port: port,
+				host: host
 			}, callback || do(_error, address)
 				if _error
 					console.error(_error)
