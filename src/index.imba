@@ -61,6 +61,7 @@ import ResetPassword from './Auth/Mail/ResetPassword'
 import Response from './Http/Response/Response'
 import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
+import Server from './Foundation/Server'
 import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
 import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
@@ -152,6 +153,7 @@ export {
 	response
 	Response
 	Route
+	Server
 	ServiceResolver
 	SessionDriverManager
 	SessionFileStoreServiceResolver
