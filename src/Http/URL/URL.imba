@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import isString from '../../Support/Helpers/isString'
+import isObject from '../../Support/Helpers/isObject'
 import jwt from 'jsonwebtoken'
 import MissingRouteParamException from './Exceptions/MissingRouteParamException'
 import Path from '../Router/Path'
@@ -13,61 +14,67 @@ const settings = {
 
 export default class URL
 
-	static def route name\string, params\object = new Object, query\object = new Object
-		let selected;
+	static def setSecret secret\string
+		if !isString(secret)
+			throw new TypeError 'secret must be a String'
 
-		for route, key in Route.all!
-			if route.name === name then selected = route
+		settings.secret = secret
+
+		self
+
+	static def route name\string, params\object = {}
+		const selected = Route.all!.find do(route) route.name === name
+
+		if !isString(name)
+			throw new TypeError 'name must be a String'
+
+		if !isEmpty(params) && !isObject(params)
+			throw new TypeError 'params must be an Object'
 
 		if isEmpty selected
 			throw new UnregisteredRouteException 'Route is not registered'
 
-		if selected.path.trim! == '/'
-			let uri = selected.path
+		selected.params = selected.path.match(/\:[a-zA-Z]+/gm) ?? []
 
-			if Object.keys(query).length > 0
-				uri = uri + '?' + self.toQuery(query)
+		let query = {}
+		const uri = []
 
-			return uri
+		Object.keys(params).forEach(do(key)
+			if !selected.params.includes(":{key}") && key !== '_query'
+				query[key] = params[key]
+		)
 
-		uri = new String
+		selected.path.split('/').forEach(do(value)
+			if value.startsWith(':')
+				value = value.slice(1)
 
-		for path, key in selected.path.split('/')
-			if path.startsWith(':') && !(params[path.split(':')[1]])
-				throw new MissingRouteParamException "Missing param: {path.split(':')[1]}"
+				if !Object.keys(params).includes(value)
+					throw new MissingRouteParamException "Route '{name}' is missing '{value}' param."
 
-			uri = uri + (path.startsWith(':') ? params[path.split(':')[1]] : path) + '/'
+				else value = params[value]
 
-		uri = Path.clean([], uri)
+			uri.push value
+		)
 
-		if Object.keys(query).length > 0
-			uri = uri + '?' + self.toQuery(query)
+		query = (new URLSearchParams(Object.assign(query, (params._query ?? {})))).toString()
 
-		uri
+		uri.join('/') + (query.length > 0 ? "?{query}" : '')
 
-	static def signedRoute name\string, params\object = new Object, query\object = new Object
-		const uri = self.route name, params, query
+	static def signedRoute name\string, params\object = {}
+		const uri = self.route name, params
 
 		const signature = await jwt.sign({ uri }, settings.secret, {})
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def temporarySignedRoute name\string, expiresIn\string, params\object = new Object, query\object = new Object
-		let uri = self.route name, params, query
+	static def temporarySignedRoute name\string, expiresIn\string, params\object = {}
+		const uri = self.route name, params
 
 		const signature = await jwt.sign({ uri }, settings.secret, { expiresIn })
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def path uri\string, query\object = new Object
-		uri = Path.clean([], uri)
-
-		if Object.keys(query).length > 0
-			uri = uri + '?' + querystring.stringify(query)
-
-		uri
-
-	static def signed uri\string, query\object = new Object
+	static def signed uri\string, query\object = {}
 		uri = self.path uri, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, {})
@@ -75,20 +82,22 @@ export default class URL
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
 	static def temporarySigned uri\string, expiresIn\string, query\object = new Object
-		luri = self.route uri, query
+		uri = self.path uri, query
 
 		const signature = await jwt.sign({ uri }, settings.secret, { expiresIn })
 
 		uri.includes('?') ? "{uri}&signature={signature}" : "{uri}?signature={signature}"
 
-	static def toQuery params\object = {}
-		const query = []
+	static def path uri\string, query\object = {}
+		if !isString(uri)
+			throw new TypeError 'uri must be a String'
 
-		querystring.stringify(params)
+		if !isEmpty(query) && !isObject(query)
+			throw new TypeError 'query must be an Object'
 
-	static def setSecret secret\string
-		if !isString(secret) then throw new TypeError 'secret must be a String'
+		uri = Path.clean([], uri)
 
-		settings.secret = secret
+		if Object.keys(query).length > 0
+			uri = uri + '?' + querystring.stringify(query)
 
-		self
+		uri

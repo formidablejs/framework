@@ -317,7 +317,7 @@ export default class Driver
 	def verificationUrl user\object
 		const clientUrl = self.config.get('app.client_url', self.config.get('app.url'))
 
-		const signature = await URL.temporarySignedRoute('email.verify','2h',null,{
+		const signature = await URL.temporarySignedRoute('email.verify','2h', {
 			email: user.email
 		})
 
@@ -326,7 +326,7 @@ export default class Driver
 	def passwordResetUrl user\object, token\string
 		const clientUrl = self.config.get('app.client_url', self.config.get('app.url'))
 
-		const signature = await URL.temporarySignedRoute('password.reset', '15m', null, {
+		const signature = await URL.temporarySignedRoute('password.reset', '15m', {
 			email: user.email,
 			token: token
 		})
