@@ -17,7 +17,7 @@ export default class Server {
     /**
      * Initialize a new server instance.
      */
-    static use(application: Application): Server
+    static use(application: Promise<Application>): Server
 
     /**
      * Start the application server.
