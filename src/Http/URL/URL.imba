@@ -1,7 +1,6 @@
 import querystring from 'querystring'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import isString from '../../Support/Helpers/isString'
-import isObject from '../../Support/Helpers/isObject'
 import jwt from 'jsonwebtoken'
 import MissingRouteParamException from './Exceptions/MissingRouteParamException'
 import Path from '../Router/Path'
@@ -27,9 +26,6 @@ export default class URL
 
 		if !isString(name)
 			throw new TypeError 'name must be a String'
-
-		if !isEmpty(params) && !isObject(params)
-			throw new TypeError 'params must be an Object'
 
 		if isEmpty selected
 			throw new UnregisteredRouteException 'Route is not registered'
@@ -91,9 +87,6 @@ export default class URL
 	static def path uri\string, query\object = {}
 		if !isString(uri)
 			throw new TypeError 'uri must be a String'
-
-		if !isEmpty(query) && !isObject(query)
-			throw new TypeError 'query must be an Object'
 
 		uri = Path.clean([], uri)
 
