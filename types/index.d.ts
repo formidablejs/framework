@@ -74,15 +74,18 @@ import ResetPassword from './Auth/Mail/ResetPassword'
 import Response from "./Http/Response/Response";
 import response from "./Support/Helpers/response";
 import Route from "./Http/Router/Route";
+import route from "./Support/Helpers/route";
 import Server from './Foundation/Server'
 import ServiceResolver from "./Support/ServiceResolver";
 import SessionDriverManager from "./Http/Session/DriverManager";
 import SessionFileStoreServiceResolver from "./Http/Session/SessionFileStoreServiceResolver";
 import SessionMemoryStoreServiceResolver from "./Http/Session/SessionMemoryStoreServiceResolver";
 import SessionServiceResolver from "./Http/Session/SessionServiceResolver";
+import signedRoute from "./Support/Helpers/signedRoute";
 import slug from "./Support/Helpers/slug";
 import StaticContentServiceResolver from "./Http/Static/StaticContentServiceResolver";
 import strRandom from "./Support/Helpers/strRandom";
+import temporarySignedRoute from "./Support/Helpers/temporarySignedRoute";
 import TransformsRequest from "./Http/Middleware/TransformsRequest";
 import TrimStrings from "./Http/Middleware/TrimStrings";
 import URL from "./Http/URL/URL";
@@ -183,6 +186,7 @@ export {
     response,
     Response,
     Route,
+    route,
     Rules,
     Server,
     ServiceResolver,
@@ -190,9 +194,11 @@ export {
     SessionFileStoreServiceResolver,
     SessionMemoryStoreServiceResolver,
     SessionServiceResolver,
+    signedRoute,
     slug,
     StaticContentServiceResolver,
     strRandom,
+    temporarySignedRoute,
     TransformsRequest,
     TrimStrings,
     URL,
