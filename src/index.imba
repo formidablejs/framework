@@ -27,12 +27,12 @@ import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
 import Database from './Database/Database'
 import DB from './Database/Database'
 import decrypt from './Support/Helpers/decrypt'
+import EmailNotVerifiedException from './Auth/Exceptions/EmailNotVerifiedException'
 import encrypt from './Support/Helpers/encrypt'
 import Encrypter from './Foundation/Encrypter'
-import env from './Support/Helpers/env'
-import EmailNotVerifiedException from './Auth/Exceptions/EmailNotVerifiedException'
 import EnsureEmailIsVerified from './Http/Middleware/EnsureEmailIsVerified'
 import EnsureStateless from './Http/Middleware/EnsureStateless'
+import env from './Support/Helpers/env'
 import ErrorIfAuthenticated from './Auth/Http/Middleware/ErrorIfAuthenticated'
 import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
@@ -61,15 +61,18 @@ import ResetPassword from './Auth/Mail/ResetPassword'
 import Response from './Http/Response/Response'
 import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
+import route from './Support/Helpers/route'
 import Server from './Foundation/Server'
 import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
 import SessionFileStoreServiceResolver from './Http/Session/SessionFileStoreServiceResolver'
 import SessionMemoryStoreServiceResolver from './Http/Session/SessionMemoryStoreServiceResolver'
 import SessionServiceResolver from './Http/Session/SessionServiceResolver'
+import signedRoute from './Support/Helpers/signedRoute'
 import slug from './Support/Helpers/slug'
 import StaticContentServiceResolver from './Http/Static/StaticContentServiceResolver'
 import strRandom from './Support/Helpers/strRandom'
+import temporarySignedRoute from './Support/Helpers/temporarySignedRoute'
 import TransformsRequest from './Http/Middleware/TransformsRequest'
 import TrimStrings from './Http/Middleware/TrimStrings'
 import URL from './Http/URL/URL'
@@ -153,15 +156,18 @@ export {
 	response
 	Response
 	Route
+	route
 	Server
 	ServiceResolver
 	SessionDriverManager
 	SessionFileStoreServiceResolver
 	SessionMemoryStoreServiceResolver
 	SessionServiceResolver
+	signedRoute
 	slug
 	StaticContentServiceResolver
 	strRandom
+	temporarySignedRoute
 	TransformsRequest
 	TrimStrings
 	URL

@@ -1,45 +1,36 @@
 export default class URL {
     /**
-    @param {string} name
-    @param {object} params
-    @param {object} query
-    */
-    static route(name: string, params?: object, query?: object): any;
+     * Generate a URL for a given route name.
+     */
+    static route(name: string, params?: object): string;
+
     /**
-    @param {string} name
-    @param {object} params
-    @param {object} query
-    */
-    static signedRoute(name: string, params?: object, query?: object): Promise<string>;
+     * Generate a signed URL for a given route name.
+     */
+    static signedRoute(name: string, params?: object): Promise<string>;
+
     /**
-    @param {string} name
-    @param {string} expiresIn
-    @param {object} params
-    @param {object} query
-    */
-    static temporarySignedRoute(name: string, expiresIn: string, params?: object, query?: object): Promise<string>;
+     * Generate a temporary signed URL for a given route name.
+     */
+    static temporarySignedRoute(name: string, expiresIn: string, params?: object): Promise<string>;
+
     /**
-    @param {string} uri
-    @param {object} query
-    */
+     * Generate a uri for a given path.
+     */
     static path(uri: string, query?: object): string;
+
     /**
-    @param {string} uri
-    @param {object} query
-    */
+     * Generate a signed uri for a given path.
+     */
     static signed(uri: string, query?: object): Promise<string>;
+
     /**
-    @param {string} uri
-    @param {string} expiresIn
-    @param {object} query
-    */
+     * Generate a temporary signed uri for a given path.
+     */
     static temporarySigned(uri: string, expiresIn: string, query?: object): Promise<string>;
+
     /**
-    @param {object} params
-    */
-    static toQuery(params?: object): string;
-    /**
-    @param {string} secret
-    */
+     * Set the secret used to sign URLs.
+     */
     static setSecret(secret: string): typeof URL;
 }

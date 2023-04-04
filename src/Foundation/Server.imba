@@ -24,6 +24,8 @@ export default class Server
 			}, callback || do(_error, address)
 				if _error
 					console.error(_error)
+
+					process.exit(1)
 				else
 					const addr = address.endsWith("://0.0.0.0:{String(port)}") ? address.replace("://0.0.0.0:{String(port)}", "://127.0.0.1:{String(port)}") : address
 
