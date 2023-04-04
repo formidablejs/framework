@@ -21,9 +21,12 @@ const { default: mix } = require './mix'
 const { default: multitap } = require './multitap'
 const { default: now }  = require './now'
 const { default: response }  = require './response'
+const { default: route } = require './route'
+const { default: signedRoute } = require './signedRoute'
 const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: tap } = require './tap'
+const { default: temporarySignedRoute } = require './temporarySignedRoute'
 const { default: toBoolean }  = require './toBoolean'
 const { default: updateLine } = require './updateLine'
 const { default: version } = require './version'
@@ -60,9 +63,12 @@ export {
 	now
 	pluralize
 	response
+	route
+	signedRoute
 	slug
 	strRandom
 	tap
+	temporarySignedRoute
 	toBoolean
 	updateLine
 	version
