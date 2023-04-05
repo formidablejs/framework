@@ -1,5 +1,5 @@
 import { Output } from '@formidablejs/console'
-import Applciation from './Application'
+import Application from './Application'
 import config from '../Support/Helpers/config'
 
 export default class Server
