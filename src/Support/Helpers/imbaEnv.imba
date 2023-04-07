@@ -4,6 +4,6 @@ export default def imbaEnv stringify\boolean = true
 
 	for own env, value of process.env
 		if env.startsWith(prefix)
-			envList[env.slice(prefix.length)] = value
+			envList[env] = value
 
 	stringify ? JSON.stringify(envList) : envList
