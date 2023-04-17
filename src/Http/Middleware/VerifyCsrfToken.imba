@@ -23,9 +23,6 @@ export default class VerifyCsrfToken
 
 	def handle request\FormRequest, reply\FastifyReply
 		if self.isReading(request) || self.shouldIgnore(request) || self.tokensMatch(request)
-			if !self.isReading(request)
-				self.forgetTokens(request)
-
 			if self.shouldAddXsrfTokenCookie!
 				self.addCookieToResponse(request, reply)
 
