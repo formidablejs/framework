@@ -37,8 +37,11 @@ export default class VerifyCsrfToken {
     @param {FormRequest} request
     */
     forgetTokens(request: FormRequest): FormRequest;
+    findToken(token: string): false | TokenPayload;
 }
 
 import Repository from "../../Config/Repository";
 import FormRequest from "../../Http/Request/FormRequest";
-import type { FastifyReply } from "fastify";
+import { FastifyReply } from "fastify";
+import { TokenPayload } from "../Csrf/TokenPayload";
+
