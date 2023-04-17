@@ -5,13 +5,34 @@ import session from '@fastify/session'
 import SessionDriverManager from '../Http/Session/DriverManager'
 import redisStore from 'connect-redis'
 
+const socketProperties = [
+	'port',
+	'host',
+	'family',
+	'path',
+	'connectTimeout'
+	'noDelay',
+	'keepAlive',
+	'tls',
+	'reconnectStrategy'
+]
+
 export default class RedisServiceResolver < ServiceResolver
 
 	get connection
 		const connection = self.app.config.get('database.redis.default')
-		const options    = self.app.config.get('database.redis.options')
+		const socket     = {}
 
-		Object.assign(connection, options)
+		for own key, value of connection
+			if key in socketProperties
+				socket[key] = value
+
+				delete connection[key]
+
+		if Object.keys(socket).length > 0
+			connection.socket = socket
+
+		Object.assign(connection, self.app.config.get('database.redis.options', {}))
 
 	def redis
 		let redisClient = redis.createClient(Object.assign({ legacyMode: true }, self.connection))
