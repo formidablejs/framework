@@ -9,14 +9,28 @@ export default class HasCsrfToken
 
 	def handle request\FormRequest
 		if ['HEAD', 'GET', 'OPTIONS'].includes(request.method!)
-			const secret = self.tokens!.secretSync!
-			const token = self.tokens!.create(secret)
+			self.initCsrfTokens(request)
 
-			request.request.session.secret = secret
-			request.request.session.token = token
+			request.request.session.token = self.createCsrfToken(request)
 
 	def tokens
 		new csrf({
 			saltLength: 48
 			secretLength: 48
 		})
+
+	def initCsrfTokens request\FormRequest
+		if !request.request.session.csrf_tokens
+			request.request.session.csrf_tokens = {}
+
+	def createCsrfToken request\FormRequest
+		const secret = self.tokens!.secretSync!
+		const token = self.tokens!.create(secret)
+
+		request.request.session.csrf_tokens[token] = {
+			secret: secret
+			token: token
+			created_at: new Date()
+		}
+
+		token

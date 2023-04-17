@@ -1,12 +1,12 @@
+import csrf from '@fastify/csrf'
+import Repository from '../../Config/Repository'
+import FormRequest from '../Request/FormRequest'
+
 export default class HasCsrfToken {
-    /**
-    @param {Repository} config
-    */
-    constructor(config: Repository);
     config: Repository;
-    /**
-    @param {FormRequest} request
-    */
+    constructor(config: Repository);
     handle(request: FormRequest): any;
-    tokens(): any;
+    tokens(): csrf;
+    initCsrfTokens(request: FormRequest);
+    createCsrfToken(request: FormRequest): string;
 }
