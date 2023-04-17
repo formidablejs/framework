@@ -23,9 +23,11 @@ export default class VerifyCsrfToken
 
 	def handle request\FormRequest, reply\FastifyReply
 		if self.isReading(request) || self.shouldIgnore(request) || self.tokensMatch(request)
-			if !self.isReading(request) then self.forgetTokens(request)
+			if !self.isReading(request)
+				self.forgetTokens(request)
 
-			if self.shouldAddXsrfTokenCookie! then self.addCookieToResponse(request, reply)
+			if self.shouldAddXsrfTokenCookie!
+				self.addCookieToResponse(request, reply)
 
 			return request
 
@@ -50,7 +52,11 @@ export default class VerifyCsrfToken
 			catch
 				token = new String
 
-		(new csrf!).verify(request.request.session.secret, token)
+		const payload = self.findToken(request, token)
+
+		if !payload then return false
+
+		(new csrf!).verify(payload.secret, payload.token)
 
 	def getTokenFromRequest request\FormRequest
 		let token = request.input('_token') ? request.input('_token') : request.header('x-csrf-token')
@@ -79,7 +85,15 @@ export default class VerifyCsrfToken
 		})
 
 	def forgetTokens request\FormRequest
-		request.request.session.secret = null
+		request.request.session.csrf_tokens = null
 		request.request.session.token = null
 
 		return request
+
+	def findToken request\FormRequest, token\string
+		const tokens = request.request.session.csrf_tokens
+
+		if !tokens
+			return false
+
+		request.request.session.csrf_tokens[token] ?? false
