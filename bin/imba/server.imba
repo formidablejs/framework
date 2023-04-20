@@ -10,28 +10,19 @@ const application = app.initiate(app.make(Kernel), true)
 
 application.then do(instance)
 	const start = do
-		let port = 3000
-		let host
-		let addr = false
+		let port = process.env.PORT || 3000
+		let host = process.env.HOST || '127.0.0.1'
+		let addr = process.env.ADDR || false
 
-		const args = process.argv.slice(2)
-
-		args.forEach do(arg)
-			if arg.startsWith('--port')
-				port = arg.split('=')[1]
-
-			if arg.startsWith('--host')
-				host = arg.split('=')[1]
-
-			if arg.startsWith('--addr') && arg == '--addr=1'
-				addr = true
+		console.log(port, host, addr)
 
 		instance.fastify().listen({
 			port: Number(port),
 			host: host
-		}, do(err, address)
-			if err
-				instance.fastify().log.error(err)
+		}, do(_error, address)
+			if _error
+				instance.fastify().log.error(_error)
+
 				process.exit(1)
 
 			if addr then storeAddress address
