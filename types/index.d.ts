@@ -97,6 +97,12 @@ import View from "./Http/View/View";
 import view from "./Support/Helpers/view";
 import ViewResponse from "./Http/Response/ViewResponse";
 
+type ImbaDevTools = {
+    debug?: boolean
+    manifest?: object
+    socket?: EventSource
+}
+
 declare global {
     interface Window {
         imba_devtools?: {
@@ -105,6 +111,8 @@ declare global {
             socket?: EventSource
         }
     }
+
+    var imba_devtools: ImbaDevTools
 }
 
 export {
