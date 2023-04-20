@@ -11,12 +11,13 @@ import DatabaseConfig from '../Database/Config'
 import EnvironmentRepository from '../Environment/Repository'
 import ExceptionHandler from './Exceptions/Handler'
 import fs from 'fs'
-import ServiceResolver from '../Support/ServiceResolver'
+import InvalidServiceResolver from './Exceptions/InvalidServiceResolver'
 import isEmpty from '../Support/Helpers/isEmpty'
 import Kernel from '../Http/Kernel'
 import Migration from '../Database/Migration'
 import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
+import ServiceResolver from '../Support/ServiceResolver'
 import version from '../Support/Helpers/version'
 import type ConsoleKernel from './ConsoleKernel'
 
@@ -209,8 +210,11 @@ export default class Application
 			return
 
 		for resolver\ServiceResolver in resolvers
-			if isCli? && resolver.runInCli !== undefined && resolver.cli == false
+			if isCli? && resolver && resolver.runInCli !== undefined && resolver.cli == false
 				continue
+
+			if resolver == undefined || resolver == null
+				throw new InvalidServiceResolver 'Service Resolver is not defined. Please check your app config.'
 
 			resolver = new resolver(self)
 
