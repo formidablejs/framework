@@ -1,5 +1,5 @@
 import { Output } from '@formidablejs/console'
-import { alternativePort } from './Console/alternativePort'
+import { verifyPort } from './Console/verifyPort'
 import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn, execSync } from 'child_process'
@@ -64,26 +64,27 @@ export default class Console
 			preServe!
 
 			let port = 3000
-			let host = 'localhost'
-			let addr = '0'
+			let host = '127.0.0.1'
+			let addr = false
 
 			args.forEach do(arg)
-				if arg.startsWith('--port')
-					port = arg.split('=')[1]
+				port = arg.split('=')[1] if arg.startsWith('--port')
+				host = arg.split('=')[1] if arg.startsWith('--host') || arg.startsWith('-h')
+				addr = true if arg == '--addr'
 
-				if arg.startsWith('--host')
-					host = arg.split('=')[1]
-
-				if arg == '--addr'
-					addr = '1'
-
-			port = await alternativePort(port)
+			port = await verifyPort(port)
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
-			const instance = spawn(runtime, [srv, '-s', '-w', '--', "--port={port}", "--host={host}", "--addr={addr}"], {
+			const instance = spawn(runtime, [srv, '-s', '-w'], {
 				stdio: 'pipe',
 				cwd: process.cwd!,
+				env: {
+					...process.env,
+					PORT: port,
+					HOST: host,
+					ADDR: addr
+				}
 			})
 
 			let address
@@ -93,8 +94,6 @@ export default class Console
 
 				if (address == null || address == undefined) && line.trim().includes('exited with error code:')
 					Output.write "\n  <bg:red> ERROR </bg:red> Development Server could not be started…\n"
-
-					Output.write "  <bg:red> ERROR </bg:red> Address in use: <u><fg:blue>http://{host || '127.0.0.1'}:{port ?? 3000}</fg:blue></u>\n"
 
 					process.exit(1)
 

@@ -1,20 +1,36 @@
 export default class Encrypter {
     /**
-    @param {object} config
-    */
+     * Configure encryption.
+     */
     static configure(config: object): typeof Encrypter;
+
     /**
-    @param {string} type
-    */
-    static appKey(type: string): any;
-    static key(): any;
-    static iv(): any;
+     * Get encryption key/iv.
+     */
+    static appKey(type: string): string;
+
     /**
-    @param {any} value
-    */
+     * Get encryption key.
+     */
+    static key(): string;
+
+    /**
+     * Get encryption iv.
+     */
+    static iv(): string;
+
+    /**
+     * Encrypt value.
+     */
     static encrypt(value: any): string;
+
     /**
-    @param {string} hash
-    */
+     * Decrypt value.
+     */
     static decrypt(hash: string): any;
+
+    /**
+     * Compares two strings to prevent timing attacks.
+     */
+    static hashEquals(knownString: string, userString: string): boolean;
 }

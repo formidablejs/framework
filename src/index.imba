@@ -23,7 +23,6 @@ import Controller from './Http/Controller'
 import ConvertEmptyStringsToNull from './Http/Middleware/ConvertEmptyStringsToNull'
 import CookieServiceResolver from './Http/Cookie/CookieServiceResolver'
 import CorsServiceResolver from './Http/Cors/CorsServiceResolver'
-import CsrfServiceResolver from './Http/Csrf/CsrfServiceResolver'
 import Database from './Database/Database'
 import DB from './Database/Database'
 import decrypt from './Support/Helpers/decrypt'
@@ -38,9 +37,9 @@ import ExceptionHandler from './Foundation/Exceptions/Handler'
 import expiresIn from './Support/Helpers/expiresIn'
 import ForbiddenException from './Http/Exceptions/ForbiddenException'
 import FormRequest from './Http/Request/FormRequest'
-import HasCsrfToken from './Http/Middleware/HasCsrfToken'
 import HasEncryptionKey from './Support/Encryption/HasEncryptionKey'
 import Hash from './Hashing/Hash'
+import hashEquals from './Support/Helpers/hashEquals'
 import HashServiceResolver from './Hashing/HashServiceResolver'
 import HttpException from './Http/Exceptions/HttpException'
 import Kernel from './Http/Kernel'
@@ -107,7 +106,6 @@ export {
 	ConvertEmptyStringsToNull
 	CookieServiceResolver
 	CorsServiceResolver
-	CsrfServiceResolver
 	Database
 	DB
 	decrypt
@@ -127,9 +125,9 @@ export {
 	FormRequest
 	handleException
 	handleMaintenanceMode
-	HasCsrfToken
 	HasEncryptionKey
 	Hash
+	hashEquals
 	HashServiceResolver
 	helpers
 	HttpException

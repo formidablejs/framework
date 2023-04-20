@@ -1,47 +1,60 @@
+import { FastifyReply } from 'fastify';
+import Repository from '../../Config/Repository';
+import FormRequest from '../../Http/Request/FormRequest';
+
 export default class VerifyCsrfToken {
     /**
-    @param {Repository} config
-    */
-    constructor(config: Repository);
-    get addHttpCookie(): boolean;
-    get except(): any[];
+     * Configuration repository.
+     */
     config: Repository;
+
     /**
-    @param {FormRequest} request
-    @param {FastifyReply} reply
-    */
+     * Add XSRF-TOKEN cookie to response.
+     */
+    get addHttpCookie(): boolean;
+
+    /**
+     * List of URIs that should be excluded from CSRF verification.
+     */
+    get except(): Array<string>;
+
+    /**
+     * Instantiate middleware.
+     */
+    constructor(config: Repository);
+
+    /**
+     * Handle request.
+     */
     handle(request: FormRequest, reply: FastifyReply): FormRequest;
+
     /**
-    @param {FormRequest} request
-    */
+     * Check if request is a read operation.
+     */
     isReading(request: FormRequest): boolean;
+
     /**
-    @param {FormRequest} request
-    */
+     * Check if request should be ignored.
+     */
     shouldIgnore(request: FormRequest): boolean;
+
     /**
-    @param {FormRequest} request
-    */
-    tokensMatch(request: FormRequest): any;
+     * Check if tokens match.
+     */
+    tokensMatch(request: FormRequest): boolean;
+
     /**
-    @param {FormRequest} request
-    */
-    getTokenFromRequest(request: FormRequest): any;
+     * Get token from request.
+     */
+    getTokenFromRequest(request: FormRequest): string;
+
+    /**
+     * Check if XSRF-TOKEN cookie should be added to response.
+     */
     shouldAddXsrfTokenCookie(): boolean;
+
     /**
-    @param {FormRequest} request
-    @param {FastifyReply} reply
-    */
-    addCookieToResponse(request: FormRequest, reply: FastifyReply): any;
-    /**
-    @param {FormRequest} request
-    */
-    forgetTokens(request: FormRequest): FormRequest;
-    findToken(token: string): false | TokenPayload;
+     * Add XSRF-TOKEN cookie to response.
+     */
+    addCookieToResponse(request: FormRequest, reply: FastifyReply): FormRequest;
 }
-
-import Repository from "../../Config/Repository";
-import FormRequest from "../../Http/Request/FormRequest";
-import { FastifyReply } from "fastify";
-import { TokenPayload } from "../Csrf/TokenPayload";
-
