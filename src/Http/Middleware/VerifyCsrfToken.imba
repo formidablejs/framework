@@ -1,12 +1,13 @@
-import csrf from '@fastify/csrf'
 import decrypt from '../../Support/Helpers/decrypt'
 import encrypt from '../../Support/Helpers/encrypt'
 import isEmpty from '../../Support/Helpers/isEmpty'
+import isString from '../../Support/Helpers/isString'
+import hashEquals from '../../Support/Helpers/hashEquals'
 import TokenMismatchException from '../Session/Exceptions/TokenMismatchException'
+import wildcard from '../../Support/Helpers/wildcard'
 import type { FastifyReply } from 'fastify'
 import type FormRequest from '../Request/FormRequest'
 import type Repository from '../../Config/Repository'
-import wildcard from '../../Support/Helpers/wildcard'
 
 export default class VerifyCsrfToken
 
@@ -22,57 +23,43 @@ export default class VerifyCsrfToken
 		self.config = config
 
 	def handle request\FormRequest, reply\FastifyReply
-		if self.isReading(request) || self.shouldIgnore(request) || self.tokensMatch(request)
-			if self.shouldAddXsrfTokenCookie!
-				self.addCookieToResponse(request, reply)
-
-			return request
-
-		self.forgetTokens(request)
+		if isReading(request) || shouldIgnore(request) || tokensMatch(request)
+			return addCookieToResponse(request, reply)
 
 		throw new TokenMismatchException 'CSRF token mismatch.'
 
 	def isReading request\FormRequest
-		['HEAD', 'GET', 'OPTIONS'].includes(request.method!)
+		['HEAD', 'GET', 'OPTIONS'].includes(request.method().toUpperCase())
 
 	def shouldIgnore request\FormRequest
 		for value in self.except
-			if wildcard(value, request.url!) then return true
+			return true if wildcard(value, request.url())
 
 		false
 
 	def tokensMatch request\FormRequest
-		let token = self.getTokenFromRequest(request)
+		const token = getTokenFromRequest(request)
 
-		if !isEmpty(token)
-			try token = decrypt(token)
-			catch
-				token = new String
-
-		const payload = self.findToken(request, token)
-
-		if !payload then return false
-
-		(new csrf!).verify(payload.secret, payload.token)
+		isString(request.session().token()) && isString(token) && hashEquals(request.session().token(), token)
 
 	def getTokenFromRequest request\FormRequest
-		let token = request.input('_token') ? request.input('_token') : request.header('x-csrf-token')
+		let token = request.input('_token', request.header('X-CSRF-TOKEN'))
 
-		if isEmpty(token) then token = request.header('x-xsrf-token')
+		if !token && request.hasHeader('X-XSRF-TOKEN')
+			token = decrypt(request.header('X-XSRF-TOKEN'))
 
-		token ? token : new String
+		token
 
 	def shouldAddXsrfTokenCookie
-		self.addHttpCookie
+		addHttpCookie && !isEmpty(self.config.get('app.key'))
 
-	def addCookieToResponse request\FormRequest, reply\FastifyReply
-		const session = self.config.get('session')
+	def addCookieToResponse request, reply
+		if !shouldAddXsrfTokenCookie
+			return
 
-		const token\string = request.request.session.token
+		const session = config.get('session')
 
-		if isEmpty(token) then return false;
-
-		reply.setCookie('XSRF-TOKEN', encrypt(token), {
+		reply.setCookie('XSRF-TOKEN', encrypt(request.session().token()), {
 			domain: session.domain
 			httpOnly: session.http_only
 			maxAge: session.lifetime
@@ -81,16 +68,4 @@ export default class VerifyCsrfToken
 			secure: session.secure
 		})
 
-	def forgetTokens request\FormRequest
-		request.request.session.csrf_tokens = null
-		request.request.session.token = null
-
-		return request
-
-	def findToken request\FormRequest, token\string
-		const tokens = request.request.session.csrf_tokens
-
-		if !tokens
-			return false
-
-		request.request.session.csrf_tokens[token] ?? false
+		request

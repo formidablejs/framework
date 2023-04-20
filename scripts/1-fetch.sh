@@ -12,9 +12,9 @@ then
     rm $E2E
 fi
 
-cd $TEST                                                                            && \
-curl -L -O https://github.com/formidablejs/formidablejs/archive/refs/heads/main.zip && \
-unzip main.zip -d .                                                                 && \
-rm -rf e2e                                                                          && \
-mv formidablejs-main e2e                                                            && \
-rm main.zip
+cd $TEST                                                                           && \
+curl -L -O https://github.com/formidablejs/formidablejs/archive/refs/heads/dev.zip && \
+unzip dev.zip -d .                                                                 && \
+rm -rf e2e                                                                         && \
+mv formidablejs-dev e2e                                                            && \
+rm dev.zip

@@ -37,3 +37,6 @@ export default class Session
 
 		for i in key
 			delete self.#ref.session[i]
+
+	def token
+		self.#ref.session._token

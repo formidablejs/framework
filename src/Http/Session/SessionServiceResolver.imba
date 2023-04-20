@@ -10,6 +10,7 @@ import PersonalAccessToken from '../../Auth/Tokens/PersonalAccessToken'
 import Protocol from '../../Auth/Protocol'
 import FormRequest from '../Request/FormRequest'
 import DriverManager from '../../Auth/DriverManager'
+import strRandom from '../../Support/Helpers/strRandom'
 import type { FastifyRequest } from 'fastify'
 import type { FastifyReply } from 'fastify'
 
@@ -53,6 +54,9 @@ export default class SessionServiceResolver < ServiceResolver
 		self.app.register session, config
 
 		self.app.addHook 'onRequest', do(request, reply)
+			if !request.session._token
+				request.session._token = strRandom(40)
+
 			await self.attemptAuth(request, reply)
 
 		self.app.onResponse do(response\ValidationException, request\FormRequest, reply\FastifyReply)
