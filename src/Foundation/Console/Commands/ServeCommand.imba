@@ -1,4 +1,4 @@
-import { alternativePort } from '../alternativePort'
+import { verifyPort } from '../verifyPort'
 import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
@@ -124,7 +124,7 @@ export class ServeCommand < Command
 	def handle
 		if isNaN self.option('port') then return self.message 'error', 'Port must be a valid number.'
 
-		const port = await alternativePort(self.option('port', 3000))
+		const port = await verifyPort(self.option('port', 3000))
 
 		self.setEnvVars(port)
 

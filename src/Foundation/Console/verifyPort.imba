@@ -7,7 +7,7 @@ def noInteraction\boolean
 
 	args.includes('--no-interaction')
 
-def alternativePort\number port\number
+def verifyPort\number port\number
 	const _p = await detectPort(port)
 
 	if _p != port
@@ -34,5 +34,5 @@ def alternativePort\number port\number
 	port
 
 export {
-	alternativePort
+	verifyPort
 }
