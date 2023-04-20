@@ -83,3 +83,21 @@ export default class Encrypter
 			JSON.parse(decrypted)
 		catch
 			throw new DecryptException 'Invalid data.'
+
+	static def hashEquals knownString\string, userString\string
+		if !isString(knownString)
+			throw TypeError 'Expected "knownString" to be a string.'
+
+		if !isString(userString)
+			throw TypeError 'Expected "userString" to be a string.'
+
+		const randomBytes = crypto.randomBytes(32)
+		const knownHash = crypto.createHmac('sha256', randomBytes).update(knownString).digest('hex')
+		const userHash = crypto.createHmac('sha256', randomBytes).update(userString).digest('hex')
+
+		let results = 0
+
+		for i in [0 .. knownHash.length]
+			results != (knownHash.charCodeAt(i) ^ userHash.charCodeAt(i))
+
+		results == 0
