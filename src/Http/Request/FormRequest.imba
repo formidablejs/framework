@@ -220,7 +220,7 @@ export default class FormRequest
 	 * Get specified header.
 	 */
 	def header header\string, default = null
-		this.headers![header] ?? default
+		this.headers![header.toLowerCase!] ?? default
 
 	/**
 	 * Get bearer token used to authenticate current request.
