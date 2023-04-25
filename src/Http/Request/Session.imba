@@ -14,10 +14,13 @@ export default class Session
 			self.#ref.session = {}
 
 	def has key\string
+		if isEmpty(self.#ref.session)
+			return false
+
 		!isEmpty(self.#ref.session[key])
 
 	def get key\string, default\any
-		self.#ref.session[key] ?? default
+		isEmpty(self.#ref.session) ? default : (self.#ref.session[key] ?? default)
 
 	def pull key\string, default\any
 		if self.has(key)
@@ -30,13 +33,16 @@ export default class Session
 		default
 
 	def set key\string, value\any
-		self.#ref.session[key] = value
+		if !isEmpty(self.#ref.session)
+			self.#ref.session[key] = value
 
 	def forget key\string|string[]
-		if !isArray(key) then key = [key]
+		if !isEmpty(self.#ref.session)
+			if !isArray(key) then key = [key]
 
-		for i in key
-			delete self.#ref.session[i]
+			for i in key
+				delete self.#ref.session[i]
 
 	def token
-		self.#ref.session._token
+		if !isEmpty(self.#ref.session)
+			self.#ref.session._token
