@@ -64,7 +64,7 @@ export default class SessionServiceResolver < ServiceResolver
 				request.flash('_errors', response.message.errors)
 				request.flash('_old', request.body!)
 
-				return reply.redirect(request.header('referer'))
+				return Redirect.to(request.header('referer'))
 
 	def attemptAuth request\FastifyRequest, reply\FastifyReply
 		const token\string = request.session.personal_access_token

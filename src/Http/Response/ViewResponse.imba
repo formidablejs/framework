@@ -1,4 +1,3 @@
-import { encrypt } from '../../Support/Helpers'
 import { isEmpty } from '../../Support/Helpers'
 import { without } from '../../Support/Helpers'
 import type { FastifyReply } from 'fastify'
@@ -22,7 +21,7 @@ export default class ViewResponse
 
 	def toView request\FormRequest, reply\FastifyReply
 		const oldData = !isEmpty(request.req.session._flashed) ? (request.req.session._flashed._old ?? {}) : {}
-		const token = !isEmpty(request.req.session) && !isEmpty(request.req.session.token) ? encrypt(request.req.session.token) : null
+		const token = !isEmpty(request.session().token()) ? request.session().token() : null
 
 		self.view
 			.setLanguage(request.request.language)
