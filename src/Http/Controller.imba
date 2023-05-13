@@ -1,8 +1,9 @@
 import bind from '../Support/Helpers/bind'
-import HttpException from './Exceptions/HttpException'
+import BadRequestException from './Exceptions/BadRequestException'
 import NotFoundException from './Exceptions/NotFoundException'
 import Validator from '../Validator/Validator'
 import ViewResponse from './Response/ViewResponse'
+import ValidationException from '../Validator/Exceptions/ValidationException'
 import type FormRequest from './Request/FormRequest'
 import type Request from './Request/FormRequest'
 import type View from './View/View'
@@ -20,10 +21,10 @@ export default class Controller
 	/**
 	 * Throw a 400 exception.
 	 *
-	 * @throws {HttpException}
+	 * @throws {BadRequestException}
 	 */
 	def badRequest message\string = 'Bad Request'
-		throw new HttpException message, 400
+		throw new BadRequestException message, 400
 
 	/**
 	 * Render a view.
@@ -34,8 +35,14 @@ export default class Controller
 	/**
 	 * Validate request.
 	 */
-	def validate request\FormRequest|Request, rules\object = null
-		Validator.make(request.input!, rules)
+	def validate request\FormRequest|Request, rules\object, callback\function = null
+		const results = Validator.make(request.input!, rules)
+
+		if results.fails!
+			if callback
+				callback(results.errors.errors)
+			else
+				throw ValidationException.withMessage(results.errors.errors)
 
 	/**
 	 * Bind route param.
