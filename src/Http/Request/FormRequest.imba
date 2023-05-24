@@ -431,6 +431,15 @@ export default class FormRequest
 	 * Validate a request using specified rules.
 	 */
 	def validate rules\object|null = null
+		if hasHeader('X-FORMIDABLE-VALIDATE')
+			const input\Array<string> = this.header('X-FORMIDABLE-VALIDATE').split(',')
+
+			if !isEmpty(input)
+				rules = {}
+
+				for key in input
+					rules[key] = this.rules![key]
+
 		const requestRules\object = isEmpty(rules) ? self.getRules! : rules
 		const files\object = !isEmpty(request._rawFiles) ? request._rawFiles : {}
 		const body\object = Object.assign(self.input! ?? {}, files ?? {})
