@@ -19,7 +19,7 @@ export class PasswordReset < View
 			<body[ff:Nunito m:0]>
 				<h1> "Reset Password"
 
-				<form action=URL.route('password.reset', {}, {
+				<form action=URL.route('password.reset', {
 					email: get('email')
 					token: get('token')
 					signature: get('signature')

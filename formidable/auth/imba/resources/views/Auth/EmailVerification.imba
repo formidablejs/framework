@@ -21,7 +21,7 @@ export class EmailVerification < View
 
 				<section[d:flex g:1]>
 					"Click"
-					<form action=URL.route('email.verify', {}, {
+					<form action=URL.route('email.verify', {
 						email: get('email')
 						signature: get('signature')
 					}) method="POST">
