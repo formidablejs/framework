@@ -56,12 +56,12 @@ export default class Session {
     /**
      * Get value from session.
      */
-    get(key: string, default$: any): any;
+    get(key: string, default$?: any): any;
 
     /**
      * Get and forget value from session.
      */
-    pull(key: string, default$: any): any;
+    pull(key: string, default$?: any): any;
 
     /**
      * Set value in session.

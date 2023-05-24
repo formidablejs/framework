@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.19.3",
+  "version": "0.20.0",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -41,12 +41,12 @@
     "detect-port": "^1.5.1",
     "dotenv": "^16.0.3",
     "fastify": "^3.29.4",
-    "fs-extra": "^11.1.0",
+    "fs-extra": "^11.1.1",
     "html-escaper": "^3.0.3",
     "inquirer": "^8.2.4",
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
-    "knex-paginate": "^3.0.2",
+    "knex-paginate": "^3.1.1",
     "memorystore": "^1.6.7",
     "ms": "^2.1.3",
     "nodemon": "^2.0.22",
@@ -63,16 +63,16 @@
   },
   "devDependencies": {
     "@formidablejs/mailer": "0.4.0",
-    "@formidablejs/stubs": "^0.4.0",
+    "@formidablejs/stubs": "^0.5.1",
     "@types/connect-redis": "^0.0.18",
     "@types/express-session": "^1.17.5",
-    "@types/jest": "^29.1.2",
-    "@types/node": "^18.11.0",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.2.3",
     "argon2": "^0.30.3",
     "imba": "2.0.0-alpha.215",
     "imba-shell": "0.4.0",
     "jest": "^29.2.0",
-    "sqlite3": "^5.1.2",
+    "sqlite3": "^5.1.6",
     "typescript": "^4.8.4"
   }
 }

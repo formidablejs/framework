@@ -117,6 +117,9 @@ export const use = do(...paramaters)
 					if (validator.fails!)
 						throw ValidationException.withMessages(validator.errors.errors)
 
+					if response.hasHeader('X-FORMIDABLE-VALIDATE')
+						return reply.send().code(204)
+
 				else
 					response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
 

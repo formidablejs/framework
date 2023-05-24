@@ -12,7 +12,7 @@ export default class Repository {
     @param {string} key
     @param {any} default
     */
-    get(key: string, default$: any): any;
+    get(key: string, default$?: any): any;
     /**
     @param {string} key
     @param {any} value
