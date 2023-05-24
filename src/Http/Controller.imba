@@ -35,14 +35,8 @@ export default class Controller
 	/**
 	 * Validate request.
 	 */
-	def validate request\FormRequest|Request, rules\object, callback\function = null
-		const results = Validator.make(request.input!, rules)
-
-		if results.fails!
-			if callback
-				callback(results.errors.errors)
-			else
-				throw ValidationException.withMessage(results.errors.errors)
+	def validate request\FormRequest|Request, rules\object = null
+		Validator.make(request.input!, rules)
 
 	/**
 	 * Bind route param.

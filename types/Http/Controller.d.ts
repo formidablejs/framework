@@ -1,4 +1,5 @@
 import { IView } from "./View/View";
+import { Validator } from "validatorjs";
 import ViewResponse from "./Response/ViewResponse";
 import NotFoundException from "./Exceptions/NotFoundException";
 import BadRequestException from "./Exceptions/BadRequestException";
@@ -37,7 +38,7 @@ export default class Controller {
       * @param {object} rules
       * @param {Function} callback
       */
-     validate(request: FormRequest | Request, rules: object, callback?: Function): void;
+     validate(request: FormRequest | Request, rules?: object): Validator;
 
      /**
       * Bind route param.
