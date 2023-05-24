@@ -40,7 +40,7 @@ export default class VerifyCsrfToken
 	def tokensMatch request\FormRequest
 		const token = getTokenFromRequest(request)
 
-		isString(request.session().token()) && isString(token) && hashEquals(request.session().token(), token)
+		isString(request.session().token()) && isString(token) && hashEquals(request.session().token(), token) && (request.session().token() === token)
 
 	def getTokenFromRequest request\FormRequest
 		let token = request.input('_token', request.header('X-CSRF-TOKEN'))

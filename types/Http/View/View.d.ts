@@ -36,7 +36,7 @@ export default class View {
     @param {string} key
     @param {any} default
     */
-    session(key: string, default$: any): any;
+    session(key: string, default$?: any): any;
     /**
     @param {string} key
     */

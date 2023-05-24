@@ -1,5 +1,5 @@
 import bind from '../Support/Helpers/bind'
-import HttpException from './Exceptions/HttpException'
+import BadRequestException from './Exceptions/BadRequestException'
 import NotFoundException from './Exceptions/NotFoundException'
 import Validator from '../Validator/Validator'
 import ViewResponse from './Response/ViewResponse'
@@ -20,10 +20,10 @@ export default class Controller
 	/**
 	 * Throw a 400 exception.
 	 *
-	 * @throws {HttpException}
+	 * @throws {BadRequestException}
 	 */
 	def badRequest message\string = 'Bad Request'
-		throw new HttpException message, 400
+		throw new BadRequestException message, 400
 
 	/**
 	 * Render a view.
