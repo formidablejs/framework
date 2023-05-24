@@ -12,12 +12,12 @@ export default class Cookies {
     @param {string} key
     @param {any} default
     */
-    get(key: string, default$: any): any;
+    get(key: string, default$?: any): any;
     /**
     @param {string} key
     @param {any} default
     */
-    pull(key: string, default$: any): any;
+    pull(key: string, default$?: any): any;
     /**
     @param {string} key
     @param {string} value
