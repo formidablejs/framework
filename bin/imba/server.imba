@@ -14,8 +14,6 @@ application.then do(instance)
 		let host = process.env.HOST || '127.0.0.1'
 		let addr = process.env.ADDR || false
 
-		console.log(port, host, addr)
-
 		instance.fastify().listen({
 			port: Number(port),
 			host: host
