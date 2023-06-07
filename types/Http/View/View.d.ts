@@ -1,69 +1,79 @@
 export default class View {
-    /**
-    @param {object} data
-    */
     constructor(data?: object);
+
+    /**
+     * View data.
+     */
     get data(): any;
+
     /**
-    @param {object} data
-    */
+     * Set view data.
+     */
     setData(data: object): View;
+
     /**
-    @param {Language} language
-    */
+     * Set language/locale.
+     */
     setLanguage(language: Language): View;
+
     /**
-    @param {string} key
-    @param {any} default
-    */
-    translate(key: string, default$: any): any;
+     * Get translation.
+     */
+    translate(key: string, default$?: string): string;
+
     /**
-    @param {string} key
-    @param {any} default
-    */
-    t(key: string, default$: any): any;
+     * Get translation.
+     */
+    t(key: string, default$?: string): string;
+
     /**
-    @param {string} key
-    @param {any} default
-    */
-    __(key: string, default$: any): any;
+     * Get translation.
+     */
+    __(key: string, default$?: string): string;
+
     /**
-    @param {string} key
-    @param {any} default
-    */
-    old(key: string, default$: any): any;
+     * Get old input.
+     */
+    old(key: string, default$?: any): ?any;
+
     /**
-    @param {string} key
-    @param {any} default
-    */
+     * Get session data.
+     */
     session(key: string, default$?: any): any;
+
     /**
-    @param {string} key
-    */
+     * Check if session data exists.
+     */
     hasSession(key: string): boolean;
+
     /**
-    @param {string} key
-    */
+     * Check if errors exist.
+     */
     hasError(key: string): boolean;
+
     /**
-    @param {string} key
-    */
-    error(key: string): any;
+     * Get errors.
+     */
+    error(key: string): ?string[];
+
     /**
-    @param {string} property
-    @param {any} default
-    @param {boolean} escape
-    */
+     * Get data.
+     */
     get(property: string, default$?: any, escape?: boolean): any;
+
     /**
-    @param {string} property
-    @param {any} default
-    */
+     * Get raw data.
+     */
     raw(property: string, default$?: any): any;
+
     /**
-    @param {string} property
-    */
+     * Check if data exists.
+     */
     has(property: string): boolean;
+
+    /**
+     * Get csrf token input.
+     */
     csrf(): string;
     beforeRender(): any;
     afterRender(): any;
@@ -80,8 +90,8 @@ declare const $__patch__$: unique symbol;
 declare const $__init__$: unique symbol;
 declare const $_data$: unique symbol;
 declare const $_language$: unique symbol;
-export {};
+export { };
 
 export interface IView {
-    new (...args: any[]): View
+    new(...args: any[]): View
 }

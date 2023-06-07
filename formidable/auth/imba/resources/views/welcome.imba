@@ -5,7 +5,7 @@ import { View } from '@formidablejs/framework'
 export class Welcome < View
 
 	def render
-		const user\User = self.get('user', '')
+		const user\User = self.get('user')
 		const locale\string = self.get('locale', helpers.config('app.locale', new String)).replace(/_/g, '-')
 		const title\string = helpers.config('app.name', 'Formidable')
 

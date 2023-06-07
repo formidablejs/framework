@@ -5,7 +5,7 @@ import { View } from '@formidablejs/framework'
 export class EmailUnverified < View
 
 	def render
-		const user\User = self.get('user', '')
+		const user\User = self.get('user')
 		const locale = get('locale', config('app.locale', new String)).replace(/_/g, '-')
 
 		<html lang=locale>
