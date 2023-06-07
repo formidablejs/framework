@@ -22,5 +22,5 @@ export default class Server {
     /**
      * Start the application server.
      */
-    start(serverOptions: ServerOptions): Promise<void>
+    start(serverOptions?: ServerOptions): Promise<void>
 }
