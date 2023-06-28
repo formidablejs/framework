@@ -1,26 +1,38 @@
 /// <reference types="node" />
+
+type RunOptions = {
+  prod: boolean;
+}
+
 export default class Console {
-    /**
-    @param {string} runtime
-    @param {string} console
-    */
-    static make(runtime?: string, console?: string): Console;
-    /**
-    @param {string} runtime
-    @param {string} console
-    */
-    constructor(runtime?: string, console?: string);
     runtime: string;
     console: string;
     config: any;
+
+    constructor(runtime?: string, console?: string);
+
+    /**
+     * Make console instance.
+     */
+    static make(runtime?: string, console?: string): Console;
+
     get devConfigDefaults(): {
         mode: string;
     };
+
     get devConfig(): any;
+
     get devMode(): any;
+
     get ext(): ".imba" | ".ts";
-    run(): import("child_process").ChildProcessWithoutNullStreams;
+
+    /**
+     * Run craftsman.
+     */
+    run(options?: RunOptions): import("child_process").ChildProcessWithoutNullStreams;
+
     preServeCommands(): any;
+
     preServe(): void[];
     [$__patch__$]($$?: {}): void;
     [$__init__$]($$?: any, deep?: boolean): void;

@@ -2,7 +2,7 @@ import { Output } from '@formidablejs/console'
 import { verifyPort } from './Console/verifyPort'
 import { existsSync } from 'fs-extra'
 import { join } from 'path'
-import { spawn, execSync } from 'child_process'
+import { spawn, spawnSync, execSync } from 'child_process'
 import { ServeEvents } from './Console/ServeEvents'
 
 export default class Console
@@ -54,7 +54,12 @@ export default class Console
 	static def make runtime\string = null, console\string = null
 		new Console(runtime, console)
 
-	def run
+	def run { prod\boolean = false } = { prod: false }
+		const consoleBuild = join(process.cwd!, '.console', 'console.js')
+
+		if prod && existsSync(consoleBuild)
+			return require(consoleBuild)
+
 		const args = ['--']
 
 		for arg in process.argv.slice(2)
