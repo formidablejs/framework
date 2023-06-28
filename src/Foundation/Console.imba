@@ -55,15 +55,16 @@ export default class Console
 		new Console(runtime, console)
 
 	def run { prod\boolean = false } = { prod: false }
-		const consoleBuild = join(process.cwd!, '.console', 'console.js')
-
-		if prod && existsSync(consoleBuild)
-			return require(consoleBuild)
-
 		const args = ['--']
 
 		for arg in process.argv.slice(2)
 			args.push arg
+
+		if args[1] !== 'serve' || args.includes('--help')
+			const consoleBuild = join(process.cwd!, '.console', 'console.js')
+
+			if prod && existsSync(consoleBuild)
+				return require(consoleBuild)
 
 		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
 			preServe!
