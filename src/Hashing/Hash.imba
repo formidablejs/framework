@@ -1,5 +1,6 @@
 import InvalidHashDriverException from './Exceptions/InvalidHashDriverException'
 import InvalidHashConfigurationException from './Exceptions/InvalidHashConfigurationException'
+import bcrypt from 'bcrypt'
 
 const settings = {
 	config: null
@@ -35,6 +36,9 @@ export default class Hash
 	static def configure config\object
 		if settings.config != null then throw new InvalidHashDriverException 'Hashing has been already configured.'
 
+		if !['argon2', 'bcrypt'].includes(config.driver)
+			throw new InvalidHashConfigurationException "{config.driver} is not a valid driver."
+
 		if config.driver == 'argon2'
 			if config.argon2.memoryCost == null
 				throw new InvalidHashConfigurationException 'argon2 memory cost is missing.'
@@ -54,10 +58,7 @@ export default class Hash
 			if config.bcrypt.rounds == null
 				throw new InvalidHashConfigurationException 'bcrypt rounds is missing.'
 
-			try
-				settings.driver = require('bcrypt')
-			catch
-				throw new InvalidHashDriverException 'bcrypt is not installed. Please run "npm install bcrypt".'
+			settings.driver = bcrypt
 
 		settings.config = config
 
