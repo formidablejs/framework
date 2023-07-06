@@ -19,7 +19,9 @@ export default def resolveResponse response\any, request\FormRequest, reply, ski
 
 			if !isEmpty(results) then return results
 
-	if response instanceof Redirect
+	if typeof response == 'undefined' && response == undefined
+		return response
+	elif response instanceof Redirect
 		return await response.handle(request, reply)
 	elif response instanceof JsonResponse
 		return await response.toJson(reply)
