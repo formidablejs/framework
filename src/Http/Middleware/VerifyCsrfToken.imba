@@ -22,13 +22,16 @@ export default class VerifyCsrfToken
 	def constructor config\Repository
 		self.config = config
 
-	def handle request\FormRequest, reply\FastifyReply
-		if isReading(request) || shouldIgnore(request) || tokensMatch(request)
+	def handle request\FormRequest, reply\FastifyReply, [ mode ]
+		if isReading(request, mode) || shouldIgnore(request) || tokensMatch(request, mode)
 			return addCookieToResponse(request, reply)
 
 		throw new TokenMismatchException 'CSRF token mismatch.'
 
-	def isReading request\FormRequest
+	def isReading request\FormRequest, mode = null
+		if mode === 'allow-get' && request.method().toUpperCase() === 'GET'
+			return false
+
 		['HEAD', 'GET', 'OPTIONS'].includes(request.method().toUpperCase())
 
 	def shouldIgnore request\FormRequest
@@ -37,16 +40,19 @@ export default class VerifyCsrfToken
 
 		false
 
-	def tokensMatch request\FormRequest
-		const token = getTokenFromRequest(request)
+	def tokensMatch request\FormRequest, mode = null
+		const token = getTokenFromRequest(request, mode)
 
 		isString(request.session().token()) && isString(token) && hashEquals(request.session().token(), token) && (request.session().token() === token)
 
-	def getTokenFromRequest request\FormRequest
+	def getTokenFromRequest request\FormRequest, mode = null
 		let token = request.input('_token', request.header('X-CSRF-TOKEN'))
 
 		if !token && request.hasHeader('X-XSRF-TOKEN')
 			token = decrypt(request.header('X-XSRF-TOKEN'))
+
+		if !token && request.cookies().has('XSRF-TOKEN') && mode === 'allow-get' && request.method().toUpperCase() === 'GET'
+			token = decrypt(request.cookies().get('XSRF-TOKEN'))
 
 		token
 
