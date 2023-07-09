@@ -26,12 +26,12 @@ export default class VerifyCsrfToken {
     /**
      * Handle request.
      */
-    handle(request: FormRequest, reply: FastifyReply): FormRequest;
+    handle(request: FormRequest, reply: FastifyReply, mode?: ['allow-get'] | []): FormRequest;
 
     /**
      * Check if request is a read operation.
      */
-    isReading(request: FormRequest): boolean;
+    isReading(request: FormRequest, mode?: string): boolean;
 
     /**
      * Check if request should be ignored.
@@ -41,12 +41,12 @@ export default class VerifyCsrfToken {
     /**
      * Check if tokens match.
      */
-    tokensMatch(request: FormRequest): boolean;
+    tokensMatch(request: FormRequest, mode?: string): boolean;
 
     /**
      * Get token from request.
      */
-    getTokenFromRequest(request: FormRequest): string;
+    getTokenFromRequest(request: FormRequest, mode?: string): string;
 
     /**
      * Check if XSRF-TOKEN cookie should be added to response.
