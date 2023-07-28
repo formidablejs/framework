@@ -1,6 +1,5 @@
 import { Mail } from '@formidablejs/mailer'
 import Database from '../Database/Database'
-import isClass from '../Support/Helpers/isClass'
 import isEmpty from '../Support/Helpers/isEmpty'
 import isString from '../Support/Helpers/isString'
 
@@ -16,7 +15,7 @@ class ContextAPI
 		registered
 
 	def inject target
-		if !isClass target
+		if !(typeof target is 'function' && {}.toString.call(target) is '[object Function]')
 			throw new TypeError 'Target must be a valid class.'
 
 		if isEmpty target.context || (target.context && !isString(target.context))
