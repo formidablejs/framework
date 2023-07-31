@@ -1,6 +1,6 @@
 @echo off
 
-echo Clean up...
+echo "Clean up..."
 
 set "OUTPUT=%CD%\output"
 set "E2E=%CD%\test\e2e"

@@ -1,5 +1,5 @@
 @echo off
 
-echo Killing server...
+echo "Killing server..."
 
 pm2 stop all

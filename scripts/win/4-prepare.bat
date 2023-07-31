@@ -8,13 +8,11 @@ if exist "%ENV%" (
 )
 
 if not exist "%E2E%" (
-    echo e2e test app does not exist.
+    echo "e2e test app does not exist."
     exit /b 1
 )
 
-echo
-echo Prepare application...
-echo
+echo "Prepare application...""
 
 cd "%E2E%" && (
     copy .env.example .env

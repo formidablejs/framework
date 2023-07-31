@@ -2,8 +2,7 @@
 
 set "OUTPUT=%CD%\output"
 
-echo Create npm package...
-echo
+echo "Create npm package..."
 
 if not exist "%OUTPUT%" (
     mkdir "%OUTPUT%"
