@@ -24,11 +24,13 @@
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
     "test": "jest --roots=test",
-    "test:e2e:darwin:linux": "cd test/e2e && npm run test && cd ../../ && ./scripts/linux/6-kill-server.sh",
-    "test:e2e:win32": "cd test/e2e && npm run test && cd ../../ && ./scripts/win/6-kill-server.bat",
+    "test:e2e-linux": "cd test/e2e && npm run test && cd ../../ && ./scripts/linux/6-kill-server.sh",
+    "test:e2e-macos": "cd test/e2e && npm run test && cd ../../ && ./scripts/linux/6-kill-server.sh",
+    "test:e2e-windows": "cd test/e2e && npm run test && cd ../../ && ./scripts/win/6-kill-server.bat",
     "test:watch": "jest --watchAll --roots=test",
-    "pre-test:darwin:linux": "./scripts/linux/0-package.sh && ./scripts/linux/1-fetch.sh && ./scripts/linux/2-install.sh && ./scripts/linux/3-copy-test-files.sh && ./scripts/linux/4-prepare.sh",
-    "pre-test:win32": "./scripts/win/0-package.bat && ./scripts/win/1-fetch.bat && ./scripts/win/2-install.bat && ./scripts/win/3-copy-test-files.bat && ./scripts/win/4-prepare.bat"
+    "pre-test-macos": "./scripts/linux/0-package.sh && ./scripts/linux/1-fetch.sh && ./scripts/linux/2-install.sh && ./scripts/linux/3-copy-test-files.sh && ./scripts/linux/4-prepare.sh",
+    "pre-test-linux": "./scripts/linux/0-package.sh && ./scripts/linux/1-fetch.sh && ./scripts/linux/2-install.sh && ./scripts/linux/3-copy-test-files.sh && ./scripts/linux/4-prepare.sh",
+    "pre-test-windows": "./scripts/win/0-package.bat && ./scripts/win/1-fetch.bat && ./scripts/win/2-install.bat && ./scripts/win/3-copy-test-files.bat && ./scripts/win/4-prepare.bat"
   },
   "dependencies": {
     "@fastify/cookie": "^6.0.0",

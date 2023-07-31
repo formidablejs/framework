@@ -22,8 +22,8 @@ jobs:
     - name: Build
       run: npm run build
     - name: Prepare e2e tests
-      run: npm run pre-test
+      run: npm run pre-test-${{ matrix.os }}
     - name: Run e2e tests
-      run: npm run test:e2e
+      run: npm run test:e2e-${{ matrix.os }}
     - name: Clean up
       run: ./scripts/5-clean-up.sh
