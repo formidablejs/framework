@@ -3,9 +3,9 @@
 set "E2E=%CD%\test\e2e"
 set "TEST=%CD%\test"
 
-echo.
+echo
 echo Fetch Formidable Skeleton...
-echo.
+echo
 
 if exist "%E2E%" (
     rmdir /s /q "%E2E%"

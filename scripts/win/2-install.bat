@@ -13,9 +13,9 @@ if not exist "%E2E%" (
     exit /b 1
 )
 
-echo.
+echo
 echo Install dependencies...
-echo.
+echo
 
 cd "%E2E%" && (
     npm i --legacy-peer-deps

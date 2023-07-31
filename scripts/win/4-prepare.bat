@@ -12,9 +12,9 @@ if not exist "%E2E%" (
     exit /b 1
 )
 
-echo.
+echo
 echo Prepare application...
-echo.
+echo
 
 cd "%E2E%" && (
     copy .env.example .env

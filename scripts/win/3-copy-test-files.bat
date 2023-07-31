@@ -7,8 +7,8 @@ if not exist "%E2E%" (
     exit /b 1
 )
 
-echo.
+echo
 echo Copy files...
-echo.
+echo
 
 xcopy /E /I /Y ".\scripts\e2e\*" "%E2E%\"
