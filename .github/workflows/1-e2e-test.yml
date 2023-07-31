@@ -26,4 +26,9 @@ jobs:
     - name: Run e2e tests
       run: npm run test:e2e-${{ matrix.os }}
     - name: Clean up
-      run: ./scripts/5-clean-up.sh
+      run: |
+        if [[ ${{ matrix.os }} == "ubuntu-latest" ]]; then
+          ./scripts/linux/5-clean-up.sh
+        else
+          ./scripts/win/5-clean-up.bat
+        fi
