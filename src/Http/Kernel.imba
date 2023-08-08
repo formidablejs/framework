@@ -127,14 +127,17 @@ export default class Kernel
 
 		imba.serve router.server
 
-		router.listen(Number(port), host, do(error, address)
-			if routes.invalid.length > 0
-				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
+		router.listen({ port: Number(port) })
+			.then(do(address)
+				if routes.invalid.length > 0
+					throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
 
-			if error then throw error
-
-			if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress address
-		)
+				if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress router.server.address!
+			)
+			.catch(do(error)
+				if routes.invalid.length > 0
+					throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
+			)
 
 		process.on('SIGINT', do process.exit(0))
 
