@@ -132,7 +132,12 @@ export default class Kernel
 				if routes.invalid.length > 0
 					throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
 
-				if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress router.server.address!
+				if process.env.FORMIDABLE_ADDRESS_SET === '1'
+					const serverAddress = router.server.address!
+					const serverHost = serverAddress.address
+					const serverPort = serverAddress.port ?? 3000
+
+					self.storeAddress "http://{serverHost}:{serverPort}"
 			)
 			.catch(do(error)
 				if routes.invalid.length > 0
