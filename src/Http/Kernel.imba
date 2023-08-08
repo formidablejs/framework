@@ -119,10 +119,13 @@ export default class Kernel
 		delete process.env.FORMIDABLE_PORT
 		delete process.env.FORMIDABLE_HOST
 
-		if returnMode isa Boolean && returnMode == true then return router
+		if returnMode isa Boolean && returnMode == true
+			return router
 
 		if onBeforeListen
 			await onBeforeListen(port, host)
+
+		imba.serve router.server
 
 		router.listen(Number(port), host, do(error, address)
 			if routes.invalid.length > 0
@@ -132,8 +135,6 @@ export default class Kernel
 
 			if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress address
 		)
-
-		imba.serve router.server
 
 		process.on('SIGINT', do process.exit(0))
 
