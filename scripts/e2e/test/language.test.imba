@@ -6,7 +6,7 @@ describe 'Language', do
 	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request current
+	beforeAll do app = request('http://127.0.0.1:3000')
 
 	it '/ (GET: Hello World)', do
 		app.get('/')

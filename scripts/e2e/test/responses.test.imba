@@ -6,7 +6,7 @@ describe 'Responses', do
 	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request current
+	beforeAll do app = request('http://127.0.0.1:3000')
 
 	it '/json-response (GET)', do
 		app.get('/json-response')

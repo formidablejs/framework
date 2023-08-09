@@ -30,5 +30,9 @@ node craftsman package:publish --package=@formidablejs/framework --tag="auth-ema
 node craftsman package:publish --package=@formidablejs/mailer --tag="components,config" && \
 node craftsman config:cache                                                             && \
 node craftsman migrate:latest                                                           && \
-pm2 start "node craftsman serve --addr"                                                     && \
-sleep 5
+pm2 start ecosystem.config.js                                                           && \
+sleep 8                                                                                 && \
+echo "Log file:"                                                                        && \
+cat ./log.log                                                                           && \
+echo "Error log file:"                                                                  && \
+cat ./error.log
