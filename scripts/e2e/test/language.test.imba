@@ -9,13 +9,13 @@ describe 'Language', do
 	beforeAll do app = request('http://127.0.0.1:3000')
 
 	it '/ (GET: Hello World)', do
-		app.set('Accept-Language', 'en')
-			.get('/')
+		app.get('/')
+			.set('Accept-Language', 'en')
 			.expect(200)
 			.expect('Hello World')
 
 	it '/ (GET: Hola Mundo)', do
-		app.set('Accept-Language', 'es')
-			.get('/')
+		app.get('/')
+			.set('Accept-Language', 'es')
 			.expect(200)
 			.expect('Hola Mundo')
