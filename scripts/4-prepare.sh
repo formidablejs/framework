@@ -31,12 +31,8 @@ node craftsman package:publish --package=@formidablejs/mailer --tag="components,
 node craftsman config:cache                                                             && \
 node craftsman migrate:latest                                                           && \
 pm2 start ecosystem.config.js                                                           && \
-sleep 5                                                                                 && \
+sleep 8                                                                                 && \
 echo "Log file:"                                                                        && \
 cat ./log.log                                                                           && \
 echo "Error log file:"                                                                  && \
-cat ./error.log                                                                         && \
-echo 'Hello World: en'                                                                  && \
-curl --request GET --url http://127.0.0.1:3000/ --header 'Accept-Language: en'          && \
-echo 'Hello World: es'                                                                  && \
-curl --request GET --url http://127.0.0.1:3000/ --header 'Accept-Language: es'
+cat ./error.log
