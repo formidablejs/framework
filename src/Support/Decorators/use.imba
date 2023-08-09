@@ -6,6 +6,7 @@ import FormRequest from '../../Http/Request/FormRequest'
 import isClass from '../Helpers/isClass'
 import isEmpty from '../Helpers/isEmpty'
 import isString from '../Helpers/isString'
+import die from '../Helpers/die'
 import Request from '../../Http/Request/Request'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
@@ -117,7 +118,8 @@ def use target, key, descriptor
 					throw ValidationException.withMessages(validator.errors.errors)
 
 				if response.hasHeader('X-FORMIDABLE-VALIDATE')
-					return reply.send().code(204)
+					die do
+						reply.send().code(204)
 
 			else
 				response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
