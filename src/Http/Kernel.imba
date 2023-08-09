@@ -119,21 +119,30 @@ export default class Kernel
 		delete process.env.FORMIDABLE_PORT
 		delete process.env.FORMIDABLE_HOST
 
-		if returnMode isa Boolean && returnMode == true then return router
+		if returnMode isa Boolean && returnMode == true
+			return router
 
 		if onBeforeListen
 			await onBeforeListen(port, host)
 
-		router.listen(Number(port), host, do(error, address)
-			if routes.invalid.length > 0
-				throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
-
-			if error then throw error
-
-			if process.env.FORMIDABLE_ADDRESS_SET === '1' then self.storeAddress address
-		)
-
 		imba.serve router.server
+
+		router.listen({ port: Number(port) })
+			.then(do(address)
+				if routes.invalid.length > 0
+					throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
+
+				if process.env.FORMIDABLE_ADDRESS_SET === '1'
+					const serverAddress = router.server.address!
+					const serverHost = serverAddress.address
+					const serverPort = serverAddress.port ?? 3000
+
+					self.storeAddress "http://{serverHost}:{serverPort}"
+			)
+			.catch(do(error)
+				if routes.invalid.length > 0
+					throw new InvalidRouteActionException "Expected route action for {routes.invalid[0]} to be an array or a function."
+			)
 
 		process.on('SIGINT', do process.exit(0))
 
