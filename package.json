@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -40,6 +40,7 @@
     "connect-redis": "^7.1.0",
     "detect-port": "^1.5.1",
     "dotenv": "^16.3.1",
+    "express-session": "^1.17.3",
     "fastify": "^4.21.0",
     "fs-extra": "^11.1.1",
     "html-escaper": "^3.0.3",
