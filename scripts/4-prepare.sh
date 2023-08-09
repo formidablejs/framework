@@ -35,4 +35,4 @@ sleep 5                                                                         
 echo "Log file:"                                                                        && \
 cat ./log.log                                                                           && \
 echo "Error log file:"                                                                  && \
-cat ./error.log"
+cat ./error.log
