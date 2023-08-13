@@ -300,7 +300,7 @@ export default class FormRequest
 	 * Get request body.
 	 */
 	def body
-		self.request.body !== null ? self.request.body : {}
+		!isEmpty(self.request.body) ? self.request.body : {}
 
 	/**
 	 * Get body input or specified query keys.
