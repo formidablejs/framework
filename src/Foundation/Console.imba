@@ -108,10 +108,12 @@ export default class Console
 		for arg in process.argv.slice(2)
 			args.push arg
 
-		if args[1] !== 'serve' || args.includes('--help') || allCommands.includes(args[1])
+		const rootCommand = args.length == 1
+
+		if args[1] !== 'serve' || args.includes('--help') || allCommands.includes(args[1]) || rootCommand
 			const consoleBuild = join(process.cwd!, '.console', 'console.js')
 
-			if prod && existsSync(consoleBuild) || existsSync(consoleBuild) && allCommands.includes(args[1])
+			if (prod && existsSync(consoleBuild)) || (existsSync(consoleBuild) && allCommands.includes(args[1])) || rootCommand
 				return require(consoleBuild)
 
 		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
