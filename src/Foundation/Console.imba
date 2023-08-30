@@ -9,6 +9,42 @@ export default class Console
 	prop runtime\string
 	prop console\string
 
+	# commands that automatically run from build output
+	prop commands\array = [
+		'down'
+		'env'
+		'inspire'
+		'up'
+		'config:cache'
+		'config:clear'
+		'db:seed'
+		'key:generate'
+		'make:command'
+		'make:config'
+		'make:controller'
+		'make:crud'
+		'make:exception'
+		'make:form'
+		'make:interface'
+		'make:mail'
+		'make:middleware'
+		'make:migration'
+		'make:repository'
+		'make:request'
+		'make:resolver'
+		'make:seeder'
+		'make:tag'
+		'make:type'
+		'make:view'
+		'migrate:down'
+		'migrate:fresh'
+		'migrate:latest'
+		'migrate:rollback'
+		'migrate:up'
+		'route:list'
+		'session:prune-expired'
+	]
+
 	prop config\object = {
 		stdio: 'inherit'
 		cwd: process.cwd!
@@ -17,6 +53,7 @@ export default class Console
 	get devConfigDefaults
 		{
 			mode: 'nodemon' # imba
+			forcedBuildCommands: []
 		}
 
 	get devConfig
@@ -47,11 +84,22 @@ export default class Console
 
 		language.toLowerCase! == 'typescript' ? '.ts' : '.imba'
 
+	get allCommands
+		const list = devConfig.forcedBuildCommands || []
+
+		if !Array.isArray(list)
+			return commands
+
+		return [...list, ...commands]
+
 	def constructor runtime\string = null, console\string = null
 		self.runtime = runtime || join(process.cwd!, 'node_modules', '.bin', 'imba' + (process.platform === 'win32' ? '.cmd' : ''))
 		self.console = console || join('bootstrap', "console{ext}")
 
 	static def make runtime\string = null, console\string = null
+		process.env._FORMIDABLE_APP_START_TIME_MS = Date.now!
+		process.env._FORMIDABLE_APP_START_TIME = new Date
+
 		new Console(runtime, console)
 
 	def run { prod\boolean = false } = { prod: false }
@@ -60,10 +108,10 @@ export default class Console
 		for arg in process.argv.slice(2)
 			args.push arg
 
-		if args[1] !== 'serve' || args.includes('--help')
+		if args[1] !== 'serve' || args.includes('--help') || allCommands.includes(args[1])
 			const consoleBuild = join(process.cwd!, '.console', 'console.js')
 
-			if prod && existsSync(consoleBuild)
+			if prod && existsSync(consoleBuild) || existsSync(consoleBuild) && allCommands.includes(args[1])
 				return require(consoleBuild)
 
 		if devMode == 'imba' && args[1] == 'serve' && args.includes('--dev') && !(args.includes('-h') || args.includes('--help') || args.includes('-V') || args.includes('--version'))
@@ -142,9 +190,15 @@ export default class Console
 			const shFlag = '/d /s /c'
 			self.config.windowsVerbatimArguments = true
 
-			return spawn(sh, [shFlag, self.runtime, self.console, ...args], self.config)
+			return spawn(sh, [shFlag, self.runtime, self.console, ...args], {
+				...self.config
+				env: process.env
+			})
 
-		spawn(runtime, [self.console, ...args], self.config)
+		spawn(runtime, [self.console, ...args], {
+			...self.config
+			env: process.env
+		})
 
 	def preServeCommands
 		const appPackage = join(process.cwd!, 'package.json')
