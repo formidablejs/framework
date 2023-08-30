@@ -36,6 +36,10 @@ export class MakeCrudCommand < Command
 		const typeName = "Database/{self.argument('name')}"
 		const domain = self.option('domain', null) ? " --domain={self.option('domain')}" : ''
 
+		process.env.CONSOLE_FORMIDABLE_GROUP = JSON.stringify({
+			newLine: false
+		})
+
 		await self.app.console!.run("make:controller {controllerName} --store-request={storeRequest} --update-request={updateRequest} {self.option('--api') ? '--api' : '-r'}{domain}")
 		await self.app.console!.run("make:migration {tableName} --table={name.toLowerCase!} --schema={self.option('schema', '')}")
 		await self.app.console!.run("make:request {storeRequest}{domain}")
