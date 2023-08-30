@@ -97,6 +97,9 @@ export default class Console
 		self.console = console || join('bootstrap', "console{ext}")
 
 	static def make runtime\string = null, console\string = null
+		process.env._FORMIDABLE_APP_START_TIME_MS = Date.now!
+		process.env._FORMIDABLE_APP_START_TIME = new Date
+
 		new Console(runtime, console)
 
 	def run { prod\boolean = false } = { prod: false }
@@ -187,9 +190,15 @@ export default class Console
 			const shFlag = '/d /s /c'
 			self.config.windowsVerbatimArguments = true
 
-			return spawn(sh, [shFlag, self.runtime, self.console, ...args], self.config)
+			return spawn(sh, [shFlag, self.runtime, self.console, ...args], {
+				...self.config
+				env: process.env
+			})
 
-		spawn(runtime, [self.console, ...args], self.config)
+		spawn(runtime, [self.console, ...args], {
+			...self.config
+			env: process.env
+		})
 
 	def preServeCommands
 		const appPackage = join(process.cwd!, 'package.json')
