@@ -147,6 +147,10 @@ export class ServeCommand < Command
 
 			spawnSync self.runtime, [ "server{ext}", ...args ], conf
 		else
+			process.env.CONSOLE_FORMIDABLE_GROUP = JSON.stringify({
+				newLine: false
+			})
+
 			const server = nodemon({
 				ext: devExt.join(',')
 				exec: #command
@@ -167,7 +171,7 @@ export class ServeCommand < Command
 					#address     = data.split(' ')[2]
 					#fullAddress = data
 
-					self.message 'info', 'Development Server running…'
+					self.message 'info', 'Development Server running…\n'
 
 					self.write "  Local: <u><fg:blue>{#address}</fg:blue></u>"
 
