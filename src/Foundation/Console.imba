@@ -43,6 +43,7 @@ export default class Console
 		'migrate:up'
 		'route:list'
 		'session:prune-expired'
+		'types:generate'
 	]
 
 	prop config\object = {
@@ -109,7 +110,7 @@ export default class Console
 			args.push arg
 
 		if args[1] !== 'serve' || args.includes('--help') || allCommands.includes(args[1])
-			const consoleBuild = join(process.cwd!, '.console', 'console.js')
+			const consoleBuild = join(process.cwd!, '.formidable', 'console.js')
 
 			if prod && existsSync(consoleBuild) || existsSync(consoleBuild) && allCommands.includes(args[1])
 				return require(consoleBuild)
