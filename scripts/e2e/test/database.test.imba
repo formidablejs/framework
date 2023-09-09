@@ -4,17 +4,15 @@ const supertest = require('supertest')
 describe 'Database', do
 	let app
 
-	beforeAll(async () => {
+	beforeAll do
 		const application = await formidable
 
 		app = application.fastify()
 
 		await app.ready()
-	})
 
-	afterAll(async () => {
+	afterAll do
 		await app.close()
-	})
 
 	it '/ (PUT: Create Post)', do
 		supertest(app.server)

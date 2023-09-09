@@ -4,17 +4,15 @@ const supertest = require('supertest')
 describe 'Routes', do
 	let app
 
-	beforeAll(async () => {
+	beforeAll do
 		const application = await formidable
 
 		app = application.fastify()
 
 		await app.ready()
-	})
 
-	afterAll(async () => {
+	afterAll do
 		await app.close()
-	})
 
 	it '/ (GET: hello)', do
 		supertest(app.server)

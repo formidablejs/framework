@@ -4,17 +4,15 @@ const supertest = require('supertest')
 describe 'Validation', do
 	let app
 
-	beforeAll(async () => {
+	beforeAll do
 		const application = await formidable
 
 		app = application.fastify()
 
 		await app.ready()
-	})
 
-	afterAll(async () => {
+	afterAll do
 		await app.close()
-	})
 
 	it '/ (PUT: Create Post: throw 422) - no body', do
 		supertest(app.server)
