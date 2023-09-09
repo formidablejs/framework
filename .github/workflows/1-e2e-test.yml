@@ -7,11 +7,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      max-parallel: 1
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - name: Install modules
       run: npm ci
     - name: Build

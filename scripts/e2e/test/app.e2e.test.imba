@@ -1,7 +1,7 @@
 const formidable = require('../.formidable/build').default
 const supertest = require('supertest')
 
-describe 'Validation', do
+describe 'Application (e2e)', do
 	let app
 
 	beforeAll do
@@ -14,14 +14,16 @@ describe 'Validation', do
 	afterAll do
 		await app.close()
 
-	it '/ (PUT: Create Post: throw 422) - no body', do
+	it '/ (GET: Hello World)', do
 		supertest(app.server)
-			.put('/posts')
-			.send()
-			.expect(422)
+			.get('/')
+			.set('Accept-Language', 'en')
+			.expect(200)
+			.expect('Hello World')
 
-	it '/ (PUT: Create Post: throw 422) - min error', do
+	it '/ (GET: Hola Mundo)', do
 		supertest(app.server)
-			.put('/posts')
-			.send({ body: 'str' })
-			.expect(422)
+			.get('/')
+			.set('Accept-Language', 'es')
+			.expect(200)
+			.expect('Hola Mundo')

@@ -1,1 +1,1 @@
-export default function isClass(object: any): boolean;
+export default function isClass(object: any, strict?: boolean): boolean;
