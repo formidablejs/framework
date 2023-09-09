@@ -1,15 +1,24 @@
-const { current } = require '../storage/framework/address.json'
-const { SuperTest } = require 'supertest'
-const request = require 'supertest'
+const formidable = require('../.formidable/build').default
+const supertest = require('supertest')
 
-describe 'Database', do
-	# @type {SuperTest}
+describe 'Auth', do
 	let app
 
-	beforeAll do app = request('http://127.0.0.1:3000')
+	beforeAll(async () => {
+		const application = await formidable
+
+		app = application.fastify()
+
+		await app.ready()
+	})
+
+	afterAll(async () => {
+		await app.close()
+	})
 
 	it '/ (POST: Create User)', do
-		app.post('/register')
+		supertest(app.server)
+			.post('/register')
 			.send({
 				name: 'Donald'
 				email: 'test@example.com'
@@ -19,7 +28,8 @@ describe 'Database', do
 			.expect(200)
 
 	it '/ (POST: Login - success)', do
-		app.post('/login')
+		supertest(app.server)
+			.post('/login')
 			.send({
 				email: 'test@example.com'
 				password: 'password'
@@ -27,7 +37,8 @@ describe 'Database', do
 			.expect(200)
 
 	it '/ (POST: Login - failure)', do
-		app.post('/login')
+		supertest(app.server)
+			.post('/login')
 			.send({
 				email: 'test@example.com'
 				password: 'password1'

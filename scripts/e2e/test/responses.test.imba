@@ -1,15 +1,24 @@
-const { current } = require '../storage/framework/address.json'
-const { SuperTest } = require 'supertest'
-const request = require 'supertest'
+const formidable = require('../.formidable/build').default
+const supertest = require('supertest')
 
 describe 'Responses', do
-	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request('http://127.0.0.1:3000')
+	beforeAll(async () => {
+		const application = await formidable
+
+		app = application.fastify()
+
+		await app.ready()
+	})
+
+	afterAll(async () => {
+		await app.close()
+	})
 
 	it '/json-response (GET)', do
-		app.get('/json-response')
+		supertest(app.server)
+			.get('/json-response')
 			.expect(201)
 			.expect({
 				message: "Hello world"
