@@ -1,7 +1,7 @@
 import isClass from '../../Support/Helpers/isClass'
 
 export default def getResponse route\object, request, reply
-	if route.action instanceof Function && !isClass(route.action)
+	if route.action instanceof Function && !isClass(route.action, true)
 		return await route.action request, reply
 
 	let controller

@@ -1,19 +1,27 @@
-const { current } = require '../storage/framework/address.json'
-const { SuperTest } = require 'supertest'
-const request = require 'supertest'
+const formidable = require('../.formidable/build').default
+const supertest = require('supertest')
 
 describe 'Validation', do
-	# @type {SuperTest}
 	let app
 
-	beforeAll do app = request('http://127.0.0.1:3000')
+	beforeAll do
+		const application = await formidable
+
+		app = application.fastify()
+
+		await app.ready()
+
+	afterAll do
+		await app.close()
 
 	it '/ (PUT: Create Post: throw 422) - no body', do
-		app.put('/posts')
+		supertest(app.server)
+			.put('/posts')
 			.send()
 			.expect(422)
 
 	it '/ (PUT: Create Post: throw 422) - min error', do
-		app.put('/posts')
+		supertest(app.server)
+			.put('/posts')
 			.send({ body: 'str' })
 			.expect(422)

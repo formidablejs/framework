@@ -14,10 +14,16 @@ describe 'Application (e2e)', do
 	afterAll do
 		await app.close()
 
-	it '/ (GET: Welcome)', do
+	it '/ (GET: Hello World)', do
 		supertest(app.server)
 			.get('/')
+			.set('Accept-Language', 'en')
 			.expect(200)
-			.expect(do(res)
-				expect(res.text).toContain('Yey! You have successfully created a new Formidable project')
-			)
+			.expect('Hello World')
+
+	it '/ (GET: Hola Mundo)', do
+		supertest(app.server)
+			.get('/')
+			.set('Accept-Language', 'es')
+			.expect(200)
+			.expect('Hola Mundo')

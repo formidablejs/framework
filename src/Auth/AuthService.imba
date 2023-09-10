@@ -161,11 +161,11 @@ export default class AuthService
 		self
 
 	static def routes\void config\object = {}
-		const login    = config.login ? config.login : true
-		const register = config.register ? config.register : true
-		const logout   = config.logout ? config.logout : true
-		const email    = config.email ? config.email : true
-		const password = config.password ? config.password : true
+		const login    = config.login !== undefined ? config.login : true
+		const register = config.register !== undefined ? config.register : true
+		const logout   = config.logout !== undefined ? config.logout : true
+		const email    = config.email !== undefined ? config.email : true
+		const password = config.password !== undefined ? config.password : true
 
 		if config.protocol
 			const protocol = config.protocol

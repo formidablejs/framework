@@ -41,7 +41,6 @@ export default class Console
 		'migrate:latest'
 		'migrate:rollback'
 		'migrate:up'
-		'route:list'
 		'session:prune-expired'
 		'types:generate'
 	]

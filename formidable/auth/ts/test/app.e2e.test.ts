@@ -21,7 +21,7 @@ describe('Application (e2e)', () => {
       .get('/')
       .expect(200)
       .expect((res) => {
-        expect(res.text).toContain('Yey! You have successfully created a new Formidable project')
+        expect(res.text).toContain('Your app is ready with Auth scaffolding')
       })
 	})
 })

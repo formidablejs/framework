@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
     "test": "jest --roots=test",
-    "test:e2e": "cd test/e2e && npm run test && cd ../../ && ./scripts/6-kill-server.sh",
+    "test:e2e": "cd test/e2e && npm run test",
     "test:watch": "jest --watchAll --roots=test",
     "pre-test": "./scripts/0-package.sh && ./scripts/1-fetch.sh && ./scripts/2-install.sh && ./scripts/3-copy-test-files.sh && ./scripts/4-prepare.sh"
   },
@@ -33,8 +33,8 @@
     "@fastify/cors": "^8.3.0",
     "@fastify/formbody": "^7.4.0",
     "@fastify/multipart": "^7.7.3",
-    "@fastify/session": "^10.4.0",
-    "@fastify/static": "^6.10.2",
+    "@fastify/session": "^10.5.0",
+    "@fastify/static": "^6.11.0",
     "@formidablejs/console": "^0.0.22",
     "bcrypt": "^5.1.1",
     "connect-redis": "^7.1.0",
