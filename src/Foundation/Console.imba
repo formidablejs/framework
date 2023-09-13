@@ -53,6 +53,7 @@ export default class Console
 	get devConfigDefaults
 		{
 			mode: 'nodemon' # imba
+			commands: []
 			forcedBuildCommands: []
 		}
 
@@ -83,6 +84,16 @@ export default class Console
 		const language = require(appPackage).language || 'imba'
 
 		language.toLowerCase! == 'typescript' ? '.ts' : '.imba'
+
+	get devCommands
+		const list = devConfig.commands || devConfigDefaults.commands
+
+		if !Array.isArray(list)
+			self.message 'error', "Expected \"development.commands\" to be an Array."
+
+			process.exit(1)
+
+		list
 
 	get allCommands
 		const list = devConfig.forcedBuildCommands || []
@@ -128,6 +139,8 @@ export default class Console
 
 			port = await verifyPort(port)
 
+			runDevCommands false
+
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
 			const instance = spawn(runtime, [srv, '-s', '-w'], {
@@ -147,7 +160,7 @@ export default class Console
 				const line = data.toString!
 
 				if (address == null || address == undefined) && line.trim().includes('exited with error code:')
-					Output.write "\n  <bg:red> ERROR </bg:red> Development Server could not be started…\n"
+					Output.write "{devCommands.length > 0 ? '' : '\n'}  <bg:red> ERROR </bg:red> Development Server could not be started…\n"
 
 					process.exit(1)
 
@@ -157,7 +170,7 @@ export default class Console
 					if line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba") && line.includes('listening on')
 						address = line.split('listening on ')[1].trim!.replace(/\u001b\[.*?m/g, '')
 
-						Output.write "\n  <bg:blue> INFO </bg:blue> Development Server running…\n"
+						Output.write "{devCommands.length > 0 ? '' : '\n'}  <bg:blue> INFO </bg:blue> Development Server running…\n"
 
 						Output.write "  Local: <u><fg:blue>http://{address}</fg:blue></u>\n"
 
@@ -173,6 +186,13 @@ export default class Console
 				else
 					if !line.includes("\x1b[1mnode_modules/@formidablejs/framework/bin/imba/server.imba") && !line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba")
 						process.stdout.write line
+
+						const msg = line.split(' ')
+
+						const file = msg.slice(-2, -1)[0]
+
+						if file && file.endsWith('\x1B[22m\x1B[32mmanifest.json\x1B[39m')
+							runDevCommands!
 
 			instance.stderr.on 'data', do(data)
 				process.stdout.write data.toString!
@@ -227,3 +247,20 @@ export default class Console
 			const repeat = process.stdout.columns <= 200 ? process.stdout.columns : (process.stdout.columns / 2)
 
 			Output.write "<dim>  " + ('-'.repeat(repeat - '  '.length)) + "</dim>"
+
+	def runDevCommands
+		process.env.CONSOLE_FORMIDABLE_GROUP = JSON.stringify({
+			newLine: false
+		})
+
+		for command in devCommands
+			execSync(command, {
+				cwd: process.cwd!
+				stdio: 'inherit'
+				env: process.env
+			})
+
+		if devCommands.length > 0
+			Output.write ''
+
+		delete process.env.CONSOLE_FORMIDABLE_GROUP
