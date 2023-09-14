@@ -139,7 +139,7 @@ export default class Console
 
 			port = await verifyPort(port)
 
-			runDevCommands false
+			runDevCommands!
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
