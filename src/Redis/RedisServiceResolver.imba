@@ -3,7 +3,7 @@ import Redis from './Redis'
 import ServiceResolver from '../Support/ServiceResolver'
 import session from '@fastify/session'
 import SessionDriverManager from '../Http/Session/DriverManager'
-import redisStore from 'connect-redis'
+import RedisStore from 'connect-redis'
 
 const socketProperties = [
 	'port',
@@ -35,7 +35,7 @@ export default class RedisServiceResolver < ServiceResolver
 		Object.assign(connection, self.app.config.get('database.redis.options', {}))
 
 	def redis
-		let redisClient = redis.createClient(Object.assign({ legacyMode: true }, self.connection))
+		let redisClient = redis.createClient(Object.assign({ legacyMode: false }, self.connection))
 		redisClient.connect().catch(console.error)
 
 		redisClient
@@ -44,17 +44,18 @@ export default class RedisServiceResolver < ServiceResolver
 		# configure redis.
 		Redis.configure(self.app.config)
 
-		let sessionClient;
+		let sessionClient
 
 		if self.app.config.get('session.driver') == 'redis'
 			if process.argv && process.argv[1] && process.argv[1].substr(-10) !== 'console.js'
 				sessionClient = self.redis!
 
-				const store = redisStore(session)
+				const redisStore = new RedisStore({
+					client: sessionClient,
+					prefix: self.app.config.get('database.redis.options.prefix', 'session')
+				})
 
-				SessionDriverManager.register('redis', new store({
-					client: sessionClient
-				}))
+				SessionDriverManager.register('redis', redisStore)
 			else
 				SessionDriverManager.register('redis', do)
 
