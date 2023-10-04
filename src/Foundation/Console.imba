@@ -4,6 +4,7 @@ import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn, spawnSync, execSync } from 'child_process'
 import { ServeEvents } from './Console/ServeEvents'
+import isBoolean from '../Support/Helpers/isBoolean'
 
 export default class Console
 	prop runtime\string
@@ -53,6 +54,7 @@ export default class Console
 	get devConfigDefaults
 		{
 			mode: 'nodemon' # imba
+			exitOnError: true
 			commands: []
 			forcedBuildCommands: []
 		}
@@ -74,6 +76,19 @@ export default class Console
 			process.exit(1)
 
 		return mode
+
+	get exitOnError
+		const exit = devConfig.exitOnError
+
+		if exit == null || exit == undefined
+			return true
+
+		if !isBoolean(exit)
+			Output.write "\n  <bg:red> ERROR </bg:red> Expected \"development.exitOnError\" to be a Boolean.\n"
+
+			process.exit(1)
+
+		exit
 
 	get ext
 		const appPackage = join(process.cwd!, 'package.json')
@@ -254,13 +269,18 @@ export default class Console
 		})
 
 		for command in devCommands
-			execSync(command, {
-				cwd: process.cwd!
-				stdio: 'inherit'
-				env: process.env
-			})
+			if exitOnError
+				executeCommand command
+			else try executeCommand command
 
 		if devCommands.length > 0
 			Output.write ''
 
 		delete process.env.CONSOLE_FORMIDABLE_GROUP
+
+	def executeCommand command
+		execSync(command, {
+			cwd: process.cwd!
+			stdio: 'inherit'
+			env: process.env
+		})
