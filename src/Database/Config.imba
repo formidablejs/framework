@@ -31,10 +31,11 @@ class Config
 	static def make
 		try
 			const connectionName = config('database.default')
-
-			const selectedConnection = config("database.connections.{connectionName}")
-
 			const client = config("database.connections.{connectionName}.driver", "mysql")
+			let selectedConnection = config("database.connections.{connectionName}")
+
+			if selectedConnection && selectedConnection.url && !isEmpty(selectedConnection.url)
+				selectedConnection = selectedConnection.url
 
 			const connection = {
 				client: client
