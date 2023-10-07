@@ -4,6 +4,7 @@ import { Command } from './Foundation/Console/Command'
 import { Context } from './Foundation/Context'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { handleException, handleMaintenanceMode } from './Foundation/Exceptions/Handler/handleException'
+import { HtmlTemplate, html, render } from  './Http/Http/Response/Render'
 import { Mail, Mailable, MailServiceResolver } from '@formidablejs/mailer'
 import { Prop } from '@formidablejs/console'
 import { use } from './Support/Decorators/tsUse'
@@ -131,6 +132,8 @@ export {
 	HashServiceResolver
 	helpers
 	HttpException
+	HtmlTemplate
+	html
 	Kernel
 	Language
 	LanguageServiceResolver
@@ -147,6 +150,7 @@ export {
 	Redirect
 	Redis
 	RedisServiceResolver
+	render
 	Repository
 	Request
 	ResetPassword

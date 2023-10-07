@@ -5,6 +5,7 @@ import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify/types/request";
 import { handleException } from "./Foundation/Exceptions/Handler/handleException";
 import { handleMaintenanceMode } from "./Foundation/Exceptions/Handler/handleException";
+import { HtmlTemplate, html, render } from  "./Http/Http/Response/Render";
 import { ICommand } from "./Foundation/Application";
 import { IContextual } from './Database/IContextual'
 import { IMiddleware } from './Http/Middleware/IMiddleware'
@@ -160,6 +161,8 @@ export {
     HashServiceResolver,
     helpers,
     HttpException,
+    HtmlTemplate
+  	html,
     ICommand,
     IContextual,
     IMiddleware,
@@ -183,6 +186,7 @@ export {
     Redirect,
     Redis,
     RedisServiceResolver,
+    render,
     Repository,
     Request,
     ResetPassword,
