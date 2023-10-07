@@ -1,6 +1,6 @@
 {
   "name": "@formidablejs/framework",
-  "version": "0.23.6",
+  "version": "0.23.7",
   "description": "Formidable Framework Core",
   "author": "Donald Pakkies",
   "license": "MIT",
@@ -16,6 +16,9 @@
     "lib",
     "types"
   ],
+  "bin": {
+    "internals": "bin/formidablejs/index.js"
+  },
   "scripts": {
     "build": "npm run imba:build && sh ./scripts/server-command-replace.sh",
     "imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
