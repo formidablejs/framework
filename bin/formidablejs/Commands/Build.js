@@ -1,5 +1,6 @@
 const { Command, Output, boolean } = require("@formidablejs/console");
 const { exec, execSync } = require("child_process");
+const { getExt } = require('../ext')
 
 class Build extends Command {
   get signature() {
@@ -19,7 +20,7 @@ class Build extends Command {
   handle() {
     if (this.option("watch-console")) {
       return execSync(
-        "imba build bootstrap/console.ts -p -s -f -w -o .formidable",
+        `imba build bootstrap/console${getExt()} -p -s -f -w -o .formidable`,
         {
           stdio: "inherit",
           cwd: process.cwd(),
@@ -28,7 +29,7 @@ class Build extends Command {
     }
 
     const output = exec(
-      "imba build bootstrap/console.ts -p -s -f -o .formidable && imba build bootstrap/build.ts -p -s -f -o .formidable && node craftsman config:cache",
+      `imba build bootstrap/console${getExt()} -p -s -f -o .formidable && imba build bootstrap/build${getExt()} -p -s -f -o .formidable && node craftsman config:cache`,
       {
         stdio: "pipe",
         cwd: process.cwd(),
@@ -44,8 +45,14 @@ class Build extends Command {
           "\x1B[93mℹ\x1B[39m built \x1B[1mbootstrap/build.ts\x1B[22m in"
         ) ||
         data.startsWith(
+          "\x1B[93mℹ\x1B[39m built \x1B[1mbootstrap/build.imba\x1B[22m in"
+        ) ||
+        data.startsWith(
           "\x1B[93mℹ\x1B[39m built \x1B[1mbootstrap/console.ts\x1B[22m in"
-        )
+        ) ||
+        data.startsWith(
+          "\x1B[93mℹ\x1B[39m built \x1B[1mbootstrap/console.imba\x1B[22m in"
+        ) ||
       )
         return;
 
