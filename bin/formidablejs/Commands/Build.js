@@ -52,7 +52,7 @@ class Build extends Command {
         ) ||
         data.startsWith(
           "\x1B[93mℹ\x1B[39m built \x1B[1mbootstrap/console.imba\x1B[22m in"
-        ) ||
+        )
       )
         return;
 
