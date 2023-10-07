@@ -10,7 +10,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     strategy:
-      max-parallel: 1
       matrix:
         node-version: [18.x, 20.x]
 
