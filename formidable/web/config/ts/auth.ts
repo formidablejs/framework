@@ -21,9 +21,9 @@ export default {
 			provider: 'jwt'
 		},
 
-        web: {
-            provider: 'session'
-        }
+		web: {
+			provider: 'session'
+		}
 	},
 
 	/**
