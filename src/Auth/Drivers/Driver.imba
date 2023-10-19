@@ -296,12 +296,14 @@ export default class Driver
 				self.getProvider.table
 			)
 
+		const db = self.config.get('database')
+
 		Database.table(self.getProvider.table)
 			.insert({
 				name: body.name,
 				email: body.email,
 				password: await Hash.make(body.password)
-			}, DatabaseConfig.client == 'pg' ? ['id'] : null)
+			}, db.connections[db.default].driver == 'pg' ? ['id'] : null)
 			.then do([ user\object|Number ])
 				user = (typeof user === 'object' && user.hasOwnProperty('id')) ? user.id : user
 
