@@ -31,7 +31,9 @@ export default class PersonalAccessToken
 
 		let returning = null
 
-		try returning = DatabaseConfig.client == 'pg' ? ['id'] : null
+		const db = settings.config.get('database')
+
+		try returning = db.connections[db.default].driver == 'pg' ? ['id'] : null
 
 		return self.getDatabase!.table('personal_access_tokens')
 			.insert({
