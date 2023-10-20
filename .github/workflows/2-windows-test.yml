@@ -3,7 +3,7 @@ name: Windows Tests
 on: [push]
 
 jobs:
-  e2e:
+  build:
     runs-on: windows-latest
 
     strategy:
@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
       - name: Install modules
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Prepare e2e tests
-        run: npm run pre-test
-      - name: Run e2e tests
-        run: npm run test:e2e
+      - name: Run tests
+        run: npm test
