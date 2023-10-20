@@ -1,0 +1,26 @@
+name: Windows Tests
+
+on: [push]
+
+jobs:
+  e2e:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install modules
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Prepare e2e tests
+        run: npm run pre-test
+      - name: Run e2e tests
+        run: npm run test:e2e
