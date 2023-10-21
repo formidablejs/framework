@@ -44,6 +44,11 @@ export default class Repository
 
 		query.insert.apply(query.args)
 
+	static def create ...args
+		const query = self.query!
+
+		query.create.apply(query.args)
+
 	static def join ...args
 		const query = self.query!
 
@@ -273,3 +278,28 @@ export default class Repository
 		const query = self.query!
 
 		query.countDistinct.apply(query, args)
+
+	static def softDelete
+		const query = self.query!
+
+		query.softDelete!
+
+	static def restore
+		const query = self.query!
+
+		query.restore!
+
+	static def withTrashed
+		const query = self.query!
+
+		query.withTrashed!
+
+	static def withoutTrashed
+		const query = self.query!
+
+		query.withoutTrashed!
+
+	static def onlyTrashed
+		const query = self.query!
+
+		query.onlyTrashed!
