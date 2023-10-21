@@ -6,5 +6,10 @@ export class Config {
     static get connections(): any;
     /** @type {string}*/
     static get client(): string;
+
+    static get settings(): any;
+
+    static get isReturningDriver(): boolean;
+
     static make(): {};
 }

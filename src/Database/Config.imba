@@ -1,6 +1,18 @@
 import config from '../Support/Helpers/config'
 import isEmpty from '../Support/Helpers/isEmpty'
 
+const settings = {
+	driver: null
+	returningDrivers: [
+		'pg'
+		'pg-native'
+		'sqlite3'
+		'better-sqlite3'
+		'oracledb'
+		'tedious'
+	]
+}
+
 class Config
 
 	# Default connection name.
@@ -23,6 +35,14 @@ class Config
 
 	static get client
 		connections[default]?.driver ?? 'mysql'
+
+	# Connection settings.
+	static get settings
+		settings
+
+	# Check if the selected driver is a returning driver.
+	static get isReturningDriver
+		settings.returningDrivers.includes(settings.driver)
 
 	# Configure database connection.
 	#
@@ -55,6 +75,8 @@ class Config
 			connection.acquireConnectionTimeout = config('database.acquireConnectionTimeout') if !isEmpty(config('database.acquireConnectionTimeout'))
 			connection.fetchAsString = config('database.fetchAsString') if !isEmpty(config('database.fetchAsString'))
 			connection.useNullAsDefault = config('database.useNullAsDefault') if !isEmpty(config('database.useNullAsDefault'))
+
+			settings.driver = connection.client
 
 			return connection
 
