@@ -18,6 +18,7 @@ declare module "knex" {
     interface TableBuilder {
       softDeletes(): Knex.TableBuilder;
       dropSoftDeletes(): Knex.TableBuilder;
+      rememberToken(): Knex.TableBuilder;
     }
   }
 }

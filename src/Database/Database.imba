@@ -38,6 +38,8 @@ try
 
 	knex.TableBuilder.extend 'dropSoftDeletes', do this.dropColumn('deleted_at')
 
+	knex.TableBuilder.extend 'rememberToken', do this.string('remember_token').nullable!
+
 	attachPaginate!
 
 catch
