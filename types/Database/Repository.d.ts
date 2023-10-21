@@ -351,6 +351,22 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
       : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
   ): Knex.QueryBuilder<TRecord, TResult2>;
 
+  static insert<TResult2 = number[]>(
+    data: TRecord extends Knex.CompositeTableType<unknown>
+      ?
+      | Knex.ResolveTableType<TRecord, 'insert'>
+      | ReadonlyArray<Knex.ResolveTableType<TRecord, 'insert'>>
+      : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+
+  static create<TResult2 = number[]>(
+    data: TRecord extends Knex.CompositeTableType<unknown>
+      ?
+      | Knex.ResolveTableType<TRecord, 'insert'>
+      | ReadonlyArray<Knex.ResolveTableType<TRecord, 'insert'>>
+      : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+
   static join: Knex.Join<TRecord, TResult>;
   static joinRaw: Knex.JoinRaw<TRecord, TResult>;
   static innerJoin: Knex.Join<TRecord, TResult>;
@@ -401,4 +417,9 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   static limit(limit: number, options?: string | Readonly<{ skipBinding?: boolean }>): Knex.QueryBuilder<TRecord, TResult>;
   static count: Knex.AsymmetricAggregation<TRecord, TResult, Knex.Lookup<ResultTypes.Registry, 'Count', number | string>>;
   static countDistinct: Knex.AsymmetricAggregation<TRecord, TResult, Knex.Lookup<ResultTypes.Registry, 'Count', number | string>>;
+  static softDelete<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
+  static restore<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
+  static withTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
+  static withoutTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
+  static onlyTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
 }
