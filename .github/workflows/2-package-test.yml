@@ -1,0 +1,26 @@
+name: Core Tests
+
+on: [push]
+
+jobs:
+  npm:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Create new app
+      run: formidable new app-test-npm --type="api" -l="typescript" -d="SQLite" --use-npm
+    - name: CD into app
+      run: cd app-test-npm
+    - name: Build app
+      run: npm run build
+    - name: Run tests
+      run: npm run test
