@@ -33,7 +33,7 @@ jobs:
     - name: Install pnpm
       run: npm i -g pnpm
     - name: Create new app
-      run: formidable new app-test-pnpm --type="api" -l="typescript" -d="SQLite" --use-pnpm && cd app-test-npm && pnpm run build && pnpm run test
+      run: formidable new app-test-pnpm --type="api" -l="typescript" -d="SQLite" --use-pnpm && cd app-test-pnpm && pnpm run build && pnpm run test
 
   yarn:
     runs-on: ubuntu-latest
@@ -50,4 +50,4 @@ jobs:
     - name: Install yarn
       run: npm i -g yarn
     - name: Create new app
-      run: formidable new app-test-yarn --type="api" -l="typescript" -d="SQLite" --use-yarn && cd app-test-npm && yarn build && yarn test
+      run: formidable new app-test-yarn --type="api" -l="typescript" -d="SQLite" --use-yarn && cd app-test-yarn && yarn build && yarn test
