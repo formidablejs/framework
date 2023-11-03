@@ -1,4 +1,4 @@
-name: Core Tests
+name: Package Tests
 
 on: [push]
 
@@ -17,10 +17,4 @@ jobs:
     - name: Install @formidablejs/installer
       run: npm i -g @formidablejs/installer
     - name: Create new app
-      run: formidable new app-test-npm --type="api" -l="typescript" -d="SQLite" --use-npm
-    - name: CD into app
-      run: cd app-test-npm
-    - name: Build app
-      run: npm run build
-    - name: Run tests
-      run: npm run test
+      run: formidable new app-test-npm --type="api" -l="typescript" -d="SQLite" --use-npm && cd app-test-npm && npm run build && npm run test
