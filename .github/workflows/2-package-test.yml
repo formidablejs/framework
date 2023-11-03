@@ -35,6 +35,23 @@ jobs:
     - name: Create new app
       run: formidable new app-test-pnpm --type="api" -l="typescript" -d="SQLite" --use-pnpm && cd app-test-pnpm && pnpm run build && pnpm run test
 
+  bun:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Install bun
+      run: curl -fsSL https://bun.sh/install | bash
+    - name: Create new app
+      run: formidable new app-test-bun --type="api" -l="typescript" -d="SQLite" --use-bun && cd app-test-bun && bun run build && bun run test
+
   yarn:
     runs-on: ubuntu-latest
 
