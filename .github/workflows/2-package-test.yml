@@ -1,0 +1,66 @@
+name: Package Tests
+
+on:
+  schedule:
+  - cron: '0 1 * * *'
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Create new app
+      run: formidable new app-test-npm --type="api" -l="typescript" -d="SQLite" --use-npm && cd app-test-npm && npm run build && npm run test
+
+  pnpm:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Install pnpm
+      run: npm i -g pnpm
+    - name: Create new app
+      run: formidable new app-test-pnpm --type="api" -l="typescript" -d="SQLite" --use-pnpm && cd app-test-pnpm && pnpm run build && pnpm run test
+
+  bun:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Create new app
+      run: formidable new app-test-bun --type="api" -l="typescript" -d="SQLite" --use-bun && cd app-test-bun && bun run build && bun run test
+
+  yarn:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install @formidablejs/installer
+      run: npm i -g @formidablejs/installer
+    - name: Install yarn
+      run: npm i -g yarn
+    - name: Create new app
+      run: formidable new app-test-yarn --type="api" -l="typescript" -d="SQLite" --use-yarn && cd app-test-yarn && yarn build && yarn test
