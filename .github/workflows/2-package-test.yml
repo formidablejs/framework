@@ -11,8 +11,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.4.0
     - name: Install @formidablejs/installer
       run: npm i -g @formidablejs/installer
     - name: Create new app
@@ -26,8 +24,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.4.0
     - name: Install @formidablejs/installer
       run: npm i -g @formidablejs/installer
     - name: Install pnpm
@@ -46,8 +42,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.4.0
     - name: Install @formidablejs/installer
       run: npm i -g @formidablejs/installer
     - name: Create new app
@@ -61,8 +55,6 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.4.0
     - name: Install @formidablejs/installer
       run: npm i -g @formidablejs/installer
     - name: Install yarn
