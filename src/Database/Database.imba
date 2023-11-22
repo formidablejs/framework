@@ -24,7 +24,7 @@ try
 
 		return !Array.isArray(data) && Array.isArray(results) ? results[0] : results
 
-	knex.QueryBuilder.extend 'get', do(...columns = null, ignore = null)
+	knex.QueryBuilder.extend 'get', do(...columns)
 		let results\object[] = await this
 
 		if columns.length > 0
