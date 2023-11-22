@@ -24,6 +24,7 @@ const { default: now }  = require './now'
 const { default: response }  = require './response'
 const { default: route } = require './route'
 const { default: signedRoute } = require './signedRoute'
+const { default: singularize } = require './singularize'
 const { default: slug }  = require './slug'
 const { default: strRandom }  = require './strRandom'
 const { default: tap } = require './tap'
@@ -67,6 +68,7 @@ export {
 	response
 	route
 	signedRoute
+	singularize
 	slug
 	strRandom
 	tap
