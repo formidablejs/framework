@@ -25,6 +25,7 @@ import pluralize from 'pluralize'
 import response from './response'
 import route from './route'
 import signedRoute from './signedRoute'
+import singularize from './singularize'
 import slug from './slug'
 import strRandom from './strRandom'
 import tap from './tap'
@@ -64,6 +65,7 @@ export {
     response,
     route,
     signedRoute,
+    singularize,
     slug,
     strRandom,
     tap,

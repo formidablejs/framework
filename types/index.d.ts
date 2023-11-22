@@ -37,6 +37,7 @@ import CorsServiceResolver from "./Http/Cors/CorsServiceResolver";
 import Database from "./Database/Database";
 import DB from "./Database/Database";
 import decrypt from "./Support/Helpers/decrypt";
+import die from "./Support/Helpers/die";
 import EmailNotVerifiedException from './Auth/Exceptions/EmailNotVerifiedException';
 import encrypt from "./Support/Helpers/encrypt";
 import Encrypter from "./Foundation/Encrypter";
@@ -138,6 +139,7 @@ export {
     Database,
     DB,
     decrypt,
+    die,
     EmailNotVerifiedException,
     encrypt,
     Encrypter,
