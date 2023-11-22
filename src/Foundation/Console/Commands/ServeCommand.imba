@@ -1,4 +1,4 @@
-import { verifyPort, isAppUrl, updateEnvAppUrl } from '../verifyPort'
+import { verifyPort } from '../verifyPort'
 import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
