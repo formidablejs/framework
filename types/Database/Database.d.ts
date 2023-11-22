@@ -14,6 +14,7 @@ declare module "knex" {
       withTrashed(): Knex.QueryBuilder;
       withoutTrashed(): Knex.QueryBuilder;
       onlyTrashed(): Knex.QueryBuilder;
+      get<T = unknown>(...columns: ?string[] = null): Promise<T>;
     }
     interface TableBuilder {
       softDeletes(): Knex.TableBuilder;

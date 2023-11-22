@@ -42,12 +42,12 @@ export default class Repository
 	static def insert ...args
 		const query = self.query!
 
-		query.insert.apply(query.args)
+		query.insert.apply(query,args)
 
 	static def create ...args
 		const query = self.query!
 
-		query.create.apply(query.args)
+		query.create.apply(query,args)
 
 	static def join ...args
 		const query = self.query!
@@ -303,3 +303,13 @@ export default class Repository
 		const query = self.query!
 
 		query.onlyTrashed!
+
+	static def get ...args
+		const query = self.query!
+
+		query.get.apply(query, args)
+
+	def get ...args
+		const query = self.table!
+
+		query.get.apply(query, args)

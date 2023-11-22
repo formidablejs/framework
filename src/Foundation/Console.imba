@@ -113,6 +113,20 @@ export default class Console
 
 		new Console(runtime, console)
 
+	static def mode modes\string[]
+		if !Array.isArray(modes)
+			self.message 'error', "Expected \"modes\" to be an Array."
+
+			process.exit(1)
+
+		const args = process.argv.slice(2)
+		const nodeEnv = args.find do(arg) arg.startsWith('--MODE=')
+		const nodeEnvValue = nodeEnv ? nodeEnv.split('=')[1] : 'development'
+
+		process.argv = process.argv.filter do(arg) !arg.startsWith('--MODE=')
+
+		modes.includes(nodeEnvValue)
+
 	def run { prod\boolean = false } = { prod: false }
 		const args = ['--']
 

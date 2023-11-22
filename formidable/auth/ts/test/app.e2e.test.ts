@@ -4,7 +4,7 @@ const supertest = require('supertest')
 describe('Application (e2e)', () => {
   let app
 
-  beforeAll(() => {
+  beforeAll(async () => {
     const application = await formidable
 
     app = application.fastify()
@@ -12,7 +12,7 @@ describe('Application (e2e)', () => {
     await app.ready()
   })
 
-  afterAll(() => {
+  afterAll(async () => {
     await app.close()
   })
 
