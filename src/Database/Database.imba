@@ -24,6 +24,20 @@ try
 
 		return !Array.isArray(data) && Array.isArray(results) ? results[0] : results
 
+	knex.QueryBuilder.extend 'get', do(...columns = null, ignore = null)
+		let results\object[] = await this
+
+		if columns.length > 0
+			return results.map do(result)
+				const object = {}
+
+				for column in columns
+					object[column] = result[column]
+
+				return object
+
+		results
+
 	knex.QueryBuilder.extend 'softDelete', do this.update({ deleted_at: Database.fn.now! })
 
 	knex.QueryBuilder.extend 'restore', do this.update({ deleted_at: null })
