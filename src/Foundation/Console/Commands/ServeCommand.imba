@@ -1,4 +1,4 @@
-import { verifyPort } from '../verifyPort'
+import { verifyPort, isAppUrl, updateEnvAppUrl } from '../verifyPort'
 import { Command } from '../Command'
 import { join } from 'path'
 import { existsSync } from 'fs'
@@ -19,7 +19,7 @@ export class ServeCommand < Command
 	get props
 		{
 			port: Prop.number!.alias('p').default(3000).description 'The port to serve the application on'
-			host: Prop.string!.alias('h').default('localhost').description 'The host address to serve the application on'
+			host: Prop.string!.alias('h').default('127.0.0.1').description 'The host address to serve the application on'
 			dev: Prop.boolean!.alias('d').description 'Serve in dev mode (build, serve and watch)'
 			addr: Prop.boolean!.description 'Store address in a config file'
 		}
@@ -45,6 +45,7 @@ export class ServeCommand < Command
 		{
 			commands: []
 			ignore: [
+				'.formidable',
 				'app/Types',
 				'bootstrap/config',
 				'database',
@@ -57,7 +58,7 @@ export class ServeCommand < Command
 				'test',
 				'tests',
 			]
-			ext: ['imba' ,'js', 'ts']
+			ext: ['imba' ,'js', 'ts', 'env']
 			delay: "500ms"
 			mode: 'nodemon' # imba
 		}
@@ -157,11 +158,16 @@ export class ServeCommand < Command
 				ignore: devIgnore
 				stdout: false
 				delay: devDelay
+				signal: 'SIGUSR2'
+				watch: ['.', '.env']
 			})
 
-			process.once('SIGUSR2', do
-				gracefulShutdown do
-					process.kill(process.pid, 'SIGUSR2')
+			process.once('SIGINT', do
+				self.message 'info', 'Shutting down development server…'
+
+				server.reset()
+
+				process.exit(0)
 			)
 
 			server.on 'stdout', do(e)
@@ -196,14 +202,13 @@ export class ServeCommand < Command
 
 				process.stdout.write data
 
-			server.on 'restart', do
-				self.message 'info', 'Application change detected. Restarting server…'
+			server.on 'restart', do(file)
+				if file == join(process.cwd!, '.env')
+					await self.app.console!.run('config:cache')
 
-			server.on 'quit', do(e)
-				self.exit()
-
-			process.on 'SIGINT', do
-				self.exit()
+					self.message 'info', 'Environment change detected. Restart the server to apply changes…'
+				else
+					self.message 'info', 'Application change detected. Restarting server…'
 
 	def setEnvVars port\number
 		process.env.FORMIDABLE_PORT = port ?? self.fallbackPort
