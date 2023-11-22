@@ -268,7 +268,7 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   get database(): Knex;
   get table(): Knex;
   static query(): Knex;
-  static find(value: any): any;
+  static find<T = unknown>(value: any): Promise<T>;
   static first<TRecord extends {} = any, TResult = any>(): Knex.Select<TRecord, DeferredKeySelection.AddUnionMember<UnwrapArrayMember<TResult>, undefined>>;
   static insert<TRecord extends {} = any>(
     data: TRecord extends Knex.CompositeTableType<unknown>
@@ -359,13 +359,13 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
       : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
   ): Knex.QueryBuilder<TRecord, TResult2>;
 
-  static create<TResult2 = number[]>(
+  static create<T = unknown>(
     data: TRecord extends Knex.CompositeTableType<unknown>
       ?
       | Knex.ResolveTableType<TRecord, 'insert'>
       | ReadonlyArray<Knex.ResolveTableType<TRecord, 'insert'>>
       : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
-  ): Knex.QueryBuilder<TRecord, TResult2>;
+  ): unknown;
 
   static join: Knex.Join<TRecord, TResult>;
   static joinRaw: Knex.JoinRaw<TRecord, TResult>;
@@ -422,4 +422,6 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   static withTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static withoutTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static onlyTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
+  static get<T = unknown>(...columns: string[]): Promise<T>;
+  get<T = unknown>(...columns: string[]): Promise<T>;
 }
