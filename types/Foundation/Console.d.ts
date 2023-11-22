@@ -16,6 +16,11 @@ export default class Console {
      */
     static make(runtime?: string, console?: string): Console;
 
+    /**
+     * Check if the given mode is active.
+     */
+    static mode(modes: string[]): boolean;
+
     get devConfigDefaults(): {
         mode: string;
     };
