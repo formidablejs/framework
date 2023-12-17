@@ -18,6 +18,7 @@ const { default: isFunction }  = require './isFunction'
 const { default: isNumber }  = require './isNumber'
 const { default: isObject }  = require './isObject'
 const { default: isString }  = require './isString'
+const { default: location }  = require './location'
 const { default: mix } = require './mix'
 const { default: multitap } = require './multitap'
 const { default: now }  = require './now'
@@ -60,6 +61,7 @@ export {
 	isNumber
 	isObject
 	isString
+	location
 	mix
 	ms
 	multitap
