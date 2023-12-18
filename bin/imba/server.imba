@@ -11,7 +11,7 @@ const application = app.initiate(app.make(Kernel), true)
 application.then do(instance)
 	const start = do
 		let port = process.env.PORT || 3000
-		let host = process.env.HOST || '127.0.0.1'
+		let host = process.env.HOST || 'localhost'
 		let addr = process.env.ADDR || false
 
 		instance.fastify().listen({
