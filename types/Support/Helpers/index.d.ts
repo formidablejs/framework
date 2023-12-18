@@ -17,6 +17,7 @@ import isFunction from './isFunction'
 import isNumber from './isNumber'
 import isObject from './isObject'
 import isString from './isString'
+import location from './location'
 import mix from './mix'
 import ms from 'ms'
 import multitap from './multitap'
@@ -57,6 +58,7 @@ export {
     isNumber,
     isObject,
     isString,
+    location,
     mix,
     ms,
     multitap,

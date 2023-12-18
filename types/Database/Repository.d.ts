@@ -1,6 +1,35 @@
 import { Knex } from 'knex'
 import ResultTypes = require('./result')
 
+type PaginationOptions = {
+  page?: number;
+  pageSize?: number;
+  query?: any;
+  url?: string;
+}
+
+type PaginationResults<T = unknown> = {
+  data: T[];
+  pagination: {
+    total: number;
+    pageSize: number;
+    currentPage: number;
+    totalPages: number;
+    pages: number[];
+    firstPage: number;
+    lastPage: number;
+    prevPage: number;
+    nextPage: number;
+    links?: {
+      [key: keyof PaginationResults<T>.pagination.pages | 'firstPage' | 'prevPage' | 'nextPage' | 'lastPage']: {
+        label: string;
+        active: boolean;
+        url: string;
+      };
+    }
+  }
+}
+
 type AnyToUnknown<T> = unknown extends T ? unknown : T;
 type UnknownToAny<T> = unknown extends T ? any : T;
 type StrKey<T> = string & keyof T;
@@ -417,6 +446,8 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   static limit(limit: number, options?: string | Readonly<{ skipBinding?: boolean }>): Knex.QueryBuilder<TRecord, TResult>;
   static count: Knex.AsymmetricAggregation<TRecord, TResult, Knex.Lookup<ResultTypes.Registry, 'Count', number | string>>;
   static countDistinct: Knex.AsymmetricAggregation<TRecord, TResult, Knex.Lookup<ResultTypes.Registry, 'Count', number | string>>;
+  static pagination<T = unknown>(options: PaginationOptions): Promise<PaginationResults<T>>;
+  static autoPaginate<T = unknown>(perPage?: number): Promise<PaginationResults<T>>;
   static softDelete<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static restore<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static withTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;

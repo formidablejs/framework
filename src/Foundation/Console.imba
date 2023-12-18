@@ -143,7 +143,7 @@ export default class Console
 			preServe!
 
 			let port = 3000
-			let host = '127.0.0.1'
+			let host = 'localhost'
 			let addr = false
 
 			args.forEach do(arg)
