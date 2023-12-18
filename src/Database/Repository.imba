@@ -279,6 +279,16 @@ export default class Repository
 
 		query.countDistinct.apply(query, args)
 
+	static def pagination ...args
+		const query = self.query!
+
+		query.pagination.apply(query, args)
+
+	static def autoPaginate ...args
+		const query = self.query!
+
+		query.autoPaginate.apply(query, args)
+
 	static def softDelete
 		const query = self.query!
 

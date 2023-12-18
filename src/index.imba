@@ -46,6 +46,7 @@ import HttpException from './Http/Exceptions/HttpException'
 import Kernel from './Http/Kernel'
 import Language from './Support/Language/Language'
 import LanguageServiceResolver from './Support/Language/LanguageServiceResolver'
+import location from './Support/Helpers/location'
 import MaintenanceModeException from './Foundation/Exceptions/MaintenanceModeException'
 import MaintenanceServiceResolver from './Foundation/MaintenanceServiceResolver'
 import MultipartServiceResolver from './Http/Request/MultipartServiceResolver'
@@ -136,6 +137,7 @@ export {
 	Kernel
 	Language
 	LanguageServiceResolver
+	location
 	Mail
 	Mailable
 	MailServiceResolver
