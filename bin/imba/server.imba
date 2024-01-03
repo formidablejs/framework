@@ -34,7 +34,7 @@ def storeAddress address\string
 	const location = join(process.cwd!, 'storage', 'framework', 'address.json')
 
 	const object = {
-		current: address.replace('[::]', '127.0.0.1')
+		current: address.replace('[::]', '127.0.0.1').replace('::1', 'localhost')
 	}
 
 	writeFileSync location, JSON.stringify(object, null, 2), {

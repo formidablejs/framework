@@ -177,6 +177,8 @@ export class ServeCommand < Command
 					#address     = data.split(' ')[2]
 					#fullAddress = data
 
+					#address = #address.replace('::1', 'localhost')
+
 					self.message 'info', 'Development Server running…\n'
 
 					self.write "  Local: <u><fg:blue>{#address}</fg:blue></u>"
