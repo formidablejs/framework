@@ -46,7 +46,7 @@ export default class Console
 	]
 
 	prop config\object = {
-		stdio: 'inherit'
+		stdio: 'pipe'
 		cwd: process.cwd!
 	}
 
@@ -184,6 +184,8 @@ export default class Console
 					if line.includes("\x1b[1m./node_modules/@formidablejs/framework/bin/imba/server.imba") && line.includes('listening on')
 						address = line.split('listening on ')[1].trim!.replace(/\u001b\[.*?m/g, '')
 
+						address = address.replace('::1', 'localhost')
+
 						Output.write "{devCommands.length > 0 ? '' : '\n'}  <bg:blue> INFO </bg:blue> Development Server running…\n"
 
 						Output.write "  Local: <u><fg:blue>http://{address}</fg:blue></u>\n"
@@ -219,20 +221,39 @@ export default class Console
 
 			return
 
+		let server
+
 		if process.platform == 'win32'
 			const sh = process.env.comspec || 'cmd'
 			const shFlag = '/d /s /c'
 			self.config.windowsVerbatimArguments = true
 
-			return spawn(sh, [shFlag, self.runtime, self.console, ...args], {
+			server = spawn(sh, [shFlag, self.runtime, self.console, ...args], {
+				...self.config
+				env: process.env
+			})
+		else
+			server = spawn(runtime, [self.console, ...args], {
 				...self.config
 				env: process.env
 			})
 
-		spawn(runtime, [self.console, ...args], {
-			...self.config
-			env: process.env
-		})
+		server.stdout.on 'data', do(e)
+			const data = e.toString!
+
+			if data.trim().startsWith('listening on http')
+				process.stdout.write "Listening on {data.split(' ')[2].replace('::1', 'localhost')}"
+			else
+				process.stdout.write data
+
+		server.stderr.on 'data', do(data)
+			process.stdout.write data.toString!
+
+		server.on 'exit', do
+			process.exit!
+
+		server.on 'exit', do
+			server.kill!
 
 	def preServeCommands
 		const appPackage = join(process.cwd!, 'package.json')

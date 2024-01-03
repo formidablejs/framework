@@ -27,7 +27,7 @@ export default class Server
 
 					process.exit(1)
 				else
-					const addr = address.endsWith("://0.0.0.0:{String(port)}") ? address.replace("://0.0.0.0:{String(port)}", "://127.0.0.1:{String(port)}") : address
+					let addr = address.endsWith("://0.0.0.0:{String(port)}") ? address.replace("://0.0.0.0:{String(port)}", "://localhost:{String(port)}") : address
 
 					if config('app.debug')
 						Output.write "\n  <bg:yellow> WARN </bg:yellow> Application Server running in debug mode…\n"
