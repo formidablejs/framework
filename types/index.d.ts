@@ -3,8 +3,7 @@ import { Context } from "./Foundation/Context";
 import { FastifyInstance } from "fastify/types/instance";
 import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify/types/request";
-import { handleException } from "./Foundation/Exceptions/Handler/handleException";
-import { handleMaintenanceMode } from "./Foundation/Exceptions/Handler/handleException";
+import { handleException, handleMaintenanceMode } from "./Foundation/Exceptions/Handler/handleException";
 import { ICommand } from "./Foundation/Application";
 import { IContextual } from './Database/IContextual'
 import { IMiddleware } from './Http/Middleware/IMiddleware'
