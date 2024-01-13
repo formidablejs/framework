@@ -1,4 +1,4 @@
 /**
 @param {string} hash
 */
-export default function decrypt(hash: string, unserialize?: boolean): any;
+export default function decrypt<T = any>(hash: string, unserialize?: boolean): T;

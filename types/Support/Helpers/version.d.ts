@@ -1,1 +1,1 @@
-export default function version(): any;
+export default function version(): string;
