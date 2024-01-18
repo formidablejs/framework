@@ -18,4 +18,4 @@ type Location = {
  *
  * @experimental
  */
-export default function location(): Location || null;
+export default function location(): Location | null;
