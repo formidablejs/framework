@@ -23,7 +23,6 @@ export class ShellCommand < Command
 
 			Object.keys(context).forEach do(key) if !ctx[key] then ctx[key] = context[key]
 
-		/** @type {REPLServer} */
-		const server = await repl.run!
+		const server\REPLServer = await repl.run!
 
 		server.on 'exit', do self.exit!
