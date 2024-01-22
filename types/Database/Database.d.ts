@@ -43,7 +43,7 @@ declare module "knex" {
       withTrashed(): Knex.QueryBuilder;
       withoutTrashed(): Knex.QueryBuilder;
       onlyTrashed(): Knex.QueryBuilder;
-      get<T = unknown>(...columns: Array<string> | never): Promise<T>;
+      get<T = unknown>(columns?: string[]): Promise<T>;
       pagination<T = unknown>(options: PaginationOptions): Promise<PaginationResults<T>>;
       /**
        * @experimental
