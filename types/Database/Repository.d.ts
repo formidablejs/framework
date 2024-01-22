@@ -296,6 +296,7 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   get db(): Knex;
   get database(): Knex;
   get table(): Knex;
+  protected get hidden(): string[];
   static query(): Knex;
   static find<T = unknown>(value: any): Promise<T>;
   static first<TRecord extends {} = any, TResult = any>(): Knex.Select<TRecord, DeferredKeySelection.AddUnionMember<UnwrapArrayMember<TResult>, undefined>>;
