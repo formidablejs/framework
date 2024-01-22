@@ -18,7 +18,12 @@ export default class Repository
 		Database
 
 	get table
-		Database.table(self.tableName)
+		const query = Database.table(self.tableName)
+
+		if this.hidden && Array.isArray(this.hidden)
+			query.hidden(this.hidden)
+
+		query
 
 	get routeKeyName\string
 		'id'

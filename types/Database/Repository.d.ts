@@ -296,6 +296,7 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   get db(): Knex;
   get database(): Knex;
   get table(): Knex;
+  protected get hidden(): string[];
   static query(): Knex;
   static find<T = unknown>(value: any): Promise<T>;
   static first<TRecord extends {} = any, TResult = any>(): Knex.Select<TRecord, DeferredKeySelection.AddUnionMember<UnwrapArrayMember<TResult>, undefined>>;
@@ -453,6 +454,6 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   static withTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static withoutTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static onlyTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
-  static get<T = unknown>(...columns: string[]): Promise<T>;
-  get<T = unknown>(...columns: string[]): Promise<T>;
+  static get<T = unknown>(columns?: string[]): Promise<T>;
+  get<T = unknown>(columns?: string[]): Promise<T>;
 }
