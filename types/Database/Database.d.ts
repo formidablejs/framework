@@ -43,12 +43,14 @@ declare module "knex" {
       withTrashed(): Knex.QueryBuilder;
       withoutTrashed(): Knex.QueryBuilder;
       onlyTrashed(): Knex.QueryBuilder;
-      get<T = unknown>(...columns: ?string[] = null): Promise<T>;
+      get<T = unknown>(...columns: Array<string> | never): Promise<T>;
       pagination<T = unknown>(options: PaginationOptions): Promise<PaginationResults<T>>;
       /**
        * @experimental
        */
       autoPaginate<T = unknown>(perPage?: number): Promise<PaginationResults<T>>;
+      hidden(columns: string[]): Knex.QueryBuilder;
+      hasOne(related: string, foreignKey: string, localKey: string): Knex.QueryBuilder;
     }
     interface TableBuilder {
       softDeletes(): Knex.TableBuilder;
