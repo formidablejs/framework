@@ -27,10 +27,10 @@ try
 
 		return !Array.isArray(data) && Array.isArray(results) ? results[0] : results
 
-	knex.QueryBuilder.extend 'get', do(...columns)
+	knex.QueryBuilder.extend 'get', do(columns)
 		let results\object[] = await this
 
-		if columns.length > 0
+		if columns && Array.isArray(columns) && columns.length > 0
 			return results.map do(result)
 				const object = {}
 
@@ -38,6 +38,11 @@ try
 					object[column] = result[column]
 
 				return object
+
+		if this._hidden && Array.isArray(this._hidden) && this._hidden.length > 0
+			for result in results
+				for column in this._hidden
+					delete result[column]
 
 		results
 
@@ -99,6 +104,11 @@ try
 				const firstPage = 1
 				const lastPage = totalPages
 
+				if this._hidden && Array.isArray(this._hidden) && this._hidden.length > 0
+					for result in data
+						for column in this._hidden
+							delete result[column]
+
 				const results = {
 					data,
 					pagination: {
@@ -155,6 +165,11 @@ try
 					results.pagination.links = links
 
 				return results
+
+	knex.QueryBuilder.extend 'hidden', do(columns)
+		this._hidden = columns
+
+		return this
 
 	knex.QueryBuilder.extend 'softDelete', do this.update({ deleted_at: Database.fn.now! })
 
