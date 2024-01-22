@@ -38,3 +38,10 @@ export default class Server
 
 					Output.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 			)
+
+			process.on 'SIGINT', do
+				Output.write "\n  <bg:blue> INFO </bg:blue> Application Server stopped…\n"
+
+				await app.fastify!.close()
+
+				process.exit(0)
