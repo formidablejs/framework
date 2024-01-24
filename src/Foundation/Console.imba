@@ -46,7 +46,7 @@ export default class Console
 	]
 
 	prop config\object = {
-		stdio: 'pipe'
+		stdio: 'inherit'
 		cwd: process.cwd!
 	}
 
@@ -221,39 +221,20 @@ export default class Console
 
 			return
 
-		let server
-
 		if process.platform == 'win32'
 			const sh = process.env.comspec || 'cmd'
 			const shFlag = '/d /s /c'
 			self.config.windowsVerbatimArguments = true
 
-			server = spawn(sh, [shFlag, self.runtime, self.console, ...args], {
-				...self.config
-				env: process.env
-			})
-		else
-			server = spawn(runtime, [self.console, ...args], {
+			return spawn(sh, [shFlag, self.runtime, self.console, ...args], {
 				...self.config
 				env: process.env
 			})
 
-		server.stdout.on 'data', do(e)
-			const data = e.toString!
-
-			if data.trim().startsWith('listening on http')
-				process.stdout.write "Listening on {data.split(' ')[2].replace('::1', 'localhost')}"
-			else
-				process.stdout.write data
-
-		server.stderr.on 'data', do(data)
-			process.stdout.write data.toString!
-
-		server.on 'exit', do
-			process.exit!
-
-		server.on 'exit', do
-			server.kill!
+		spawn(runtime, [self.console, ...args], {
+			...self.config
+			env: process.env
+		})
 
 	def preServeCommands
 		const appPackage = join(process.cwd!, 'package.json')
