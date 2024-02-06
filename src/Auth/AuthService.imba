@@ -167,6 +167,12 @@ export default class AuthService
 		const email    = config.email !== undefined ? config.email : true
 		const password = config.password !== undefined ? config.password : true
 
+		const loginName = config.loginName !== undefined ? config.loginName : 'login'
+		const registerName = config.registerName !== undefined ? config.registerName : 'register'
+		const logoutName = config.logoutName !== undefined ? config.logoutName : 'logout'
+		const passwordName = config.passwordName !== undefined ? config.passwordName : 'password.forgot'
+		const resetName = config.resetName !== undefined ? config.resetName : 'password.reset'
+
 		if config.protocol
 			const protocol = config.protocol
 
@@ -179,18 +185,18 @@ export default class AuthService
 			BeforeVerify._params = [protocol]
 
 		if login === true
-			Route.post('login', [LoginController, 'login']).middleware(['guest', BeforeLogin]).name('login')
+			Route.post('login', [LoginController, 'login']).middleware(['guest', BeforeLogin]).name(loginName)
 
 		if register === true
-			Route.post('register', [RegisterController, 'register']).middleware(['guest', BeforeRegister]).name('register')
+			Route.post('register', [RegisterController, 'register']).middleware(['guest', BeforeRegister]).name(registerName)
 
 		if logout === true
-			Route.post('logout', [LogoutController, 'logout']).middleware(['auth', BeforeLogout]).name('logout')
+			Route.post('logout', [LogoutController, 'logout']).middleware(['auth', BeforeLogout]).name(logoutName)
 
 		if email === true
 			Route.post('email/verify', [EmailVerificationController, 'verify']).name('email.verify').middleware(['signed', BeforeVerify])
 			Route.post('email/resend', [EmailVerificationController, 'resend']).name('email.resend').middleware([BeforeResend])
 
 		if password === true
-			Route.post('password/forgot', [PasswordController, 'forgot']).middleware(['guest', BeforeForgot]).name('password.forgot')
-			Route.post('password/reset', [PasswordController, 'reset']).middleware(['signed', 'guest', BeforeReset]).name('password.reset')
+			Route.post('password/forgot', [PasswordController, 'forgot']).middleware(['guest', BeforeForgot]).name(passwordName)
+			Route.post('password/reset', [PasswordController, 'reset']).middleware(['signed', 'guest', BeforeReset]).name(resetName)

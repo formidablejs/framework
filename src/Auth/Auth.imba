@@ -39,12 +39,24 @@ class Auth
 	static def getTable
 		config.provider.table
 
+	static def getIdentifier
+		config.provider.identifier
+
 	static def attempt body\object
 		const dbTable = config.provider.table
+		const dbIdentifier = config.provider.identifier || 'email'
 
-		const user = await Database.table(dbTable)
-			.where('email', body.email)
-			.first!
+		if !['email', 'username', 'username-email'].includes(dbIdentifier)
+			throw new Error "\"{dbIdentifier}\" is not a valid identifier"
+
+		let user = null
+
+		if dbIdentifier === 'email'
+			user = await Database.table(dbTable).where('email', body.email).first!
+		elif dbIdentifier === 'username'
+			user = await Database.table(dbTable).where('username', body.username).first!
+		elif dbIdentifier === 'username-email'
+			user = await Database.table(dbTable).where('username', body.username).orWhere('email', body.username).first!
 
 		if user && await Hash.check(body.password, user.password)
 			return user
