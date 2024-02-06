@@ -54,6 +54,12 @@ type RoutesConfig = {
      * @default undefined
      */
     protocol?: string
+
+    loginName?: string
+    registerName?: string
+    logoutName?: string
+    passwordName?: string
+    resetName?: string
 }
 
 export default class AuthService {

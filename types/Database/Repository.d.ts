@@ -395,7 +395,7 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
       | Knex.ResolveTableType<TRecord, 'insert'>
       | ReadonlyArray<Knex.ResolveTableType<TRecord, 'insert'>>
       : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
-  ): unknown;
+  ): T;
 
   static join: Knex.Join<TRecord, TResult>;
   static joinRaw: Knex.JoinRaw<TRecord, TResult>;
