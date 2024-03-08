@@ -50,9 +50,13 @@ class Auth
 			throw new Error "\"{dbIdentifier}\" is not a valid identifier"
 
 		let user = null
+		let property = 'username'
 
 		if dbIdentifier === 'email'
 			user = await Database.table(dbTable).where('email', body.email).first!
+
+			property = 'email'
+
 		elif dbIdentifier === 'username'
 			user = await Database.table(dbTable).where('username', body.username).first!
 		elif dbIdentifier === 'username-email'
@@ -62,7 +66,7 @@ class Auth
 			return user
 
 		throw ValidationException.withMessages({
-			email: [
+			[property]: [
 				'Invalid credentials'
 			]
 		})
