@@ -156,6 +156,9 @@ export default class Driver {
     @param {object} body
     */
     insertUser(body: object): Promise<any>;
+
+    validateUser(body: object): Promise<true | ['email'] | ['email' | 'username']>;
+
     /**
     @param {object} body
     */
