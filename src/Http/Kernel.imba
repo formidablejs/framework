@@ -1,3 +1,4 @@
+import http from 'http'
 import { writeFileSync } from 'fs-extra'
 import { join } from 'path'
 import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
@@ -113,6 +114,7 @@ export default class Kernel
 
 			return errorHandler.beforeHandle(error, request, reply)
 
+		const schema = router.server isa http.Server ? 'http' : 'https'
 		const port = process.env.FORMIDABLE_PORT || 3000
 		const host = process.env.FORMIDABLE_HOST || '0.0.0.0'
 
@@ -124,6 +126,13 @@ export default class Kernel
 
 		if onBeforeListen
 			await onBeforeListen(port, host)
+
+		process.env.IMBA_CLUSTER = true
+
+		router.server.on 'listening', do
+			const url = "{schema}://{host == '0.0.0.0' ? 'localhost' : host}:{port}"
+
+			console.log "listening on {url}"
 
 		imba.serve router.server
 
