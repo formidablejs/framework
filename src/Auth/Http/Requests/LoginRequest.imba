@@ -11,11 +11,22 @@ export default class LoginRequest < FormRequest
 		true
 
 	def rules
-		{
+		const identifier = this.authDriver.getProvider.identifier ?? 'email'
+
+		let rules = {
 			email: 'required|email'
 			password: 'required'
 			remember_me: 'boolean'
 		}
+
+		if identifier != 'email'
+			rules = {
+				username: 'required'
+				password: 'required'
+				remember_me: 'boolean'
+			}
+
+		rules
 
 	def persist
 		await self.authDriver.authenticate(self.body!)

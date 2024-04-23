@@ -277,16 +277,50 @@ export default class Driver
 		self.config.get("auth.providers.{protocol.provider}")
 
 	def insertUser body\object
-		let user = await self.findUser(body)
+		const isValid = await self.validateUser(body)
 
-		if user !== undefined
-			throw ValidationException.withMessages({
-				email : [
-					"The email is already taken."
+		if isValid !== true
+			let errors = {}
+
+			isValid.forEach do(field)
+				errors[field] = [
+					"The {field} is already taken."
 				]
-			})
+
+			throw ValidationException.withMessages(errors)
 
 		await this.createUser(body)
+
+	def validateUser body\object
+		const dbTable = self.getProvider.table
+		const dbIdentifier = self.getProvider.identifier || 'email'
+
+		if !['email', 'username', 'username-email'].includes(dbIdentifier)
+			throw new Error "\"{dbIdentifier}\" is not a valid identifier"
+
+		if dbIdentifier == 'email'
+			const results = await Database.table(dbTable)
+				.where('email', body.email)
+				.count!
+
+			return ['email'] if results[0]['count(*)'] > 0
+
+		else
+			const [ emailResults, usernameResults ] = await Promise.all([
+				Database.table(dbTable).where('email', body.email).count!,
+				Database.table(dbTable).where('username', body.username).count!
+			])
+
+			let fields = []
+
+			if emailResults[0]['count(*)'] > 0
+				fields.push('email')
+			elif usernameResults[0]['count(*)'] > 0
+				fields.push('username')
+
+			return fields if fields.length > 0
+
+		return true
 
 	def createUser body\object
 		if events.onCreateUser !== null
@@ -298,12 +332,17 @@ export default class Driver
 
 		const db = self.config.get('database')
 
+		let payload = {
+			name: body.name,
+			email: body.email,
+			password: await Hash.make(body.password)
+		}
+
+		if self.getProvider.identifier || 'email' !== 'email'
+			payload['username'] = body.username
+
 		Database.table(self.getProvider.table)
-			.insert({
-				name: body.name,
-				email: body.email,
-				password: await Hash.make(body.password)
-			}, db.connections[db.default].driver == 'pg' ? ['id'] : null)
+			.insert(payload, db.connections[db.default].driver == 'pg' ? ['id'] : null)
 			.then do([ user\object|Number ])
 				user = (typeof user === 'object' && user.hasOwnProperty('id')) ? user.id : user
 
