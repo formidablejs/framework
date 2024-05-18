@@ -90,9 +90,9 @@ export default class Application {
 
     console(): ApplicationConsole;
 
-    prepare(): Application;
+    prepare(resolvers?: any): Application;
 
-    resolve(): any[];
+    resolve(resolvers?: any): any[];
 
     bootResolver(resolver: any): any;
 
