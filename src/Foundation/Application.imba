@@ -19,6 +19,7 @@ import Route from '../Http/Router/Route'
 import Seeder from '../Database/Seeder'
 import ServiceResolver from '../Support/ServiceResolver'
 import version from '../Support/Helpers/version'
+import loadHelpers from '../Support/Helpers/loadHelpers'
 import type ConsoleKernel from './ConsoleKernel'
 
 const settings = {
@@ -195,16 +196,18 @@ export default class Application
 	def console
 		settings.console
 
-	def prepare\Application
+	def prepare\Application resolvers = null
+		loadHelpers!
+
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
 
-		self.resolve!
+		self.resolve(resolvers)
 
 		self
 
-	def resolve
-		const resolvers = self.config.get 'app.resolvers'
+	def resolve resolvers = null
+		resolvers = resolvers ? (resolvers.default ?? resolvers) : self.config.get 'app.resolvers'
 
 		if !(resolvers && resolvers instanceof Array)
 			return
