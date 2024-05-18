@@ -6,7 +6,9 @@ import { FastifyRequest } from "fastify/types/request";
 import { handleException, handleMaintenanceMode } from "./Foundation/Exceptions/Handler/handleException";
 import { ICommand } from "./Foundation/Application";
 import { IContextual } from './Database/IContextual'
+import { InfiniteHigherOrderTapProxy } from "./Support/InfiniteHigherOrderTapProxy";
 import { IMiddleware } from './Http/Middleware/IMiddleware'
+import { IView } from "./Http/View/View";
 import { Mail } from "@formidablejs/mailer";
 import { Mailable } from "@formidablejs/mailer";
 import { MailServiceResolver } from "@formidablejs/mailer";
@@ -34,6 +36,7 @@ import ConvertEmptyStringsToNull from "./Http/Middleware/ConvertEmptyStringsToNu
 import CookieServiceResolver from "./Http/Cookie/CookieServiceResolver";
 import CorsServiceResolver from "./Http/Cors/CorsServiceResolver";
 import Database from "./Database/Database";
+import Bind from "./Database/Bind";
 import DB from "./Database/Database";
 import decrypt from "./Support/Helpers/decrypt";
 import die from "./Support/Helpers/die";
@@ -104,6 +107,14 @@ type ImbaDevTools = {
     socket?: EventSource
 }
 
+type Params = {
+    [key: string]: string | number | Params,
+}
+
+type SlugOptions = {
+    lowerCase?: boolean;
+}
+
 declare global {
     interface Window {
         imba_devtools?: {
@@ -114,6 +125,43 @@ declare global {
     }
 
     var imba_devtools: ImbaDevTools
+
+    var asObject: <T = any>(object: object) => T
+    var bind: (table: string, first?: boolean) => Bind
+    var config: <T = any>(notation: string, default$?: T) => T
+    var decrypt: <T = any>(hash: string, unserialize?: boolean) => T
+    var die: (handler: Function | CallableFunction) => void
+    var dotNotation: <T = any>(object: object, key: string) => T
+    var encrypt: <T = any>(value: T, serialize?: boolean) => string
+    var env: <T = any>(key: string, default$?: T) => T
+    var expiresIn: (time: string) => string
+    var hashEquals: (knownString: string, userString: string) => boolean
+    var isArray: <T = any>(object: T) => boolean
+    var isBoolean: <T = any>(object: T) => boolean
+    var isClass: <T = any>(object: T, strict?: boolean) => boolean
+    var isEmpty: <T = any>(object: T) => boolean
+    var isFunction: <T = any>(object: T) => boolean
+    var isNumber: <T = any>(object: T) => boolean
+    var isObject: <T = any>(object: T) => boolean
+    var isString: <T = any>(object: T) => boolean
+    var mix: (file: string) => string
+    var ms: (value: number, options?: { long: boolean }) => string
+    var multitap: <T = any>(object: T) => InfiniteHigherOrderTapProxy
+    var now: <T = any>() => T
+    var response: <T = any>(data?: T, statusCode?: number) => Response
+    var route: (name: string, params?: Params) => string
+    var signedRoute: (name: string, params?: Params) => Promise<string>
+    var singularize: (value: string) => string
+    var slug: (value: string, separator?: string, options?: SlugOptions) => string
+    var strRandom: (length?: number) => string
+    var tap: <T = any>(object: any, callback: Function | CallableFunction) => T
+    var temporarySignedRoute: (name: string, expiresIn: string, params?: Params) => Promise<string>
+    var toBoolean: <T = any>(value: T) => boolean
+    var updateLine: (file: string, callback: Function) => boolean
+    var version: () => string
+    var view: (view: IView, data?: object | null) => ViewResponse
+    var wildcard: (value: string, match: string) => boolean
+    var without: <T = any>(object: object, exclude: string[]) => T
 }
 
 export {
