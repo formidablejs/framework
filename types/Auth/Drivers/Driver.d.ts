@@ -68,8 +68,9 @@ export default class Driver {
     @param {string} name
     @param {object} user
     @param {number|null} ttl
+    @param {string[]|null} abilities
     */
-    attempt(name: string, user: object, ttl?: number | null): Promise<{
+    attempt(name: string, user: object, ttl?: number | null, abilities?: string[] | null): Promise<{
         token: any;
         tokenable: any;
     }>;
@@ -149,8 +150,9 @@ export default class Driver {
     @param {string} name
     @param {number} id
     @param {number|null} ttl
+    @param {string[]|nell} abilities
     */
-    createPersonalAccessToken(name: string, id: number, ttl?: number | null): Promise<any>;
+    createPersonalAccessToken(name: string, id: number, ttl?: number | null, abilities?: string[] | null): Promise<any>;
     get getProvider(): any;
     /**
     @param {object} body
