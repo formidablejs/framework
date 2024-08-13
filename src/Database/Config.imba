@@ -57,6 +57,9 @@ class Config
 			if selectedConnection && selectedConnection.url && !isEmpty(selectedConnection.url)
 				selectedConnection = selectedConnection.url
 
+			if isEmpty(selectedConnection.url)
+				delete selectedConnection.url
+
 			const connection = {
 				client: client
 				connection: selectedConnection
