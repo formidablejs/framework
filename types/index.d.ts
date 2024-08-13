@@ -27,6 +27,7 @@ import Auth from "./Auth/Auth";
 import Authenticate from "./Auth/Http/Middleware/Authenticate";
 import AuthenticationServiceResolver from "./Auth/AuthenticationServiceResolver";
 import AuthorizationException from "./Auth/Exceptions/AuthorizationException";
+import Authorize from "./Auth/Authorize";
 import AuthService from "./Auth/AuthService";
 import config from "./Support/Helpers/config";
 import ConfigRepository from "./Config/Repository";
@@ -175,6 +176,7 @@ export {
     Authenticate,
     AuthenticationServiceResolver,
     AuthorizationException,
+    Authorize,
     AuthService,
     Command,
     config,
