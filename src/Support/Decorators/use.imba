@@ -98,7 +98,7 @@ def use target, key, descriptor
 				response = new object(
 					request.request,
 					request.route,
-					reply.raw,
+					reply,
 					request.config
 				)
 

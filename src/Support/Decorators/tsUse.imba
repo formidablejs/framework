@@ -99,7 +99,7 @@ export const use = do(...paramaters)
 					response = new object(
 						request.request,
 						request.route,
-						reply.raw,
+						reply,
 						request.config
 					)
 
