@@ -26,6 +26,8 @@ import ApplicationException from "./Foundation/Exceptions/ApplicationException";
 import Auth from "./Auth/Auth";
 import Authenticate from "./Auth/Http/Middleware/Authenticate";
 import AuthenticationServiceResolver from "./Auth/AuthenticationServiceResolver";
+import AuthorizationException from "./Auth/Exceptions/AuthorizationException";
+import Authorize from "./Auth/Authorize";
 import AuthService from "./Auth/AuthService";
 import config from "./Support/Helpers/config";
 import ConfigRepository from "./Config/Repository";
@@ -145,7 +147,7 @@ declare global {
     var isObject: <T = any>(object: T) => boolean
     var isString: <T = any>(object: T) => boolean
     var mix: (file: string) => string
-    var ms: (value: number, options?: { long: boolean }) => string
+    var ms: (value: number | string, options?: { long: boolean }) => string
     var multitap: <T = any>(object: T) => InfiniteHigherOrderTapProxy
     var now: <T = any>() => T
     var response: <T = any>(data?: T, statusCode?: number) => Response
@@ -173,6 +175,8 @@ export {
     Auth,
     Authenticate,
     AuthenticationServiceResolver,
+    AuthorizationException,
+    Authorize,
     AuthService,
     Command,
     config,

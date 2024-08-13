@@ -6,7 +6,7 @@ type PaginationOptions = {
   pageSize?: number;
   query?: any;
   url?: string;
-}
+};
 
 type PaginationResults<T = unknown> = {
   data: T[];
@@ -21,14 +21,14 @@ type PaginationResults<T = unknown> = {
     prevPage: number;
     nextPage: number;
     links?: {
-      [key: keyof PaginationResults<T>.pagination.pages | 'firstPage' | 'prevPage' | 'nextPage' | 'lastPage']: {
+      [key in 'firstPage' | 'prevPage' | 'nextPage' | 'lastPage' | keyof PaginationResults<T>['pagination']['pages']]: {
         label: string;
         active: boolean;
         url: string;
       };
-    }
-  }
-}
+    };
+  };
+};
 
 type AnyToUnknown<T> = unknown extends T ? unknown : T;
 type UnknownToAny<T> = unknown extends T ? any : T;
