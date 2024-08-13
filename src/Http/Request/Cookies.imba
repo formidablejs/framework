@@ -39,7 +39,7 @@ export default class Cookies
 		self.#reply.setCookie(key, value, {
 			domain: session.domain
 			httpOnly: session.http_only
-			maxAge: isEmpty(maxAge) : session.lifetime : maxAge
+			maxAge: isEmpty(maxAge) ? session.lifetime : maxAge
 			path: session.path
 			sameSite: session.same_site
 			secure: session.secure
