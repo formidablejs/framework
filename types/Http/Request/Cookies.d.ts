@@ -22,7 +22,7 @@ export default class Cookies {
     @param {string} key
     @param {string} value
     */
-    set(key: string, value: string): any;
+    set(key: string, value: string, maxAge?: number | string): any;
     /**
     @param {string|string[]} key
     */
