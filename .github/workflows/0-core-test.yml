@@ -7,11 +7,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - name: Start Redis
       uses: supercharge/redis-github-action@1.4.0
     - name: Install modules
