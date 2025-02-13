@@ -1,22 +1,32 @@
 export class DateTime
 
-	def wherePast column\string
+	# Register the DateTime query builder methods.
+	static def register client\Knex
+		client.QueryBuilder.extend('wherePast', self.wherePast)
+		client.QueryBuilder.extend('whereFuture', self.whereFuture)
+		client.QueryBuilder.extend('whereNowOrPast', self.whereNowOrPast)
+		client.QueryBuilder.extend('whereNowOrFuture', self.whereNowOrFuture)
+		client.QueryBuilder.extend('whereToday', self.whereToday)
+		client.QueryBuilder.extend('whereBeforeToday', self.whereBeforeToday)
+		client.QueryBuilder.extend('whereAfterToday', self.whereAfterToday)
+
+	static def wherePast column\string
 		return this.where(column, '<', this.client.raw('NOW()'))
 
-	def whereFuture column\string
+	static def whereFuture column\string
 		return this.where(column, '>', this.client.raw('NOW()'))
 
-	def whereNowOrPast column\string
+	static def whereNowOrPast column\string
 		return this.where(column, '<=', this.client.raw('NOW()'))
 
-	def whereNowOrFuture column\string
+	static def whereNowOrFuture column\string
 		return this.where(column, '>=', this.client.raw('NOW()'))
 
-	def whereToday column\string
+	static def whereToday column\string
 		return this.where(column, '>=', this.client.raw('CURDATE()'))
 
-	def whereBeforeToday column\string
+	static def whereBeforeToday column\string
 		return this.where(column, '<', this.client.raw('CURDATE()'))
 
-	def whereAfterToday column\string
+	static def whereAfterToday column\string
 		return this.where(column, '>', this.client.raw('CURDATE()'))
