@@ -11,4 +11,8 @@ import { Route } from '@formidablejs/framework'
  * is assigned the "jwt" middleware group.
  */
 
-Route.get('/user', (request: Request) => request.auth().user()).middleware(['auth'])
+Route.get('/user', (request: Request) => {
+  return without(request.user(), [
+    'password', 'remember_token'
+  ])
+}).middleware(['auth'])
