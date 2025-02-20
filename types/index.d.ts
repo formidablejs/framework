@@ -8,7 +8,7 @@ import { ICommand } from "./Foundation/Application";
 import { IContextual } from './Database/IContextual'
 import { InfiniteHigherOrderTapProxy } from "./Support/InfiniteHigherOrderTapProxy";
 import { IMiddleware } from './Http/Middleware/IMiddleware'
-import { IView } from "./Http/View/View";
+import { View as ImbaView, IView } from "./Http/View/View";
 import { Mail } from "@formidablejs/mailer";
 import { Mailable } from "@formidablejs/mailer";
 import { MailServiceResolver } from "@formidablejs/mailer";
@@ -161,7 +161,7 @@ declare global {
     var toBoolean: <T = any>(value: T) => boolean
     var updateLine: (file: string, callback: Function) => boolean
     var version: () => string
-    var view: (view: IView, data?: object | null) => ViewResponse
+    var view: (view: IView | ImbaView, data?: object | null) => ViewResponse
     var wildcard: (value: string, match: string) => boolean
     var without: <T = any>(object: object, exclude: string[]) => T
 }

@@ -90,7 +90,7 @@ declare const $__patch__$: unique symbol;
 declare const $__init__$: unique symbol;
 declare const $_data$: unique symbol;
 declare const $_language$: unique symbol;
-export { };
+export { View };
 
 export interface IView {
     new(...args: any[]): View
