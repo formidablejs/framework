@@ -1,4 +1,4 @@
-import { Mailable } from '@formidablejs/mailer'
+import { Mailable } from '../../Mail/Mailable'
 import FormRequest from '../../Http/Request/FormRequest'
 
 export default class ResetPassword < Mailable
