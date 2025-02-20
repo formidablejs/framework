@@ -1,4 +1,3 @@
-import { config } from '@formidablejs/framework/lib/Support/Helpers'
 import { URL } from '@formidablejs/framework'
 import { View } from '@formidablejs/framework'
 

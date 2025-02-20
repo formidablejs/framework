@@ -1,4 +1,3 @@
-import { config } from '@formidablejs/framework'
 import { ResetPassword as Mailable } from '@formidablejs/framework'
 import { ActionComponent } from '../../resources/views/mail/vendor/ActionComponent'
 import { ContentComponent } from '../../resources/views/mail/vendor/ContentComponent'

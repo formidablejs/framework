@@ -1,11 +1,10 @@
-import { helpers } from '@formidablejs/framework'
 import { View } from '@formidablejs/framework'
 
 export class Welcome < View
 
 	def render
-		const locale = self.get('locale', helpers.config('app.locale', new String)).replace(/_/g, '-')
-		const title = helpers.config('app.name', 'Formidable')
+		const locale = self.get('locale', config('app.locale', new String)).replace(/_/g, '-')
+		const title = config('app.name', 'Formidable')
 
 		<html lang="{locale}">
 			<head>
