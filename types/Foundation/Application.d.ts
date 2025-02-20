@@ -1,7 +1,7 @@
 import Kernel from "../Http/Kernel";
 import ConsoleKernel from "./ConsoleKernel";
 import ConfigRepository from "../Config/Repository";
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyServerOptions } from 'fastify'
 import { ContextAPI } from "./Context";
 import { Application as ApplicationConsole } from "@formidablejs/console";
 
@@ -58,7 +58,7 @@ export default class Application {
 
     onServeInjection(event: CallableFunction): void;
 
-    server(config: object): Application;
+    server(config: FastifyServerOptions): Application;
 
     fastify(): FastifyInstance;
 
