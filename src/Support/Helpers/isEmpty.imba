@@ -2,6 +2,7 @@ import isObject from './isObject'
 import isArray from './isArray'
 import isBoolean from './isBoolean'
 import isString from './isString'
+import isNumber from './isNumber'
 
 export default def isEmpty value\any
 	if value === null || value === undefined
@@ -13,13 +14,13 @@ export default def isEmpty value\any
 	if isBoolean(value) && value === false
 		return true
 
-	if !(isNaN(value)) && Number(value) === 0
-		return true
-
 	if isArray(value) && value.length === 0
 		return true
 
 	if isObject(value) && Object.keys(value).length === 0
+		return true
+
+	if isNumber(value) && Number(value) === 0
 		return true
 
 	return false
