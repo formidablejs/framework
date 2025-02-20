@@ -1,4 +1,5 @@
 import { escape as htmlEscape } from 'html-escaper'
+import { config as ConfigFinder } from '../../Support/Helpers/index'
 import dot from '../../Support/Helpers/dotNotation'
 import isEmpty from '../../Support/Helpers/isEmpty'
 import isObject from '../../Support/Helpers/isObject'
@@ -11,6 +12,9 @@ export default class View
 
 	prop #_data\object = {}
 	prop #_language\Language
+
+	get config
+		ConfigFinder
 
 	def constructor data\object = {}
 		if !isObject(data) then throw TypeError "Expected object."
