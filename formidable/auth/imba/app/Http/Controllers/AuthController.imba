@@ -1,4 +1,4 @@
-import { Redirect, Request, view, ViewResponse } from '@formidablejs/framework'
+import { Redirect, Request, ViewResponse } from '@formidablejs/framework'
 import { EmailUnverified } from '../../../resources/views/Auth/EmailUnverified'
 import { EmailVerification } from '../../../resources/views/Auth/EmailVerification'
 import { ForgotPassword } from '../../../resources/views/Auth/ForgotPassword'

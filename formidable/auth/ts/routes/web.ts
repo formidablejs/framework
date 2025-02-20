@@ -1,7 +1,6 @@
 import { AuthController } from '../app/Http/Controllers/AuthController'
 import { Request } from '@formidablejs/framework'
 import { Route } from '@formidablejs/framework'
-import { view } from '@formidablejs/framework'
 import { Welcome } from '../resources/views/welcome'
 
 /**
@@ -17,7 +16,9 @@ import { Welcome } from '../resources/views/welcome'
 Route.get('/', (request: Request) => {
 	return view(Welcome, {
 		locale: request.locale(),
-		user: request.auth().check() ? request.user() : null
+		user: request.auth().check() ? without(request.user(), [
+			'password', 'remember_token'
+		]) : null
 	})
 }).middleware(['verified']).name('welcome')
 
