@@ -12,7 +12,7 @@ export default class ValidationServiceResolver < ServiceResolver
 	def register
 		Validator.get!.register 'nullable', self.nullable, ''
 		Validator.get!.registerAsync 'unique', self.unique
-		Validator.get!.registerAsync 'exists', self.unique
+		Validator.get!.registerAsync 'exists', self.exists
 
 	def nullable
 		true
@@ -50,10 +50,10 @@ export default class ValidationServiceResolver < ServiceResolver
 		] = definition.split(',')
 
 		const results = await DB.table(table)
-			.whereRaw(`LOWER(${field}) = LOWER(?)`, [value])
+			.whereRaw("LOWER({field}) = LOWER(?)", [value])
 			.first()
 
-		passes(results !== undefined || results !== null, "The selected {field} is invalid.")
+		passes(results ? true : false, "The selected {field} is invalid.")
 
 	def registeredRules
 		{  }
