@@ -17,7 +17,7 @@ import { MiddlewareGroups } from './Http/Middleware/MiddlewareGroups'
 import { Prop } from "@formidablejs/console";
 import { PropList } from '@formidablejs/console';
 import { RequestGenericInterface } from "fastify";
-import { use } from "./Support/Decorators/tsUse";
+import { αuse, use } from "./Support/Decorators/use";
 import { ValidationRules } from "./Http/Request/ValidationRules";
 import * as helpers from "./Support/Helpers/index";
 import AcceptLanguage from "./Support/Language/Middleware/AcceptLanguage";
