@@ -60,6 +60,6 @@ export default class ValidationServiceResolver < ServiceResolver
 
 	def registerRules rules\object
 		Object.keys(rules).forEach do(name)
-			Validator.get!.registerAsync(name, rules[name].handler)
+			Validator.get!.registerAsync(name, rules[name])
 
 		this
