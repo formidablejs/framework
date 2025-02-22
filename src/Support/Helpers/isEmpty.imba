@@ -13,7 +13,7 @@ export default def isEmpty value\any
 	if isBoolean(value) && value === false
 		return true
 
-	if !(isNaN(value)) && Number(value) === 0
+	if typeof value === 'number' && !Number.isNaN(value) && value === 0
 		return true
 
 	if isArray(value) && value.length === 0
