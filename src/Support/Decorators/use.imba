@@ -11,11 +11,11 @@ import Request from '../../Http/Request/Request'
 import ResponseFactory from '../../Http/Response/Response'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
-def use target, key, descriptor
+def DI target, key, descriptor, paramaters = null
 	if isClass target then return
 
 	const value = descriptor.value
-	const definition = this
+	const definition = paramaters ?? this
 
 	const config = {
 		reply: null
@@ -135,4 +135,11 @@ def use target, key, descriptor
 
 	return descriptor
 
-exports.@use = use
+
+def typescriptDI ...paramaters
+	return do(target, key, descriptor)
+		DI(target, key, descriptor, paramaters)
+
+exports.DI = DI
+exports.use = typescriptDI
+exports.@use = DI
