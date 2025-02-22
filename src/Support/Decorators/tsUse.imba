@@ -39,7 +39,7 @@ export const use = do(...paramaters)
 				let response = null
 
 				if isString(object) && object.substring(0, 'table:'.length) === 'table:'
-					response = bind(object.split(':')[1]).handle(request, key)
+					response = await bind(object.split(':')[1]).handle(request, key)
 
 				elif isString(object) && object.substring(0, 'query:'.length) === 'query:'
 					const query = object.split(':')[1]
@@ -69,13 +69,13 @@ export const use = do(...paramaters)
 					response = param
 
 				elif object instanceof Bind
-					response = object.handle(request, key)
+					response = await object.handle(request, key)
 
 				elif Repository.isPrototypeOf(object)
 					const param = Object.values(request.params!)[key] || undefined
 					const repo = new object
 
-					const results = repo.table.where(repo.routeKeyName || 'id', param).first!
+					const results = await repo.table.whereRaw("LOWER({repo.routeKeyName || 'id'}) = LOWER(?)", [param]).first!
 
 					response = results
 
