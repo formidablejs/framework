@@ -35,7 +35,7 @@ export const use = do(...paramaters)
 
 			config.request = request
 
-			definition.forEach do(object, key)
+			for own key, object of definition
 				let response = null
 
 				if isString(object) && object.substring(0, 'table:'.length) === 'table:'
@@ -115,8 +115,10 @@ export const use = do(...paramaters)
 
 					const validator = response.validate!
 
-					if (validator.fails!)
-						throw ValidationException.withMessages(validator.errors.errors)
+					await new Promise do(resolve, reject)
+						validator.checkAsync
+							do resolve!
+							do reject(ValidationException.withMessages(validator.errors.errors))
 
 					if response.hasHeader('X-FORMIDABLE-VALIDATE')
 						die do
