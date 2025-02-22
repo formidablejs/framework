@@ -8,6 +8,7 @@ import isEmpty from '../Helpers/isEmpty'
 import isString from '../Helpers/isString'
 import die from '../Helpers/die'
 import Request from '../../Http/Request/Request'
+import ResponseFactory from '../../Http/Response/Response'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
 def use target, key, descriptor
@@ -120,8 +121,7 @@ def use target, key, descriptor
 						do reject(ValidationException.withMessages(validator.errors.errors))
 
 				if response.hasHeader('X-FORMIDABLE-VALIDATE')
-					die do
-						reply.send().code(204)
+					die do new ResponseFactory('', 204)
 
 			else
 				response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
