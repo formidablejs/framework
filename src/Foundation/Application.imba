@@ -51,6 +51,8 @@ export default class Application
 	}
 
 	def constructor root\string
+		loadHelpers!
+
 		self.root = root
 
 		settings.console = new ApplicationConsole('Formidable Framework', version!)
@@ -197,8 +199,6 @@ export default class Application
 		settings.console
 
 	def prepare\Application resolvers = null
-		loadHelpers!
-
 		self.config = self.make(ConfigRepository)
 		self.handler = self.make ExceptionHandler, [self.config]
 
