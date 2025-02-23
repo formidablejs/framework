@@ -284,7 +284,7 @@ export default class Driver
 
 			isValid.forEach do(field)
 				errors[field] = [
-					"The {field} is already taken."
+					"The {field} is invalid or has already taken."
 				]
 
 			throw ValidationException.withMessages(errors)
@@ -300,22 +300,22 @@ export default class Driver
 
 		if dbIdentifier == 'email'
 			const results = await Database.table(dbTable)
-				.where('email', body.email)
+				.whereRaw('LOWER(email) = LOWER(?)', [body.email])
 				.count!
 
-			return ['email'] if results[0]['count(*)'] > 0
+			return ['email'] if results[0]['count(*)'] > 0 || results[0]['count'] > 0
 
 		else
 			const [ emailResults, usernameResults ] = await Promise.all([
-				Database.table(dbTable).where('email', body.email).count!,
-				Database.table(dbTable).where('username', body.username).count!
+				Database.table(dbTable).whereRaw('LOWER(email) = LOWER(?)', [body.email]).count!,
+				Database.table(dbTable).whereRaw('LOWER(username) = LOWER(?)', [body.username]).count!
 			])
 
 			let fields = []
 
-			if emailResults[0]['count(*)'] > 0
+			if emailResults[0]['count(*)'] > 0 || emailResults[0]['count'] > 0
 				fields.push('email')
-			elif usernameResults[0]['count(*)'] > 0
+			elif usernameResults[0]['count(*)'] > 0 || usernameResults[0]['count'] > 0
 				fields.push('username')
 
 			return fields if fields.length > 0
@@ -352,7 +352,7 @@ export default class Driver
 
 	def findUser body\object
 		return await Database.table(self.getProvider.table)
-			.where('email', body.email)
+			.whereRaw('LOWER(email) = LOWER(?)', [body.email])
 			.first!
 
 	def verificationUrl user\object

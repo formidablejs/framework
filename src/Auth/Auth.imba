@@ -53,21 +53,24 @@ class Auth
 		let property = 'username'
 
 		if dbIdentifier === 'email'
-			user = await Database.table(dbTable).where('email', body.email).first!
+			user = await Database.table(dbTable).whereRaw('LOWER(email) = LOWER(?)', [body.email]).first!
 
 			property = 'email'
 
 		elif dbIdentifier === 'username'
-			user = await Database.table(dbTable).where('username', body.username).first!
+			user = await Database.table(dbTable).whereRaw('LOWER(username) = LOWER(?)', [body.username]).first!
 		elif dbIdentifier === 'username-email'
-			user = await Database.table(dbTable).where('username', body.username).orWhere('email', body.username).first!
+			user = await Database.table(dbTable)
+				.whereRaw('LOWER(username) = LOWER(?)', [body.username])
+				.orWhereRaw('LOWER(email) = LOWER(?)', [body.username])
+				.first!
 
 		if user && await Hash.check(body.password, user.password)
 			return user
 
 		throw ValidationException.withMessages({
 			[property]: [
-				'Invalid credentials'
+				"Invalid {dbIdentifier === 'email' ? 'Email' : 'Username'} or password."
 			]
 		})
 
