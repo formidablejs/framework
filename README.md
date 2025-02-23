@@ -1,7 +1,7 @@
 # Formidablejs Core
 
 ## About Formidablejs
-Note: This repository contains the core code of the Formidable framework. If you want to build an application using Formidable, visit the main [Formidablejs repository](https://github.com/formidablejs/formidablejs).
+Note: This repository contains the core code of the Formidable framework. If you want to build an application using Formidable, visit the main [Formidablejs repository](https://github.com/formidablejs/formidablejs-typescript).
 
 <center>
 
