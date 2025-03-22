@@ -39,6 +39,8 @@ export class Command < BaseCommand
 
 				exit!
 
+				return
+
 			confirmed
 
 		else true
