@@ -37,9 +37,10 @@ export class DbSeedCommand < Command
 		this.error "Seeder file {seeder} does not exist"
 
 	def handle
-		await self.shouldRun!
+		if !self.app.console![Symbol.for('#internal')]
+			await self.shouldRun!
 
-		self.usingEnv!
+			self.usingEnv!
 
 		if isTS
 			require('ts-node').register({
@@ -63,9 +64,11 @@ export class DbSeedCommand < Command
 
 			Output.group { newLine: false }, do
 				results[0].forEach do(seeder)
-					self.message 'info', "Seeder \x1b[1m[{seeder.substring(root.length)}]\x1b[0m ran successfully."
+					self.message 'info', "Seeder \x1b[1m[{seeder.substring(root.length + 1)}]\x1b[0m ran successfully."
 
 			exit!
+
+			return
 
 		console.error results
 
