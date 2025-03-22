@@ -16,7 +16,7 @@ export class MigrationCommand < Command
 
 		language.toLowerCase! == 'typescript'
 
-	def call action\string
+	def call action\string, exitOnEnd\boolean = true
 		await shouldRun!
 
 		self.usingEnv!
@@ -55,10 +55,12 @@ export class MigrationCommand < Command
 				results[1].forEach do(migration)
 					self.message 'info', "<fg:green>{action === 'rollback' ? 'Rollback' : 'Migrate'}:</fg:green> {migration}"
 
-			exit!
+			if exitOnEnd
+				exit!
 
 			return
 
 		self.write "<fg:red>No migration to run</fg:red>"
 
-		exit!
+		if exitOnEnd
+			exit!
