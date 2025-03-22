@@ -2,6 +2,6 @@ export class MigrationCommand extends Command {
     /**
     @param {string} action
     */
-    call(action: string): Promise<mixed>;
+    call(action: string, exitOnEnd?: boolean): Promise<mixed>;
 }
 import { Command } from "../Command";
