@@ -8,13 +8,14 @@ import isEmpty from '../Helpers/isEmpty'
 import isString from '../Helpers/isString'
 import die from '../Helpers/die'
 import Request from '../../Http/Request/Request'
+import ResponseFactory from '../../Http/Response/Response'
 import ValidationException from '../../Validator/Exceptions/ValidationException'
 
-def use target, key, descriptor
+def DI target, key, descriptor, paramaters = null
 	if isClass target then return
 
 	const value = descriptor.value
-	const definition = this
+	const definition = paramaters ?? this
 
 	const config = {
 		reply: null
@@ -34,11 +35,11 @@ def use target, key, descriptor
 
 		config.request = request
 
-		await definition.forEach do(object, key)
+		for own key, object of definition
 			let response = null
 
 			if isString(object) && object.substring(0, 'table:'.length) === 'table:'
-				response = bind(object.split(':')[1]).handle(request, key)
+				response = await bind(object.split(':')[1]).handle(request, key)
 
 			elif isString(object) && object.substring(0, 'query:'.length) === 'query:'
 				const query = object.split(':')[1]
@@ -68,13 +69,13 @@ def use target, key, descriptor
 				response = param
 
 			elif object instanceof Bind
-				response = object.handle(request, key)
+				response = await object.handle(request, key)
 
 			elif Repository.isPrototypeOf(object)
 				const param = Object.values(request.params!)[key] || undefined
 				const repo = new object
 
-				const results = repo.table.where(repo.routeKeyName || 'id', param).first!
+				const results = await repo.table.where(repo.routeKeyName || 'id', param).first!
 
 				response = results
 
@@ -114,12 +115,13 @@ def use target, key, descriptor
 
 				const validator = response.validate!
 
-				if (validator.fails!)
-					throw ValidationException.withMessages(validator.errors.errors)
+				await new Promise do(resolve, reject)
+					validator.checkAsync
+						do resolve!
+						do reject(ValidationException.withMessages(validator.errors.errors))
 
 				if response.hasHeader('X-FORMIDABLE-VALIDATE')
-					die do
-						reply.send().code(204)
+					die do new ResponseFactory('', 204)
 
 			else
 				response = !!object.prototype && !!object.prototype.constructor.name ? new object : object
@@ -133,4 +135,11 @@ def use target, key, descriptor
 
 	return descriptor
 
-exports.@use = use
+
+def typescriptDI ...paramaters
+	return do(target, key, descriptor)
+		DI(target, key, descriptor, paramaters)
+
+exports.DI = DI
+exports.use = typescriptDI
+exports.@use = DI

@@ -1,13 +1,13 @@
 import { @context, context } from './Support/Decorators/context'
-import { @use } from './Support/Decorators/use'
+import { @use, use } from './Support/Decorators/use'
 import { Command } from './Foundation/Console/Command'
 import { Context } from './Foundation/Context'
+import { Factory } from './Database/Factory'
 import { FastifyReply, FastifyRequest, RequestGenericInterface, FastifyInstance } from 'fastify'
 import { handleException, handleMaintenanceMode } from './Foundation/Exceptions/Handler/handleException'
 import { Mail, MailServiceResolver } from '@formidablejs/mailer'
 import { Mailable } from './Mail/Mailable'
 import { Prop } from '@formidablejs/console'
-import { use } from './Support/Decorators/tsUse'
 import * as helpers from './Support/Helpers/index'
 import AcceptLanguage from './Support/Language/Middleware/AcceptLanguage'
 import Application from './Foundation/Application'
@@ -126,6 +126,7 @@ export {
 	ErrorIfAuthenticated
 	ExceptionHandler
 	expiresIn
+	Factory
 	FastifyInstance
 	FastifyReply
 	FastifyRequest
