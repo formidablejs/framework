@@ -37,6 +37,7 @@ export default class Console
 		'make:tag'
 		'make:type'
 		'make:view'
+		'migrate'
 		'migrate:down'
 		'migrate:fresh'
 		'migrate:latest'
