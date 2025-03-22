@@ -54,6 +54,21 @@ export default class Repository
 
 		query.create.apply(query,args)
 
+	static def delete ...args
+		const query = self.query!
+
+		query.delete.apply(query,args)
+
+	static def del ...args
+		const query = self.query!
+
+		query.del.apply(query,args)
+
+	static def truncate
+		const query = self.query!
+
+		query.truncate!
+
 	static def join ...args
 		const query = self.query!
 

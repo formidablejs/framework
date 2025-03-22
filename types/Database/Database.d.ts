@@ -1,9 +1,10 @@
+import "knex";
 import type { Knex } from "knex";
 
-export default Database;
 declare let Database: Knex;
+declare type Database = Knex;
 
-import "knex";
+export default Database;
 
 type PaginationOptions = {
   page?: number;

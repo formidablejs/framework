@@ -10,6 +10,7 @@ import { MakeCommandCommand } from './Console/Commands/MakeCommandCommand'
 import { MakeConfigCommand } from './Console/Commands/MakeConfigCommand'
 import { MakeControllerCommand } from './Console/Commands/MakeControllerCommand'
 import { MakeCrudCommand } from './Console/Commands/MakeCrudCommand'
+import { MakeFactoryCommand } from './Console/Commands/MakeFactoryCommand'
 import { MakeExceptionCommand } from './Console/Commands/MakeExceptionCommand'
 import { MakeMailCommand } from './Console/Commands/MakeMailCommand'
 import { MakeMiddlewareCommand } from './Console/Commands/MakeMiddlewareCommand'
@@ -70,6 +71,7 @@ export default class ConsoleKernel
 			MakeConfigCommand
 			MakeControllerCommand
 			MakeCrudCommand
+			MakeFactoryCommand
 			MakeExceptionCommand
 			MakeMailCommand
 			MakeMiddlewareCommand

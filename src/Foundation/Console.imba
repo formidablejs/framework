@@ -24,6 +24,7 @@ export default class Console
 		'make:controller'
 		'make:crud'
 		'make:exception'
+		'make:factory'
 		'make:form'
 		'make:interface'
 		'make:mail'
