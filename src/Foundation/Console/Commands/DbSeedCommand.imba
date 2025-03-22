@@ -63,7 +63,7 @@ export class DbSeedCommand < Command
 
 			Output.group { newLine: false }, do
 				results[0].forEach do(seeder)
-					self.message 'info', "Seeder \x1b[1m[{seeder.substring(root.length)}]\x1b[0m ran successfully."
+					self.message 'info', "Seeder \x1b[1m[{seeder.substring(root.length + 1)}]\x1b[0m ran successfully."
 
 			exit!
 
