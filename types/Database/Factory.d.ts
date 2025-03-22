@@ -1,5 +1,6 @@
 import { Faker } from "@faker-js/faker";
-import { type Repository } from "@formidablejs/framework";
+import Database from "./Database";
+import Repository from "./Repository";
 import type { Knex } from "knex";
 
 export declare class Factory {
