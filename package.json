@@ -58,14 +58,17 @@
     "redis": "^4.6.12",
     "session-file-store": "^1.5.0",
     "stacktrace-js": "^2.0.2",
+    "ts-node": "^10.9.2",
     "validatorjs": "^3.22.1"
   },
   "peerDependencies": {
+    "@faker-js/faker": ">= 8.3.0",
     "@formidablejs/mailer": ">=0.4.0",
-    "@formidablejs/stubs": ">= 0.3.0",
+    "@formidablejs/stubs": ">= 0.6.0",
     "imba-shell": ">=0.4.0 <0.5.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.6.0",
     "@formidablejs/mailer": "0.4.0",
     "@formidablejs/stubs": "^0.5.1",
     "@types/connect-redis": "^0.0.18",
