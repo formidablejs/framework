@@ -1,5 +1,5 @@
 import { Output } from '@formidablejs/console'
-import detectPort from 'detect-port/lib/detect-port'
+import { detect } from 'detect-port'
 import inquirer from 'inquirer'
 
 def noInteraction\boolean
@@ -8,7 +8,7 @@ def noInteraction\boolean
 	args.includes('--no-interaction')
 
 def verifyPort\number port\number
-	const _p = await detectPort(port)
+	const _p = await detect(port)
 
 	if _p != port
 		if noInteraction!
