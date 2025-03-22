@@ -1,9 +1,9 @@
+import { RedisStore } from 'connect-redis'
 import * as redis from 'redis'
 import Redis from './Redis'
 import ServiceResolver from '../Support/ServiceResolver'
 import session from '@fastify/session'
 import SessionDriverManager from '../Http/Session/DriverManager'
-import RedisStore from 'connect-redis'
 
 const socketProperties = [
 	'port',
