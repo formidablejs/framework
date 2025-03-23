@@ -159,7 +159,7 @@ export default class Console
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
-			const instance = spawn(runtime, [srv, '-s', '-w'], {
+			const instance = spawn(runtime, [srv, '-s', '-w', '--esm'], {
 				stdio: 'pipe',
 				cwd: process.cwd!,
 				env: {
