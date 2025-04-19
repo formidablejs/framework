@@ -1,5 +1,6 @@
 import { Command } from "./Foundation/Console/Command";
 import { Context } from "./Foundation/Context";
+import { Factory } from "./Database/Factory";
 import { FastifyInstance } from "fastify/types/instance";
 import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify/types/request";
@@ -201,6 +202,7 @@ export {
     ErrorIfAuthenticated,
     ExceptionHandler,
     expiresIn,
+    Factory,
     FastifyInstance,
     FastifyReply,
     FastifyRequest,

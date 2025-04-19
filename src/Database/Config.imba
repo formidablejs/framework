@@ -67,8 +67,8 @@ class Config
 					tableName: 'migrations'
 					directory: './database/migrations'
 				})
-				seeds: config('database.seeds', {
-					directory: './database/seeds'
+				seeds: config('database.seeders', {
+					directory: './database/seeders'
 				})
 			}
 

@@ -8,7 +8,7 @@ export default class Seeder
 
 		Database.seed.make name
 
-	def run
+	def run config\object = {}
 		if isEmpty(Database) then return false
 
-		Database.seed.run!
+		Database.seed.run config

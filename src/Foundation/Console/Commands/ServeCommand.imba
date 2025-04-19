@@ -109,7 +109,7 @@ export class ServeCommand < Command
 	get commandList
 		const list\array = self.devCommands
 
-		list.push("{runtime} server{ext} -f -s -v")
+		list.push("{runtime} server{ext} -f -s -v --esm")
 
 		list.join(' && ')
 

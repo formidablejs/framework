@@ -1,6 +1,9 @@
 import { Knex } from 'knex'
 import ResultTypes = require('./result')
 
+type AnyOrUnknownToOther<T1, T2> = unknown extends T1 ? T2 : T1;
+type SafePartial<T> = Partial<AnyOrUnknownToOther<T, {}>>;
+
 type PaginationOptions = {
   page?: number;
   pageSize?: number;
@@ -397,6 +400,73 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
       : Knex.DbRecordArr<TRecord> | ReadonlyArray<Knex.DbRecordArr<TRecord>>
   ): T;
 
+  static del(
+    returning?: '*',
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, DeferredKeySelection<TRecord, never>[]>;
+  del<
+    TKey extends StrKey<TRecord>,
+    TResult2 = DeferredKeySelection.Augment<
+      UnwrapArrayMember<TResult>,
+      TRecord,
+      TKey
+    >[]
+  >(
+    returning?: TKey,
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+
+  del<
+    TKey extends StrKey<TRecord>,
+    TResult2 = DeferredKeySelection.Augment<
+      UnwrapArrayMember<TResult>,
+      TRecord,
+      TKey
+    >[]
+  >(
+    returning?: readonly TKey[],
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, TResult2[]>;
+  del<TResult2 = SafePartial<TRecord>[]>(
+    returning?: string | readonly string[],
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+  del<TResult2 = number>(): Knex.QueryBuilder<TRecord, TResult2>;
+
+  static delete(
+    returning?: '*',
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, DeferredKeySelection<TRecord, never>[]>;
+  delete<
+    TKey extends StrKey<Knex.ResolveTableType<TRecord>>,
+    TResult2 = DeferredKeySelection.Augment<
+      UnwrapArrayMember<TResult>,
+      Knex.ResolveTableType<TRecord>,
+      TKey
+    >[]
+  >(
+    returning?: TKey,
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+  delete<
+    TKey extends StrKey<TRecord>,
+    TResult2 = DeferredKeySelection.Augment<
+      UnwrapArrayMember<TResult>,
+      TRecord,
+      TKey
+    >[]
+  >(
+    returning?: readonly TKey[],
+    options?: DMLOptions
+  ): Knex.QueryBuilder<TRecord, TResult2>;
+
+  static delete<TResult2 = any>(
+    returning?: string | readonly (string | Knex.Raw)[] | Knex.Raw,
+    options?: DMLOptions
+  ): QueryBuilder<TRecord, TResult2>;
+
+  static delete<TResult2 = number>(): Knex.QueryBuilder<TRecord, TResult2>;
+  static truncate(): Knex.QueryBuilder<TRecord, void>;
   static join: Knex.Join<TRecord, TResult>;
   static joinRaw: Knex.JoinRaw<TRecord, TResult>;
   static innerJoin: Knex.Join<TRecord, TResult>;

@@ -24,6 +24,7 @@ export default class Console
 		'make:controller'
 		'make:crud'
 		'make:exception'
+		'make:factory'
 		'make:form'
 		'make:interface'
 		'make:mail'
@@ -36,6 +37,7 @@ export default class Console
 		'make:tag'
 		'make:type'
 		'make:view'
+		'migrate'
 		'migrate:down'
 		'migrate:fresh'
 		'migrate:latest'
@@ -157,7 +159,7 @@ export default class Console
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
-			const instance = spawn(runtime, [srv, '-s', '-w'], {
+			const instance = spawn(runtime, [srv, '-s', '-w', '--esm'], {
 				stdio: 'pipe',
 				cwd: process.cwd!,
 				env: {
