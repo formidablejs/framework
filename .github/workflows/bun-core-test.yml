@@ -21,4 +21,4 @@ jobs:
     - name: Build
       run: bun run build
     - name: Run tests
-      run: bun test
+      run: bun run test
