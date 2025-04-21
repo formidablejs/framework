@@ -8,8 +8,8 @@ const runtime = () => {
     }
   };
 
-  if (isInstalled('node')) return 'node';
   if (isInstalled('bun')) return 'bun';
+  if (isInstalled('node')) return 'node';
 
   throw new Error('Neither Node.js nor Bun is installed. Please install one of them.');
 };
