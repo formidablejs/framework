@@ -1,4 +1,4 @@
-name: Automated Tests
+name: Node.js - Automated Tests
 
 on:
   schedule:
