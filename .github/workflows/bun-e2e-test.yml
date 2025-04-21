@@ -10,14 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: oven-sh/setup-bun@v2
-    - name: Set runtime
-      run: RUNTIME=bun
     - name: Install modules
       run: bun install --frozen-lockfile
     - name: Build
       run: bun run build
     - name: Prepare e2e tests
-      run: bun run pre-test
+      run: RUNTIME=bun bun run pre-test
     - name: Run e2e tests
       run: bun run test:e2e
     - name: Clean up
