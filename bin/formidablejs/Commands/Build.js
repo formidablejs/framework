@@ -1,6 +1,7 @@
 const { Command, Output, boolean } = require("@formidablejs/console");
 const { exec, execSync } = require("child_process");
-const { getExt } = require('../ext')
+const { getExt } = require('../ext');
+const { getRuntime } = require("../runtime");
 
 class Build extends Command {
   get signature() {
@@ -18,6 +19,8 @@ class Build extends Command {
   }
 
   handle() {
+    const runtime = getRuntime();
+
     if (this.option("watch-console")) {
       return execSync(
         `imba build bootstrap/console${getExt()} -p -s -f -w -o .formidable`,
@@ -29,7 +32,7 @@ class Build extends Command {
     }
 
     const output = exec(
-      `imba build bootstrap/console${getExt()} -p -s -f -o .formidable && imba build bootstrap/build${getExt()} -p -s -f -o .formidable && node craftsman config:cache`,
+      `imba build bootstrap/console${getExt()} -p -s -f -o .formidable && imba build bootstrap/build${getExt()} -p -s -f -o .formidable && ${runtime} craftsman config:cache`,
       {
         stdio: "pipe",
         cwd: process.cwd(),
@@ -69,7 +72,21 @@ class Build extends Command {
       track.push(data);
     });
 
+    let workerThreadErrors = false;
+
     output.stderr.on("data", function (data) {
+      if (
+        data.startsWith('NotImplementedError: worker_threads.Worker')
+      ) {
+        if (workerThreadErrors) {
+          return;
+        }
+
+        workerThreadErrors = true;
+
+        return Output.write("  <bg:yellow> WARN </bg:yellow> Bun does not support node.js worker_threads yet.\n");
+      }
+
       process.stdout.write(data);
     });
 

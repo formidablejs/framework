@@ -1,5 +1,6 @@
 const { Command } = require("@formidablejs/console");
 const { execSync } = require("child_process");
+const { getRuntime } = require("../runtime");
 
 class Start extends Command {
   get signature() {
@@ -11,7 +12,9 @@ class Start extends Command {
   }
 
   handle() {
-    execSync("node server", {
+    const runtime = getRuntime();
+
+    execSync(`${runtime} server`, {
       stdio: "inherit",
       cwd: process.cwd(),
     });
