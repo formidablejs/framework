@@ -23,7 +23,7 @@ then
 fi
 
 echo
-echo "Install dependencies..."
+echo "Installing dependencies for $RUNTIME...."
 echo
 
 cd "$E2E" || exit 1
