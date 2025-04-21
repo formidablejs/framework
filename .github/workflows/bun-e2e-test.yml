@@ -1,0 +1,22 @@
+name: Bun - E2E Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: oven-sh/setup-bun@v2
+    - name: Install modules
+      run: bun install --frozen-lockfile
+    - name: Build
+      run: bun run build
+    - name: Prepare e2e tests
+      run: RUNTIME=bun bun run pre-test
+    - name: Run e2e tests
+      run: bun run test:e2e
+    - name: Clean up
+      run: ./scripts/5-clean-up.sh
