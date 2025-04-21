@@ -18,7 +18,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Set runtime
-      run: echo "RUNTIME=node"
+      run: RUNTIME=node
     - name: Install modules
       run: npm ci
     - name: Build

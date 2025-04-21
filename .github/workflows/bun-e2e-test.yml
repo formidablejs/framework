@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: oven-sh/setup-bun@v2
     - name: Set runtime
-      run: echo "RUNTIME=bun"
+      run: RUNTIME=bun
     - name: Install modules
       run: bun install --frozen-lockfile
     - name: Build

@@ -24,7 +24,7 @@ jobs:
         node-version: 22
         cache: 'npm'
     - name: Set runtime
-      run: echo "RUNTIME=node"
+      run: RUNTIME=node
     - run: npm ci
     - run: npm run build
     - run: npm test
