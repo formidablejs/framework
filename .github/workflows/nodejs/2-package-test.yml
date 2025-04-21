@@ -1,4 +1,4 @@
-name: Package Tests
+name: Node.js - Package Tests
 
 on:
   schedule:
