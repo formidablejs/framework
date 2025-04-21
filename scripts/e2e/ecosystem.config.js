@@ -14,6 +14,8 @@ const runtime = () => {
   throw new Error('Neither Node.js nor Bun is installed. Please install one of them.');
 };
 
+console.log(`Using runtime: ${runtime()}\n`);
+
 module.exports = {
   apps: [
     {
