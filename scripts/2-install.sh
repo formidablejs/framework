@@ -29,9 +29,8 @@ echo
 cd "$E2E" || exit 1
 
 if [ "$PKG_MGR" = "bun" ]; then
-    bun install        && \
-    bun add sqlite3    && \
-    bun add "$PACKAGE"
+    rm -rf node_modules yarn.lock package-lock.json bun.lockb && \
+    bun add sqlite3 "$PACKAGE"
 else
     npm install --legacy-peer-deps            && \
     npm install sqlite3 --save                && \
