@@ -24,6 +24,7 @@ const { default: multitap } = require './multitap'
 const { default: now }  = require './now'
 const { default: response }  = require './response'
 const { default: route } = require './route'
+const { default: runtime } = require './runtime'
 const { default: signedRoute } = require './signedRoute'
 const { default: singularize } = require './singularize'
 const { default: slug }  = require './slug'
@@ -69,6 +70,7 @@ export {
 	pluralize
 	response
 	route
+	runtime
 	signedRoute
 	singularize
 	slug

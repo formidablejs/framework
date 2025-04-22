@@ -66,6 +66,7 @@ import Response from './Http/Response/Response'
 import response from './Support/Helpers/response'
 import Route from './Http/Router/Route'
 import route from './Support/Helpers/route'
+import runtime from './Support/Helpers/runtime'
 import Server from './Foundation/Server'
 import ServiceResolver from './Support/ServiceResolver'
 import SessionDriverManager from './Http/Session/DriverManager'
@@ -165,6 +166,7 @@ export {
 	Response
 	Route
 	route
+	runtime
 	Server
 	ServiceResolver
 	SessionDriverManager
