@@ -1,16 +1,22 @@
 const getRuntime = () => {
-  const args = process.argv;
+  const path = process.argv[0];
   let runtime = 'node';
 
-  if (args) {
-    const executor = args[0].split('/').pop();
+  if (path) {
+    const isWindows = path.endsWith('.exe');
+    const separator = isWindows ? '\\' : '/';
+    let executor = path.split(separator).slice(-1)[0];
 
-    if (executor != undefined) {
+    if (isWindows) {
+      executor = executor.slice(0, -4);
+    }
+
+    if (executor) {
       runtime = executor;
     }
   }
 
   return runtime;
-}
+};
 
-module.exports = { getRuntime }
+module.exports = { getRuntime };

@@ -29,7 +29,7 @@ echo
 cd "$E2E" || exit 1
 
 if [ "$PKG_MGR" = "bun" ]; then
-    rm -rf node_modules yarn.lock package-lock.json bun.lockb && \
+    rm -rf node_modules yarn.lock package-lock.json bun.lock && \
     sed -i '/"@formidablejs\/framework"/d' package.json       && \
     bun add sqlite3 "$PACKAGE"
 else

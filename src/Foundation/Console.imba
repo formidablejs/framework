@@ -4,6 +4,7 @@ import { existsSync } from 'fs-extra'
 import { join } from 'path'
 import { spawn, spawnSync, execSync } from 'child_process'
 import { ServeEvents } from './Console/ServeEvents'
+import executor from '../Support/Helpers/runtime'
 
 export default class Console
 	prop runtime\string
@@ -159,7 +160,7 @@ export default class Console
 
 			const srv = './node_modules/@formidablejs/framework/bin/imba/server.imba'
 
-			const instance = spawn(runtime, [srv, '-s', '-w', '--esm'], {
+			const instance = spawn(executor!, [runtime, srv, '-s', '-w', '--esm'], {
 				stdio: 'pipe',
 				cwd: process.cwd!,
 				env: {
@@ -188,9 +189,12 @@ export default class Console
 
 						address = address.replace('::1', 'localhost')
 
+						if !address.startsWith('http://') && !address.startsWith('https://')
+							address = 'http://' + address
+
 						Output.write "{devCommands.length > 0 ? '' : '\n'}  <bg:blue> INFO </bg:blue> Development Server running…\n"
 
-						Output.write "  Local: <u><fg:blue>http://{address}</fg:blue></u>\n"
+						Output.write "  Local: <u><fg:blue>{address}</fg:blue></u>\n"
 
 						Output.write "  <fg:yellow>Press Ctrl+C to stop the server</fg:yellow>\n"
 
@@ -212,8 +216,18 @@ export default class Console
 						if file && file.endsWith('\x1B[22m\x1B[32mmanifest.json\x1B[39m')
 							runDevCommands!
 
+			let workerThreadErrors = false
+
 			instance.stderr.on 'data', do(data)
-				process.stdout.write data.toString!
+				if data.toString().startsWith('NotImplementedError: worker_threads.Worker')
+					if workerThreadErrors
+						return
+
+					workerThreadErrors = true
+
+					return Output.write("\n  <bg:yellow> WARN </bg:yellow> Bun does not support Node.js worker_threads yet.")
+
+				process.stdout.write data
 
 			instance.on 'exit', do
 				process.exit!
@@ -231,9 +245,10 @@ export default class Console
 			return spawn(sh, [shFlag, self.runtime, self.console, ...args], {
 				...self.config
 				env: process.env
+				shell: true
 			})
 
-		spawn(runtime, [self.console, ...args], {
+		spawn(self.runtime, [ self.console, ...args], {
 			...self.config
 			env: process.env
 		})

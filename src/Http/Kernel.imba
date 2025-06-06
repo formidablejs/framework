@@ -1,20 +1,22 @@
-import http from 'http'
-import { writeFileSync } from 'fs-extra'
-import { join } from 'path'
 import { handleMaintenanceMode } from '../Foundation/Exceptions/Handler/handleException'
+import { join } from 'path'
+import { serve } from './server/serve'
+import { writeFileSync } from 'fs-extra'
+import runtime from '../Support/Helpers/runtime'
 import fastify from 'fastify'
 import FormRequest from './Request/FormRequest'
 import getResponse from './Kernel/getResponse'
 import handleNotFound from './Kernel/handleNotFound'
 import hasContentTypes from './Kernel/hasContentTypes'
+import http from 'http'
 import InvalidRouteActionException from './Router/Exceptions/InvalidRouteActionException'
 import isArray from '../Support/Helpers/isArray'
 import isClass from '../Support/Helpers/isClass'
 import isEmpty from '../Support/Helpers/isEmpty'
 import isFunction from '../Support/Helpers/isFunction'
 import MaintenanceModeException from '../Foundation/Exceptions/MaintenanceModeException'
-import resolveResponse from './Kernel/resolveResponse'
 import Redirect from './Redirect/Redirect'
+import resolveResponse from './Kernel/resolveResponse'
 import Route from './Router/Route'
 import UndefinedMiddlewareException from './Exceptions/UndefinedMiddlewareException'
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
@@ -134,7 +136,10 @@ export default class Kernel
 
 			console.log "listening on {url}"
 
-		imba.serve router.server
+		if runtime! == 'bun'
+			serve router.server
+		else
+			imba.serve router.server
 
 		router.listen({ port: Number(port) })
 			.then(do(address)

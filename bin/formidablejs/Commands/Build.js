@@ -84,7 +84,7 @@ class Build extends Command {
 
         workerThreadErrors = true;
 
-        return Output.write("  <bg:yellow> WARN </bg:yellow> Bun does not support node.js worker_threads yet.\n");
+        return Output.write("  <bg:yellow> WARN </bg:yellow> Bun does not support Node.js worker_threads yet.\n");
       }
 
       process.stdout.write(data);

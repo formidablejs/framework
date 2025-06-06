@@ -1,4 +1,4 @@
-type Runtime = 'node' | 'bun' | 'deno'
+type Runtime = 'node' | 'bun' | 'deno' | 'browser'
 
 /**
  * Get the current runtime.

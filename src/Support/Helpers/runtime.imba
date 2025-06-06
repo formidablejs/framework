@@ -1,10 +1,19 @@
 export default def runtime
-	const args = process.argv
+	if process == undefined
+		return 'browser'
+
+	const path = process.argv[0]
 	let runtime = 'node'
 
-	if args && args.length > 0
-		const executor = args[0].split('/').pop!
+	if path
+		const isWindows = path.endsWith('.exe')
+		const separator = isWindows ? '\\' : '/'
+		let executor = path.split(separator).slice(-1)[0];
 
-		runtime = executor if executor != undefined
+		if isWindows
+			executor = executor.slice(0, -4);
+
+		if executor
+			runtime = executor
 
 	runtime

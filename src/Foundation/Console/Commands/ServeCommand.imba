@@ -5,7 +5,7 @@ import { existsSync } from 'fs'
 import { Prop } from '@formidablejs/console'
 import { spawnSync } from 'child_process'
 import { ServeEvents } from '../ServeEvents'
-import isNumber from '../../../Support/Helpers/isNumber'
+import executor from '../../../Support/Helpers/runtime'
 import nodemon from 'nodemon'
 
 export class ServeCommand < Command
@@ -28,6 +28,9 @@ export class ServeCommand < Command
 
 	prop #fullAddress\string
 
+	get isBun
+		typeof Bun !== 'undefined'
+
 	get ext
 		const appPackage = join(process.cwd!, 'package.json')
 
@@ -39,7 +42,15 @@ export class ServeCommand < Command
 		language.toLowerCase! == 'typescript' ? '.ts' : '.imba'
 
 	get runtime
-		join process.cwd!, 'node_modules', '.bin', 'imba' + (process.platform === 'win32' ? '.cmd' : '')
+		let _path = join process.cwd!, 'node_modules', '.bin', 'imba'
+
+		if process.platform === 'win32'
+			if existsSync(_path + '.cmd')
+				return _path + '.cmd'
+			elif existsSync(_path + '.exe')
+				return _path + '.exe'
+
+		_path
 
 	get devConfigDefaults
 		{
@@ -109,7 +120,7 @@ export class ServeCommand < Command
 	get commandList
 		const list\array = self.devCommands
 
-		list.push("{runtime} server{ext} -f -s -v --esm")
+		list.push("{!isBun ? executor! + ' ' : ''}{runtime} server{ext} -f -s -v --esm")
 
 		list.join(' && ')
 
@@ -129,7 +140,7 @@ export class ServeCommand < Command
 
 		self.setEnvVars(port)
 
-		const args = ['-s']
+		const args = ['-s', '--esm']
 
 		if self.option('addr') then process.env.FORMIDABLE_ADDRESS_SET = '1'
 
@@ -146,7 +157,7 @@ export class ServeCommand < Command
 
 				return spawnSync sh, [ shFlag, self.runtime, "server{ext}", ...args ], conf
 
-			spawnSync self.runtime, [ "server{ext}", ...args ], conf
+			spawnSync executor!, [ self.runtime, "server{ext}", ...args ], conf
 		else
 			process.env.CONSOLE_FORMIDABLE_GROUP = JSON.stringify({
 				newLine: false
@@ -162,13 +173,17 @@ export class ServeCommand < Command
 				watch: ['.', '.env']
 			})
 
-			process.once('SIGINT', do
+			def exitApp
 				self.message 'info', 'Shutting down development server…'
 
 				server.reset()
 
 				process.exit(0)
-			)
+
+			if isBun
+				process.on('SIGINT', exitApp)
+			else
+				process.once('SIGINT', exitApp)
 
 			server.on 'stdout', do(e)
 				const data = e.toString()
