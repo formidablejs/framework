@@ -127,7 +127,7 @@ export default class FormRequest {
 	/**
 	 * Get request headers.
 	 */
-	headers(): any;
+	headers<T = any>(): T;
 
 	/**
 	 * Check if header is present.
@@ -152,32 +152,32 @@ export default class FormRequest {
 	 * Get specified header.
 	 * @param {string} header
 	 */
-	header(header: string, default$?: any): any;
+	header<T = any>(header: string, default$?: T): T;
 
 	/**
 	 * Get bearer token used to authenticate current request.
 	 */
-	bearerToken(): any;
+	bearerToken(): string | null;
 
 	/**
 	 * Get request referer.
 	 */
-	referer(): any;
+	referer(): string | null;
 
 	/**
 	 * Get request host.
 	 */
-	getHost(): any;
+	getHost(): string | null;
 
 	/**
 	 * Get full request host.
 	 */
-	getFullOrigin(): any;
+	getFullOrigin(): string | null;
 
 	/**
 	 * Get request origin.
 	 */
-	getOrigin(): any;
+	getOrigin(): string | null;
 
 	/**
 	 * Get request origin protocol.
@@ -187,7 +187,7 @@ export default class FormRequest {
 	/**
 	 * Get request ip address.
 	 */
-	ip(): any;
+	ip(): string | null;
 
 	/**
 	 * Check if path matches.
@@ -205,7 +205,7 @@ export default class FormRequest {
 	 * Get url param.
 	 * @param {string} name
 	 */
-	param(name: string): string | number;
+	param<T = string | number>(name: string): T;
 
 	/**
 	 * Get all url params.
@@ -221,7 +221,7 @@ export default class FormRequest {
 	 * Get body input or specified query keys.
 	 * @param {string[]} keys
 	 */
-	all(keys?: string[]): any;
+	all<T = any>(keys?: string[]): T;
 
 	/**
 	 * Get specified input from body.
@@ -251,7 +251,7 @@ export default class FormRequest {
 	 * Get specified query.
 	 * @param {string|null} key
 	 */
-	query(key?: string | null, default$?: any): string | number;
+	query<T = string | number>(key?: string | null, default$?: any): T
 
 	/**
 	 * Get files.
@@ -302,7 +302,7 @@ export default class FormRequest {
 	 * Get request rules.
 	 * @returns {object}
 	 */
-	getRules(): object;
+	getRules<T = ReturnType<T['rules']>>(): T;
 
 	/**
 	 * Get currently authenticated user.
@@ -324,6 +324,7 @@ import type Session from "./Session";
 import type Cookies from "./Cookies";
 import type { FastifyRequest } from "fastify";
 import type { FastifyReply } from "fastify";
+import s from "connect-redis";
 
 declare const $__patch__$: unique symbol;
 declare const $__init__$: unique symbol;

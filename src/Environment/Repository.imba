@@ -16,7 +16,8 @@ export default class Repository
 		env = fs.existsSync(envPath) ? envPath : path.join(root, '.env')
 
 		dotenv.config({
-			path: env
+			path: env,
+			quiet: true,
 		})
 
 		delete process.env.BUILD_ENV
