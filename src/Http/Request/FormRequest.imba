@@ -332,13 +332,7 @@ export default class FormRequest
 		this.all![key] ? true : false
 
 	/**
-	 * Get key from body/query.
-	 */
-	def get key\string, default = null
-		this.all![key] ?? default
-
-	/**
-	 * Get specified keys from request.
+	 * Get specified keys from body.
 	 */
 	def only keys\string[]
 		if (!isArray(keys))
@@ -346,10 +340,10 @@ export default class FormRequest
 
 		let response = {}
 
-		const all\object = this.all!
+		const body\object = this.body!
 
 		keys.forEach do(key)
-			const value = all[key]
+			const value = body[key]
 
 			if value
 				Object.assign response, {

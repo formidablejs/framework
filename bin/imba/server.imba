@@ -14,6 +14,8 @@ application.then do(instance)
 		let host = process.env.HOST || 'localhost'
 		let addr = process.env.ADDR || false
 
+		imba.serve instance.fastify().server
+
 		instance.fastify().listen({
 			port: Number(port),
 			host: host
@@ -25,8 +27,6 @@ application.then do(instance)
 
 			if addr then storeAddress address
 		)
-
-		imba.serve instance.fastify().server
 
 	start!
 

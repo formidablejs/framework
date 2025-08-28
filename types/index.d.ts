@@ -80,6 +80,7 @@ import Response from "./Http/Response/Response";
 import response from "./Support/Helpers/response";
 import Route from "./Http/Router/Route";
 import route from "./Support/Helpers/route";
+import runtime from "./Support/Helpers/runtime";
 import Server from './Foundation/Server'
 import ServiceResolver from "./Support/ServiceResolver";
 import SessionDriverManager from "./Http/Session/DriverManager";
@@ -103,6 +104,7 @@ import VerifyEmail from './Auth/Mail/VerifyEmail'
 import View from "./Http/View/View";
 import view from "./Support/Helpers/view";
 import ViewResponse from "./Http/Response/ViewResponse";
+import type { Runtime } from "./Support/Helpers/runtime";
 
 type ImbaDevTools = {
     debug?: boolean
@@ -153,6 +155,7 @@ declare global {
     var now: <T = any>() => T
     var response: <T = any>(data?: T, statusCode?: number) => Response
     var route: (name: string, params?: Params) => string
+    var runtime: <T = unknown>() => Runtime & T
     var signedRoute: (name: string, params?: Params) => Promise<string>
     var singularize: (value: string) => string
     var slug: (value: string, separator?: string, options?: SlugOptions) => string
@@ -247,6 +250,7 @@ export {
     response,
     Response,
     route,
+    runtime,
     Route,
     Rules,
     Server,
