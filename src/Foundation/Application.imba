@@ -47,7 +47,9 @@ export default class Application
 	prop context\Context = Context
 	prop beforeListen = null
 	prop serverConfig\object = {
-		ignoreTrailingSlash: true
+		routerOptions: {
+			ignoreTrailingSlash: true
+		}
 	}
 
 	def constructor root\string
