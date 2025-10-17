@@ -49,16 +49,16 @@ export default class Kernel
 		const middlewareAliases = self.middlewareAliases ?? self.routeMiddleware
 
 		# get route grouped middleware list.
-		Object.values((_middleware ? _middleware : route.middleware) || []).forEach do(middleware)
+		middlewareArr = Object.values((_middleware ? _middleware : route.middleware) || [])
+		for middleware in middlewareArr
 			if typeof middleware === 'string'
 				if typeof middleware.split(':')[1] === 'string' then params = middleware.split(':')[1].split(',')
-
 				middleware = middleware.split(':')[0]
 
 			if self.middlewareGroups[middleware]
 				const groupedList = self.middlewareGroups[middleware]
-
-				Object.values(groupedList).forEach do(match)
+				const groupedArr = Object.values(groupedList)
+				for match in groupedArr
 					if typeof match == 'string' && typeof match.split(':')[1] === 'string'
 						params = match.split(':')[1].split(',')
 						match  = match.split(':')[0]
@@ -171,8 +171,8 @@ export default class Kernel
 	def hasRoutes router\FastifyInstance, config
 		for route in Route.all!
 			if isArray(route.action) || isFunction(route.action) || isClass(route.action) || route.action.constructor.name === 'AsyncFunction'
-				router.route({
-					method: route.method.toUpperCase!
+				const domainPayload = {
+					method: route.method == 'any' ? ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT'] : route.method.toUpperCase!
 					url: route.path
 					handler: do(req\FastifyRequest, reply\FastifyReply)
 						const request = req.#context
@@ -198,7 +198,14 @@ export default class Kernel
 
 						await self.resolveMiddleware('timeout', route, request, reply, config)
 
-				})
+				}
+
+				if route.domain
+					domainPayload.constraints = {
+						host: route.domain
+					}
+
+				router.route(domainPayload)
 			else
 				routes.invalid.push(route.path)
 

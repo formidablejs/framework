@@ -227,5 +227,5 @@ export default class Application
 			resolver.register!
 
 			if resolver.context && Array.isArray(resolver.context)
-				resolver.context.forEach do(context)
+				for context in resolver.context
 					self.context.inject(context)

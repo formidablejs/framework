@@ -35,12 +35,11 @@ export default class URL
 		let query = {}
 		const uri = []
 
-		Object.keys(params).forEach(do(key)
+		for key in Object.keys(params)
 			if !selected.params.includes(":{key}") && key !== '_query'
 				query[key] = params[key]
-		)
 
-		selected.path.split('/').forEach(do(value)
+		for value in selected.path.split('/')
 			if value.startsWith(':')
 				value = value.slice(1)
 
@@ -50,7 +49,6 @@ export default class URL
 				else value = params[value]
 
 			uri.push value
-		)
 
 		query = (new URLSearchParams(Object.assign(query, (params._query ?? {})))).toString()
 

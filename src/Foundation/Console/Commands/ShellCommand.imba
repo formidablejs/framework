@@ -38,7 +38,8 @@ export class ShellCommand < Command
 		imbaRepl.registerCallback do(ctx)
 			const context = app.context.registered
 
-			Object.keys(context).forEach do(key) if !ctx[key] then ctx[key] = context[key]
+			for key in Object.keys(context)
+				if !ctx[key] then ctx[key] = context[key]
 
 		const server\REPLServer = await imbaRepl.run!
 

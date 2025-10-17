@@ -106,11 +106,13 @@ def DI target, key, descriptor, paramaters = null
 				if !isEmpty(request.auth)
 					response.auth = request.auth
 
-				if !response.passesAuthorization! then response.failedAuthorization!
+				const passesAuth = await response.passesAuthorization!
+
+				if !passesAuth then response.failedAuthorization!
 
 				parsed.request = true
 
-				Object.keys(request).map do(key)
+				for key in Object.keys(request)
 					if isEmpty(response[key]) then response[key] = request[key]
 
 				const validator = response.validate!

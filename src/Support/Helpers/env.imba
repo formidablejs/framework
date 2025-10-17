@@ -13,7 +13,7 @@ export default def env key\string, default\any = null
 			const results = output.match(/\$\{(.*?)\}/g)
 
 			if !isEmpty(results)
-				results.forEach do(variable)
+				for variable in results
 					output = output.replace(variable, process.env[variable.slice(2, -1)])
 
 		if isEmpty(output) then return default

@@ -6,4 +6,6 @@ export default def imbaEnv stringify\boolean = true
 		if env.startsWith(prefix)
 			envList[env] = value
 
-	stringify ? JSON.stringify(envList) : envList
+	if stringify
+		return JSON.stringify(envList)
+	return envList

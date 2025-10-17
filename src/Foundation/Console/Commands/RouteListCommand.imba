@@ -24,9 +24,13 @@ export class RouteListCommand < Command
 		const list = []
 		const methods = self.option('method') ? (Array.isArray(self.option('method')) ? self.option('method') : [self.option('method')]) : ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD', 'TRACE', 'CONNECT']
 
-		const routes = self.app.routes!.filter(do(route)
-			methods.map(do(method) method.toUpperCase!).includes(route.method.toUpperCase!)
-		)
+		let normalizedMethods = []
+		for method in methods
+			normalizedMethods.push(method.toUpperCase!)
+		let routes = []
+		for route in self.app.routes!
+			if normalizedMethods.includes(route.method.toUpperCase!)
+				routes.push(route)
 
 		if self.option('legacy')
 			self.table(routes)

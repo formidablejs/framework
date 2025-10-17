@@ -16,4 +16,4 @@ export default def toBoolean value
 	if !isString(value)
 		throw new BooleanCastError("Can't convert {value} to boolean.")
 
-	JSON.parse value.toLowerCase!
+	return JSON.parse(value.toLowerCase!)

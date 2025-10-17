@@ -63,7 +63,7 @@ export class DbSeedCommand < Command
 			const root = process.cwd!
 
 			Output.group { newLine: false }, do
-				results[0].forEach do(seeder)
+				for seeder in results[0]
 					self.message 'info', "Seeder \x1b[1m[{seeder.substring(root.length + 1)}]\x1b[0m ran successfully."
 
 			exit!

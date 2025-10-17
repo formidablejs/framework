@@ -18,27 +18,52 @@ export default class ValidationServiceResolver < ServiceResolver
 		true
 
 	def unique value\string, definition\string, field\string, passes\CallableFunction
+		let rawDef = definition.trim!
+		let conditionBlock = null
+
+		if rawDef.includes('[')
+			conditionBlock = rawDef.slice(rawDef.indexOf('[') + 1, rawDef.lastIndexOf(']'))
+			rawDef = rawDef.slice(0, rawDef.indexOf('[')) // remove condition part
+
 		let [
 			table,
 			column = field,
 			ignore = null
-		] = definition.split(',')
+		] = rawDef.split(',')
 
 		let results
 
-		if ignore
-			const [
-				identifierValue,
-				identifierColumn = 'id'
-			] = ignore.split(':')
+		let query = DB.table(table)
 
-			results = await DB.table(table)
-				.whereRaw("LOWER({column}) = LOWER(?) AND {identifierColumn} != ?", [ value, identifierValue ])
-				.first!
+		if ignore
+			let [identifierValue, identifierColumn = 'id'] = ignore.split(':')
+			query.whereRaw("LOWER({column}) = LOWER(?) AND {identifierColumn} != ?", [value, identifierValue])
 		else
-			results = await DB.table(table)
-				.whereRaw("LOWER({column}) = LOWER(?)", [ value ])
-				.first!
+			query.whereRaw("LOWER({column}) = LOWER(?)", [value])
+
+		if conditionBlock
+			let conditionRegex = /(where(?:Not)?(?:In|Like|ILike|Null)?\(([^)]*)\))/g
+			let conditionMatch
+
+			while conditionMatch = conditionRegex.exec(conditionBlock)
+				let full = conditionMatch[1]
+				let method = full.split('(')[0].trim()
+				let args = conditionMatch[2].split(',').map do(x) x.trim()
+
+				args = args.map do(arg) arg === 'true' ? true : arg === 'false' ? false : arg === 'null' ? null : isNaN(arg) ? arg.replace(/^['"]|['"]$/g, '') : Number(arg)
+
+				if method in ['where', 'whereNot']
+					query[method](...args)
+				else if method in ['whereIn', 'whereNotIn']
+					query[method](args[0], args.slice(1))
+				else if method in ['whereLike', 'whereILike']
+					query[method](...args)
+				else if method in ['whereNull', 'whereNotNull']
+					query[method](args[0])
+				else
+					continue
+
+		results = await query.first!
 
 		passes(!results, "The {field} has already been taken.")
 
@@ -59,7 +84,7 @@ export default class ValidationServiceResolver < ServiceResolver
 		{  }
 
 	def registerRules rules\object
-		Object.keys(rules).forEach do(name)
+		for name in Object.keys(rules)
 			Validator.get!.registerAsync(name, rules[name])
 
 		this

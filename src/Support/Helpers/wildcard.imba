@@ -9,4 +9,10 @@ export default def wildcard value\string, match\string
 
 	const escapeRegex = do(value) value.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1")
 
-	new RegExp("^" + match.split("*").map(escapeRegex).join(".*") + "$").test value
+	let parts = match.split("*")
+	let regexStr = ""
+	for idx in [0...parts.length]
+		regexStr += escapeRegex(parts[idx])
+		if idx < parts.length - 1
+			regexStr += ".*"
+	new RegExp("^" + regexStr + "$").test value

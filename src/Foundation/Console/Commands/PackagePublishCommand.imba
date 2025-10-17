@@ -64,7 +64,8 @@ export class PackagePublishCommand < Command
 	def handle
 		let tags\string[] = self.option('tag').split(',')
 
-		tags.forEach do(optTag) self.persist optTag
+		for optTag in tags
+			self.persist optTag
 
 		self.exit!
 
@@ -75,7 +76,7 @@ export class PackagePublishCommand < Command
 		if typeof self.publisher[optTag] !== 'object'
 			return self.write "<fg:red>{optTag} is missing paths.</fg:red>"
 
-		Object.keys(self.publisher[optTag].paths).forEach do(entry)
+		for entry in Object.keys(self.publisher[optTag].paths)
 			const file = join self.package, self.publisher[optTag].paths[entry]
 
 			if existsSync(entry) && !self.option('force', false)
