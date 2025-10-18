@@ -2,138 +2,117 @@ import { IMiddleware } from "../Middleware/IMiddleware";
 import { IView } from "../View/View";
 
 export default class Route {
-//     /**
-//     @param {string} verb
-//     @param {string} pattern
-//     @param {function|[function, string]} action
-//     */
-//     static addRoute(verb: string, pattern: string, action: Function | [Function, string]): typeof Route;
     /**
-         * Check if route exists.
-         */
-    /**
-     *
      * Check if route exists.
-     * @param {string} name
+     * @param name - The route name to check
+     * @returns True if the route exists, false otherwise
      */
     static has(name: string): boolean;
-    /**
-         * Add a get route that renders a view.
-         */
-    /**
-    *
-         * Add a get route that renders a view.
 
-    @param {string} path
-    @param {View} view
-    @param {object} data
-    @param {number|null} statusCode
-    */
+    /**
+     * Add a GET route that renders a view.
+     * @param path - The route path
+     * @param view - The view to render
+     * @param data - Optional data to pass to the view
+     * @param statusCode - Optional HTTP status code
+     * @returns The Route class for method chaining
+     */
     static view(path: string, view: IView, data?: object, statusCode?: number | null): typeof Route;
-    /**
-         * Add a delete route.
-         */
-    /**
-    *
-         * Add a delete route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add a DELETE route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static delete(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Add a get route.
-         */
-    /**
-    *
-         * Add a get route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add a GET route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static get(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Add a options route.
-         */
-    /**
-    *
-         * Add a options route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add an OPTIONS route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static options(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Add a patch route.
-         */
-    /**
-    *
-         * Add a patch route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add a PATCH route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static patch(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Add a post route.
-         */
-    /**
-    *
-         * Add a post route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add a POST route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static post(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Add a put route.
-         */
-    /**
-    *
-         * Add a put route.
 
-    @param {string} path
-    @param {function|[function, string]} action
-    */
+    /**
+     * Add a PUT route.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
     static put(path: string, action: Function | [Function, string]): typeof Route;
-    /**
-         * Set route name.
-         */
-    /**
-    *
-         * Set route name.
 
-    @param {string} name
-    */
+    /**
+     * Add a route that matches any HTTP method.
+     * @param path - The route path
+     * @param action - The route handler function or [function, method] tuple
+     * @returns The Route class for method chaining
+     */
+    static any(path: string, action: Function | [Function, string]): typeof Route;
+
+    /**
+     * Set route name.
+     * @param name - The name to assign to the route
+     * @returns The Route class for method chaining
+     */
     static name(name: string): typeof Route;
-    /**
-         * Add middleware to route.
-         */
-    /**
-    *
-         * Add middleware to route.
 
-    @param {string | IMiddleware | Array<string|IMiddleware>} name
-    */
+    /**
+     * Add middleware to route.
+     * @param name - The middleware name, instance, or array of middleware
+     * @returns The Route class for method chaining
+     */
     static middleware(name: string | IMiddleware | Array<string|IMiddleware>): typeof Route;
-    /**
-         * Add grouped routes.
-         */
-    /**
-    *
-         * Add grouped routes.
 
-    @param {function} callable
-    */
+    /**
+     * Add grouped routes.
+     * @param options - Group configuration options
+     * @param callable - Function containing the grouped routes
+     */
     static group(options: GroupOptions, callable: Function): void;
+
+    /**
+     * Get all registered routes.
+     * @returns Array of all registered routes
+     */
     static all(): any[];
 }
 
 export type GroupOptions = {
-     prefix: string;
-     middleware: IMiddleware | string | Array<IMiddleware | string>;
+    prefix: string;
+    middleware: IMiddleware | string | Array<IMiddleware | string>;
+    domain?: string;
 } | {
-     prefix: string;
+    prefix: string;
+    domain?: string;
 } | {
-     middleware: IMiddleware | string | Array<IMiddleware | string>;
+    middleware: IMiddleware | string | Array<IMiddleware | string>;
+    domain?: string;
+} | {
+    domain: string;
 }
