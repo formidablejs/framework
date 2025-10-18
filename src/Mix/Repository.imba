@@ -14,9 +14,9 @@ export default class Repository
 	static def manifest
 		const location\string = path.join(process.cwd!, 'public', 'mix-manifest.json')
 
-		if fs.existsSync(location)
-			const content\string = fs.readFileSync(location, 'utf8')
-
+		try
+			await fs.promises.access(location)
+			const content\string = await fs.promises.readFile(location, 'utf8')
 			return content ? JSON.parse(content) : null
-
-		null
+		catch err
+			return null

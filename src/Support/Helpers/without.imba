@@ -8,9 +8,9 @@ export default def without object\object, exclude\string[]
 
 	const output = {}
 
-	Object.keys(object).forEach do(key)
-		if !exclude.includes(key) then Object.assign(output, {
-			[ key ] : object[key]
-		})
+	keys = Object.keys(object)
+	for key in keys
+		if !exclude.includes(key)
+			output[key] = object[key]
 
 	output

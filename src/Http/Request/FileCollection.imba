@@ -68,9 +68,13 @@ export default class FileCollection
 	 * @returns {void}
 	 */
 	def each callback\function, _this\null
-		if isEmpty(_this) then return self._object.forEach callback, _this
+		if isEmpty(_this)
+			for file in self._object
+				callback file, _this
+			return
 
-		self._object.forEach callback
+		for file in self._object
+			callback file
 
 	/**
 	 * Calls a defined callback function on each File of an array, and returns an array that contains the results.
@@ -80,9 +84,14 @@ export default class FileCollection
 	 * @returns {File[]}
 	 */
 	def map callback\function, _this\null
-		if isEmpty(_this) then return self._object.map callback, _this
-
-		self._object.map callback
+		let result = []
+		if isEmpty(_this)
+			for file in self._object
+				result.push(callback(file, _this))
+			return result
+		for file in self._object
+			result.push(callback(file))
+		return result
 
 	/**
 	 * Returns the files of an array that meet the condition specified in a callback function.
@@ -92,9 +101,16 @@ export default class FileCollection
 	 * @returns {File[]}
 	 */
 	def filter callback\function, _this\null
-		if isEmpty(_this) then return self._object.filter callback, _this
-
-		self._object.filter callback
+		let result = []
+		if isEmpty(_this)
+			for file in self._object
+				if callback(file, _this)
+					result.push(file)
+			return result
+		for file in self._object
+			if callback(file)
+				result.push(file)
+		return result
 
 	/**
 	 * Filter files using the where condition.
@@ -123,8 +139,10 @@ export default class FileCollection
 	 */
 	def get
 		let filtered = self._object
-
 		for condition\{ key: string, value: any } in self._conditions
-			filtered = filtered.filter do(file) file[condition.key] == condition.value
-
-		filtered
+			let temp = []
+			for file in filtered
+				if file[condition.key] == condition.value
+					temp.push(file)
+			filtered = temp
+		return filtered

@@ -5,7 +5,7 @@ import path from 'path'
 def getDirectories location
 	const all = []
 
-	fs.readdirSync(location).forEach do(folder)
+	for folder in fs.readdirSync(location)
 		if fs.statSync(path.join(location, folder)).isDirectory! then all.push folder
 
 	all
@@ -40,11 +40,11 @@ export default class Language
 	def register location\string
 		const packs = getDirectories location
 
-		packs.forEach do(pack)
+		for pack in packs
 			if !self.lang.packs[pack]
 				self.lang.packs[pack] = {}
 
-			fs.readdirSync(path.join(location, pack)).forEach do(file)
+			for file in fs.readdirSync(path.join(location, pack))
 				if path.extname(file) == '.json'
 					const definition = {
 						[path.parse(file).name]: require path.join(location, pack, file)

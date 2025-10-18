@@ -8,7 +8,7 @@ export default def dotNotation object\object, key\string
 	if !isString key
 		throw new TypeError 'Expected string'
 
-	const results = key.split('.').reduce(&, object) do(o, i)
-		o ? o[i] ?? null : null
-
-	results
+	let result = object
+	for i in key.split('.')
+		result = result ? result[i] ?? null : null
+	result

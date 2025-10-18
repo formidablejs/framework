@@ -125,7 +125,11 @@ export default class Console
 		const nodeEnv = args.find do(arg) arg.startsWith('--MODE=')
 		const nodeEnvValue = nodeEnv ? nodeEnv.split('=')[1] : 'development'
 
-		process.argv = process.argv.filter do(arg) !arg.startsWith('--MODE=')
+		let filteredArgv = []
+		for arg in process.argv
+			if !arg.startsWith('--MODE=')
+				filteredArgv.push(arg)
+		process.argv = filteredArgv
 
 		modes.includes(nodeEnvValue)
 
@@ -148,7 +152,7 @@ export default class Console
 			let host = 'localhost'
 			let addr = false
 
-			args.forEach do(arg)
+			for arg in args
 				port = arg.split('=')[1] if arg.startsWith('--port')
 				host = arg.split('=')[1] if arg.startsWith('--host') || arg.startsWith('-h')
 				addr = true if arg == '--addr'
