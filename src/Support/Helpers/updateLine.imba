@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
 
-def updateLine file\string, callback\function
+export default def updateLine file\string, callback\function
 	if !existsSync(file) then return false
 
 	const contents = fs.readFileSync(file, 'utf8')
