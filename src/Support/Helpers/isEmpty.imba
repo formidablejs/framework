@@ -19,7 +19,9 @@ export default def isEmpty value\any
 	if isArray(value) && value.length === 0
 		return true
 
-	if isObject(value) && Object.keys(value).length === 0
-		return true
+	if isObject(value)
+		keys = Object.keys(value)
+		if keys.length === 0
+			return true
 
 	return false

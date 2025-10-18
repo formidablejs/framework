@@ -282,7 +282,7 @@ export default class Driver
 		if isValid !== true
 			let errors = {}
 
-			isValid.forEach do(field)
+			for field in isValid
 				errors[field] = [
 					"The {field} is invalid or has already taken."
 				]

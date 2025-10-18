@@ -10,15 +10,12 @@ export default class TransformsRequest
 
 	def clean request
 		if (request.request.body && request.request.body.constructor === ({}).constructor)
-			const results = Object.keys(request.request.body).map do(key)
+			let results = []
+			for key in Object.keys(request.request.body)
 				let value = request.request.body[key]
-
 				if except.includes(key) == false
 					value = transform(key, request.input(key))
-
-				{
-					[key]: value
-				}
+				results.push({ [key]: value })
 
 			let output = {}
 

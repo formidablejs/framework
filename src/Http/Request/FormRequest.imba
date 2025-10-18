@@ -211,7 +211,8 @@ export default class FormRequest
 	def setHeaders headers\object
 		const req = this
 
-		Object.keys(headers).forEach do(value)
+		const headerKeys = Object.keys(headers)
+		for value in headerKeys
 			req.setHeader(value, headers[value])
 
 		this
@@ -342,9 +343,8 @@ export default class FormRequest
 
 		const body\object = this.body!
 
-		keys.forEach do(key)
+		for key in keys
 			const value = body[key]
-
 			if value
 				Object.assign response, {
 					[key]: value

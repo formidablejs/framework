@@ -31,13 +31,13 @@ try
 		let results\object[] = await this
 
 		if columns && Array.isArray(columns) && columns.length > 0
-			return results.map do(result)
+			let mappedResults = []
+			for result in results
 				const object = {}
-
 				for column in columns
 					object[column] = result[column]
-
-				return object
+				mappedResults.push(object)
+			return mappedResults
 
 		if this._hidden && Array.isArray(this._hidden) && this._hidden.length > 0
 			for result in results
@@ -129,37 +129,56 @@ try
 
 					url = url.length > 1 ? url.replace(/\/+$/, '') + '/' : ''
 
+					params = []
+					keys = Object.keys(query)
+					for key in keys
+						params.push(key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.firstPage) : query[key]))
 					links.firstPage = {
 						label: 'First',
 						active: results.pagination.firstPage === results.pagination.currentPage,
-						url: url + '?' + Object.keys(query).map(do(key) key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.firstPage) : query[key])).join('&')
+						url: url + '?' + params.join('&')
 					}
 
+					params = []
+					keys = Object.keys(query)
+					for key in keys
+						params.push(key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.prevPage) : query[key]))
 					links.prevPage = results.pagination.prevPage ? {
 						label: 'Previous',
 						active: results.pagination.prevPage === results.pagination.currentPage,
-						url: url + '?' + Object.keys(query).map(do(key) key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.prevPage) : query[key])).join('&')
+						url: url + '?' + params.join('&')
 					} : null
 
 					for page in pages
 						query.page = page
-
+						params = []
+						keys = Object.keys(query)
+						for key in keys
+							params.push(key + '=' + encodeURIComponent(query[key]))
 						links[page] = {
 							label: page,
 							active: page === results.pagination.currentPage,
-							url: url + '?' + Object.keys(query).map(do(key) key + '=' + encodeURIComponent(query[key])).join('&')
+							url: url + '?' + params.join('&')
 						}
 
+					params = []
+					keys = Object.keys(query)
+					for key in keys
+						params.push(key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.nextPage) : query[key]))
 					links.nextPage = results.pagination.nextPage ? {
 						label: 'Next',
 						active: results.pagination.nextPage === results.pagination.currentPage,
-						url: url + '?' + Object.keys(query).map(do(key) key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.nextPage) : query[key])).join('&')
+						url: url + '?' + params.join('&')
 					} : null
 
+					params = []
+					keys = Object.keys(query)
+					for key in keys
+						params.push(key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.lastPage) : query[key]))
 					links.lastPage = {
 						label: 'Last',
 						active: results.pagination.lastPage === results.pagination.currentPage,
-						url: url + '?' + Object.keys(query).map(do(key) key + '=' + encodeURIComponent(key == 'page' ? (results.pagination.lastPage) : query[key])).join('&')
+						url: url + '?' + params.join('&')
 					}
 
 					results.pagination.links = links

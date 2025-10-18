@@ -52,7 +52,7 @@ export class MigrationCommand < Command
 
 		if results[1].length > 0
 			Output.group { newLine: false }, do
-				results[1].forEach do(migration)
+				for migration in results[1]
 					self.message 'info', "<fg:green>{action === 'rollback' ? 'Rollback' : 'Migrate'}:</fg:green> {migration}"
 
 			if exitOnEnd

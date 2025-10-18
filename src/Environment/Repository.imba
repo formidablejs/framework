@@ -36,8 +36,11 @@ export default class Repository
 			const results = output.match(/\$\{(.*?)\}/g)
 
 			if !isEmpty(results)
-				results.forEach do(variable)
+				for variable in results
 					output = output.replace(variable, self.variables[variable.slice(2, -1)])
+
+				# results.forEach do(variable)
+				# 	output = output.replace(variable, self.variables[variable.slice(2, -1)])
 
 		if isEmpty(output) then return default
 
