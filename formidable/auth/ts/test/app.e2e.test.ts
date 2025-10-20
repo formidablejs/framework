@@ -1,3 +1,5 @@
+jest.mock('@paralleldrive/cuid2')
+
 const formidable = require('../.formidable/build').default
 const supertest = require('supertest')
 
