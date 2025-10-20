@@ -1,8 +1,8 @@
-// Mock for @paralleldrive/cuid2
+//Mock for @paralleldrive/cuid2
 
 module.exports = {
-	createId: jest.fn(do 'mock-id'),
-	init: jest.fn!,
-	getConstants: jest.fn(do ({})),
-	isCuid: jest.fn(do true)
-}
+    createId: jest.fn(() => 'mock-id'),
+    init: jest.fn(),
+    getConstants: jest.fn(() => ({})),
+    isCuid: jest.fn(() => true)
+};
