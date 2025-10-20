@@ -1,5 +1,6 @@
 import ConfigNotCachedError from './Error/ConfigNotCachedError'
 import dot from './dotNotation'
+import runtime from './runtime'
 import path from 'path'
 
 def fallback notation\string, default\any = null
@@ -15,7 +16,9 @@ export default def config notation\string, default\any = null
 	if !notation or typeof notation != 'string'
 		return default
 	try
-		const config = require(path.join(process.cwd!, 'bootstrap', 'cache', 'config.json'))
+		const cachedConfig = path.join(process.cwd!, 'bootstrap', 'cache', 'config.json')
+
+		const config = runtime() == 'bun' ? JSON.parse(fs.readFileSync(cachedConfig)) : require(cachedConfig)
 		return dot(config, notation) ?? default
 	catch e
 		return fallback(notation, default)

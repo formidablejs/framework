@@ -1,3 +1,5 @@
+jest.mock('@paralleldrive/cuid2')
+
 const formidable = require('../.formidable/build').default
 const supertest = require('supertest')
 
@@ -17,7 +19,7 @@ describe('Application (e2e)', () => {
   })
 
   it('/ (GET: Welcome)', async () => {
-    supertest(app.server)
+    await supertest(app.server)
       .get('/')
       .expect(200)
       .expect((res) => {

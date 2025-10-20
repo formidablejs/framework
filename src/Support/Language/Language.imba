@@ -1,4 +1,5 @@
 import dot from '../Helpers/dotNotation'
+import runtime from '../Helpers/runtime'
 import fs from 'fs'
 import path from 'path'
 
@@ -46,8 +47,10 @@ export default class Language
 
 			for file in fs.readdirSync(path.join(location, pack))
 				if path.extname(file) == '.json'
+					const translation = path.join(location, pack, file)
+
 					const definition = {
-						[path.parse(file).name]: require path.join(location, pack, file)
+						[path.parse(file).name]: runtime! == 'bun' ? JSON.parse(fs.readFileSync(translation).toString()) : require(translation)
 					}
 
 					if !definition
