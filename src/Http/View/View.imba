@@ -7,6 +7,7 @@ import isString from '../../Support/Helpers/isString'
 import querystring from 'querystring'
 import UndefinedDataPropException from './Exceptions/UndefinedDataPropException'
 import Language from '../../Support/Language/Language'
+import viteHelper from '../../Support/Helpers/vite'
 
 export default class View
 
@@ -35,6 +36,40 @@ export default class View
 		self.#_language = language
 
 		self
+
+	def vite file\string|string[]
+		if Array.isArray(file)
+			let tags = []
+
+			for asset in file
+				if !isString(asset)
+					throw TypeError "Expected string."
+
+				const jsTagExtensions = ['js', 'ts']
+				const cssTagExtensions = ['css', 'scss', 'sass', 'less', 'styl', 'stylus']
+				const imgTagExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'avif']
+				const fontTagExtensions = ['woff', 'woff2', 'eot', 'ttf', 'otf']
+
+				const extension = asset.split('.').pop!.toLowerCase!
+
+				if !isString(extension)
+					throw new Error "Could not determine file extension for: {asset}"
+
+				if jsTagExtensions.includes(extension)
+					tags.push("<script type='module' src={viteHelper(asset)}></script>")
+				else if cssTagExtensions.includes(extension)
+					tags.push("<link rel='stylesheet' href={viteHelper(asset)}>")
+				else if imgTagExtensions.includes(extension)
+					tags.push("<img src={viteHelper(asset)} alt=''>")
+				else if fontTagExtensions.includes(extension)
+					tags.push("<link rel='preload' href={viteHelper(asset)} as='font' type='font/{extension}' crossorigin>")
+				else
+					throw new Error "Unsupported file extension: {extension}"
+
+			if tags.length > 0
+				tags.join('\n')
+		else
+			viteHelper(file)
 
 	def translate key\string, default\any
 		self.#_language.get(key, default)

@@ -35,6 +35,7 @@ const { default: toBoolean }  = require './toBoolean'
 const { default: updateLine } = require './updateLine'
 const { default: version } = require './version'
 const { default: view } = require './view'
+const { default: vite }  = require './vite'
 const { default: wildcard }  = require './wildcard'
 const { default: without }  = require './without'
 
@@ -81,6 +82,7 @@ export {
 	updateLine
 	version
 	view
+	vite
 	wildcard
 	without
 }
