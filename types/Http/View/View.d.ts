@@ -32,6 +32,14 @@ export default class View {
     __(key: string, default$?: string): string;
 
     /**
+     * Get asset path(s) from Vite manifest.
+     *
+     * @param {string | string[]} file
+     * @returns {string}
+     */
+    vite(file: string | string[]): string;
+
+    /**
      * Get old input.
      */
     old(key: string, default$?: any): ?any;
