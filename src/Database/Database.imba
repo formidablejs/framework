@@ -3,6 +3,7 @@ import { attachPaginate } from 'knex-paginate'
 import querystring from 'querystring'
 import location from '../Support/Helpers/location'
 import isString from '../Support/Helpers/isString'
+import singularize from '../Support/Helpers/singularize'
 import Config from './Config'
 import knex from 'knex'
 
@@ -37,12 +38,15 @@ try
 				for column in columns
 					object[column] = result[column]
 				mappedResults.push(object)
-			return mappedResults
+			results = mappedResults
 
 		if this._hidden && Array.isArray(this._hidden) && this._hidden.length > 0
 			for result in results
 				for column in this._hidden
 					delete result[column]
+
+		if this._relationships && Array.isArray(this._relationships) && this._relationships.length > 0
+			results = await this._loadRelationships(results)
 
 		results
 
@@ -108,6 +112,9 @@ try
 					for result in data
 						for column in this._hidden
 							delete result[column]
+
+				if this._relationships && Array.isArray(this._relationships) && this._relationships.length > 0
+					data = await this._loadRelationships(data)
 
 				const results = {
 					data,
@@ -189,6 +196,304 @@ try
 		this._hidden = columns
 
 		return this
+
+	knex.QueryBuilder.extend 'belongsTo', do(relatedTable, queryCallback, foreignKey, localKey)
+		this._relationships = this._relationships || []
+
+		let tableName = relatedTable
+		if typeof relatedTable == 'function' && relatedTable.prototype && relatedTable.prototype.tableName
+			tableName = new relatedTable().tableName
+
+		if typeof queryCallback == 'function'
+			this._relationships.push({
+				type: 'belongsTo',
+				relatedTable: tableName,
+				queryCallback: queryCallback,
+				foreignKey: foreignKey || singularize(tableName) + '_id',
+				localKey: localKey || 'id'
+			})
+		else if typeof queryCallback == 'string'
+			this._relationships.push({
+				type: 'belongsTo',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: queryCallback,
+				localKey: foreignKey || 'id'
+			})
+		else
+			this._relationships.push({
+				type: 'belongsTo',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: singularize(tableName) + '_id',
+				localKey: 'id'
+			})
+
+		return this
+
+	knex.QueryBuilder.extend 'hasOne', do(relatedTable, queryCallback, foreignKey, localKey)
+		this._relationships = this._relationships || []
+
+		let tableName = relatedTable
+		if typeof relatedTable == 'function' && relatedTable.prototype && relatedTable.prototype.tableName
+			tableName = new relatedTable().tableName
+
+		if typeof queryCallback == 'function'
+			this._relationships.push({
+				type: 'hasOne',
+				relatedTable: tableName,
+				queryCallback: queryCallback,
+				foreignKey: foreignKey || singularize(this._single.table) + '_id',
+				localKey: localKey || 'id'
+			})
+		else if typeof queryCallback == 'string'
+			this._relationships.push({
+				type: 'hasOne',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: queryCallback,
+				localKey: foreignKey || 'id'
+			})
+		else
+			this._relationships.push({
+				type: 'hasOne',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: singularize(this._single.table) + '_id',
+				localKey: 'id'
+			})
+
+		return this
+
+	knex.QueryBuilder.extend 'hasMany', do(relatedTable, queryCallback, foreignKey, localKey)
+		this._relationships = this._relationships || []
+
+		let tableName = relatedTable
+		if typeof relatedTable == 'function' && relatedTable.prototype && relatedTable.prototype.tableName
+			tableName = new relatedTable().tableName
+
+		if typeof queryCallback == 'function'
+			this._relationships.push({
+				type: 'hasMany',
+				relatedTable: tableName,
+				queryCallback: queryCallback,
+				foreignKey: foreignKey || singularize(this._single.table) + '_id',
+				localKey: localKey || 'id'
+			})
+		else if typeof queryCallback == 'string'
+			this._relationships.push({
+				type: 'hasMany',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: queryCallback,
+				localKey: foreignKey || 'id'
+			})
+		else
+			this._relationships.push({
+				type: 'hasMany',
+				relatedTable: tableName,
+				queryCallback: null,
+				foreignKey: singularize(this._single.table) + '_id',
+				localKey: 'id'
+			})
+
+		return this
+
+	knex.QueryBuilder.extend 'belongsToMany', do(relatedTable, queryCallback, pivotTable, foreignKey, relatedKey, localKey, relatedLocalKey)
+		this._relationships = this._relationships || []
+
+		let tableName = relatedTable
+		if typeof relatedTable == 'function' && relatedTable.prototype && relatedTable.prototype.tableName
+			tableName = new relatedTable().tableName
+
+		if typeof queryCallback == 'function'
+			this._relationships.push({
+				type: 'belongsToMany',
+				relatedTable: tableName,
+				queryCallback: queryCallback,
+				pivotTable: pivotTable || singularize(this._single.table) + '_' + tableName,
+				foreignKey: foreignKey || singularize(this._single.table) + '_id',
+				relatedKey: relatedKey || singularize(tableName) + '_id',
+				localKey: localKey || 'id',
+				relatedLocalKey: relatedLocalKey || 'id'
+			})
+		else if typeof queryCallback == 'string'
+			this._relationships.push({
+				type: 'belongsToMany',
+				relatedTable: tableName,
+				queryCallback: null,
+				pivotTable: queryCallback,
+				foreignKey: foreignKey || singularize(this._single.table) + '_id',
+				relatedKey: relatedKey || singularize(tableName) + '_id',
+				localKey: localKey || 'id',
+				relatedLocalKey: relatedLocalKey || 'id'
+			})
+		else
+			this._relationships.push({
+				type: 'belongsToMany',
+				relatedTable: tableName,
+				queryCallback: null,
+				pivotTable: singularize(this._single.table) + '_' + tableName,
+				foreignKey: singularize(this._single.table) + '_id',
+				relatedKey: singularize(tableName) + '_id',
+				localKey: 'id',
+				relatedLocalKey: 'id'
+			})
+
+		return this
+
+	knex.QueryBuilder.extend '_loadRelationships', do(results)
+		if !results || results.length == 0
+			return results
+
+		for relationship in this._relationships
+			let relationshipName = relationship.relatedTable
+			if relationship.type == 'belongsTo' || relationship.type == 'hasOne'
+				relationshipName = singularize(relationship.relatedTable)
+
+			if relationship.type == 'belongsTo'
+				await this._loadBelongsTo(results, relationship, relationshipName)
+			else if relationship.type == 'hasOne'
+				await this._loadHasOne(results, relationship, relationshipName)
+			else if relationship.type == 'hasMany'
+				await this._loadHasMany(results, relationship, relationshipName)
+			else if relationship.type == 'belongsToMany'
+				await this._loadBelongsToMany(results, relationship, relationshipName)
+
+		results
+
+	knex.QueryBuilder.extend '_loadBelongsTo', do(results, relationship, relationshipName)
+		const hasForeignKey = results.length > 0 && results[0].hasOwnProperty(relationship.foreignKey)
+
+		if !hasForeignKey
+			const ids = results.map(do(result) result.id).filter(do(id) id != null)
+
+			if ids.length == 0
+				for result in results
+					result[relationshipName] = null
+				return
+
+			const foreignKeyResults = await Database(this._single.table)
+				.select('id', relationship.foreignKey)
+				.whereIn('id', ids)
+
+			const foreignKeyMap = {}
+			for row in foreignKeyResults
+				foreignKeyMap[row.id] = row[relationship.foreignKey]
+
+			for result in results
+				result[relationship.foreignKey] = foreignKeyMap[result.id]
+
+		const foreignKeys = results.map(do(result) result[relationship.foreignKey]).filter(do(key) key != null)
+
+		if foreignKeys.length == 0
+			for result in results
+				result[relationshipName] = null
+			return
+
+		let relatedQuery = Database(relationship.relatedTable).whereIn(relationship.localKey, foreignKeys)
+
+		if relationship.queryCallback
+			relatedQuery = relationship.queryCallback(relatedQuery)
+
+		const relatedResults = await relatedQuery
+		const relatedMap = {}
+
+		for related in relatedResults
+			relatedMap[related[relationship.localKey]] = related
+
+		for result in results
+			result[relationshipName] = relatedMap[result[relationship.foreignKey]] || null
+
+	knex.QueryBuilder.extend '_loadHasOne', do(results, relationship, relationshipName)
+		const localKeys = results.map(do(result) result[relationship.localKey]).filter(do(key) key != null)
+
+		if localKeys.length == 0
+			for result in results
+				result[relationshipName] = null
+			return
+
+		let relatedQuery = Database(relationship.relatedTable).whereIn(relationship.foreignKey, localKeys)
+
+		if relationship.queryCallback
+			relatedQuery = relationship.queryCallback(relatedQuery)
+
+		const relatedResults = await relatedQuery
+		const relatedMap = {}
+
+		for related in relatedResults
+			relatedMap[related[relationship.foreignKey]] = related
+
+		for result in results
+			result[relationshipName] = relatedMap[result[relationship.localKey]] || null
+
+	knex.QueryBuilder.extend '_loadHasMany', do(results, relationship, relationshipName)
+		const localKeys = results.map(do(result) result[relationship.localKey]).filter(do(key) key != null)
+
+		if localKeys.length == 0
+			for result in results
+				result[relationshipName] = []
+			return
+
+		let relatedQuery = Database(relationship.relatedTable).whereIn(relationship.foreignKey, localKeys)
+
+		if relationship.queryCallback
+			relatedQuery = relationship.queryCallback(relatedQuery)
+
+		const relatedResults = await relatedQuery
+		const relatedMap = {}
+
+		for related in relatedResults
+			const key = related[relationship.foreignKey]
+			if !relatedMap[key]
+				relatedMap[key] = []
+			relatedMap[key].push(related)
+
+		for result in results
+			result[relationshipName] = relatedMap[result[relationship.localKey]] || []
+
+	knex.QueryBuilder.extend '_loadBelongsToMany', do(results, relationship, relationshipName)
+		const localKeys = results.map(do(result) result[relationship.localKey]).filter(do(key) key != null)
+
+		if localKeys.length == 0
+			for result in results
+				result[relationshipName] = []
+			return
+
+		const pivotQuery = Database(relationship.pivotTable)
+			.whereIn(relationship.foreignKey, localKeys)
+			.select(relationship.foreignKey, relationship.relatedKey)
+
+		const pivotResults = await pivotQuery
+		const pivotMap = {}
+
+		for pivot in pivotResults
+			const key = pivot[relationship.foreignKey]
+			if !pivotMap[key]
+				pivotMap[key] = []
+			pivotMap[key].push(pivot[relationship.relatedKey])
+
+		const allRelatedIds = [...new Set(pivotResults.map(do(pivot) pivot[relationship.relatedKey]))]
+
+		if allRelatedIds.length == 0
+			for result in results
+				result[relationshipName] = []
+			return
+
+		let relatedQuery = Database(relationship.relatedTable).whereIn(relationship.relatedLocalKey, allRelatedIds)
+
+		if relationship.queryCallback
+			relatedQuery = relationship.queryCallback(relatedQuery)
+
+		const relatedResults = await relatedQuery
+		const relatedMap = {}
+
+		for related in relatedResults
+			relatedMap[related[relationship.relatedLocalKey]] = related
+
+		for result in results
+			const relatedIds = pivotMap[result[relationship.localKey]] || []
+			result[relationshipName] = relatedIds.map(do(id) relatedMap[id]).filter(do(item) item != null)
 
 	knex.QueryBuilder.extend 'softDelete', do this.update({ deleted_at: Database.fn.now! })
 

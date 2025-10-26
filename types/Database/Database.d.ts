@@ -1,5 +1,6 @@
 import "knex";
 import type { Knex } from "knex";
+import type Repository from "../Database/Repository";
 
 declare let Database: Knex;
 declare type Database = Knex;
@@ -52,7 +53,18 @@ declare module "knex" {
        */
       autoPaginate<T = unknown>(perPage?: number): Promise<PaginationResults<T>>;
       hidden(columns: string[]): Knex.QueryBuilder;
-      hasOne(related: string, foreignKey: string, localKey: string): Knex.QueryBuilder;
+      belongsTo(related: string | typeof Repository): Knex.QueryBuilder;
+      belongsTo(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder;
+      belongsTo(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder;
+      hasOne(related: string | typeof Repository): Knex.QueryBuilder;
+      hasOne(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder;
+      hasOne(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder;
+      hasMany(related: string | typeof Repository): Knex.QueryBuilder;
+      hasMany(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder;
+      hasMany(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder;
+      belongsToMany(related: string | typeof Repository): Knex.QueryBuilder;
+      belongsToMany(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder;
+      belongsToMany(related: string | typeof Repository, pivotTable: string, foreignKey?: string, relatedKey?: string, localKey?: string, relatedLocalKey?: string): Knex.QueryBuilder;
     }
     interface TableBuilder {
       softDeletes(): Knex.TableBuilder;
