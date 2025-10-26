@@ -526,4 +526,16 @@ export default class Repository<TRecord extends {} = any, TResult = any> {
   static onlyTrashed<TRecord extends {} = any, TResult = any>(): Knex.QueryBuilder<TRecord, TResult>;
   static get<T = unknown>(columns?: string[]): Promise<T>;
   get<T = unknown>(columns?: string[]): Promise<T>;
+  static belongsTo(related: string | typeof Repository): Knex.QueryBuilder<TRecord, TResult>;
+  static belongsTo(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder<TRecord, TResult>;
+  static belongsTo(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder<TRecord, TResult>;
+  static hasOne(related: string | typeof Repository): Knex.QueryBuilder<TRecord, TResult>;
+  static hasOne(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder<TRecord, TResult>;
+  static hasOne(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder<TRecord, TResult>;
+  static hasMany(related: string | typeof Repository): Knex.QueryBuilder<TRecord, TResult>;
+  static hasMany(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder<TRecord, TResult>;
+  static hasMany(related: string | typeof Repository, foreignKey: string, localKey: string): Knex.QueryBuilder<TRecord, TResult>;
+  static belongsToMany(related: string | typeof Repository): Knex.QueryBuilder<TRecord, TResult>;
+  static belongsToMany(related: string | typeof Repository, queryCallback: (query: Knex.QueryBuilder) => Knex.QueryBuilder): Knex.QueryBuilder<TRecord, TResult>;
+  static belongsToMany(related: string | typeof Repository, pivotTable: string, foreignKey?: string, relatedKey?: string, localKey?: string, relatedLocalKey?: string): Knex.QueryBuilder<TRecord, TResult>;
 }
