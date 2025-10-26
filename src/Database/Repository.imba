@@ -343,3 +343,23 @@ export default class Repository
 		const query = self.table!
 
 		query.get.apply(query, args)
+
+	static def belongsTo ...args
+		const query = self.query!
+
+		query.belongsTo.apply(query, args)
+
+	static def hasOne ...args
+		const query = self.query!
+
+		query.hasOne.apply(query, args)
+
+	static def hasMany ...args
+		const query = self.query!
+
+		query.hasMany.apply(query, args)
+
+	static def belongsToMany ...args
+		const query = self.query!
+
+		query.belongsToMany.apply(query, args)
